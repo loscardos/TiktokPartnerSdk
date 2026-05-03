@@ -1,0 +1,49 @@
+{
+  "operation_id": "authorization.202405.get_authorized_category_assets",
+  "module_name": "Authorization",
+  "module_key": "authorization",
+  "path": "/authorization/202405/category_assets",
+  "method": "GET",
+  "auth_scope": "partner",
+  "access_token_kind": "partner",
+  "request_content_kind": "query",
+  "required_headers": ["x-tts-access-token", "content-type"],
+  "request_parameters": [
+    { "name": "app_key", "type": "string", "required": true, "location": "query", "children": [] },
+    { "name": "timestamp", "type": "int", "required": true, "location": "query", "children": [] },
+    { "name": "sign", "type": "string", "required": true, "location": "query", "children": [] }
+  ],
+  "response_parameters": [
+    { "name": "code", "type": "int", "required": false, "location": "body", "children": [] },
+    { "name": "message", "type": "string", "required": false, "location": "body", "children": [] },
+    { "name": "request_id", "type": "string", "required": false, "location": "body", "children": [] },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "category_assets",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            { "name": "cipher", "type": "string", "required": false, "location": "body", "children": [] },
+            { "name": "target_market", "type": "string", "required": false, "location": "body", "children": [] },
+            {
+              "name": "category",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                { "name": "id", "type": "int", "required": false, "location": "body", "children": [] },
+                { "name": "name", "type": "string", "required": false, "location": "body", "children": [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

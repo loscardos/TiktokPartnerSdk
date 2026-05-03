@@ -1,99 +1,72 @@
+using System.Text.Json;
+
 namespace TikTokPartnerSdk.Generator;
 
 public sealed class SchemaReader
 {
-    public SchemaCategory ReadCategory(string yamlPath)
+    public IReadOnlyList<SchemaEndpoint> ReadDirectory(string schemaDirectory)
     {
-        var lines = File.ReadAllLines(yamlPath);
-        var categoryName = string.Empty;
         var endpoints = new List<SchemaEndpoint>();
 
-        for (var index = 0; index < lines.Length; index++)
+        foreach (var file in Directory.EnumerateFiles(schemaDirectory, "*.json").OrderBy(path => path, StringComparer.Ordinal))
         {
-            var line = lines[index];
-            var trimmed = line.Trim();
-
-            if (line.StartsWith("  name:", StringComparison.Ordinal) && categoryName.Length == 0)
-            {
-                categoryName = Unquote(ReadValue(trimmed));
-                continue;
-            }
-
-            if (!trimmed.StartsWith("- title:", StringComparison.Ordinal))
-            {
-                continue;
-            }
-
-            var title = Unquote(ReadValue(trimmed));
-            string slug = string.Empty;
-            string method = string.Empty;
-            string path = string.Empty;
-
-            for (index += 1; index < lines.Length; index++)
-            {
-                var endpointLine = lines[index];
-                var endpointTrimmed = endpointLine.Trim();
-
-                if (endpointTrimmed.StartsWith("- title:", StringComparison.Ordinal))
-                {
-                    index -= 1;
-                    break;
-                }
-
-                if (endpointLine.StartsWith("    - ", StringComparison.Ordinal))
-                {
-                    index -= 1;
-                    break;
-                }
-
-                if (endpointTrimmed.StartsWith("slug:", StringComparison.Ordinal))
-                {
-                    slug = Unquote(ReadValue(endpointTrimmed));
-                }
-                else if (endpointTrimmed.StartsWith("method:", StringComparison.Ordinal))
-                {
-                    method = Unquote(ReadValue(endpointTrimmed));
-                }
-                else if (endpointTrimmed.StartsWith("path:", StringComparison.Ordinal))
-                {
-                    path = Unquote(ReadValue(endpointTrimmed));
-                }
-            }
+            using var document = JsonDocument.Parse(File.ReadAllText(file));
+            var root = document.RootElement;
 
             endpoints.Add(new SchemaEndpoint(
-                title,
-                slug,
-                method,
-                path,
-                [],
-                [],
-                []));
+                root.GetProperty("operation_id").GetString()!,
+                root.GetProperty("module_name").GetString()!,
+                root.GetProperty("module_key").GetString()!,
+                root.GetProperty("path").GetString()!,
+                root.GetProperty("method").GetString()!,
+                root.GetProperty("auth_scope").GetString()!,
+                root.TryGetProperty("access_token_kind", out var accessTokenKindElement)
+                    ? accessTokenKindElement.GetString() ?? string.Empty
+                    : string.Empty,
+                root.GetProperty("request_content_kind").GetString()!,
+                ReadHeaders(root),
+                ReadParameters(root, "request_parameters"),
+                ReadParameters(root, "response_parameters")));
         }
 
-        if (categoryName.Length == 0)
-        {
-            throw new InvalidOperationException("Category name was not found in YAML.");
-        }
-
-        return new SchemaCategory(
-            categoryName,
-            Path.GetFileName(yamlPath),
-            endpoints);
+        return endpoints;
     }
 
-    private static string ReadValue(string line)
+    private static IReadOnlyList<SchemaParameter> ReadParameters(JsonElement root, string propertyName)
     {
-        var separatorIndex = line.IndexOf(':', StringComparison.Ordinal);
-        if (separatorIndex < 0)
+        if (!root.TryGetProperty(propertyName, out var parameters) || parameters.ValueKind != JsonValueKind.Array)
         {
-            return string.Empty;
+            return [];
         }
 
-        return line[(separatorIndex + 1)..].Trim();
+        return parameters.EnumerateArray().Select(ReadParameter).ToArray();
     }
 
-    private static string Unquote(string value)
+    private static SchemaParameter ReadParameter(JsonElement parameter)
     {
-        return value.Trim().Trim('\'', '"');
+        var children = parameter.TryGetProperty("children", out var childElement) && childElement.ValueKind == JsonValueKind.Array
+            ? childElement.EnumerateArray().Select(ReadParameter).ToArray()
+            : [];
+
+        return new SchemaParameter(
+            parameter.GetProperty("name").GetString()!,
+            parameter.GetProperty("type").GetString() ?? "object",
+            parameter.GetProperty("required").GetBoolean(),
+            parameter.TryGetProperty("location", out var locationElement) ? locationElement.GetString() ?? "body" : "body",
+            children);
+    }
+
+    private static IReadOnlyList<string> ReadHeaders(JsonElement root)
+    {
+        if (!root.TryGetProperty("required_headers", out var headers) || headers.ValueKind != JsonValueKind.Array)
+        {
+            return [];
+        }
+
+        return headers.EnumerateArray()
+            .Select(static header => header.GetString())
+            .Where(static header => !string.IsNullOrWhiteSpace(header))
+            .Cast<string>()
+            .ToArray();
     }
 }

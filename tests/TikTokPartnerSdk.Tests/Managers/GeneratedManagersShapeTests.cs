@@ -5,12 +5,17 @@ namespace TikTokPartnerSdk.Tests.Managers;
 public sealed class GeneratedManagersShapeTests
 {
     [Fact]
-    public void Generated_manager_interfaces_should_exist_for_starter_categories()
+    public void Authorization_manager_interface_should_include_access_token_kind_comment()
     {
-        var root = TestPaths.RepositoryRoot;
+        var contents = File.ReadAllText(Path.Combine(
+            TestPaths.RepositoryRoot,
+            "src",
+            "TikTokPartnerSdk.Abstractions",
+            "Managers",
+            "Generated",
+            "IAuthorizationApi.g.cs"));
 
-        File.Exists(Path.Combine(root, "src", "TikTokPartnerSdk.Abstractions", "Managers", "Generated", "IAuthorizationApi.g.cs")).Should().BeTrue();
-        File.Exists(Path.Combine(root, "src", "TikTokPartnerSdk.Abstractions", "Managers", "Generated", "ISellerApi.g.cs")).Should().BeTrue();
-        File.Exists(Path.Combine(root, "src", "TikTokPartnerSdk.Abstractions", "Managers", "Generated", "IEventApi.g.cs")).Should().BeTrue();
+        contents.Should().Contain("Access token kind: partner");
+        contents.Should().Contain("Required headers: x-tts-access-token, content-type");
     }
 }

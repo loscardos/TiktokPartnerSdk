@@ -5,7 +5,7 @@ namespace TikTokPartnerSdk.Tests.Generator;
 public sealed class ContractsWriterTests
 {
     [Fact]
-    public void Generated_contracts_should_include_authorization_request_and_response_types()
+    public void Generated_authorization_contract_should_include_request_properties()
     {
         var path = Path.Combine(
             TestPaths.RepositoryRoot,
@@ -15,7 +15,10 @@ public sealed class ContractsWriterTests
             "AuthorizationContracts.g.cs");
 
         File.Exists(path).Should().BeTrue();
-        File.ReadAllText(path).Should().Contain("AuthorizationGetAuthorizedShopsRequest");
-        File.ReadAllText(path).Should().Contain("AuthorizationGetAuthorizedShopsResponse");
+        var contents = File.ReadAllText(path);
+
+        contents.Should().Contain("AuthorizationGetAuthorizedShopsRequest");
+        contents.Should().Contain("string AppKey");
+        contents.Should().Contain("long Timestamp");
     }
 }

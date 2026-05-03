@@ -1,6 +1,6 @@
 namespace TikTokPartnerSdk.Generator;
 
-public sealed record SchemaCategory(
+public sealed record SchemaModule(
     string Name,
-    string FileName,
+    string Key,
     IReadOnlyList<SchemaEndpoint> Endpoints);
