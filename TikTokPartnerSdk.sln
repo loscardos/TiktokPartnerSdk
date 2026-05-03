@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Abstractions", "src\TikTokPartnerSdk.Abstractions\TikTokPartnerSdk.Abstractions.csproj", "{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Core", "src\TikTokPartnerSdk.Core\TikTokPartnerSdk.Core.csproj", "{9AB5720F-090D-4FEA-9F40-AEE73A07696C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Generated", "src\TikTokPartnerSdk.Generated\TikTokPartnerSdk.Generated.csproj", "{483B810D-473F-498E-9B71-A5020A58C89C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Extensions.DependencyInjection", "src\TikTokPartnerSdk.Extensions.DependencyInjection\TikTokPartnerSdk.Extensions.DependencyInjection.csproj", "{631109E5-8510-4771-A9CF-025E4276F3B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Generator", "src\TikTokPartnerSdk.Generator\TikTokPartnerSdk.Generator.csproj", "{5FD92855-9268-41BA-9347-611A57B685F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Storage.EntityFramework", "src\TikTokPartnerSdk.Storage.EntityFramework\TikTokPartnerSdk.Storage.EntityFramework.csproj", "{E4223444-13F9-4D44-8D87-3CAC0A147FD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{C88951D6-3F84-418F-BD60-064AE25933B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.SampleConsole", "samples\TikTokPartnerSdk.SampleConsole\TikTokPartnerSdk.SampleConsole.csproj", "{984B061C-8273-4508-9CEC-4F12F0F635DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{15D15784-398F-437B-961E-6640757DE712}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Tests", "tests\TikTokPartnerSdk.Tests\TikTokPartnerSdk.Tests.csproj", "{A495DFA6-01D9-49A1-8BE7-49B2A510252C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.IntegrationTests", "tests\TikTokPartnerSdk.IntegrationTests\TikTokPartnerSdk.IntegrationTests.csproj", "{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Storage.EntityFramework.Tests", "tests\TikTokPartnerSdk.Storage.EntityFramework.Tests\TikTokPartnerSdk.Storage.EntityFramework.Tests.csproj", "{698F623A-682D-4F83-AECA-8691663F2371}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB5720F-090D-4FEA-9F40-AEE73A07696C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB5720F-090D-4FEA-9F40-AEE73A07696C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB5720F-090D-4FEA-9F40-AEE73A07696C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB5720F-090D-4FEA-9F40-AEE73A07696C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483B810D-473F-498E-9B71-A5020A58C89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483B810D-473F-498E-9B71-A5020A58C89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483B810D-473F-498E-9B71-A5020A58C89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483B810D-473F-498E-9B71-A5020A58C89C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{631109E5-8510-4771-A9CF-025E4276F3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{631109E5-8510-4771-A9CF-025E4276F3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{631109E5-8510-4771-A9CF-025E4276F3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{631109E5-8510-4771-A9CF-025E4276F3B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD92855-9268-41BA-9347-611A57B685F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD92855-9268-41BA-9347-611A57B685F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD92855-9268-41BA-9347-611A57B685F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD92855-9268-41BA-9347-611A57B685F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4223444-13F9-4D44-8D87-3CAC0A147FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4223444-13F9-4D44-8D87-3CAC0A147FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4223444-13F9-4D44-8D87-3CAC0A147FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4223444-13F9-4D44-8D87-3CAC0A147FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{984B061C-8273-4508-9CEC-4F12F0F635DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984B061C-8273-4508-9CEC-4F12F0F635DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984B061C-8273-4508-9CEC-4F12F0F635DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984B061C-8273-4508-9CEC-4F12F0F635DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A495DFA6-01D9-49A1-8BE7-49B2A510252C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A495DFA6-01D9-49A1-8BE7-49B2A510252C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A495DFA6-01D9-49A1-8BE7-49B2A510252C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A495DFA6-01D9-49A1-8BE7-49B2A510252C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698F623A-682D-4F83-AECA-8691663F2371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698F623A-682D-4F83-AECA-8691663F2371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698F623A-682D-4F83-AECA-8691663F2371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698F623A-682D-4F83-AECA-8691663F2371}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
+		{9AB5720F-090D-4FEA-9F40-AEE73A07696C} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
+		{483B810D-473F-498E-9B71-A5020A58C89C} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
+		{631109E5-8510-4771-A9CF-025E4276F3B9} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
+		{5FD92855-9268-41BA-9347-611A57B685F3} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
+		{E4223444-13F9-4D44-8D87-3CAC0A147FD1} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
+		{984B061C-8273-4508-9CEC-4F12F0F635DC} = {C88951D6-3F84-418F-BD60-064AE25933B4}
+		{A495DFA6-01D9-49A1-8BE7-49B2A510252C} = {15D15784-398F-437B-961E-6640757DE712}
+		{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB} = {15D15784-398F-437B-961E-6640757DE712}
+		{698F623A-682D-4F83-AECA-8691663F2371} = {15D15784-398F-437B-961E-6640757DE712}
+	EndGlobalSection
+EndGlobal

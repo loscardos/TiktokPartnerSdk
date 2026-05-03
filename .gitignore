@@ -1,0 +1,15 @@
+docs/
+test/
+bin/
+obj/
+.vs/
+.vscode/
+TestResults/
+*.user
+*.suo
+*.nupkg
+.token/
+.tmp/
+artifacts/
+tools/
+.idea/
