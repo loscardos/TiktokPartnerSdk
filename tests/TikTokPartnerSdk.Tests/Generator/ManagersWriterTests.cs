@@ -71,4 +71,37 @@ public sealed class ManagersWriterTests
         output.Should().Contain("path,");
         output.Should().NotContain("query[\"order_id\"]");
     }
+
+    [Fact]
+    public void Implementation_should_use_disambiguated_duplicate_request_parameter_names()
+    {
+        var endpoint = new SchemaEndpoint(
+            "promotion.202309.update_activity_product",
+            "Promotion",
+            "promotion",
+            "/promotion/202309/activities/{activity_id}/products",
+            "PUT",
+            "seller",
+            "seller",
+            "body",
+            ["x-tts-access-token", "content-type"],
+            [
+                new SchemaParameter("activity_id", "string", true, "path", []),
+                new SchemaParameter("app_key", "string", true, "query", []),
+                new SchemaParameter("timestamp", "int", true, "query", []),
+                new SchemaParameter("sign", "string", true, "query", []),
+                new SchemaParameter("shop_cipher", "string", true, "query", []),
+                new SchemaParameter("activity_id", "string", true, "body", [])
+            ],
+            [
+                new SchemaParameter("code", "int", false, "body", []),
+                new SchemaParameter("message", "string", false, "body", []),
+                new SchemaParameter("request_id", "string", false, "body", [])
+            ]);
+
+        var output = new ManagersWriter().WriteImplementation("Promotion", "promotion", [endpoint]);
+
+        output.Should().Contain("body[\"activity_id\"] = request.BodyActivityId;");
+        output.Should().Contain("path = path.Replace(\"{activity_id}\", Uri.EscapeDataString(Convert.ToString(request.PathActivityId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));");
+    }
 }

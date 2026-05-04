@@ -79,7 +79,7 @@ public sealed class ManagersWriter
                     continue;
                 }
 
-                builder.AppendLine($"        query[\"{parameter.Name}\"] = request.{TikTokName.ToPascalCase(parameter.Name)};");
+                builder.AppendLine($"        query[\"{parameter.Name}\"] = request.{TikTokName.ToPropertyName(parameter, endpoint.RequestParameters)};");
             }
 
             var bodyParameters = endpoint.RequestParameters
@@ -90,14 +90,14 @@ public sealed class ManagersWriter
                 builder.AppendLine("        var body = new Dictionary<string, object?>();");
                 foreach (var parameter in bodyParameters)
                 {
-                    builder.AppendLine($"        body[\"{parameter.Name}\"] = request.{TikTokName.ToPascalCase(parameter.Name)};");
+                    builder.AppendLine($"        body[\"{parameter.Name}\"] = request.{TikTokName.ToPropertyName(parameter, endpoint.RequestParameters)};");
                 }
             }
 
             builder.AppendLine($"        var path = \"{endpoint.Path}\";");
             foreach (var parameter in PathParameters(endpoint))
             {
-                builder.AppendLine($"        path = path.Replace(\"{{{parameter.Name}}}\", Uri.EscapeDataString(Convert.ToString(request.{TikTokName.ToPascalCase(parameter.Name)}, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));");
+                builder.AppendLine($"        path = path.Replace(\"{{{parameter.Name}}}\", Uri.EscapeDataString(Convert.ToString(request.{TikTokName.ToPropertyName(parameter, endpoint.RequestParameters)}, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));");
             }
 
             builder.AppendLine($"        var envelope = await client.SendAsync<{ToEnvelopePayloadType(endpoint)}>(");

@@ -30,6 +30,15 @@ public static class TikTokName
     public static string ToPropertyName(string value)
         => ToPascalCase(value);
 
+    public static string ToPropertyName(SchemaParameter parameter, IReadOnlyList<SchemaParameter> siblings)
+    {
+        var propertyName = ToPropertyName(parameter.Name);
+        var duplicateName = siblings.Count(sibling => sibling.Name.Equals(parameter.Name, StringComparison.Ordinal)) > 1;
+        return duplicateName
+            ? ToPascalCase(parameter.Location) + propertyName
+            : propertyName;
+    }
+
     public static string ToRequestTypeName(SchemaEndpoint endpoint)
         => ToPascalCase(endpoint.ModuleKey) + ToOperationName(endpoint.OperationId) + "Request";
 

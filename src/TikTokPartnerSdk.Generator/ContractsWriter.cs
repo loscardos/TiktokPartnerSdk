@@ -48,7 +48,7 @@ public sealed class ContractsWriter
             var parameter = parameters[index];
             var suffix = index == parameters.Count - 1 ? ");" : ",";
             builder.AppendLine(
-                $"    [property: JsonPropertyName(\"{parameter.Name}\")] {TikTokTypeMapper.MapType(parameter, typeName)} {TikTokName.ToPropertyName(parameter.Name)}{suffix}");
+                $"    [property: JsonPropertyName(\"{parameter.Name}\")] {TikTokTypeMapper.MapType(parameter, typeName)} {TikTokName.ToPropertyName(parameter, parameters)}{suffix}");
         }
     }
 
