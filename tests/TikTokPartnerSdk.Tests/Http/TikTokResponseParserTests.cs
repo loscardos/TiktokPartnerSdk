@@ -1,4 +1,5 @@
 using FluentAssertions;
+using TikTokPartnerSdk.Abstractions.Errors;
 using TikTokPartnerSdk.Core.Http;
 
 namespace TikTokPartnerSdk.Tests.Http;
@@ -6,13 +7,15 @@ namespace TikTokPartnerSdk.Tests.Http;
 public sealed class TikTokResponseParserTests
 {
     [Fact]
-    public void Parse_should_throw_when_tiktok_business_code_is_non_zero()
+    public void Parse_should_throw_typed_exception_for_tiktok_error()
     {
         var parser = new TikTokResponseParser();
 
-        var action = () => parser.Parse<Dictionary<string, bool>>("""{"code":106001,"message":"bad request","request_id":"req-1","data":null}""");
+        var action = () => parser.Parse<Dictionary<string, bool>>("""{"code":105005,"message":"Invalid access token","request_id":"req-error","data":null}""");
 
-        action.Should().Throw<InvalidOperationException>()
-            .WithMessage("*106001*");
+        var exception = action.Should().Throw<TikTokApiException>().Which;
+        exception.Code.Should().Be(105005);
+        exception.RequestId.Should().Be("req-error");
+        exception.Category.Should().Be(TikTokErrorCategory.Authentication);
     }
 }

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using TikTokPartnerSdk.Abstractions.Errors;
 using TikTokPartnerSdk.Abstractions.Http;
 
 namespace TikTokPartnerSdk.Core.Http;
@@ -20,7 +21,11 @@ public sealed class TikTokResponseParser
 
         if (envelope.Code != 0)
         {
-            throw new InvalidOperationException($"TikTok API error {envelope.Code}: {envelope.Message}");
+            throw new TikTokApiException(
+                envelope.Code,
+                envelope.Message,
+                envelope.RequestId,
+                TikTokErrorClassifier.Classify(envelope.Code, envelope.Message));
         }
 
         return envelope;
