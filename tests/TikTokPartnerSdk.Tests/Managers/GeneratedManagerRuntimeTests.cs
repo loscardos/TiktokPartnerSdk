@@ -4,6 +4,7 @@ using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Event;
 using TikTokPartnerSdk.Generated.Order;
+using TikTokPartnerSdk.Generated.Product;
 using TikTokPartnerSdk.Generated.Seller;
 
 namespace TikTokPartnerSdk.Tests.Managers;
@@ -241,6 +242,73 @@ public sealed class GeneratedManagerRuntimeTests
         priceClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
         priceClient.LastRequest.Path.Should().Be("/order/202407/orders/order-1/price_detail");
         priceClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+    }
+
+    [Fact]
+    public async Task Product_api_should_send_core_catalog_paths()
+    {
+        var categoriesClient = new RecordingClient();
+        var categoriesApi = new ProductApi(categoriesClient);
+
+        await categoriesApi.GetCategoriesAsync(
+            "seller-token",
+            new ProductGetCategoriesRequest(
+                "app-key",
+                1,
+                "sign",
+                "v2",
+                true,
+                "shirt",
+                "TikTok Shop",
+                "en",
+                "shop-cipher"),
+            CancellationToken.None);
+
+        categoriesClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        categoriesClient.LastRequest.Path.Should().Be("/product/202309/categories");
+        categoriesClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var productClient = new RecordingClient();
+        var productApi = new ProductApi(productClient);
+
+        await productApi.GetProductAsync(
+            "seller-token",
+            new ProductGetProductRequest(
+                "product-1",
+                "app-key",
+                1,
+                "sign",
+                "en",
+                false,
+                false,
+                "shop-cipher"),
+            CancellationToken.None);
+
+        productClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        productClient.LastRequest.Path.Should().Be("/product/202309/products/product-1");
+        productClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var brandsClient = new RecordingClient();
+        var brandsApi = new ProductApi(brandsClient);
+
+        await brandsApi.GetBrandsAsync(
+            "seller-token",
+            new ProductGetBrandsRequest(
+                "app-key",
+                1,
+                "sign",
+                "Acme",
+                "category-1",
+                "v2",
+                true,
+                20,
+                string.Empty,
+                "shop-cipher"),
+            CancellationToken.None);
+
+        brandsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        brandsClient.LastRequest.Path.Should().Be("/product/202309/brands");
+        brandsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
