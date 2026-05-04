@@ -4,6 +4,7 @@ using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Event;
 using TikTokPartnerSdk.Generated.Fulfillment;
+using TikTokPartnerSdk.Generated.Logistics;
 using TikTokPartnerSdk.Generated.Order;
 using TikTokPartnerSdk.Generated.Product;
 using TikTokPartnerSdk.Generated.Seller;
@@ -364,6 +365,43 @@ public sealed class GeneratedManagerRuntimeTests
             ["pickup_slot"] = new FulfillmentShipPackageRequestPickupSlot(1710000000, 1710003600),
             ["self_shipment"] = new FulfillmentShipPackageRequestSelfShipment("track-1", "provider-1")
         });
+    }
+
+    [Fact]
+    public async Task Logistics_api_should_send_core_warehouse_paths()
+    {
+        var warehousesClient = new RecordingClient();
+        var warehousesApi = new LogisticsApi(warehousesClient);
+
+        await warehousesApi.GetWarehouseListAsync(
+            "seller-token",
+            new LogisticsGetWarehouseListRequest("app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        warehousesClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        warehousesClient.LastRequest.Path.Should().Be("/logistics/202309/warehouses");
+        warehousesClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var providersClient = new RecordingClient();
+        var providersApi = new LogisticsApi(providersClient);
+
+        await providersApi.GetShippingProvidersAsync(
+            "seller-token",
+            new LogisticsGetShippingProvidersRequest(
+                "delivery-option-1",
+                "app-key",
+                1,
+                "sign",
+                "ID",
+                "shop-cipher",
+                "ID"),
+            CancellationToken.None);
+
+        providersClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        providersClient.LastRequest.Path.Should().Be("/logistics/202309/delivery_options/delivery-option-1/shipping_providers");
+        providersClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        providersClient.LastRequest.Query.Should().ContainKey("buyer_region").WhoseValue.Should().Be("ID");
+        providersClient.LastRequest.Query.Should().ContainKey("warehouse_region").WhoseValue.Should().Be("ID");
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
