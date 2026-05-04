@@ -46,6 +46,7 @@ public static class TikTokServiceCollectionExtensions
         services.AddScoped<IProductApi, ProductApi>();
         services.AddScoped<IFulfillmentApi, FulfillmentApi>();
         services.AddScoped<ILogisticsApi, LogisticsApi>();
+        services.AddScoped<IReturnAndRefundApi, ReturnAndRefundApi>();
         return services;
     }
 
