@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Abstractions.Managers;
 using TikTokPartnerSdk.Abstractions.Managers.Generated;
 using TikTokPartnerSdk.Extensions.DependencyInjection;
@@ -21,6 +22,7 @@ public sealed class TikTokServiceCollectionExtensionsTests
         var provider = services.BuildServiceProvider();
 
         provider.GetService<IAuthApi>().Should().NotBeNull();
+        provider.GetService<ITikTokAuthClient>().Should().NotBeNull();
     }
 
     [Fact]

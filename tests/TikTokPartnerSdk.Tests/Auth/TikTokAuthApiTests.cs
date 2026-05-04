@@ -18,7 +18,7 @@ public sealed class TikTokAuthApiTests
             {
                 AppKey = "app-key"
             }),
-            client: new StubTikTokPartnerClient(),
+            authClient: new RecordingAuthClient(),
             tokenStore: new InMemoryTikTokTokenStore());
 
         var url = api.BuildAuthorizationUrl(new Uri("https://example.com/callback"), "abc");
@@ -31,18 +31,18 @@ public sealed class TikTokAuthApiTests
     public async Task ExchangeCodeAsync_should_store_token_from_tiktok_response()
     {
         var store = new InMemoryTikTokTokenStore();
-        var client = new StubTikTokPartnerClient(new TikTokPartnerResponseEnvelope<ExchangeCodeResponse>(
+        var authClient = new RecordingAuthClient(new TikTokPartnerResponseEnvelope<AuthTokenResponse>(
             0,
             "success",
             "req-1",
-            new ExchangeCodeResponse("access-1", "refresh-1", 7200, 2592000)));
+            new AuthTokenResponse("access-1", "refresh-1", 7200, 2592000)));
         var api = new TikTokAuthApi(
             Options.Create(new TikTokPartnerOptions
             {
                 AppKey = "app-key",
                 AppSecret = "app-secret"
             }),
-            client,
+            authClient,
             store);
         var context = new TikTokAuthorizationContext(TikTokAccessTokenKind.Seller, "app-key", "cipher-1");
 
@@ -52,6 +52,9 @@ public sealed class TikTokAuthApiTests
             cancellationToken: CancellationToken.None);
 
         token.AccessToken.Should().Be("access-1");
+        authClient.LastPath.Should().Be("/authorization/202309/access_token");
+        authClient.LastBodyJson.Should().Contain("authorized_code");
+        authClient.LastBodyJson.Should().Contain("auth_code");
         (await store.GetAsync(context, CancellationToken.None)).Should().NotBeNull();
     }
 
@@ -69,38 +72,48 @@ public sealed class TikTokAuthApiTests
             "app-key");
         var store = new InMemoryTikTokTokenStore();
         await store.StoreAsync(existing, CancellationToken.None);
-        var client = new StubTikTokPartnerClient(new TikTokPartnerResponseEnvelope<RefreshTokenResponse>(
+        var authClient = new RecordingAuthClient(new TikTokPartnerResponseEnvelope<AuthTokenResponse>(
             0,
             "success",
             "req-2",
-            new RefreshTokenResponse("new-access", "new-refresh", 7200, 2592000)));
+            new AuthTokenResponse("new-access", "new-refresh", 7200, 2592000)));
         var api = new TikTokAuthApi(
             Options.Create(new TikTokPartnerOptions
             {
                 AppKey = "app-key",
                 AppSecret = "app-secret"
             }),
-            client,
+            authClient,
             store);
 
         var refreshed = await api.RefreshTokenAsync(context, CancellationToken.None);
 
         refreshed.AccessToken.Should().Be("new-access");
+        authClient.LastPath.Should().Be("/authorization/202309/refresh_token");
+        authClient.LastBodyJson.Should().Contain("old-refresh");
+        authClient.LastBodyJson.Should().Contain("refresh_token");
     }
 
-    private sealed class StubTikTokPartnerClient : ITikTokPartnerClient
+    private sealed class RecordingAuthClient : ITikTokAuthClient
     {
         private readonly object? _response;
 
-        public StubTikTokPartnerClient(object? response = null)
+        public RecordingAuthClient(object? response = null)
         {
             _response = response;
         }
 
-        public Task<TikTokPartnerResponseEnvelope<TResponse>> SendAsync<TResponse>(
-            TikTokPartnerRequest request,
+        public string? LastPath { get; private set; }
+        public string? LastBodyJson { get; private set; }
+
+        public Task<TikTokPartnerResponseEnvelope<TResponse>> PostAsync<TResponse>(
+            string path,
+            object body,
             CancellationToken cancellationToken)
         {
+            LastPath = path;
+            LastBodyJson = JsonSerializer.Serialize(body);
+
             if (_response is TikTokPartnerResponseEnvelope<TResponse> typed)
             {
                 return Task.FromResult(typed);
@@ -146,13 +159,7 @@ public sealed class TikTokAuthApiTests
             => $"{context.AccessTokenKind}:{context.AppKey}:{context.ShopCipher ?? string.Empty}";
     }
 
-    private sealed record ExchangeCodeResponse(
-        string AccessToken,
-        string RefreshToken,
-        long AccessTokenExpireIn,
-        long RefreshTokenExpireIn);
-
-    private sealed record RefreshTokenResponse(
+    private sealed record AuthTokenResponse(
         string AccessToken,
         string RefreshToken,
         long AccessTokenExpireIn,

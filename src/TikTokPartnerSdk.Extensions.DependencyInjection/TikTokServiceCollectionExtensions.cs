@@ -22,6 +22,7 @@ public static class TikTokServiceCollectionExtensions
         services.AddSingleton<TikTokRequestUriBuilder>();
         services.AddSingleton<TikTokRequestContentFactory>();
         services.AddSingleton<TikTokResponseParser>();
+        services.AddHttpClient<ITikTokAuthClient, TikTokAuthClient>();
         services.AddHttpClient<ITikTokPartnerClient, TikTokPartnerClient>();
         services.AddSingleton<ITikTokTokenStore, InMemoryTikTokTokenStore>();
         services.AddScoped<TikTokTokenService>();

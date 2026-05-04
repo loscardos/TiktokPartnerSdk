@@ -8,11 +8,10 @@ namespace TikTokPartnerSdk.Core.Auth;
 
 public sealed class TikTokAuthApi(
     IOptions<TikTokPartnerOptions> options,
-    ITikTokPartnerClient client,
+    ITikTokAuthClient authClient,
     ITikTokTokenStore tokenStore) : IAuthApi
 {
     private readonly TikTokPartnerOptions _options = options.Value;
-    private readonly ITikTokPartnerClient _client = client;
 
     public Uri BuildAuthorizationUrl(Uri redirectUri, string? state)
     {
@@ -29,19 +28,15 @@ public sealed class TikTokAuthApi(
         TikTokAuthorizationContext context,
         CancellationToken cancellationToken)
     {
-        var envelope = await _client.SendAsync<AuthTokenPayload>(
-            new TikTokPartnerRequest(
-                HttpMethod.Post,
-                "/authorization/202309/access_token",
-                new Dictionary<string, object?>(),
-                new Dictionary<string, object?>
-                {
-                    ["app_key"] = _options.AppKey,
-                    ["app_secret"] = _options.AppSecret,
-                    ["auth_code"] = code,
-                    ["grant_type"] = "authorized_code"
-                },
-                context),
+        var envelope = await authClient.PostAsync<AuthTokenPayload>(
+            "/authorization/202309/access_token",
+            new Dictionary<string, object?>
+            {
+                ["app_key"] = _options.AppKey,
+                ["app_secret"] = _options.AppSecret,
+                ["auth_code"] = code,
+                ["grant_type"] = "authorized_code"
+            },
             cancellationToken);
 
         var payload = envelope.Data ?? throw new InvalidOperationException("TikTok auth exchange returned no data.");
@@ -57,19 +52,15 @@ public sealed class TikTokAuthApi(
         var existing = await tokenStore.GetAsync(context, cancellationToken)
             ?? throw new InvalidOperationException("TikTok token is missing for the requested authorization context.");
 
-        var envelope = await _client.SendAsync<AuthTokenPayload>(
-            new TikTokPartnerRequest(
-                HttpMethod.Post,
-                "/authorization/202309/refresh_token",
-                new Dictionary<string, object?>(),
-                new Dictionary<string, object?>
-                {
-                    ["app_key"] = _options.AppKey,
-                    ["app_secret"] = _options.AppSecret,
-                    ["refresh_token"] = existing.RefreshToken,
-                    ["grant_type"] = "refresh_token"
-                },
-                context),
+        var envelope = await authClient.PostAsync<AuthTokenPayload>(
+            "/authorization/202309/refresh_token",
+            new Dictionary<string, object?>
+            {
+                ["app_key"] = _options.AppKey,
+                ["app_secret"] = _options.AppSecret,
+                ["refresh_token"] = existing.RefreshToken,
+                ["grant_type"] = "refresh_token"
+            },
             cancellationToken);
 
         var payload = envelope.Data ?? throw new InvalidOperationException("TikTok auth refresh returned no data.");
