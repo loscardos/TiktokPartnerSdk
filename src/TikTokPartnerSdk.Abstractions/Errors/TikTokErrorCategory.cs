@@ -4,6 +4,7 @@ public enum TikTokErrorCategory
 {
     Unknown,
     Authentication,
+    Authorization,
     Signature,
     Validation,
     RateLimit,

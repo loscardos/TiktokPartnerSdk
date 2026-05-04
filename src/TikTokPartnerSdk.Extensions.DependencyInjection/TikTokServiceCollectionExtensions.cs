@@ -9,6 +9,7 @@ using TikTokPartnerSdk.Abstractions.RateLimiting;
 using TikTokPartnerSdk.Core.Auth;
 using TikTokPartnerSdk.Core.Crypto;
 using TikTokPartnerSdk.Core.Http;
+using TikTokPartnerSdk.Core.Managers;
 using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Core.RateLimiting;
 
@@ -39,6 +40,8 @@ public static class TikTokServiceCollectionExtensions
         services.AddSingleton<ITikTokTokenStore, InMemoryTikTokTokenStore>();
         services.AddScoped<TikTokTokenService>();
         services.AddScoped<IAuthApi, TikTokAuthApi>();
+        services.AddScoped<IOrderManager, OrderManager>();
+        services.AddScoped<IProductManager, ProductManager>();
         services.AddScoped<IAuthorizationApi, AuthorizationApi>();
         services.AddScoped<ISellerApi, SellerApi>();
         services.AddScoped<IEventApi, EventApi>();

@@ -13,6 +13,14 @@ public static class TikTokErrorClassifier
             return TikTokErrorCategory.Authentication;
         }
 
+        if (text.Contains("permission", StringComparison.OrdinalIgnoreCase)
+            || text.Contains("scope", StringComparison.OrdinalIgnoreCase)
+            || text.Contains("forbidden", StringComparison.OrdinalIgnoreCase)
+            || text.Contains("unauthorized", StringComparison.OrdinalIgnoreCase))
+        {
+            return TikTokErrorCategory.Authorization;
+        }
+
         if (text.Contains("sign", StringComparison.OrdinalIgnoreCase))
         {
             return TikTokErrorCategory.Signature;
@@ -40,7 +48,8 @@ public static class TikTokErrorClassifier
     {
         return statusCode switch
         {
-            HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden => TikTokErrorCategory.Authentication,
+            HttpStatusCode.Unauthorized => TikTokErrorCategory.Authentication,
+            HttpStatusCode.Forbidden => TikTokErrorCategory.Authorization,
             HttpStatusCode.TooManyRequests => TikTokErrorCategory.RateLimit,
             >= HttpStatusCode.InternalServerError => TikTokErrorCategory.Transient,
             >= HttpStatusCode.BadRequest => TikTokErrorCategory.Validation,

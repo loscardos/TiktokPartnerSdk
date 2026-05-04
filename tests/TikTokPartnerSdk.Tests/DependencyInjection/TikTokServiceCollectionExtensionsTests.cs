@@ -26,6 +26,22 @@ public sealed class TikTokServiceCollectionExtensionsTests
     }
 
     [Fact]
+    public void AddTikTokPartnerSdk_should_register_polished_managers()
+    {
+        var services = new ServiceCollection();
+        services.AddTikTokPartnerSdk(options =>
+        {
+            options.AppKey = "key";
+            options.AppSecret = "secret";
+        });
+
+        var provider = services.BuildServiceProvider();
+
+        provider.GetService<IOrderManager>().Should().NotBeNull();
+        provider.GetService<IProductManager>().Should().NotBeNull();
+    }
+
+    [Fact]
     public void AddTikTokPartnerSdk_should_register_generated_manager_apis()
     {
         var services = new ServiceCollection();

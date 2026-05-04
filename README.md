@@ -2,7 +2,7 @@
 
 ASP.NET-friendly TikTok Shop Partner SDK for .NET 8.
 
-Status: `0.1.0-preview`. The SDK is ready for local package smoke testing and starter sandbox integration work. It now has typed API errors, transient retry support, optional in-memory rate limiting, generated endpoint coverage for Authorization, Seller, Event, Orders, Products, Fulfillment, Logistics, Return-and-Refund, Finance, FBT, Supply Chain, Promotion, Analytics, Customer Service, Customer Engagement, Affiliate Creator, Affiliate Partner, Affiliate Seller, and Tools, and a YAML documentation normalization path. Full production coverage is still in progress.
+Status: `0.1.0-preview`. The SDK is ready for local package smoke testing and starter sandbox integration work. It now has typed API errors, transient retry support, optional in-memory rate limiting, token-aware Orders and Products managers, pagination helpers, generated endpoint coverage for Authorization, Seller, Event, Orders, Products, Fulfillment, Logistics, Return-and-Refund, Finance, FBT, Supply Chain, Promotion, Analytics, Customer Service, Customer Engagement, Affiliate Creator, Affiliate Partner, Affiliate Seller, and Tools, and a YAML documentation normalization path. Full production coverage is still in progress.
 
 ## Packages
 
