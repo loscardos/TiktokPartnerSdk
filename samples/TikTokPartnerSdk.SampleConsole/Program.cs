@@ -69,6 +69,12 @@ try
             await RunProductsSearchAsync(provider, productsContext, env, CancellationToken.None);
             break;
 
+        case "smoke":
+            var smokeContext = CreateSellerContext(env);
+            var smokeToken = await SeedTokenStoreAsync(provider, env, smokeContext, CancellationToken.None);
+            await RunSmokeAsync(provider, smokeContext, smokeToken, env, CancellationToken.None);
+            break;
+
         default:
             Console.Error.WriteLine($"Unknown command '{command}'.");
             PrintHelp();
@@ -155,12 +161,23 @@ static async Task RunAuthorizedShopsAsync(
     IServiceProvider provider,
     IReadOnlyDictionary<string, string> env,
     CancellationToken cancellationToken)
+    => await RunAuthorizedShopsWithTokenAsync(
+        provider,
+        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
+        Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+        cancellationToken);
+
+static async Task RunAuthorizedShopsWithTokenAsync(
+    IServiceProvider provider,
+    string accessToken,
+    string appKey,
+    CancellationToken cancellationToken)
 {
     var api = provider.GetRequiredService<IAuthorizationApi>();
     var response = await api.GetAuthorizedShopsAsync(
-        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
+        accessToken,
         new AuthorizationGetAuthorizedShopsRequest(
-            Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+            appKey,
             0,
             string.Empty),
         cancellationToken);
@@ -172,12 +189,23 @@ static async Task RunSellerShopsAsync(
     IServiceProvider provider,
     IReadOnlyDictionary<string, string> env,
     CancellationToken cancellationToken)
+    => await RunSellerShopsWithTokenAsync(
+        provider,
+        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
+        Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+        cancellationToken);
+
+static async Task RunSellerShopsWithTokenAsync(
+    IServiceProvider provider,
+    string accessToken,
+    string appKey,
+    CancellationToken cancellationToken)
 {
     var api = provider.GetRequiredService<ISellerApi>();
     var response = await api.GetActiveShopsAsync(
-        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
+        accessToken,
         new SellerGetActiveShopsRequest(
-            Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+            appKey,
             0,
             string.Empty),
         cancellationToken);
@@ -221,6 +249,43 @@ static async Task RunProductsSearchAsync(
     Console.WriteLine($"products={page.Items.Count} total={page.TotalCount} next_page_token={page.NextPageToken}");
 }
 
+static async Task RunSmokeAsync(
+    IServiceProvider provider,
+    TikTokAuthorizationContext context,
+    TikTokTokenRecord token,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    var results = new List<bool>
+    {
+        await RunSmokeStepAsync("authorized-shops", () => RunAuthorizedShopsWithTokenAsync(provider, token.AccessToken, context.AppKey, cancellationToken)),
+        await RunSmokeStepAsync("seller-shops", () => RunSellerShopsWithTokenAsync(provider, token.AccessToken, context.AppKey, cancellationToken)),
+        await RunSmokeStepAsync("orders-search", () => RunOrdersSearchAsync(provider, context, env, cancellationToken)),
+        await RunSmokeStepAsync("products-search", () => RunProductsSearchAsync(provider, context, env, cancellationToken))
+    };
+
+    if (results.Any(static passed => !passed))
+    {
+        Environment.ExitCode = 1;
+    }
+}
+
+static async Task<bool> RunSmokeStepAsync(string name, Func<Task> action)
+{
+    Console.WriteLine($"== {name} ==");
+    try
+    {
+        await action();
+        Console.WriteLine($"PASS {name}");
+        return true;
+    }
+    catch (Exception exception)
+    {
+        Console.WriteLine($"FAIL {name}: {exception.Message}");
+        return false;
+    }
+}
+
 static void PrintConfigStatus(IReadOnlyDictionary<string, string> env)
 {
     var keys = new[]
@@ -262,6 +327,7 @@ static void PrintHelp()
     Console.WriteLine("  seller-shops        Call Seller get active shops with an access token");
     Console.WriteLine("  orders-search       Search orders through token-aware IOrderManager");
     Console.WriteLine("  products-search     Search products through token-aware IProductManager");
+    Console.WriteLine("  smoke               Run direct read-only validation: shops, orders, products");
 }
 
 static string Require(IReadOnlyDictionary<string, string> values, string key)
