@@ -52,7 +52,7 @@ public sealed class TikTokAuthApiTests
             cancellationToken: CancellationToken.None);
 
         token.AccessToken.Should().Be("access-1");
-        authClient.LastPath.Should().Be("/authorization/202309/access_token");
+        authClient.LastPath.Should().Be("/token/get");
         authClient.LastBodyJson.Should().Contain("authorized_code");
         authClient.LastBodyJson.Should().Contain("auth_code");
         (await store.GetAsync(context, CancellationToken.None)).Should().NotBeNull();
@@ -89,7 +89,7 @@ public sealed class TikTokAuthApiTests
         var refreshed = await api.RefreshTokenAsync(context, CancellationToken.None);
 
         refreshed.AccessToken.Should().Be("new-access");
-        authClient.LastPath.Should().Be("/authorization/202309/refresh_token");
+        authClient.LastPath.Should().Be("/token/refresh");
         authClient.LastBodyJson.Should().Contain("old-refresh");
         authClient.LastBodyJson.Should().Contain("refresh_token");
     }
@@ -160,8 +160,8 @@ public sealed class TikTokAuthApiTests
     }
 
     private sealed record AuthTokenResponse(
-        string AccessToken,
-        string RefreshToken,
-        long AccessTokenExpireIn,
-        long RefreshTokenExpireIn);
+        [property: System.Text.Json.Serialization.JsonPropertyName("access_token")] string AccessToken,
+        [property: System.Text.Json.Serialization.JsonPropertyName("refresh_token")] string RefreshToken,
+        [property: System.Text.Json.Serialization.JsonPropertyName("access_token_expire_in")] long AccessTokenExpireIn,
+        [property: System.Text.Json.Serialization.JsonPropertyName("refresh_token_expire_in")] long RefreshTokenExpireIn);
 }

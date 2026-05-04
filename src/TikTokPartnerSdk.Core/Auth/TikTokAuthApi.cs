@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
 using TikTokPartnerSdk.Abstractions.Auth;
 using TikTokPartnerSdk.Abstractions.Configuration;
 using TikTokPartnerSdk.Abstractions.Http;
@@ -29,7 +30,7 @@ public sealed class TikTokAuthApi(
         CancellationToken cancellationToken)
     {
         var envelope = await authClient.PostAsync<AuthTokenPayload>(
-            "/authorization/202309/access_token",
+            "/token/get",
             new Dictionary<string, object?>
             {
                 ["app_key"] = _options.AppKey,
@@ -53,7 +54,7 @@ public sealed class TikTokAuthApi(
             ?? throw new InvalidOperationException("TikTok token is missing for the requested authorization context.");
 
         var envelope = await authClient.PostAsync<AuthTokenPayload>(
-            "/authorization/202309/refresh_token",
+            "/token/refresh",
             new Dictionary<string, object?>
             {
                 ["app_key"] = _options.AppKey,
@@ -78,15 +79,23 @@ public sealed class TikTokAuthApi(
             context.AccessTokenKind,
             payload.AccessToken,
             payload.RefreshToken,
-            now.AddSeconds(payload.AccessTokenExpireIn),
-            now.AddSeconds(payload.RefreshTokenExpireIn),
+            ToExpiry(payload.AccessTokenExpireIn, now),
+            ToExpiry(payload.RefreshTokenExpireIn, now),
             context.ShopCipher,
             context.AppKey);
     }
 
+    private static DateTimeOffset ToExpiry(long value, DateTimeOffset now)
+    {
+        var nowUnix = now.ToUnixTimeSeconds();
+        return value > nowUnix
+            ? DateTimeOffset.FromUnixTimeSeconds(value)
+            : now.AddSeconds(value);
+    }
+
     private sealed record AuthTokenPayload(
-        string AccessToken,
-        string RefreshToken,
-        long AccessTokenExpireIn,
-        long RefreshTokenExpireIn);
+        [property: JsonPropertyName("access_token")] string AccessToken,
+        [property: JsonPropertyName("refresh_token")] string RefreshToken,
+        [property: JsonPropertyName("access_token_expire_in")] long AccessTokenExpireIn,
+        [property: JsonPropertyName("refresh_token_expire_in")] long RefreshTokenExpireIn);
 }

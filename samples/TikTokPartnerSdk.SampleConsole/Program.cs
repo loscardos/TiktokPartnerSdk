@@ -34,7 +34,7 @@ try
             break;
 
         case "exchange-code":
-            var exchangeContext = CreateSellerContext(env);
+            var exchangeContext = CreateSellerAuthContext(env);
             var exchanged = await ExchangeSellerTokenAsync(provider, env, exchangeContext, CancellationToken.None);
             PrintToken(exchanged);
             break;
@@ -54,7 +54,9 @@ try
 
         case "authorized-shops":
         case "get-authorized-shops":
-            await RunAuthorizedShopsAsync(provider, env, CancellationToken.None);
+            var authorizedContext = CreateSellerAuthContext(env);
+            var authorizedToken = await SeedTokenStoreAsync(provider, env, authorizedContext, CancellationToken.None);
+            await RunAuthorizedShopsWithTokenAsync(provider, authorizedToken.AccessToken, authorizedContext.AppKey, CancellationToken.None);
             break;
 
         case "orders-search":
@@ -107,6 +109,12 @@ static TikTokAuthorizationContext CreateSellerContext(IReadOnlyDictionary<string
         Require(env, "TIKTOK_SANDBOX_APP_KEY"),
         Require(env, "TIKTOK_SANDBOX_SHOP_CIPHER"));
 
+static TikTokAuthorizationContext CreateSellerAuthContext(IReadOnlyDictionary<string, string> env)
+    => new(
+        TikTokAccessTokenKind.Seller,
+        Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+        Get(env, "TIKTOK_SANDBOX_SHOP_CIPHER"));
+
 static async Task<TikTokTokenRecord> SeedTokenStoreAsync(
     IServiceProvider provider,
     IReadOnlyDictionary<string, string> env,
@@ -157,16 +165,6 @@ static async Task<TikTokTokenRecord> ExchangeSellerTokenAsync(
         cancellationToken);
 }
 
-static async Task RunAuthorizedShopsAsync(
-    IServiceProvider provider,
-    IReadOnlyDictionary<string, string> env,
-    CancellationToken cancellationToken)
-    => await RunAuthorizedShopsWithTokenAsync(
-        provider,
-        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
-        Require(env, "TIKTOK_SANDBOX_APP_KEY"),
-        cancellationToken);
-
 static async Task RunAuthorizedShopsWithTokenAsync(
     IServiceProvider provider,
     string accessToken,
@@ -183,6 +181,10 @@ static async Task RunAuthorizedShopsWithTokenAsync(
         cancellationToken);
 
     Console.WriteLine($"code={response.Code} request_id={response.RequestId} shops={response.Data.Shops.Count}");
+    foreach (var shop in response.Data.Shops)
+    {
+        Console.WriteLine($"shop id={shop.Id} name={shop.Name} region={shop.Region} seller_type={shop.SellerType} cipher={shop.Cipher}");
+    }
 }
 
 static async Task RunSellerShopsAsync(
@@ -389,7 +391,12 @@ static Dictionary<string, string> LoadEnv()
         var separator = line.IndexOf('=', StringComparison.Ordinal);
         if (separator > 0)
         {
-            values[line[..separator].Trim()] = line[(separator + 1)..].Trim();
+            var key = line[..separator].Trim();
+            var value = line[(separator + 1)..].Trim();
+            if (!string.IsNullOrWhiteSpace(value) || !values.ContainsKey(key))
+            {
+                values[key] = value;
+            }
         }
     }
 

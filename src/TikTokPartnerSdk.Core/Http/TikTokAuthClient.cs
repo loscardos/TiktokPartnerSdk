@@ -1,4 +1,4 @@
-using System.Net.Http.Json;
+using System.Globalization;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
 using TikTokPartnerSdk.Abstractions.Configuration;
@@ -14,7 +14,6 @@ public sealed class TikTokAuthClient(
     ITikTokRateLimiter rateLimiter,
     TikTokResponseParser responseParser) : ITikTokAuthClient
 {
-    private static readonly JsonSerializerOptions BodySerializerOptions = new(JsonSerializerDefaults.Web);
     private readonly TikTokPartnerOptions _options = options.Value;
 
     public async Task<TikTokPartnerResponseEnvelope<TResponse>> PostAsync<TResponse>(
@@ -26,10 +25,7 @@ public sealed class TikTokAuthClient(
 
         for (var attempt = 0; ; attempt++)
         {
-            using var httpRequest = new HttpRequestMessage(HttpMethod.Post, BuildUri(path))
-            {
-                Content = JsonContent.Create(body, options: BodySerializerOptions)
-            };
+            using var httpRequest = new HttpRequestMessage(HttpMethod.Get, BuildUri(path, body));
 
             httpRequest.Headers.UserAgent.ParseAdd(_options.UserAgent);
 
@@ -53,11 +49,28 @@ public sealed class TikTokAuthClient(
         }
     }
 
-    private Uri BuildUri(string path)
+    private Uri BuildUri(string path, object body)
     {
         var baseUrl = _options.AuthApiBaseUrl.TrimEnd('/');
         var normalizedPath = path.TrimStart('/');
-        return new Uri($"{baseUrl}/{normalizedPath}", UriKind.Absolute);
+        var query = ToQueryString(body);
+        return new Uri($"{baseUrl}/{normalizedPath}{query}", UriKind.Absolute);
+    }
+
+    private static string ToQueryString(object body)
+    {
+        if (body is not IEnumerable<KeyValuePair<string, object?>> values)
+        {
+            return string.Empty;
+        }
+
+        var parts = values
+            .Where(static item => item.Value is not null)
+            .Select(static item =>
+                $"{Uri.EscapeDataString(item.Key)}={Uri.EscapeDataString(Convert.ToString(item.Value, CultureInfo.InvariantCulture) ?? string.Empty)}");
+
+        var query = string.Join("&", parts);
+        return query.Length == 0 ? string.Empty : "?" + query;
     }
 
     private async Task DelayAsync(int attempt, CancellationToken cancellationToken)

@@ -11,7 +11,7 @@ namespace TikTokPartnerSdk.Tests.Http;
 public sealed class TikTokAuthClientTests
 {
     [Fact]
-    public async Task PostAsync_should_send_to_auth_base_url_without_open_api_signature()
+    public async Task PostAsync_should_send_token_query_to_auth_base_url_without_open_api_signature()
     {
         var handler = new RecordingHandler("""{"code":0,"message":"success","requestId":"req-auth","data":{"accessToken":"access","refreshToken":"refresh","accessTokenExpireIn":7200,"refreshTokenExpireIn":2592000}}""");
         var client = new TikTokAuthClient(
@@ -21,7 +21,7 @@ public sealed class TikTokAuthClientTests
             new TikTokResponseParser());
 
         var envelope = await client.PostAsync<AuthPayload>(
-            "/authorization/202309/access_token",
+            "/token/get",
             new Dictionary<string, object?>
             {
                 ["app_key"] = "app-key",
@@ -35,10 +35,12 @@ public sealed class TikTokAuthClientTests
         envelope.RequestId.Should().Be("req-auth");
         envelope.Data.Should().NotBeNull();
         envelope.Data!.AccessToken.Should().Be("access");
-        handler.LastRequest!.RequestUri!.ToString().Should().Be("https://auth.example.test/api/v2/authorization/202309/access_token");
-        handler.LastRequest.RequestUri.Query.Should().BeEmpty();
+        handler.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        handler.LastRequest.RequestUri!.ToString().Should().Contain("https://auth.example.test/api/v2/token/get?");
+        handler.LastRequest.RequestUri.Query.Should().Contain("auth_code=code-1");
+        handler.LastRequest.RequestUri.Query.Should().Contain("grant_type=authorized_code");
         handler.LastRequest.Headers.UserAgent.ToString().Should().Be("InternalTikTokPartnerSdk/0.1");
-        handler.LastRequestBody.Should().Contain("auth_code");
+        handler.LastRequestBody.Should().BeEmpty();
         handler.LastRequestBody.Should().NotContain("sign");
     }
 
