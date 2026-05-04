@@ -1,0 +1,535 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202409.search_goods_info",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202409/goods/search",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "page_size",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "page_token",
+      "type": "string",
+      "required": false,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "goods_ids",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "product_ids",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "reference_codes",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "sku_ids",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "next_page_token",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "total_count",
+          "type": "int",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "goods",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "barcodes",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "code",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "type",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "reference_code",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "image_url",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "merchant_declaration_info",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "weight",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "value",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "unit",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "dimension",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "width",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "length",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "height",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "unit",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "warehouse_confirmation_info",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "weight",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "value",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "unit",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "dimension",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "width",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "length",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "height",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "unit",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "skus",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "image_url",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "product",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "id",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "name",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "image_url",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "regions",
+                  "type": "[]string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "matched",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "lot_expiration_info",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "is_lot_control",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "is_expiration_management",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "shelf_life_days",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "inbound_cutoff_days",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "expiration_alert_days",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "sales_cutoff_days",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "handling_method",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "return_cycle",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "addresses",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "name",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "phone_number",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "postal_code",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "region_code",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "state",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "district",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "city",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "address_line_1",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "address_line_2",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "address_line_3",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

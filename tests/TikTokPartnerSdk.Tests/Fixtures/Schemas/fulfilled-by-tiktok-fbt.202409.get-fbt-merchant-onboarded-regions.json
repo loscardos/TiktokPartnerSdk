@@ -1,0 +1,90 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202409.get_fbt_merchant_onboarded_regions",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202409/merchants/onboarded_regions",
+  "method": "GET",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "query",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "onboarded_regions",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "region_code",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

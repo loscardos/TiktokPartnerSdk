@@ -1,0 +1,420 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202602.get_inbound_order",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202602/inbound_orders",
+  "method": "GET",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "query",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "include_carton_details",
+      "type": "bool",
+      "required": false,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "order_ids",
+      "type": "[]string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "inbound_orders",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "order_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "order_id_string",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "order_plan_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "merchant",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "create_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "ship_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "expected_arrival_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "actual_arrival_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "warehouse",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "fbt_warehouse_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "business_warehouse_ids",
+                  "type": "[]string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "type",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "status_logs",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "operate_time",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "new_status",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "previous_status",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "operator",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "logistic_info_list",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "provider_name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "waybill_number",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "related_number",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "carton_details",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "carton_no",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "carton_type",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "box_measurements",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "weight",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "weight_unit",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "width",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "height",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "length",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "length_unit",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "items",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "goods_id",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "quantity",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "inbound_goods_lot_receive_item_details",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "goods_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "lot_code",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "expiration_time",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "planned_count",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "normal_received_count",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "defective_received_count",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "total_received_count",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202601.create_fbt_mcf_order",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202601/mcf_outbound_orders",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "external_order_id",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "goods",
+      "type": "[]object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "quantity",
+          "type": "int",
+          "required": true,
+          "location": "body",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "consignee",
+      "type": "object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "phone_number",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "address",
+          "type": "object",
+          "required": true,
+          "location": "body",
+          "children": [
+            {
+              "name": "country_code",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "state_or_region",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "district_or_county",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "city",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "address_line_1",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "address_line_2",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "postal_code",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "mcf_order",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "external_order_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "mcf_order_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "create_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

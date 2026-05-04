@@ -1,0 +1,155 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202603.get_hazmat_and_expiration_info",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202603/goods/hazmat_and_expiration_info/search",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "tts_sku_ids",
+      "type": "[]string",
+      "required": true,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "hazmat_and_expiration_info",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "hazmat_and_expiration_dto_list",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "tts_sku_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "is_hazmat",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "is_lot_code",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "is_expiration_management",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "exp_base_info",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "inbound_cutoff_days",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "expiration_alert_days",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "sales_cutoff_days",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

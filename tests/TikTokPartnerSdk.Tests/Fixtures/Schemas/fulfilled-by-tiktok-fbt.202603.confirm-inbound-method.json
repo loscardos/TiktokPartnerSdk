@@ -1,0 +1,125 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202603.confirm_inbound_method",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202603/confirm_inbound_method",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "plan_id",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "placement_option_id",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "inbound_method",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "estimate_arrival_time",
+      "type": "object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "start_timestamp",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "end_timestamp",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "inbound_order_ids",
+          "type": "[]string",
+          "required": false,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202410.search_fbt_inventory_record",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202410/inventory_records/search",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "page_size",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "page_token",
+      "type": "string",
+      "required": false,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "goods_ids",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "fbt_warehouse_ids",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "create_time_ge",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "create_time_le",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "inventory_records",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "goods",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "reference_code",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "fbt_warehouse_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "order",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "type",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "create_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "inventory_goods_type",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "initial_on_hand_quantity",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "final_on_hand_quantity",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "changed_quantity",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "next_page_token",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "total_count",
+          "type": "int",
+          "required": false,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

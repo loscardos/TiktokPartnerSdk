@@ -1,0 +1,519 @@
+{
+  "operation_id": "fulfilled-by-tiktok-fbt.202603.create_goods",
+  "module_name": "Fulfilled by TikTok (FBT)",
+  "module_key": "fulfilled-by-tiktok-fbt",
+  "path": "/fbt/202603/goods/create_goods",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "create_goods_dto_list",
+      "type": "[]object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "tts_sku_id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "create_goods_type",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "goods_name",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "goods_image_url",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "reference_code",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "barcode_infos",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "barcode_type",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "barcode_value",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "return_handling_method",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "dimension_and_weight_base_info",
+          "type": "object",
+          "required": true,
+          "location": "body",
+          "children": [
+            {
+              "name": "weight_value",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "length_value",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "width_value",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "height_value",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "weight_unit",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "dimension_unit",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "is_hazmat",
+          "type": "bool",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "hazmat_info",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "hazmat_type",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "battery_extra_info",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "battery_type",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "battery_packaging_type",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "total_battery_weight",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "total_battery_weight_unit",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "total_battery_capacity",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "total_battery_capacity_unit",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "is_need_un_38_3_test",
+                  "type": "bool",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "un_38_3_test_file_url",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "battery_count_per_package",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "flammable_liquids_extra_info",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "flammable_liquids_type",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "flammable_liquids_volume",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "volume_unit",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "dg_class",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "dg_uncode",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "msds_file_url",
+              "type": "string",
+              "required": true,
+              "location": "body",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "is_lot_code",
+          "type": "bool",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "is_expiration_management",
+          "type": "bool",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "shelf_life_attribute_info",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "shelf_life",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "inbound_cutoff_days",
+              "type": "int",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "expiration_alert_days",
+              "type": "int",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "sales_cutoff_days",
+              "type": "int",
+              "required": true,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "handling_method_expired_goods",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "return_cycle",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "return_address_info",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "phone_number",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "postal_code",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "region_code",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "state",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "district",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "city",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "address_line1",
+                  "type": "string",
+                  "required": true,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "address_line2",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "create_result_info",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "create_result_list",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "tts_sku_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "is_success",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "tts_goods_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "fail_reason",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
