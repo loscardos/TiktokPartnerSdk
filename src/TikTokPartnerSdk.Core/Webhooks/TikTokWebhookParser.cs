@@ -1,0 +1,66 @@
+using System.Text.Json;
+using TikTokPartnerSdk.Abstractions.Webhooks;
+
+namespace TikTokPartnerSdk.Core.Webhooks;
+
+public sealed class TikTokWebhookParser(
+    ITikTokWebhookSignatureVerifier signatureVerifier,
+    TikTokWebhookTimestampValidator timestampValidator,
+    ITikTokWebhookIdempotencyKeyFactory idempotencyKeyFactory) : ITikTokWebhookParser
+{
+    private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
+
+    public TikTokWebhookReceiveResult TryReceive(
+        string rawBody,
+        string signature,
+        DateTimeOffset receivedAt)
+    {
+        if (!signatureVerifier.Verify(rawBody, signature))
+        {
+            return TikTokWebhookReceiveResult.Reject("invalid_signature");
+        }
+
+        TikTokWebhookEvent? webhookEvent;
+        try
+        {
+            webhookEvent = JsonSerializer.Deserialize<TikTokWebhookEvent>(rawBody, JsonOptions);
+        }
+        catch (JsonException)
+        {
+            return TikTokWebhookReceiveResult.Reject("invalid_json");
+        }
+
+        if (webhookEvent is null)
+        {
+            return TikTokWebhookReceiveResult.Reject("empty_payload");
+        }
+
+        if (!timestampValidator.IsFresh(webhookEvent, receivedAt))
+        {
+            return TikTokWebhookReceiveResult.Reject("stale_timestamp");
+        }
+
+        var envelope = new TikTokWebhookEnvelope(
+            Marketplace: "tiktok",
+            RawBody: rawBody,
+            Signature: signature,
+            IdempotencyKey: idempotencyKeyFactory.Create(webhookEvent, rawBody),
+            ReceivedAt: receivedAt,
+            Event: webhookEvent);
+
+        return TikTokWebhookReceiveResult.Accept(envelope);
+    }
+
+    public TikTokWebhookTypedEvent<TData>? TryParseData<TData>(TikTokWebhookEnvelope envelope)
+    {
+        try
+        {
+            var data = envelope.Event.Data.Deserialize<TData>(JsonOptions);
+            return data is null ? null : new TikTokWebhookTypedEvent<TData>(envelope, data);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
+    }
+}
