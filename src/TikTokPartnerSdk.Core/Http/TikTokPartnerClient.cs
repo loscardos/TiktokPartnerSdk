@@ -2,12 +2,14 @@ using System.Text.Json;
 using Microsoft.Extensions.Options;
 using TikTokPartnerSdk.Abstractions.Configuration;
 using TikTokPartnerSdk.Abstractions.Http;
+using TikTokPartnerSdk.Core.Crypto;
 
 namespace TikTokPartnerSdk.Core.Http;
 
 public sealed class TikTokPartnerClient(
     HttpClient httpClient,
     IOptions<TikTokPartnerOptions> options,
+    TikTokRequestSigner signer,
     TikTokRequestUriBuilder uriBuilder,
     TikTokRequestContentFactory contentFactory,
     TikTokResponseParser responseParser) : ITikTokPartnerClient
@@ -24,6 +26,16 @@ public sealed class TikTokPartnerClient(
             static x => ConvertToQueryValue(x.Value),
             StringComparer.Ordinal);
 
+        query["app_key"] = _options.AppKey;
+        query["timestamp"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+        var bodyText = request.Body is null ? null : JsonSerializer.Serialize(request.Body, BodySerializerOptions);
+        query["sign"] = signer.Sign(
+            _options.AppSecret,
+            request.Path,
+            query,
+            bodyText);
+
         var uri = uriBuilder.Build(_options, request.Path, query);
         using var httpRequest = new HttpRequestMessage(request.Method, uri)
         {
@@ -31,6 +43,10 @@ public sealed class TikTokPartnerClient(
         };
 
         httpRequest.Headers.UserAgent.ParseAdd(_options.UserAgent);
+        if (!string.IsNullOrWhiteSpace(request.AccessToken))
+        {
+            httpRequest.Headers.Add("x-tts-access-token", request.AccessToken);
+        }
 
         using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         timeoutCts.CancelAfter(_options.RequestTimeout);

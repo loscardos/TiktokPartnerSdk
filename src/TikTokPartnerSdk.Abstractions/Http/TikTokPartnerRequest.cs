@@ -7,4 +7,5 @@ public sealed record TikTokPartnerRequest(
     string Path,
     IReadOnlyDictionary<string, object?> Query,
     object? Body,
-    TikTokAuthorizationContext? Authorization);
+    TikTokAuthorizationContext? Authorization,
+    string? AccessToken = null);

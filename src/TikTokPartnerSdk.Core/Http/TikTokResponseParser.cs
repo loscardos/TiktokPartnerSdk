@@ -18,6 +18,11 @@ public sealed class TikTokResponseParser
             throw new InvalidOperationException("TikTok API response could not be parsed.");
         }
 
+        if (envelope.Code != 0)
+        {
+            throw new InvalidOperationException($"TikTok API error {envelope.Code}: {envelope.Message}");
+        }
+
         return envelope;
     }
 }

@@ -64,6 +64,12 @@ public sealed class TikTokTokenServiceTests
         public Uri BuildAuthorizationUrl(Uri redirectUri, string? state)
             => throw new NotSupportedException();
 
+        public Task<TikTokTokenRecord> ExchangeCodeAsync(
+            string code,
+            TikTokAuthorizationContext context,
+            CancellationToken cancellationToken)
+            => throw new NotSupportedException();
+
         public Task<TikTokTokenRecord> RefreshTokenAsync(
             TikTokAuthorizationContext context,
             CancellationToken cancellationToken)

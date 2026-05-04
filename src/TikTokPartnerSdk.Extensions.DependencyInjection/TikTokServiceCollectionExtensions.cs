@@ -3,8 +3,11 @@ using TikTokPartnerSdk.Abstractions.Auth;
 using TikTokPartnerSdk.Abstractions.Configuration;
 using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Abstractions.Managers;
+using TikTokPartnerSdk.Abstractions.Managers.Generated;
 using TikTokPartnerSdk.Core.Auth;
+using TikTokPartnerSdk.Core.Crypto;
 using TikTokPartnerSdk.Core.Http;
+using TikTokPartnerSdk.Core.Managers.Generated;
 
 namespace TikTokPartnerSdk.Extensions.DependencyInjection;
 
@@ -15,6 +18,7 @@ public static class TikTokServiceCollectionExtensions
         Action<TikTokPartnerOptions> configure)
     {
         services.Configure(configure);
+        services.AddSingleton<TikTokRequestSigner>();
         services.AddSingleton<TikTokRequestUriBuilder>();
         services.AddSingleton<TikTokRequestContentFactory>();
         services.AddSingleton<TikTokResponseParser>();
@@ -22,6 +26,9 @@ public static class TikTokServiceCollectionExtensions
         services.AddSingleton<ITikTokTokenStore, InMemoryTikTokTokenStore>();
         services.AddScoped<TikTokTokenService>();
         services.AddScoped<IAuthApi, TikTokAuthApi>();
+        services.AddScoped<IAuthorizationApi, AuthorizationApi>();
+        services.AddScoped<ISellerApi, SellerApi>();
+        services.AddScoped<IEventApi, EventApi>();
         return services;
     }
 

@@ -24,14 +24,78 @@ public sealed class TikTokAuthApi(
         return builder.Uri;
     }
 
+    public async Task<TikTokTokenRecord> ExchangeCodeAsync(
+        string code,
+        TikTokAuthorizationContext context,
+        CancellationToken cancellationToken)
+    {
+        var envelope = await _client.SendAsync<AuthTokenPayload>(
+            new TikTokPartnerRequest(
+                HttpMethod.Post,
+                "/authorization/202309/access_token",
+                new Dictionary<string, object?>(),
+                new Dictionary<string, object?>
+                {
+                    ["app_key"] = _options.AppKey,
+                    ["app_secret"] = _options.AppSecret,
+                    ["auth_code"] = code,
+                    ["grant_type"] = "authorized_code"
+                },
+                context),
+            cancellationToken);
+
+        var payload = envelope.Data ?? throw new InvalidOperationException("TikTok auth exchange returned no data.");
+        var token = ToTokenRecord(context, payload);
+        await tokenStore.StoreAsync(token, cancellationToken);
+        return token;
+    }
+
     public async Task<TikTokTokenRecord> RefreshTokenAsync(
         TikTokAuthorizationContext context,
         CancellationToken cancellationToken)
     {
-        _ = _client;
         var existing = await tokenStore.GetAsync(context, cancellationToken)
             ?? throw new InvalidOperationException("TikTok token is missing for the requested authorization context.");
 
-        return existing;
+        var envelope = await _client.SendAsync<AuthTokenPayload>(
+            new TikTokPartnerRequest(
+                HttpMethod.Post,
+                "/authorization/202309/refresh_token",
+                new Dictionary<string, object?>(),
+                new Dictionary<string, object?>
+                {
+                    ["app_key"] = _options.AppKey,
+                    ["app_secret"] = _options.AppSecret,
+                    ["refresh_token"] = existing.RefreshToken,
+                    ["grant_type"] = "refresh_token"
+                },
+                context),
+            cancellationToken);
+
+        var payload = envelope.Data ?? throw new InvalidOperationException("TikTok auth refresh returned no data.");
+        var token = ToTokenRecord(context, payload);
+        await tokenStore.StoreAsync(token, cancellationToken);
+        return token;
     }
+
+    private static TikTokTokenRecord ToTokenRecord(
+        TikTokAuthorizationContext context,
+        AuthTokenPayload payload)
+    {
+        var now = DateTimeOffset.UtcNow;
+        return new TikTokTokenRecord(
+            context.AccessTokenKind,
+            payload.AccessToken,
+            payload.RefreshToken,
+            now.AddSeconds(payload.AccessTokenExpireIn),
+            now.AddSeconds(payload.RefreshTokenExpireIn),
+            context.ShopCipher,
+            context.AppKey);
+    }
+
+    private sealed record AuthTokenPayload(
+        string AccessToken,
+        string RefreshToken,
+        long AccessTokenExpireIn,
+        long RefreshTokenExpireIn);
 }
