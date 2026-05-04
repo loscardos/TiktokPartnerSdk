@@ -8,6 +8,34 @@ namespace TikTokPartnerSdk.Core.Managers.Generated;
 
 public sealed class EventApi(ITikTokPartnerClient client) : IEventApi
 {
+    public async Task<EventDeleteShopWebhookResponse> DeleteShopWebhookAsync(
+        string accessToken,
+        EventDeleteShopWebhookRequest request,
+        CancellationToken cancellationToken)
+    {
+        // Generated from schema metadata:
+        // access_token_kind=seller
+        // required_headers=x-tts-access-token,content-type
+        var query = new Dictionary<string, object?>();
+        query["shop_cipher"] = request.ShopCipher;
+        var body = new Dictionary<string, object?>();
+        body["event_type"] = request.EventType;
+        var envelope = await client.SendAsync<object>(
+            new TikTokPartnerRequest(
+                HttpMethod.Delete,
+                "/event/202309/webhooks",
+                query,
+                body,
+                null,
+                accessToken),
+            cancellationToken);
+        return new EventDeleteShopWebhookResponse(
+            envelope.Code,
+            envelope.Message,
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
+    }
+
     public async Task<EventGetShopWebhooksResponse> GetShopWebhooksAsync(
         string accessToken,
         EventGetShopWebhooksRequest request,
@@ -17,7 +45,8 @@ public sealed class EventApi(ITikTokPartnerClient client) : IEventApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        var envelope = await client.SendAsync<object>(
+        query["shop_cipher"] = request.ShopCipher;
+        var envelope = await client.SendAsync<EventGetShopWebhooksResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
                 "/event/202309/webhooks",
@@ -29,7 +58,37 @@ public sealed class EventApi(ITikTokPartnerClient client) : IEventApi
         return new EventGetShopWebhooksResponse(
             envelope.Code,
             envelope.Message,
-            envelope.RequestId ?? string.Empty);
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
+    }
+
+    public async Task<EventUpdateShopWebhookResponse> UpdateShopWebhookAsync(
+        string accessToken,
+        EventUpdateShopWebhookRequest request,
+        CancellationToken cancellationToken)
+    {
+        // Generated from schema metadata:
+        // access_token_kind=seller
+        // required_headers=x-tts-access-token,content-type
+        var query = new Dictionary<string, object?>();
+        query["shop_cipher"] = request.ShopCipher;
+        var body = new Dictionary<string, object?>();
+        body["address"] = request.Address;
+        body["event_type"] = request.EventType;
+        var envelope = await client.SendAsync<object>(
+            new TikTokPartnerRequest(
+                HttpMethod.Put,
+                "/event/202309/webhooks",
+                query,
+                body,
+                null,
+                accessToken),
+            cancellationToken);
+        return new EventUpdateShopWebhookResponse(
+            envelope.Code,
+            envelope.Message,
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
     }
 
 }

@@ -1,11 +1,11 @@
 {
-  "operation_id": "authorization.202405.get_authorized_category_assets",
-  "module_name": "Authorization",
-  "module_key": "authorization",
-  "path": "/authorization/202405/category_assets",
+  "operation_id": "seller.202601.get_shop_group",
+  "module_name": "Seller",
+  "module_key": "seller",
+  "path": "/seller/202601/shop_groups",
   "method": "GET",
-  "auth_scope": "partner",
-  "access_token_kind": "partner",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
   "request_content_kind": "query",
   "required_headers": [
     "x-tts-access-token",
@@ -63,40 +63,62 @@
       "location": "body",
       "children": [
         {
-          "name": "category_assets",
-          "type": "[]object",
+          "name": "shop_group_data",
+          "type": "object",
           "required": false,
           "location": "body",
           "children": [
             {
-              "name": "cipher",
-              "type": "string",
-              "required": false,
-              "location": "body",
-              "children": []
-            },
-            {
-              "name": "target_market",
-              "type": "string",
-              "required": false,
-              "location": "body",
-              "children": []
-            },
-            {
-              "name": "category",
+              "name": "shop_group",
               "type": "object",
               "required": false,
               "location": "body",
               "children": [
                 {
-                  "name": "id",
-                  "type": "int",
+                  "name": "source",
+                  "type": "string",
                   "required": false,
                   "location": "body",
                   "children": []
                 },
                 {
-                  "name": "name",
+                  "name": "shop_group_name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "shops",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "shop_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "seller_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "shop_name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "shop_region",
                   "type": "string",
                   "required": false,
                   "location": "body",

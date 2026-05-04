@@ -17,7 +17,7 @@ public sealed class AuthorizationApi(ITikTokPartnerClient client) : IAuthorizati
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        var envelope = await client.SendAsync<object>(
+        var envelope = await client.SendAsync<AuthorizationGetAuthorizedShopsResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
                 "/authorization/202309/shops",
@@ -29,7 +29,8 @@ public sealed class AuthorizationApi(ITikTokPartnerClient client) : IAuthorizati
         return new AuthorizationGetAuthorizedShopsResponse(
             envelope.Code,
             envelope.Message,
-            envelope.RequestId ?? string.Empty);
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
     }
 
     public async Task<AuthorizationGetAuthorizedCategoryAssetsResponse> GetAuthorizedCategoryAssetsAsync(

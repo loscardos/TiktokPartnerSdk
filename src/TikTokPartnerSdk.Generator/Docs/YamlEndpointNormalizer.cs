@@ -7,8 +7,8 @@ public sealed partial class YamlEndpointNormalizer
     public SchemaEndpoint Normalize(YamlDocsEndpoint endpoint)
     {
         var requestParameters = endpoint.PathParameters.Select(static parameter => ToSchemaParameter(parameter, "path"))
-            .Concat(endpoint.QueryParameters.Select(static parameter => ToSchemaParameter(parameter, "query")))
-            .Concat(endpoint.BodyParameters.Select(static parameter => ToSchemaParameter(parameter, "body")))
+            .Concat(OrderRequestParameters(endpoint.QueryParameters).Select(static parameter => ToSchemaParameter(parameter, "query")))
+            .Concat(OrderRequestParameters(endpoint.BodyParameters).Select(static parameter => ToSchemaParameter(parameter, "body")))
             .ToArray();
 
         return new SchemaEndpoint(
@@ -20,13 +20,30 @@ public sealed partial class YamlEndpointNormalizer
             InferAccessTokenKind(endpoint),
             InferAccessTokenKind(endpoint),
             endpoint.BodyParameters.Count > 0 ? "body" : "query",
-            endpoint.Headers.Select(static header => header.Name).ToArray(),
+            OrderHeaders(endpoint.Headers).Select(static header => header.Name).ToArray(),
             requestParameters,
             BuildParameterTree(endpoint.ResponseParameters, "body"));
     }
 
     private static SchemaParameter ToSchemaParameter(YamlDocsParameter parameter, string location)
         => new(CleanName(parameter.Name), parameter.Type, parameter.Required, location, []);
+
+    private static IEnumerable<YamlDocsParameter> OrderRequestParameters(IEnumerable<YamlDocsParameter> parameters)
+        => parameters.OrderBy(static parameter => parameter.Name switch
+        {
+            "app_key" => 0,
+            "timestamp" => 1,
+            "sign" => 2,
+            _ => 100
+        }).ThenBy(static parameter => parameter.Name, StringComparer.Ordinal);
+
+    private static IEnumerable<YamlDocsParameter> OrderHeaders(IEnumerable<YamlDocsParameter> parameters)
+        => parameters.OrderBy(static parameter => parameter.Name switch
+        {
+            "x-tts-access-token" => 0,
+            "content-type" => 1,
+            _ => 100
+        }).ThenBy(static parameter => parameter.Name, StringComparer.Ordinal);
 
     private static IReadOnlyList<SchemaParameter> BuildParameterTree(
         IReadOnlyList<YamlDocsParameter> parameters,

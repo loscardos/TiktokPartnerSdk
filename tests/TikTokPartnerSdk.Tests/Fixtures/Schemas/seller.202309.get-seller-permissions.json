@@ -1,8 +1,8 @@
 {
-  "operation_id": "event.202309.get_shop_webhooks",
-  "module_name": "Event",
-  "module_key": "event",
-  "path": "/event/202309/webhooks",
+  "operation_id": "seller.202309.get_seller_permissions",
+  "module_name": "Seller",
+  "module_key": "seller",
+  "path": "/seller/202309/permissions",
   "method": "GET",
   "auth_scope": "seller",
   "access_token_kind": "seller",
@@ -28,13 +28,6 @@
     },
     {
       "name": "sign",
-      "type": "string",
-      "required": true,
-      "location": "query",
-      "children": []
-    },
-    {
-      "name": "shop_cipher",
       "type": "string",
       "required": true,
       "location": "query",
@@ -70,44 +63,8 @@
       "location": "body",
       "children": [
         {
-          "name": "webhooks",
-          "type": "[]object",
-          "required": false,
-          "location": "body",
-          "children": [
-            {
-              "name": "event_type",
-              "type": "string",
-              "required": false,
-              "location": "body",
-              "children": []
-            },
-            {
-              "name": "address",
-              "type": "string",
-              "required": false,
-              "location": "body",
-              "children": []
-            },
-            {
-              "name": "create_time",
-              "type": "int",
-              "required": false,
-              "location": "body",
-              "children": []
-            },
-            {
-              "name": "update_time",
-              "type": "int",
-              "required": false,
-              "location": "body",
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "total_count",
-          "type": "int",
+          "name": "permissions",
+          "type": "[]string",
           "required": false,
           "location": "body",
           "children": []

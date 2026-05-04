@@ -11,6 +11,10 @@ public static class TikTokTypeMapper
             "integer" => "long",
             "bool" => "bool",
             "boolean" => "bool",
+            "object" => "object",
+            "number" => "decimal",
+            "float" => "decimal",
+            "double" => "decimal",
             _ => "string"
         };
     }

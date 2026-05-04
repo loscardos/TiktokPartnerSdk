@@ -12,7 +12,19 @@ public sealed record AuthorizationGetAuthorizedShopsRequest(
 public sealed record AuthorizationGetAuthorizedShopsResponse(
     [property: JsonPropertyName("code")] long Code,
     [property: JsonPropertyName("message")] string Message,
-    [property: JsonPropertyName("request_id")] string RequestId);
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] AuthorizationGetAuthorizedShopsResponseData Data);
+
+public sealed record AuthorizationGetAuthorizedShopsResponseData(
+    [property: JsonPropertyName("shops")] IReadOnlyList<AuthorizationGetAuthorizedShopsResponseDataShops> Shops);
+
+public sealed record AuthorizationGetAuthorizedShopsResponseDataShops(
+    [property: JsonPropertyName("id")] string Id,
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("region")] string Region,
+    [property: JsonPropertyName("seller_type")] string SellerType,
+    [property: JsonPropertyName("cipher")] string Cipher,
+    [property: JsonPropertyName("code")] string Code);
 
 
 public sealed record AuthorizationGetAuthorizedCategoryAssetsRequest(

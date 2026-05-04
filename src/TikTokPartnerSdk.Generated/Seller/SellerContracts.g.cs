@@ -12,4 +12,58 @@ public sealed record SellerGetActiveShopsRequest(
 public sealed record SellerGetActiveShopsResponse(
     [property: JsonPropertyName("code")] long Code,
     [property: JsonPropertyName("message")] string Message,
-    [property: JsonPropertyName("request_id")] string RequestId);
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] SellerGetActiveShopsResponseData Data);
+
+public sealed record SellerGetActiveShopsResponseData(
+    [property: JsonPropertyName("shops")] IReadOnlyList<SellerGetActiveShopsResponseDataShops> Shops);
+
+public sealed record SellerGetActiveShopsResponseDataShops(
+    [property: JsonPropertyName("id")] string Id,
+    [property: JsonPropertyName("region")] string Region);
+
+
+public sealed record SellerGetSellerPermissionsRequest(
+    [property: JsonPropertyName("app_key")] string AppKey,
+    [property: JsonPropertyName("timestamp")] long Timestamp,
+    [property: JsonPropertyName("sign")] string Sign);
+
+
+public sealed record SellerGetSellerPermissionsResponse(
+    [property: JsonPropertyName("code")] long Code,
+    [property: JsonPropertyName("message")] string Message,
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] SellerGetSellerPermissionsResponseData Data);
+
+public sealed record SellerGetSellerPermissionsResponseData(
+    [property: JsonPropertyName("permissions")] IReadOnlyList<string> Permissions);
+
+
+public sealed record SellerGetShopGroupRequest(
+    [property: JsonPropertyName("app_key")] string AppKey,
+    [property: JsonPropertyName("timestamp")] long Timestamp,
+    [property: JsonPropertyName("sign")] string Sign);
+
+
+public sealed record SellerGetShopGroupResponse(
+    [property: JsonPropertyName("code")] long Code,
+    [property: JsonPropertyName("message")] string Message,
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] SellerGetShopGroupResponseData Data);
+
+public sealed record SellerGetShopGroupResponseData(
+    [property: JsonPropertyName("shop_group_data")] SellerGetShopGroupResponseDataShopGroupData ShopGroupData);
+
+public sealed record SellerGetShopGroupResponseDataShopGroupData(
+    [property: JsonPropertyName("shop_group")] SellerGetShopGroupResponseDataShopGroupDataShopGroup ShopGroup,
+    [property: JsonPropertyName("shops")] IReadOnlyList<SellerGetShopGroupResponseDataShopGroupDataShops> Shops);
+
+public sealed record SellerGetShopGroupResponseDataShopGroupDataShopGroup(
+    [property: JsonPropertyName("source")] string Source,
+    [property: JsonPropertyName("shop_group_name")] string ShopGroupName);
+
+public sealed record SellerGetShopGroupResponseDataShopGroupDataShops(
+    [property: JsonPropertyName("shop_id")] string ShopId,
+    [property: JsonPropertyName("seller_id")] string SellerId,
+    [property: JsonPropertyName("shop_name")] string ShopName,
+    [property: JsonPropertyName("shop_region")] string ShopRegion);

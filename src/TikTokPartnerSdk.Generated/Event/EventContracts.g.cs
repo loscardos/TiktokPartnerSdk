@@ -3,13 +3,56 @@
 using System.Text.Json.Serialization;
 namespace TikTokPartnerSdk.Generated.Event;
 
+public sealed record EventDeleteShopWebhookRequest(
+    [property: JsonPropertyName("app_key")] string AppKey,
+    [property: JsonPropertyName("timestamp")] long Timestamp,
+    [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonPropertyName("event_type")] string EventType);
+
+
+public sealed record EventDeleteShopWebhookResponse(
+    [property: JsonPropertyName("code")] long Code,
+    [property: JsonPropertyName("message")] string Message,
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] object Data);
+
+
 public sealed record EventGetShopWebhooksRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
-    [property: JsonPropertyName("sign")] string Sign);
+    [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
 
 public sealed record EventGetShopWebhooksResponse(
     [property: JsonPropertyName("code")] long Code,
     [property: JsonPropertyName("message")] string Message,
-    [property: JsonPropertyName("request_id")] string RequestId);
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] EventGetShopWebhooksResponseData Data);
+
+public sealed record EventGetShopWebhooksResponseData(
+    [property: JsonPropertyName("webhooks")] IReadOnlyList<EventGetShopWebhooksResponseDataWebhooks> Webhooks,
+    [property: JsonPropertyName("total_count")] long TotalCount);
+
+public sealed record EventGetShopWebhooksResponseDataWebhooks(
+    [property: JsonPropertyName("event_type")] string EventType,
+    [property: JsonPropertyName("address")] string Address,
+    [property: JsonPropertyName("create_time")] long CreateTime,
+    [property: JsonPropertyName("update_time")] long UpdateTime);
+
+
+public sealed record EventUpdateShopWebhookRequest(
+    [property: JsonPropertyName("app_key")] string AppKey,
+    [property: JsonPropertyName("timestamp")] long Timestamp,
+    [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonPropertyName("address")] string Address,
+    [property: JsonPropertyName("event_type")] string EventType);
+
+
+public sealed record EventUpdateShopWebhookResponse(
+    [property: JsonPropertyName("code")] long Code,
+    [property: JsonPropertyName("message")] string Message,
+    [property: JsonPropertyName("request_id")] string RequestId,
+    [property: JsonPropertyName("data")] object Data);

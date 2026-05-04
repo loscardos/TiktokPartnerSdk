@@ -13,11 +13,11 @@ public sealed class GeneratedManagerRuntimeTests
     public async Task Authorization_api_should_send_authorized_shops_request_with_access_token()
     {
         var client = new RecordingClient(
-            new TikTokPartnerResponseEnvelope<object>(
+            new TikTokPartnerResponseEnvelope<AuthorizationGetAuthorizedShopsResponseData>(
                 0,
                 "success",
                 "req-1",
-                null));
+                new AuthorizationGetAuthorizedShopsResponseData([])));
         var api = new AuthorizationApi(client);
 
         var response = await api.GetAuthorizedShopsAsync(
@@ -63,11 +63,11 @@ public sealed class GeneratedManagerRuntimeTests
     public async Task Seller_and_event_apis_should_send_expected_paths()
     {
         var sellerClient = new RecordingClient(
-            new TikTokPartnerResponseEnvelope<object>(
+            new TikTokPartnerResponseEnvelope<SellerGetActiveShopsResponseData>(
                 0,
                 "success",
                 "req-3",
-                null));
+                new SellerGetActiveShopsResponseData([])));
         var sellerApi = new SellerApi(sellerClient);
 
         await sellerApi.GetActiveShopsAsync(
@@ -78,19 +78,109 @@ public sealed class GeneratedManagerRuntimeTests
         sellerClient.LastRequest!.Path.Should().Be("/seller/202309/shops");
 
         var eventClient = new RecordingClient(
-            new TikTokPartnerResponseEnvelope<object>(
+            new TikTokPartnerResponseEnvelope<EventGetShopWebhooksResponseData>(
                 0,
                 "success",
                 "req-4",
-                null));
+                new EventGetShopWebhooksResponseData([], 0)));
         var eventApi = new EventApi(eventClient);
 
         await eventApi.GetShopWebhooksAsync(
             "seller-token",
-            new EventGetShopWebhooksRequest("app-key", 1, "sign"),
+            new EventGetShopWebhooksRequest("app-key", 1, "sign", "shop-cipher"),
             CancellationToken.None);
 
         eventClient.LastRequest!.Path.Should().Be("/event/202309/webhooks");
+        eventClient.LastRequest.Query.Should().ContainKey("shop_cipher")
+            .WhoseValue.Should().Be("shop-cipher");
+    }
+
+    [Fact]
+    public async Task Seller_api_should_send_permissions_and_shop_group_paths()
+    {
+        var permissionsClient = new RecordingClient(
+            new TikTokPartnerResponseEnvelope<SellerGetSellerPermissionsResponseData>(
+                0,
+                "success",
+                "req-5",
+                new SellerGetSellerPermissionsResponseData([])));
+        var permissionsApi = new SellerApi(permissionsClient);
+
+        await permissionsApi.GetSellerPermissionsAsync(
+            "seller-token",
+            new SellerGetSellerPermissionsRequest("app-key", 1, "sign"),
+            CancellationToken.None);
+
+        permissionsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        permissionsClient.LastRequest.Path.Should().Be("/seller/202309/permissions");
+
+        var shopGroupClient = new RecordingClient(
+            new TikTokPartnerResponseEnvelope<SellerGetShopGroupResponseData>(
+                0,
+                "success",
+                "req-6",
+                new SellerGetShopGroupResponseData(
+                    new SellerGetShopGroupResponseDataShopGroupData(
+                        new SellerGetShopGroupResponseDataShopGroupDataShopGroup("SYNC", "Group"),
+                        []))));
+        var shopGroupApi = new SellerApi(shopGroupClient);
+
+        await shopGroupApi.GetShopGroupAsync(
+            "seller-token",
+            new SellerGetShopGroupRequest("app-key", 1, "sign"),
+            CancellationToken.None);
+
+        shopGroupClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        shopGroupClient.LastRequest.Path.Should().Be("/seller/202601/shop_groups");
+    }
+
+    [Fact]
+    public async Task Event_api_should_send_delete_and_update_body_payloads()
+    {
+        var deleteClient = new RecordingClient(
+            new TikTokPartnerResponseEnvelope<object>(
+                0,
+                "success",
+                "req-7",
+                new { }));
+        var deleteApi = new EventApi(deleteClient);
+
+        await deleteApi.DeleteShopWebhookAsync(
+            "seller-token",
+            new EventDeleteShopWebhookRequest("app-key", 1, "sign", "shop-cipher", "ORDER_STATUS_CHANGE"),
+            CancellationToken.None);
+
+        deleteClient.LastRequest!.Method.Should().Be(HttpMethod.Delete);
+        deleteClient.LastRequest.Path.Should().Be("/event/202309/webhooks");
+        deleteClient.LastRequest.Query.Should().ContainKey("shop_cipher")
+            .WhoseValue.Should().Be("shop-cipher");
+        deleteClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["event_type"] = "ORDER_STATUS_CHANGE"
+        });
+
+        var updateClient = new RecordingClient(
+            new TikTokPartnerResponseEnvelope<object>(
+                0,
+                "success",
+                "req-8",
+                new { }));
+        var updateApi = new EventApi(updateClient);
+
+        await updateApi.UpdateShopWebhookAsync(
+            "seller-token",
+            new EventUpdateShopWebhookRequest("app-key", 1, "sign", "shop-cipher", "https://example.test/webhook", "ORDER_STATUS_CHANGE"),
+            CancellationToken.None);
+
+        updateClient.LastRequest!.Method.Should().Be(HttpMethod.Put);
+        updateClient.LastRequest.Path.Should().Be("/event/202309/webhooks");
+        updateClient.LastRequest.Query.Should().ContainKey("shop_cipher")
+            .WhoseValue.Should().Be("shop-cipher");
+        updateClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["address"] = "https://example.test/webhook",
+            ["event_type"] = "ORDER_STATUS_CHANGE"
+        });
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient

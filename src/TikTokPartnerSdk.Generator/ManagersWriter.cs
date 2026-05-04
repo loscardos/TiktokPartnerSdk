@@ -132,9 +132,17 @@ public sealed class ManagersWriter
             : "null";
 
     private static string ToEnvelopePayloadType(SchemaEndpoint endpoint)
-        => HasResponseParameter(endpoint, "data")
+    {
+        var dataParameter = endpoint.ResponseParameters.FirstOrDefault(parameter => parameter.Name.Equals("data", StringComparison.Ordinal));
+        if (dataParameter is null)
+        {
+            return "object";
+        }
+
+        return dataParameter.Children.Count > 0
             ? TikTokName.ToResponseTypeName(endpoint) + "Data"
-            : "object";
+            : TikTokTypeMapper.MapType(dataParameter, TikTokName.ToResponseTypeName(endpoint));
+    }
 
     private static string ToRequestIdExpression(SchemaEndpoint endpoint)
         => HasResponseParameter(endpoint, "request_id")

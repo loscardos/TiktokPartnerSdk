@@ -17,7 +17,7 @@ public sealed class SellerApi(ITikTokPartnerClient client) : ISellerApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        var envelope = await client.SendAsync<object>(
+        var envelope = await client.SendAsync<SellerGetActiveShopsResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
                 "/seller/202309/shops",
@@ -29,7 +29,58 @@ public sealed class SellerApi(ITikTokPartnerClient client) : ISellerApi
         return new SellerGetActiveShopsResponse(
             envelope.Code,
             envelope.Message,
-            envelope.RequestId ?? string.Empty);
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
+    }
+
+    public async Task<SellerGetSellerPermissionsResponse> GetSellerPermissionsAsync(
+        string accessToken,
+        SellerGetSellerPermissionsRequest request,
+        CancellationToken cancellationToken)
+    {
+        // Generated from schema metadata:
+        // access_token_kind=seller
+        // required_headers=x-tts-access-token,content-type
+        var query = new Dictionary<string, object?>();
+        var envelope = await client.SendAsync<SellerGetSellerPermissionsResponseData>(
+            new TikTokPartnerRequest(
+                HttpMethod.Get,
+                "/seller/202309/permissions",
+                query,
+                null,
+                null,
+                accessToken),
+            cancellationToken);
+        return new SellerGetSellerPermissionsResponse(
+            envelope.Code,
+            envelope.Message,
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
+    }
+
+    public async Task<SellerGetShopGroupResponse> GetShopGroupAsync(
+        string accessToken,
+        SellerGetShopGroupRequest request,
+        CancellationToken cancellationToken)
+    {
+        // Generated from schema metadata:
+        // access_token_kind=seller
+        // required_headers=x-tts-access-token,content-type
+        var query = new Dictionary<string, object?>();
+        var envelope = await client.SendAsync<SellerGetShopGroupResponseData>(
+            new TikTokPartnerRequest(
+                HttpMethod.Get,
+                "/seller/202601/shop_groups",
+                query,
+                null,
+                null,
+                accessToken),
+            cancellationToken);
+        return new SellerGetShopGroupResponse(
+            envelope.Code,
+            envelope.Message,
+            envelope.RequestId ?? string.Empty,
+            envelope.Data ?? throw new InvalidOperationException("TikTok API response data was missing."));
     }
 
 }

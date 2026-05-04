@@ -14,4 +14,20 @@ public interface ISellerApi
         string accessToken,
         SellerGetActiveShopsRequest request,
         CancellationToken cancellationToken);
+    /// <summary>
+    /// Access token kind: seller
+    /// Required headers: x-tts-access-token, content-type
+    /// </summary>
+    Task<SellerGetSellerPermissionsResponse> GetSellerPermissionsAsync(
+        string accessToken,
+        SellerGetSellerPermissionsRequest request,
+        CancellationToken cancellationToken);
+    /// <summary>
+    /// Access token kind: seller
+    /// Required headers: x-tts-access-token, content-type
+    /// </summary>
+    Task<SellerGetShopGroupResponse> GetShopGroupAsync(
+        string accessToken,
+        SellerGetShopGroupRequest request,
+        CancellationToken cancellationToken);
 }

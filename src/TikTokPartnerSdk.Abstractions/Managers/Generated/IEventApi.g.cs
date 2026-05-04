@@ -10,8 +10,24 @@ public interface IEventApi
     /// Access token kind: seller
     /// Required headers: x-tts-access-token, content-type
     /// </summary>
+    Task<EventDeleteShopWebhookResponse> DeleteShopWebhookAsync(
+        string accessToken,
+        EventDeleteShopWebhookRequest request,
+        CancellationToken cancellationToken);
+    /// <summary>
+    /// Access token kind: seller
+    /// Required headers: x-tts-access-token, content-type
+    /// </summary>
     Task<EventGetShopWebhooksResponse> GetShopWebhooksAsync(
         string accessToken,
         EventGetShopWebhooksRequest request,
+        CancellationToken cancellationToken);
+    /// <summary>
+    /// Access token kind: seller
+    /// Required headers: x-tts-access-token, content-type
+    /// </summary>
+    Task<EventUpdateShopWebhookResponse> UpdateShopWebhookAsync(
+        string accessToken,
+        EventUpdateShopWebhookRequest request,
         CancellationToken cancellationToken);
 }
