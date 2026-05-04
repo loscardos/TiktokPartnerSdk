@@ -4,6 +4,7 @@ using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Event;
 using TikTokPartnerSdk.Generated.Finance;
+using TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
 using TikTokPartnerSdk.Generated.Fulfillment;
 using TikTokPartnerSdk.Generated.Logistics;
 using TikTokPartnerSdk.Generated.Order;
@@ -530,6 +531,61 @@ public sealed class GeneratedManagerRuntimeTests
         statementTransactionsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
         statementTransactionsClient.LastRequest.Path.Should().Be("/finance/202501/statements/statement-1/statement_transactions");
         statementTransactionsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+    }
+
+    [Fact]
+    public async Task Fbt_api_should_send_core_fulfillment_paths()
+    {
+        var warehouseClient = new RecordingClient();
+        var warehouseApi = new FulfilledByTiktokFbtApi(warehouseClient);
+
+        await warehouseApi.GetFbtWarehouseListAsync(
+            "seller-token",
+            new FulfilledByTiktokFbtGetFbtWarehouseListRequest("app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        warehouseClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        warehouseClient.LastRequest.Path.Should().Be("/fbt/202408/warehouses");
+        warehouseClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var inventoryClient = new RecordingClient();
+        var inventoryApi = new FulfilledByTiktokFbtApi(inventoryClient);
+
+        await inventoryApi.SearchFbtInventoryAsync(
+            "seller-token",
+            new FulfilledByTiktokFbtSearchFbtInventoryRequest(
+                "app-key",
+                1,
+                "sign",
+                20,
+                string.Empty,
+                "shop-cipher",
+                ["goods-1"],
+                ["warehouse-1"],
+                ["sku-1"]),
+            CancellationToken.None);
+
+        inventoryClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        inventoryClient.LastRequest.Path.Should().Be("/fbt/202408/inventory/search");
+        inventoryClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        inventoryClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["goods_ids"] = new[] { "goods-1" },
+            ["fbt_warehouse_ids"] = new[] { "warehouse-1" },
+            ["sku_ids"] = new[] { "sku-1" }
+        });
+
+        var mcfClient = new RecordingClient();
+        var mcfApi = new FulfilledByTiktokFbtApi(mcfClient);
+
+        await mcfApi.GetFbtMerchantMcfStatusAsync(
+            "seller-token",
+            new FulfilledByTiktokFbtGetFbtMerchantMcfStatusRequest("app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        mcfClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        mcfClient.LastRequest.Path.Should().Be("/fbt/202601/merchants/mcf_status");
+        mcfClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
