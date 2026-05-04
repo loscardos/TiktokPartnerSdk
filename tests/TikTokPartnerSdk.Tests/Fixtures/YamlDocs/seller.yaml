@@ -1,0 +1,55 @@
+  name: 'Seller'
+    - title: 'Get Active Shops'
+      slug: 'get-active-shops-202309'
+      method: 'GET'
+      path: '/seller/202309/shops'
+      request:
+        query_params:
+          - name: 'app_key'
+            type: 'string'
+            required: 'Y'
+          - name: 'timestamp'
+            type: 'int'
+            required: 'Y'
+          - name: 'sign'
+            type: 'string'
+            required: 'Y'
+      response:
+        fields:
+          - name: 'data'
+            type: 'object'
+            required: 'Y'
+    - title: 'Get Seller Permissions'
+      slug: 'get-seller-permissions-202309'
+      method: 'GET'
+      path: '/seller/202309/permissions'
+      request:
+        query_params:
+          - name: 'app_key'
+            type: 'string'
+            required: 'Y'
+          - name: 'timestamp'
+            type: 'int'
+            required: 'Y'
+          - name: 'sign'
+            type: 'string'
+            required: 'Y'
+      response:
+        fields:
+          - name: 'data'
+            type: 'object'
+            required: 'Y'
+    - title: 'Get Shop Group'
+      slug: 'get-shop-group-202601'
+      method: 'GET'
+      path: '/seller/202601/shop_groups'
+      request:
+        query_params:
+          - name: 'app_key'
+            type: 'string'
+            required: 'Y'
+      response:
+        fields:
+          - name: 'data'
+            type: 'object'
+            required: 'Y'

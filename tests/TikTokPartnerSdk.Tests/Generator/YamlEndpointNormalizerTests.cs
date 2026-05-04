@@ -8,7 +8,7 @@ public sealed class YamlEndpointNormalizerTests
     [Fact]
     public void Normalizer_should_map_seller_docs_to_schema_endpoint()
     {
-        var path = Path.Combine(TestPaths.RepositoryRoot, "docs", "api-reference-sdk", "seller.yaml");
+        var path = Path.Combine(TestPaths.RepositoryRoot, "tests", "TikTokPartnerSdk.Tests", "Fixtures", "YamlDocs", "seller.yaml");
         var docsEndpoint = new YamlApiReferenceReader().ReadFile(path)
             .Single(static endpoint => endpoint.Path == "/seller/202309/permissions");
 
@@ -25,7 +25,7 @@ public sealed class YamlEndpointNormalizerTests
     [Fact]
     public void Normalizer_should_map_body_and_query_locations_for_event_docs()
     {
-        var path = Path.Combine(TestPaths.RepositoryRoot, "docs", "api-reference-sdk", "event.yaml");
+        var path = Path.Combine(TestPaths.RepositoryRoot, "tests", "TikTokPartnerSdk.Tests", "Fixtures", "YamlDocs", "event.yaml");
         var docsEndpoint = new YamlApiReferenceReader().ReadFile(path)
             .Single(static endpoint => endpoint.Method == "DELETE" && endpoint.Path == "/event/202309/webhooks");
 
@@ -39,7 +39,7 @@ public sealed class YamlEndpointNormalizerTests
     [Fact]
     public void Normalizer_should_build_nested_body_tree_for_product_create()
     {
-        var path = Path.Combine(TestPaths.RepositoryRoot, "docs", "api-reference-sdk", "products.yaml");
+        var path = Path.Combine(TestPaths.RepositoryRoot, "tests", "TikTokPartnerSdk.Tests", "Fixtures", "YamlDocs", "products.yaml");
         var docsEndpoint = new YamlApiReferenceReader().ReadFile(path)
             .Single(static endpoint => endpoint.Slug == "create-product-202309");
 

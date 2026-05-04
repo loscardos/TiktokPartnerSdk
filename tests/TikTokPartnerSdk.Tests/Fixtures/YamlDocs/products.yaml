@@ -1,0 +1,28 @@
+  name: 'Products'
+    - title: 'Create Product'
+      slug: 'create-product-202309'
+      method: 'POST'
+      path: '/product/202309/products'
+      request:
+        query_params:
+          - name: 'shop_cipher'
+            type: 'string'
+            required: 'Y'
+        body_params:
+          - name: 'title'
+            type: 'string'
+            required: 'Y'
+          - name: 'package_weight'
+            type: 'object'
+            required: 'Y'
+          - name: '^value'
+            type: 'string'
+            required: 'Y'
+          - name: '^unit'
+            type: 'string'
+            required: 'Y'
+      response:
+        fields:
+          - name: 'data'
+            type: 'object'
+            required: 'Y'

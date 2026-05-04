@@ -1,0 +1,41 @@
+  name: 'Event'
+    - title: 'Get Shop Webhooks'
+      slug: 'get-shop-webhooks-202309'
+      method: 'GET'
+      path: '/event/202309/webhooks'
+      request:
+        query_params:
+          - name: 'shop_cipher'
+            type: 'string'
+            required: 'Y'
+      response:
+        fields:
+          - name: 'data'
+            type: 'object'
+            required: 'Y'
+    - title: 'Update Shop Webhook'
+      slug: 'update-shop-webhook-202309'
+      method: 'PUT'
+      path: '/event/202309/webhooks'
+      request:
+        query_params:
+          - name: 'shop_cipher'
+            type: 'string'
+            required: 'Y'
+        body_params:
+          - name: 'event_type'
+            type: 'string'
+            required: 'Y'
+    - title: 'Delete Shop Webhook'
+      slug: 'delete-shop-webhook-202309'
+      method: 'DELETE'
+      path: '/event/202309/webhooks'
+      request:
+        query_params:
+          - name: 'shop_cipher'
+            type: 'string'
+            required: 'Y'
+        body_params:
+          - name: 'event_type'
+            type: 'string'
+            required: 'Y'

@@ -5,38 +5,69 @@ namespace TikTokPartnerSdk.Tests.SampleConsole;
 public sealed class DocumentationPresenceTests
 {
     [Fact]
-    public void Readme_should_link_core_production_docs()
+    public void Readme_should_document_packages_install_auth_usage_and_verification()
     {
         var readme = File.ReadAllText(Path.Combine(TestPaths.RepositoryRoot, "README.md"));
 
+        readme.Should().Contain("Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection");
+        readme.Should().Contain("Loscardos.TikTokPartnerSdk.Storage.EntityFramework");
+        readme.Should().Contain("AddTikTokPartnerSdk");
+        readme.Should().Contain("AddTikTokEntityFrameworkTokenStorage");
+        readme.Should().Contain("BuildAuthorizationUrl");
+        readme.Should().Contain("ExchangeCodeAsync");
+        readme.Should().Contain("IOrderManager");
+        readme.Should().Contain("certify-readonly");
+        readme.Should().Contain("verify-packages.sh");
         readme.Should().Contain("docs/getting-started.md");
-        readme.Should().Contain("docs/auth.md");
-        readme.Should().Contain("docs/sandbox.md");
-        readme.Should().Contain("docs/storage.md");
-        readme.Should().Contain("docs/packaging.md");
+        readme.Should().Contain("docs/api/README.md");
     }
 
     [Fact]
-    public void Getting_started_and_auth_docs_should_include_required_snippets()
+    public void Github_style_docs_should_exist_for_core_topics_and_api_categories()
     {
         var root = TestPaths.RepositoryRoot;
-        var gettingStarted = File.ReadAllText(Path.Combine(root, "docs", "getting-started.md"));
-        var auth = File.ReadAllText(Path.Combine(root, "docs", "auth.md"));
+        var docs = Path.Combine(root, "docs");
 
-        gettingStarted.Should().Contain("AddTikTokPartnerSdk");
-        gettingStarted.Should().Contain("IAuthApi");
-        auth.Should().Contain("BuildAuthorizationUrl");
-        auth.Should().Contain("ExchangeCodeAsync");
+        File.Exists(Path.Combine(docs, "README.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "getting-started.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "authentication.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "token-storage.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "api", "README.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "api", "orders.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "api", "products.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "api", "fulfillment.md")).Should().BeTrue();
+        File.Exists(Path.Combine(docs, "api", "affiliate.md")).Should().BeTrue();
     }
 
     [Fact]
-    public void Production_docs_should_exist_for_runtime_storage_and_packaging()
+    public void Api_index_should_reference_every_generated_api_category()
     {
-        var root = TestPaths.RepositoryRoot;
+        var apiIndex = File.ReadAllText(Path.Combine(TestPaths.RepositoryRoot, "docs", "api", "README.md"));
 
-        File.Exists(Path.Combine(root, "docs", "sandbox.md")).Should().BeTrue();
-        File.Exists(Path.Combine(root, "docs", "storage.md")).Should().BeTrue();
-        File.Exists(Path.Combine(root, "docs", "runtime.md")).Should().BeTrue();
-        File.Exists(Path.Combine(root, "docs", "packaging.md")).Should().BeTrue();
+        foreach (var category in new[]
+        {
+            "Affiliate Creator",
+            "Affiliate Partner",
+            "Affiliate Seller",
+            "Analytics",
+            "Authorization",
+            "Customer Engagement",
+            "Customer Service",
+            "Event",
+            "Finance",
+            "Fulfilled by TikTok",
+            "Fulfillment",
+            "Logistics",
+            "Order",
+            "Product",
+            "Promotion",
+            "Return and Refund",
+            "Seller",
+            "Supply Chain",
+            "Tools"
+        })
+        {
+            apiIndex.Should().Contain(category);
+        }
     }
 }
