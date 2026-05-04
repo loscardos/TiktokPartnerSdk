@@ -11,6 +11,7 @@ using TikTokPartnerSdk.Generated.Order;
 using TikTokPartnerSdk.Generated.Product;
 using TikTokPartnerSdk.Generated.ReturnAndRefund;
 using TikTokPartnerSdk.Generated.Seller;
+using TikTokPartnerSdk.Generated.SupplyChain;
 
 namespace TikTokPartnerSdk.Tests.Managers;
 
@@ -586,6 +587,49 @@ public sealed class GeneratedManagerRuntimeTests
         mcfClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
         mcfClient.LastRequest.Path.Should().Be("/fbt/202601/merchants/mcf_status");
         mcfClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+    }
+
+    [Fact]
+    public async Task Supply_chain_api_should_send_package_shipment_payload()
+    {
+        var client = new RecordingClient();
+        var api = new SupplyChainApi(client);
+        var package = new SupplyChainConfirmPackageShipmentRequestPackages(
+            "package-1",
+            "wms-order-1",
+            "warehouse-code",
+            "Jakarta",
+            "Asia/Jakarta",
+            1710000000000,
+            1710000001000,
+            1710000002000,
+            "provider-1",
+            "Provider",
+            "tracking-1",
+            new SupplyChainConfirmPackageShipmentRequestPackagesDimension(10, 20, 30, "CM"),
+            new SupplyChainConfirmPackageShipmentRequestPackagesWeight(1000, "GRAM"),
+            [new SupplyChainConfirmPackageShipmentRequestPackagesSkus("sku-1", 2)],
+            "Warehouse",
+            "TCW");
+
+        await api.ConfirmPackageShipmentAsync(
+            "seller-token",
+            new SupplyChainConfirmPackageShipmentRequest(
+                "app-key",
+                1,
+                "sign",
+                "warehouse-provider-1",
+                [package]),
+            CancellationToken.None);
+
+        client.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        client.LastRequest.Path.Should().Be("/supply_chain/202309/packages/sync");
+        client.LastRequest.Query.Should().BeEmpty();
+        client.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["warehouse_provider_id"] = "warehouse-provider-1",
+            ["packages"] = new[] { package }
+        });
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
