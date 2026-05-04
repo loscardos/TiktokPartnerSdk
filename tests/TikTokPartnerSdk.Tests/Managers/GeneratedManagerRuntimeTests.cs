@@ -3,6 +3,7 @@ using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Event;
+using TikTokPartnerSdk.Generated.Fulfillment;
 using TikTokPartnerSdk.Generated.Order;
 using TikTokPartnerSdk.Generated.Product;
 using TikTokPartnerSdk.Generated.Seller;
@@ -309,6 +310,60 @@ public sealed class GeneratedManagerRuntimeTests
         brandsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
         brandsClient.LastRequest.Path.Should().Be("/product/202309/brands");
         brandsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+    }
+
+    [Fact]
+    public async Task Fulfillment_api_should_send_core_package_paths()
+    {
+        var detailClient = new RecordingClient();
+        var detailApi = new FulfillmentApi(detailClient);
+
+        await detailApi.GetPackageDetailAsync(
+            "seller-token",
+            new FulfillmentGetPackageDetailRequest("package-1", "app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        detailClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        detailClient.LastRequest.Path.Should().Be("/fulfillment/202309/packages/package-1");
+        detailClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var trackingClient = new RecordingClient();
+        var trackingApi = new FulfillmentApi(trackingClient);
+
+        await trackingApi.GetTrackingAsync(
+            "seller-token",
+            new FulfillmentGetTrackingRequest("order-1", "app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        trackingClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        trackingClient.LastRequest.Path.Should().Be("/fulfillment/202309/orders/order-1/tracking");
+        trackingClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var shipClient = new RecordingClient();
+        var shipApi = new FulfillmentApi(shipClient);
+
+        await shipApi.ShipPackageAsync(
+            "seller-token",
+            new FulfillmentShipPackageRequest(
+                "package-1",
+                "app-key",
+                1,
+                "sign",
+                "shop-cipher",
+                "PICKUP",
+                new FulfillmentShipPackageRequestPickupSlot(1710000000, 1710003600),
+                new FulfillmentShipPackageRequestSelfShipment("track-1", "provider-1")),
+            CancellationToken.None);
+
+        shipClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        shipClient.LastRequest.Path.Should().Be("/fulfillment/202309/packages/package-1/ship");
+        shipClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        shipClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["handover_method"] = "PICKUP",
+            ["pickup_slot"] = new FulfillmentShipPackageRequestPickupSlot(1710000000, 1710003600),
+            ["self_shipment"] = new FulfillmentShipPackageRequestSelfShipment("track-1", "provider-1")
+        });
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
