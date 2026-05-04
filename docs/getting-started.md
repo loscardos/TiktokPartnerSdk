@@ -47,6 +47,8 @@ builder.Services.AddTikTokEntityFrameworkTokenStorage();
 - Generated managers for the generated endpoint surface.
 - Optional in-memory rate limiting.
 
+For inbound TikTok Shop callbacks, read [Webhooks](webhooks.md) to wire a fast receiver with signature verification, timestamp validation, and app-owned queue handoff.
+
 ## Configuration
 
 `TikTokPartnerOptions` supports:
@@ -71,4 +73,3 @@ builder.Services.AddTikTokEntityFrameworkTokenStorage();
 - Read [Authentication](authentication.md) to wire the OAuth callback.
 - Read [Token Storage](token-storage.md) before going beyond local testing.
 - Read [API Categories](api/README.md) to choose polished or generated managers.
-

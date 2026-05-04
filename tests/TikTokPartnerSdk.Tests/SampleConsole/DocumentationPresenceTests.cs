@@ -70,4 +70,17 @@ public sealed class DocumentationPresenceTests
             apiIndex.Should().Contain(category);
         }
     }
+
+    [Fact]
+    public void Webhook_documentation_should_be_present()
+    {
+        var root = TestPaths.RepositoryRoot;
+        var webhooks = File.ReadAllText(Path.Combine(root, "docs", "webhooks.md"));
+        var readme = File.ReadAllText(Path.Combine(root, "README.md"));
+
+        webhooks.Should().Contain("TikTokPartnerSdk provides TikTok Shop webhook primitives");
+        webhooks.Should().Contain("ITikTokWebhookParser");
+        webhooks.Should().Contain("return Results.Ok()");
+        readme.Should().Contain("Webhooks");
+    }
 }

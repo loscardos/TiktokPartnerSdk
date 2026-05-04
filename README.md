@@ -84,6 +84,7 @@ The SDK exposes two API surfaces:
 
 - Polished managers for common seller workflows: orders and products.
 - Generated managers for full SDK endpoint coverage. Generated managers live under `TikTokPartnerSdk.Abstractions.Managers.Generated` and use DTOs from `TikTokPartnerSdk.Generated.<Module>`.
+- Webhooks primitives for raw payload verification, timestamp validation, idempotency keys, and typed event parsing.
 
 Example using the token-aware order manager:
 
