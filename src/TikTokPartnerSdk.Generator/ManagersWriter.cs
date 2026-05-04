@@ -94,10 +94,16 @@ public sealed class ManagersWriter
                 }
             }
 
+            builder.AppendLine($"        var path = \"{endpoint.Path}\";");
+            foreach (var parameter in PathParameters(endpoint))
+            {
+                builder.AppendLine($"        path = path.Replace(\"{{{parameter.Name}}}\", Uri.EscapeDataString(Convert.ToString(request.{TikTokName.ToPascalCase(parameter.Name)}, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));");
+            }
+
             builder.AppendLine($"        var envelope = await client.SendAsync<{ToEnvelopePayloadType(endpoint)}>(");
             builder.AppendLine("            new TikTokPartnerRequest(");
             builder.AppendLine($"                HttpMethod.{ToHttpMethod(endpoint.HttpMethod)},");
-            builder.AppendLine($"                \"{endpoint.Path}\",");
+            builder.AppendLine("                path,");
             builder.AppendLine("                query,");
             builder.AppendLine($"                {ToBodyExpression(endpoint, bodyParameters.Length > 0)},");
             builder.AppendLine("                null,");
@@ -156,4 +162,7 @@ public sealed class ManagersWriter
 
     private static bool HasResponseParameter(SchemaEndpoint endpoint, string name)
         => endpoint.ResponseParameters.Any(parameter => parameter.Name.Equals(name, StringComparison.Ordinal));
+
+    private static IEnumerable<SchemaParameter> PathParameters(SchemaEndpoint endpoint)
+        => endpoint.RequestParameters.Where(static parameter => parameter.Location == "path");
 }
