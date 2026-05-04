@@ -56,4 +56,36 @@ public sealed class ContractsWriterTests
         output.Should().Contain("[property: JsonPropertyName(\"activity_id\")] string BodyActivityId");
         output.Should().NotContain("string ActivityId,");
     }
+
+    [Fact]
+    public void Response_contract_should_emit_valid_identifier_for_numeric_property_name()
+    {
+        var endpoint = new SchemaEndpoint(
+            "analytics.202509.get_shop_live_performance_list",
+            "Analytics",
+            "analytics",
+            "/analytics/202509/live/performance",
+            "GET",
+            "seller",
+            "seller",
+            "query",
+            ["x-tts-access-token", "content-type"],
+            [
+                new SchemaParameter("app_key", "string", true, "query", []),
+                new SchemaParameter("timestamp", "int", true, "query", []),
+                new SchemaParameter("sign", "string", true, "query", [])
+            ],
+            [
+                new SchemaParameter("data", "object", false, "body", [
+                    new SchemaParameter("24h_live_gmv", "object", false, "body", [
+                        new SchemaParameter("amount", "string", false, "body", [])
+                    ])
+                ])
+            ]);
+
+        var output = new ContractsWriter().WriteModule("Analytics", "analytics", [endpoint]);
+
+        output.Should().Contain("[property: JsonPropertyName(\"24h_live_gmv\")] AnalyticsGetShopLivePerformanceListResponseDataValue24hLiveGmv Value24hLiveGmv");
+        output.Should().NotContain(" 24hLiveGmv");
+    }
 }

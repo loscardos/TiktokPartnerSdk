@@ -24,7 +24,10 @@ public static class TikTokName
             }
         }
 
-        return builder.ToString();
+        var identifier = builder.ToString();
+        return identifier.Length > 0 && !IsValidIdentifierStart(identifier[0])
+            ? "Value" + identifier
+            : identifier;
     }
 
     public static string ToPropertyName(string value)
@@ -65,4 +68,7 @@ public static class TikTokName
             : operationId;
         return ToPascalCase(relevant);
     }
+
+    private static bool IsValidIdentifierStart(char value)
+        => value == '_' || char.IsLetter(value);
 }
