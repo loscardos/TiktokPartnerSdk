@@ -1,0 +1,251 @@
+{
+  "operation_id": "product.202405.product_information_issue_diagnosis",
+  "module_name": "Product",
+  "module_key": "product",
+  "path": "/product/202405/products/diagnoses",
+  "method": "GET",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "query",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "product_ids",
+      "type": "[]string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "products",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "listing_quality",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "current_tier",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "remaining_recommendations",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "diagnoses",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "field",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "diagnosis_results",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "code",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "how_to_solve",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "quality_tier",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "suggestion",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "seo_words",
+                      "type": "[]object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "text",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "smart_texts",
+                      "type": "[]object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "text",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "images",
+                      "type": "[]object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "height",
+                          "type": "int",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "width",
+                          "type": "int",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "uri",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "url",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "optimized_uri",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "optimized_url",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -6,15 +6,17 @@ public sealed partial class YamlEndpointNormalizer
 {
     public SchemaEndpoint Normalize(YamlDocsEndpoint endpoint)
     {
+        var moduleKey = CanonicalModuleKey(endpoint.ModuleKey);
+        var moduleName = CanonicalModuleName(endpoint.ModuleName, moduleKey);
         var requestParameters = endpoint.PathParameters.Select(static parameter => ToSchemaParameter(parameter, "path"))
             .Concat(OrderRequestParameters(endpoint.QueryParameters).Select(static parameter => ToSchemaParameter(parameter, "query")))
             .Concat(BuildParameterTree(endpoint.BodyParameters, "body"))
             .ToArray();
 
         return new SchemaEndpoint(
-            ToOperationId(endpoint),
-            endpoint.ModuleName,
-            endpoint.ModuleKey,
+            ToOperationId(endpoint, moduleKey),
+            moduleName,
+            moduleKey,
             endpoint.Path,
             endpoint.Method,
             InferAccessTokenKind(endpoint),
@@ -97,7 +99,23 @@ public sealed partial class YamlEndpointNormalizer
         return "seller";
     }
 
-    private static string ToOperationId(YamlDocsEndpoint endpoint)
+    private static string CanonicalModuleKey(string moduleKey)
+        => moduleKey switch
+        {
+            "orders" => "order",
+            "products" => "product",
+            _ => moduleKey
+        };
+
+    private static string CanonicalModuleName(string moduleName, string moduleKey)
+        => moduleKey switch
+        {
+            "order" => "Order",
+            "product" => "Product",
+            _ => moduleName
+        };
+
+    private static string ToOperationId(YamlDocsEndpoint endpoint, string moduleKey)
     {
         var version = endpoint.Path.Split('/', StringSplitOptions.RemoveEmptyEntries).Skip(1).FirstOrDefault() ?? "unknown";
         var operationName = endpoint.Slug;
@@ -107,7 +125,7 @@ public sealed partial class YamlEndpointNormalizer
         }
 
         operationName = NonIdentifierCharacterRegex().Replace(operationName, "_").Trim('_');
-        return $"{endpoint.ModuleKey}.{version}.{operationName}";
+        return $"{moduleKey}.{version}.{operationName}";
     }
 
     [GeneratedRegex("[^a-zA-Z0-9]+")]

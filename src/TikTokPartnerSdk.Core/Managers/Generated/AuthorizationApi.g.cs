@@ -17,10 +17,11 @@ public sealed class AuthorizationApi(ITikTokPartnerClient client) : IAuthorizati
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
+        var path = "/authorization/202309/shops";
         var envelope = await client.SendAsync<AuthorizationGetAuthorizedShopsResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
-                "/authorization/202309/shops",
+                path,
                 query,
                 null,
                 null,
@@ -42,10 +43,11 @@ public sealed class AuthorizationApi(ITikTokPartnerClient client) : IAuthorizati
         // access_token_kind=partner
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
+        var path = "/authorization/202405/category_assets";
         var envelope = await client.SendAsync<AuthorizationGetAuthorizedCategoryAssetsResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
-                "/authorization/202405/category_assets",
+                path,
                 query,
                 null,
                 null,

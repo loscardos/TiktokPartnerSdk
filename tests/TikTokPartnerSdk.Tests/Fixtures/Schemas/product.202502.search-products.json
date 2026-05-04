@@ -1,0 +1,616 @@
+{
+  "operation_id": "product.202502.search_products",
+  "module_name": "Product",
+  "module_key": "product",
+  "path": "/product/202502/products/search",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "page_size",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "page_token",
+      "type": "string",
+      "required": false,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "seller_skus",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "create_time_ge",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "create_time_le",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "update_time_ge",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "update_time_le",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "category_version",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "listing_quality_tiers",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "listing_platforms",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "audit_status",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "sku_ids",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "sns_filter",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "return_draft_version",
+      "type": "bool",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "total_count",
+          "type": "int",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "products",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "title",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "status",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "skus",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "seller_sku",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "price",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "currency",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "tax_exclusive_price",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "sale_price",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "inventory",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "warehouse_id",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "quantity",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "backorder_quantity",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "handling_time",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "list_price",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "amount",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "currency",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "external_list_prices",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "source",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "amount",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "currency",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "pre_sale",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "type",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "fulfillment_type",
+                      "type": "object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "handling_duration_days",
+                          "type": "int",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "release_date",
+                          "type": "int",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "status_info",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "status",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "deactivation_source",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "fees",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "type",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "amount",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "additional_attribute",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "sales_regions",
+              "type": "[]string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "create_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "update_time",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "product_sync_fail_reasons",
+              "type": "[]string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "is_not_for_sale",
+              "type": "bool",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "recommended_categories",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "local_name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "listing_quality_tier",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "integrated_platform_statuses",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "platform",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "status",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "audit",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "status",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "pre_approved_reasons",
+                  "type": "[]string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "product_families",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "products",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "id",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "has_draft",
+              "type": "bool",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "scheduled_sale",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "is_enabled_scheduled_sale",
+                  "type": "bool",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "schedule_sale_time",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "next_page_token",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

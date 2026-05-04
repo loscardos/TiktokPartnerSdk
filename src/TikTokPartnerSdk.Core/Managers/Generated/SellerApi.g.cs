@@ -17,10 +17,11 @@ public sealed class SellerApi(ITikTokPartnerClient client) : ISellerApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
+        var path = "/seller/202309/shops";
         var envelope = await client.SendAsync<SellerGetActiveShopsResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
-                "/seller/202309/shops",
+                path,
                 query,
                 null,
                 null,
@@ -42,10 +43,11 @@ public sealed class SellerApi(ITikTokPartnerClient client) : ISellerApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
+        var path = "/seller/202309/permissions";
         var envelope = await client.SendAsync<SellerGetSellerPermissionsResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
-                "/seller/202309/permissions",
+                path,
                 query,
                 null,
                 null,
@@ -67,10 +69,11 @@ public sealed class SellerApi(ITikTokPartnerClient client) : ISellerApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
+        var path = "/seller/202601/shop_groups";
         var envelope = await client.SendAsync<SellerGetShopGroupResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
-                "/seller/202601/shop_groups",
+                path,
                 query,
                 null,
                 null,

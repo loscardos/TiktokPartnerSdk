@@ -20,10 +20,11 @@ public sealed class EventApi(ITikTokPartnerClient client) : IEventApi
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["event_type"] = request.EventType;
+        var path = "/event/202309/webhooks";
         var envelope = await client.SendAsync<object>(
             new TikTokPartnerRequest(
                 HttpMethod.Delete,
-                "/event/202309/webhooks",
+                path,
                 query,
                 body,
                 null,
@@ -46,10 +47,11 @@ public sealed class EventApi(ITikTokPartnerClient client) : IEventApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
+        var path = "/event/202309/webhooks";
         var envelope = await client.SendAsync<EventGetShopWebhooksResponseData>(
             new TikTokPartnerRequest(
                 HttpMethod.Get,
-                "/event/202309/webhooks",
+                path,
                 query,
                 null,
                 null,
@@ -75,10 +77,11 @@ public sealed class EventApi(ITikTokPartnerClient client) : IEventApi
         var body = new Dictionary<string, object?>();
         body["address"] = request.Address;
         body["event_type"] = request.EventType;
+        var path = "/event/202309/webhooks";
         var envelope = await client.SendAsync<object>(
             new TikTokPartnerRequest(
                 HttpMethod.Put,
-                "/event/202309/webhooks",
+                path,
                 query,
                 body,
                 null,

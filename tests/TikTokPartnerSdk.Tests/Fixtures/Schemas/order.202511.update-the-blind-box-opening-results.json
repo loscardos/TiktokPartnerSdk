@@ -1,0 +1,117 @@
+{
+  "operation_id": "order.202511.update_the_blind_box_opening_results",
+  "module_name": "Order",
+  "module_key": "order",
+  "path": "/order/202511/orders/blind_box_result/callback",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "main_order_id",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "blind_box_results",
+      "type": "[]object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "order_line_id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "blind_result_product_id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "blind_result_sku_id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "blind_open_time",
+          "type": "int",
+          "required": true,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ]
+}

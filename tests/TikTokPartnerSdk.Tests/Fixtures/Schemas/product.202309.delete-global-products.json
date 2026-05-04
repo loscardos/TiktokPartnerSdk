@@ -1,0 +1,112 @@
+{
+  "operation_id": "product.202309.delete_global_products",
+  "module_name": "Product",
+  "module_key": "product",
+  "path": "/product/202309/global_products",
+  "method": "DELETE",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "global_product_ids",
+      "type": "[]string",
+      "required": true,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "errors",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "message",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "code",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "detail",
+              "type": "object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "global_product_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

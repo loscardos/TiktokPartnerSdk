@@ -1,0 +1,104 @@
+{
+  "operation_id": "product.202312.check_listing_prerequisites",
+  "module_name": "Product",
+  "module_key": "product",
+  "path": "/product/202312/prerequisites",
+  "method": "GET",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "query",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "check_results",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "check_item",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "is_failed",
+              "type": "bool",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "fail_reasons",
+              "type": "[]string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -40,5 +40,7 @@ public sealed class TikTokServiceCollectionExtensionsTests
         provider.GetService<IAuthorizationApi>().Should().NotBeNull();
         provider.GetService<ISellerApi>().Should().NotBeNull();
         provider.GetService<IEventApi>().Should().NotBeNull();
+        provider.GetService<IOrderApi>().Should().NotBeNull();
+        provider.GetService<IProductApi>().Should().NotBeNull();
     }
 }
