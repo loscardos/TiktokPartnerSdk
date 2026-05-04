@@ -9,6 +9,7 @@ using TikTokPartnerSdk.Generated.Fulfillment;
 using TikTokPartnerSdk.Generated.Logistics;
 using TikTokPartnerSdk.Generated.Order;
 using TikTokPartnerSdk.Generated.Product;
+using TikTokPartnerSdk.Generated.Promotion;
 using TikTokPartnerSdk.Generated.ReturnAndRefund;
 using TikTokPartnerSdk.Generated.Seller;
 using TikTokPartnerSdk.Generated.SupplyChain;
@@ -630,6 +631,69 @@ public sealed class GeneratedManagerRuntimeTests
             ["warehouse_provider_id"] = "warehouse-provider-1",
             ["packages"] = new[] { package }
         });
+    }
+
+    [Fact]
+    public async Task Promotion_api_should_send_core_activity_paths()
+    {
+        var activityClient = new RecordingClient();
+        var activityApi = new PromotionApi(activityClient);
+
+        await activityApi.GetActivityAsync(
+            "seller-token",
+            new PromotionGetActivityRequest("activity-1", "app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        activityClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        activityClient.LastRequest.Path.Should().Be("/promotion/202309/activities/activity-1");
+        activityClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var product = new PromotionUpdateActivityProductRequestProducts(
+            "product-1",
+            "1000",
+            "10",
+            10,
+            1,
+            [new PromotionUpdateActivityProductRequestProductsSkus("sku-1", "1000", "10", 5, 1)]);
+        var updateClient = new RecordingClient();
+        var updateApi = new PromotionApi(updateClient);
+
+        await updateApi.UpdateActivityProductAsync(
+            "seller-token",
+            new PromotionUpdateActivityProductRequest(
+                "path-activity-1",
+                "app-key",
+                1,
+                "sign",
+                "shop-cipher",
+                [product],
+                "body-activity-1",
+                ["benefit-product-1"],
+                ["exclude-product-1"]),
+            CancellationToken.None);
+
+        updateClient.LastRequest!.Method.Should().Be(HttpMethod.Put);
+        updateClient.LastRequest.Path.Should().Be("/promotion/202309/activities/path-activity-1/products");
+        updateClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        updateClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["products"] = new[] { product },
+            ["activity_id"] = "body-activity-1",
+            ["benefit_product_ids"] = new[] { "benefit-product-1" },
+            ["exclude_product_ids"] = new[] { "exclude-product-1" }
+        });
+
+        var couponClient = new RecordingClient();
+        var couponApi = new PromotionApi(couponClient);
+
+        await couponApi.GetCouponAsync(
+            "seller-token",
+            new PromotionGetCouponRequest("coupon-1", "app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        couponClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        couponClient.LastRequest.Path.Should().Be("/promotion/202406/coupons/coupon-1");
+        couponClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
