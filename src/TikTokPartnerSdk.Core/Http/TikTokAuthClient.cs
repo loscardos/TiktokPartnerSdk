@@ -16,16 +16,16 @@ public sealed class TikTokAuthClient(
 {
     private readonly TikTokPartnerOptions _options = options.Value;
 
-    public async Task<TikTokPartnerResponseEnvelope<TResponse>> PostAsync<TResponse>(
+    public async Task<TikTokPartnerResponseEnvelope<TResponse>> GetAsync<TResponse>(
         string path,
-        object body,
+        object query,
         CancellationToken cancellationToken)
     {
         await rateLimiter.WaitAsync("auth", cancellationToken);
 
         for (var attempt = 0; ; attempt++)
         {
-            using var httpRequest = new HttpRequestMessage(HttpMethod.Get, BuildUri(path, body));
+            using var httpRequest = new HttpRequestMessage(HttpMethod.Get, BuildUri(path, query));
 
             httpRequest.Headers.UserAgent.ParseAdd(_options.UserAgent);
 
@@ -49,17 +49,17 @@ public sealed class TikTokAuthClient(
         }
     }
 
-    private Uri BuildUri(string path, object body)
+    private Uri BuildUri(string path, object query)
     {
         var baseUrl = _options.AuthApiBaseUrl.TrimEnd('/');
         var normalizedPath = path.TrimStart('/');
-        var query = ToQueryString(body);
-        return new Uri($"{baseUrl}/{normalizedPath}{query}", UriKind.Absolute);
+        var queryString = ToQueryString(query);
+        return new Uri($"{baseUrl}/{normalizedPath}{queryString}", UriKind.Absolute);
     }
 
-    private static string ToQueryString(object body)
+    private static string ToQueryString(object query)
     {
-        if (body is not IEnumerable<KeyValuePair<string, object?>> values)
+        if (query is not IEnumerable<KeyValuePair<string, object?>> values)
         {
             return string.Empty;
         }
@@ -69,8 +69,8 @@ public sealed class TikTokAuthClient(
             .Select(static item =>
                 $"{Uri.EscapeDataString(item.Key)}={Uri.EscapeDataString(Convert.ToString(item.Value, CultureInfo.InvariantCulture) ?? string.Empty)}");
 
-        var query = string.Join("&", parts);
-        return query.Length == 0 ? string.Empty : "?" + query;
+        var queryString = string.Join("&", parts);
+        return queryString.Length == 0 ? string.Empty : "?" + queryString;
     }
 
     private async Task DelayAsync(int attempt, CancellationToken cancellationToken)

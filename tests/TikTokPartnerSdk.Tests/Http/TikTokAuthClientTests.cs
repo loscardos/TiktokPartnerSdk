@@ -11,7 +11,7 @@ namespace TikTokPartnerSdk.Tests.Http;
 public sealed class TikTokAuthClientTests
 {
     [Fact]
-    public async Task PostAsync_should_send_token_query_to_auth_base_url_without_open_api_signature()
+    public async Task GetAsync_should_send_token_query_to_auth_base_url_without_open_api_signature()
     {
         var handler = new RecordingHandler("""{"code":0,"message":"success","requestId":"req-auth","data":{"accessToken":"access","refreshToken":"refresh","accessTokenExpireIn":7200,"refreshTokenExpireIn":2592000}}""");
         var client = new TikTokAuthClient(
@@ -20,7 +20,7 @@ public sealed class TikTokAuthClientTests
             new NoopTikTokRateLimiter(),
             new TikTokResponseParser());
 
-        var envelope = await client.PostAsync<AuthPayload>(
+        var envelope = await client.GetAsync<AuthPayload>(
             "/token/get",
             new Dictionary<string, object?>
             {

@@ -29,7 +29,7 @@ public sealed class TikTokAuthApi(
         TikTokAuthorizationContext context,
         CancellationToken cancellationToken)
     {
-        var envelope = await authClient.PostAsync<AuthTokenPayload>(
+        var envelope = await authClient.GetAsync<AuthTokenPayload>(
             "/token/get",
             new Dictionary<string, object?>
             {
@@ -53,7 +53,7 @@ public sealed class TikTokAuthApi(
         var existing = await tokenStore.GetAsync(context, cancellationToken)
             ?? throw new InvalidOperationException("TikTok token is missing for the requested authorization context.");
 
-        var envelope = await authClient.PostAsync<AuthTokenPayload>(
+        var envelope = await authClient.GetAsync<AuthTokenPayload>(
             "/token/refresh",
             new Dictionary<string, object?>
             {

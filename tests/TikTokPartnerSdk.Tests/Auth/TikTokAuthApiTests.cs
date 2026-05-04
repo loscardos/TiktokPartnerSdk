@@ -53,8 +53,8 @@ public sealed class TikTokAuthApiTests
 
         token.AccessToken.Should().Be("access-1");
         authClient.LastPath.Should().Be("/token/get");
-        authClient.LastBodyJson.Should().Contain("authorized_code");
-        authClient.LastBodyJson.Should().Contain("auth_code");
+        authClient.LastQueryJson.Should().Contain("authorized_code");
+        authClient.LastQueryJson.Should().Contain("auth_code");
         (await store.GetAsync(context, CancellationToken.None)).Should().NotBeNull();
     }
 
@@ -90,8 +90,8 @@ public sealed class TikTokAuthApiTests
 
         refreshed.AccessToken.Should().Be("new-access");
         authClient.LastPath.Should().Be("/token/refresh");
-        authClient.LastBodyJson.Should().Contain("old-refresh");
-        authClient.LastBodyJson.Should().Contain("refresh_token");
+        authClient.LastQueryJson.Should().Contain("old-refresh");
+        authClient.LastQueryJson.Should().Contain("refresh_token");
     }
 
     private sealed class RecordingAuthClient : ITikTokAuthClient
@@ -104,15 +104,15 @@ public sealed class TikTokAuthApiTests
         }
 
         public string? LastPath { get; private set; }
-        public string? LastBodyJson { get; private set; }
+        public string? LastQueryJson { get; private set; }
 
-        public Task<TikTokPartnerResponseEnvelope<TResponse>> PostAsync<TResponse>(
+        public Task<TikTokPartnerResponseEnvelope<TResponse>> GetAsync<TResponse>(
             string path,
-            object body,
+            object query,
             CancellationToken cancellationToken)
         {
             LastPath = path;
-            LastBodyJson = JsonSerializer.Serialize(body);
+            LastQueryJson = JsonSerializer.Serialize(query);
 
             if (_response is TikTokPartnerResponseEnvelope<TResponse> typed)
             {

@@ -2,8 +2,8 @@ namespace TikTokPartnerSdk.Abstractions.Http;
 
 public interface ITikTokAuthClient
 {
-    Task<TikTokPartnerResponseEnvelope<TResponse>> PostAsync<TResponse>(
+    Task<TikTokPartnerResponseEnvelope<TResponse>> GetAsync<TResponse>(
         string path,
-        object body,
+        object query,
         CancellationToken cancellationToken);
 }
