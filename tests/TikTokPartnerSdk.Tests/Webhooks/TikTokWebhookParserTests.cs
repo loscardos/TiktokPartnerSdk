@@ -48,6 +48,18 @@ public sealed class TikTokWebhookParserTests
     }
 
     [Fact]
+    public void TryReceive_UsesSignedTimestampWhenTikTokSignatureHeaderProvidesOne()
+    {
+        const string rawBody = """{"type":1,"tts_notification_id":"n1","shop_id":"s1","timestamp":1800000000,"data":{}}""";
+        var parser = CreateParser();
+
+        var result = parser.TryReceive(rawBody, SignTikTokHeader(rawBody, 1_700_000_000), DateTimeOffset.FromUnixTimeSeconds(1_700_001_000));
+
+        result.IsAccepted.Should().BeFalse();
+        result.RejectionReason.Should().Be("stale_signature_timestamp");
+    }
+
+    [Fact]
     public void TryParseData_ReturnsTypedOrderStatusChangeData()
     {
         const string rawBody = """{"type":1,"tts_notification_id":"n1","shop_id":"s1","timestamp":1700000000,"data":{"order_id":"o1","order_status":"UNPAID","is_on_hold_order":false,"update_time":1700000000}}""";
@@ -80,4 +92,13 @@ public sealed class TikTokWebhookParserTests
         => Convert.ToHexString(HMACSHA256.HashData(
             Encoding.UTF8.GetBytes("app-secret"),
             Encoding.UTF8.GetBytes(rawBody))).ToLowerInvariant();
+
+    private static string SignTikTokHeader(string rawBody, long timestamp)
+    {
+        var signedPayload = $"{timestamp}.{rawBody}";
+        var signature = Convert.ToHexString(HMACSHA256.HashData(
+            Encoding.UTF8.GetBytes("app-secret"),
+            Encoding.UTF8.GetBytes(signedPayload))).ToLowerInvariant();
+        return $"t={timestamp},s={signature}";
+    }
 }

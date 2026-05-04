@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Integratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.Storage.EntityFramework.Tests", "tests\TikTokPartnerSdk.Storage.EntityFramework.Tests\TikTokPartnerSdk.Storage.EntityFramework.Tests.csproj", "{698F623A-682D-4F83-AECA-8691663F2371}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTokPartnerSdk.WebhookReceiver", "samples\TikTokPartnerSdk.WebhookReceiver\TikTokPartnerSdk.WebhookReceiver.csproj", "{2FAA9A53-AD07-41B8-92D1-33E44D385A89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{698F623A-682D-4F83-AECA-8691663F2371}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{698F623A-682D-4F83-AECA-8691663F2371}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{698F623A-682D-4F83-AECA-8691663F2371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FAA9A53-AD07-41B8-92D1-33E44D385A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FAA9A53-AD07-41B8-92D1-33E44D385A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FAA9A53-AD07-41B8-92D1-33E44D385A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FAA9A53-AD07-41B8-92D1-33E44D385A89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9087CEAC-C0D4-4AC7-A804-DAE472DC3CEC} = {F4066A08-F9AD-4FE0-B4AE-7F850FD683B2}
@@ -90,5 +96,6 @@ Global
 		{A495DFA6-01D9-49A1-8BE7-49B2A510252C} = {15D15784-398F-437B-961E-6640757DE712}
 		{788DE1CA-CDD7-4D19-AFBC-8FB30957AFAB} = {15D15784-398F-437B-961E-6640757DE712}
 		{698F623A-682D-4F83-AECA-8691663F2371} = {15D15784-398F-437B-961E-6640757DE712}
+		{2FAA9A53-AD07-41B8-92D1-33E44D385A89} = {C88951D6-3F84-418F-BD60-064AE25933B4}
 	EndGlobalSection
 EndGlobal

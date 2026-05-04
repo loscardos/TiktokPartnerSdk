@@ -26,6 +26,8 @@ TikTok Shop
 
 The committed webhook specification snapshot is stored at `docs/webhooks/tiktok-webhooks.yaml`.
 
+The verifier accepts TikTok's `TikTok-Signature` header in `t=<unix-timestamp>,s=<signature>` format and verifies the signed payload as `<timestamp>.<raw-body>`. The parser validates the signed timestamp when it is present. Raw-body HMAC signatures are still accepted for local compatibility tests.
+
 ## ASP.NET Receiver Example
 
 The receiver should read the raw body before any JSON model binding changes it.
@@ -42,7 +44,7 @@ app.MapPost("/webhooks/tiktok", async (
 {
     using var reader = new StreamReader(request.Body);
     var rawBody = await reader.ReadToEndAsync(cancellationToken);
-    var signature = request.Headers["authorization"].ToString();
+    var signature = request.Headers["TikTok-Signature"].ToString();
 
     var result = parser.TryReceive(rawBody, signature, DateTimeOffset.UtcNow);
     if (!result.IsAccepted)

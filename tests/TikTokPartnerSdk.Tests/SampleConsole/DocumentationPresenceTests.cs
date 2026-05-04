@@ -80,6 +80,7 @@ public sealed class DocumentationPresenceTests
 
         webhooks.Should().Contain("TikTokPartnerSdk provides TikTok Shop webhook primitives");
         webhooks.Should().Contain("ITikTokWebhookParser");
+        webhooks.Should().Contain("TikTok-Signature");
         webhooks.Should().Contain("return Results.Ok()");
         readme.Should().Contain("Webhooks");
     }

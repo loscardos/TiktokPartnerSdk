@@ -18,15 +18,20 @@ public sealed class TikTokWebhookSignatureVerifier(IOptions<TikTokPartnerOptions
             return false;
         }
 
-        var normalizedSignature = NormalizeSignature(signature);
-        var expected = Convert.ToHexString(HMACSHA256.HashData(
-            Encoding.UTF8.GetBytes(_options.AppSecret),
-            Encoding.UTF8.GetBytes(rawBody))).ToLowerInvariant();
+        var parsed = ParseTikTokSignatureHeader(signature);
+        var normalizedSignature = parsed.Signature ?? NormalizeSignature(signature);
+        var signedPayload = parsed.Timestamp is null
+            ? rawBody
+            : $"{parsed.Timestamp.Value}.{rawBody}";
+        var expected = ComputeHmac(signedPayload);
 
         return CryptographicOperations.FixedTimeEquals(
             Encoding.UTF8.GetBytes(expected),
             Encoding.UTF8.GetBytes(normalizedSignature));
     }
+
+    public long? GetSignedTimestamp(string signature)
+        => ParseTikTokSignatureHeader(signature).Timestamp;
 
     private static string NormalizeSignature(string signature)
     {
@@ -36,4 +41,40 @@ public sealed class TikTokWebhookSignatureVerifier(IOptions<TikTokPartnerOptions
             ? trimmed[sha256Prefix.Length..].ToLowerInvariant()
             : trimmed.ToLowerInvariant();
     }
+
+    private string ComputeHmac(string payload)
+        => Convert.ToHexString(HMACSHA256.HashData(
+            Encoding.UTF8.GetBytes(_options.AppSecret),
+            Encoding.UTF8.GetBytes(payload))).ToLowerInvariant();
+
+    private static ParsedTikTokSignatureHeader ParseTikTokSignatureHeader(string signature)
+    {
+        long? timestamp = null;
+        string? signedSignature = null;
+
+        foreach (var part in signature.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var separator = part.IndexOf('=');
+            if (separator <= 0)
+            {
+                continue;
+            }
+
+            var key = part[..separator];
+            var value = part[(separator + 1)..];
+            if (string.Equals(key, "t", StringComparison.OrdinalIgnoreCase)
+                && long.TryParse(value, out var parsedTimestamp))
+            {
+                timestamp = parsedTimestamp;
+            }
+            else if (string.Equals(key, "s", StringComparison.OrdinalIgnoreCase))
+            {
+                signedSignature = NormalizeSignature(value);
+            }
+        }
+
+        return new ParsedTikTokSignatureHeader(timestamp, signedSignature);
+    }
+
+    private sealed record ParsedTikTokSignatureHeader(long? Timestamp, string? Signature);
 }

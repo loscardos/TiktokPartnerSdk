@@ -20,6 +20,12 @@ public sealed class TikTokWebhookParser(
             return TikTokWebhookReceiveResult.Reject("invalid_signature");
         }
 
+        var signedTimestamp = signatureVerifier.GetSignedTimestamp(signature);
+        if (signedTimestamp is not null && !timestampValidator.IsFresh(signedTimestamp, receivedAt))
+        {
+            return TikTokWebhookReceiveResult.Reject("stale_signature_timestamp");
+        }
+
         TikTokWebhookEvent? webhookEvent;
         try
         {

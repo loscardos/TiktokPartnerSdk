@@ -8,13 +8,16 @@ public sealed class TikTokWebhookTimestampValidator(IOptions<TikTokWebhookOption
     private readonly TikTokWebhookOptions _options = options.Value;
 
     public bool IsFresh(TikTokWebhookEvent webhookEvent, DateTimeOffset receivedAt)
+        => IsFresh(webhookEvent.Timestamp, receivedAt);
+
+    public bool IsFresh(long? unixTimestamp, DateTimeOffset receivedAt)
     {
-        if (webhookEvent.Timestamp is null)
+        if (unixTimestamp is null)
         {
             return false;
         }
 
-        var sentAt = DateTimeOffset.FromUnixTimeSeconds(webhookEvent.Timestamp.Value);
+        var sentAt = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp.Value);
         var delta = (receivedAt - sentAt).Duration();
         return delta <= _options.TimestampTolerance;
     }
