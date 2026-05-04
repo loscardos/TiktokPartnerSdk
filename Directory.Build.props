@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <Authors>Internal</Authors>
+    <Company>Internal</Company>
+    <Product>TikTok Partner SDK for .NET</Product>
+    <Description>ASP.NET-friendly TikTok Shop Partner SDK for .NET.</Description>
+    <PackageTags>tiktok;tiktok-shop;partner-sdk;ecommerce</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://example.invalid/internal/tiktokpartnersdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <VersionPrefix>0.1.0</VersionPrefix>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+    <None Include="$(MSBuildThisFileDirectory)docs/nuget-readme.md" Pack="true" PackagePath="README.md" />
+  </ItemGroup>
+</Project>

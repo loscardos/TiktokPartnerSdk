@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore TikTokPartnerSdk.sln
+      - run: dotnet build TikTokPartnerSdk.sln --no-restore -c Release
+      - run: dotnet test TikTokPartnerSdk.sln --no-build -c Release
+      - run: bash scripts/verify-generated.sh

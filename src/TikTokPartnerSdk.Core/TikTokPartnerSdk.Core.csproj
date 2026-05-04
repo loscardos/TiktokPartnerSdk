@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TikTokPartnerSdk.Core</RootNamespace>
+    <Description>Runtime HTTP, auth, token, and generated manager implementations for TikTok Partner SDK.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />

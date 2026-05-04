@@ -1,0 +1,23 @@
+name: package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore TikTokPartnerSdk.sln
+      - run: bash scripts/verify-packages.sh
+      - run: dotnet pack TikTokPartnerSdk.sln --no-restore -c Release -o artifacts/packages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tiktokpackages
+          path: artifacts/packages

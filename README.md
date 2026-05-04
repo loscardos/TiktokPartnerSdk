@@ -1,17 +1,30 @@
 # TikTokPartnerSdk
 
-ASP.NET-friendly TikTok Shop Partner SDK for .NET.
+ASP.NET-friendly TikTok Shop Partner SDK for .NET 8.
 
-Packages:
+## Packages
 
 - `TikTokPartnerSdk.Abstractions`
-- `TikTokPartnerSdk.Core`
 - `TikTokPartnerSdk.Generated`
+- `TikTokPartnerSdk.Core`
 - `TikTokPartnerSdk.Extensions.DependencyInjection`
-- `TikTokPartnerSdk.Generator`
+- `TikTokPartnerSdk.Storage.EntityFramework`
 
-The TikTok SDK does not use YAML at runtime.
-Generator inputs live under `tests/TikTokPartnerSdk.Tests/Fixtures/Schemas` as normalized JSON snapshots.
-Generated DTOs and managers are committed under `src/` and shipped as compiled code.
+## Documentation
 
-Snapshot metadata now includes nested field trees plus auth requirements such as access token kind and required headers, and the generator projects that metadata into generated DTOs, coverage output, and manager source.
+- [Getting started](docs/getting-started.md)
+- [Authentication](docs/auth.md)
+- [Sandbox testing](docs/sandbox.md)
+- [Endpoint coverage](docs/endpoints.md)
+- [Token storage](docs/storage.md)
+- [Runtime behavior](docs/runtime.md)
+- [Generator](docs/generator.md)
+- [Packaging](docs/packaging.md)
+
+## Local Verification
+
+```bash
+dotnet test TikTokPartnerSdk.sln
+bash scripts/verify-generated.sh
+bash scripts/verify-packages.sh /tmp/tiktok-packages
+```

@@ -1,0 +1,22 @@
+name: sandbox
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sandbox:
+    runs-on: ubuntu-latest
+    env:
+      TIKTOK_RUN_SANDBOX: true
+      TIKTOK_SANDBOX_APP_KEY: ${{ secrets.TIKTOK_SANDBOX_APP_KEY }}
+      TIKTOK_SANDBOX_APP_SECRET: ${{ secrets.TIKTOK_SANDBOX_APP_SECRET }}
+      TIKTOK_SANDBOX_REDIRECT_URI: ${{ secrets.TIKTOK_SANDBOX_REDIRECT_URI }}
+      TIKTOK_SANDBOX_AUTH_CODE: ${{ secrets.TIKTOK_SANDBOX_AUTH_CODE }}
+      TIKTOK_SANDBOX_SHOP_CIPHER: ${{ secrets.TIKTOK_SANDBOX_SHOP_CIPHER }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore TikTokPartnerSdk.sln
+      - run: dotnet test tests/TikTokPartnerSdk.IntegrationTests/TikTokPartnerSdk.IntegrationTests.csproj -c Release
