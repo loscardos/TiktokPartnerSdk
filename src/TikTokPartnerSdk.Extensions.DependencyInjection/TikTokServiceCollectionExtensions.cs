@@ -1,13 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using TikTokPartnerSdk.Abstractions.Auth;
 using TikTokPartnerSdk.Abstractions.Configuration;
 using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Abstractions.Managers;
 using TikTokPartnerSdk.Abstractions.Managers.Generated;
+using TikTokPartnerSdk.Abstractions.RateLimiting;
 using TikTokPartnerSdk.Core.Auth;
 using TikTokPartnerSdk.Core.Crypto;
 using TikTokPartnerSdk.Core.Http;
 using TikTokPartnerSdk.Core.Managers.Generated;
+using TikTokPartnerSdk.Core.RateLimiting;
 
 namespace TikTokPartnerSdk.Extensions.DependencyInjection;
 
@@ -22,6 +25,15 @@ public static class TikTokServiceCollectionExtensions
         services.AddSingleton<TikTokRequestUriBuilder>();
         services.AddSingleton<TikTokRequestContentFactory>();
         services.AddSingleton<TikTokResponseParser>();
+        services.AddSingleton<NoopTikTokRateLimiter>();
+        services.AddSingleton<FixedWindowTikTokRateLimiter>();
+        services.AddSingleton<ITikTokRateLimiter>(provider =>
+        {
+            var options = provider.GetRequiredService<IOptions<TikTokPartnerOptions>>().Value;
+            return options.EnableRateLimiting
+                ? provider.GetRequiredService<FixedWindowTikTokRateLimiter>()
+                : provider.GetRequiredService<NoopTikTokRateLimiter>();
+        });
         services.AddHttpClient<ITikTokAuthClient, TikTokAuthClient>();
         services.AddHttpClient<ITikTokPartnerClient, TikTokPartnerClient>();
         services.AddSingleton<ITikTokTokenStore, InMemoryTikTokTokenStore>();

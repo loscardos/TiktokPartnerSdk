@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Options;
 using TikTokPartnerSdk.Abstractions.Configuration;
 using TikTokPartnerSdk.Core.Http;
+using TikTokPartnerSdk.Core.RateLimiting;
 
 namespace TikTokPartnerSdk.Tests.Http;
 
@@ -16,6 +17,7 @@ public sealed class TikTokAuthClientTests
         var client = new TikTokAuthClient(
             new HttpClient(handler),
             Options.Create(new TikTokPartnerOptions { AuthApiBaseUrl = "https://auth.example.test/api/v2" }),
+            new NoopTikTokRateLimiter(),
             new TikTokResponseParser());
 
         var envelope = await client.PostAsync<AuthPayload>(

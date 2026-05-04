@@ -1,7 +1,9 @@
 using System.Text.Json;
 using Microsoft.Extensions.Options;
 using TikTokPartnerSdk.Abstractions.Configuration;
+using TikTokPartnerSdk.Abstractions.Errors;
 using TikTokPartnerSdk.Abstractions.Http;
+using TikTokPartnerSdk.Abstractions.RateLimiting;
 using TikTokPartnerSdk.Core.Crypto;
 
 namespace TikTokPartnerSdk.Core.Http;
@@ -12,6 +14,7 @@ public sealed class TikTokPartnerClient(
     TikTokRequestSigner signer,
     TikTokRequestUriBuilder uriBuilder,
     TikTokRequestContentFactory contentFactory,
+    ITikTokRateLimiter rateLimiter,
     TikTokResponseParser responseParser) : ITikTokPartnerClient
 {
     private static readonly JsonSerializerOptions BodySerializerOptions = new(JsonSerializerDefaults.Web);
@@ -21,6 +24,8 @@ public sealed class TikTokPartnerClient(
         TikTokPartnerRequest request,
         CancellationToken cancellationToken)
     {
+        await rateLimiter.WaitAsync(request.Authorization?.AppKey ?? _options.AppKey, cancellationToken);
+
         var query = request.Query.ToDictionary(
             static x => x.Key,
             static x => ConvertToQueryValue(x.Value),
@@ -36,24 +41,38 @@ public sealed class TikTokPartnerClient(
             query,
             bodyText);
 
-        var uri = uriBuilder.Build(_options, request.Path, query);
-        using var httpRequest = new HttpRequestMessage(request.Method, uri)
+        for (var attempt = 0; ; attempt++)
         {
-            Content = contentFactory.Create(request.Body)
-        };
+            var uri = uriBuilder.Build(_options, request.Path, query);
+            using var httpRequest = new HttpRequestMessage(request.Method, uri)
+            {
+                Content = contentFactory.Create(request.Body)
+            };
 
-        httpRequest.Headers.UserAgent.ParseAdd(_options.UserAgent);
-        if (!string.IsNullOrWhiteSpace(request.AccessToken))
-        {
-            httpRequest.Headers.Add("x-tts-access-token", request.AccessToken);
+            httpRequest.Headers.UserAgent.ParseAdd(_options.UserAgent);
+            if (!string.IsNullOrWhiteSpace(request.AccessToken))
+            {
+                httpRequest.Headers.Add("x-tts-access-token", request.AccessToken);
+            }
+
+            using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            timeoutCts.CancelAfter(_options.RequestTimeout);
+
+            using var response = await httpClient.SendAsync(httpRequest, timeoutCts.Token);
+            var payload = await response.Content.ReadAsStringAsync(cancellationToken);
+            if (response.IsSuccessStatusCode)
+            {
+                return responseParser.Parse<TResponse>(payload);
+            }
+
+            if (IsTransient(response.StatusCode) && attempt < _options.MaxTransientRetries)
+            {
+                await DelayAsync(attempt, cancellationToken);
+                continue;
+            }
+
+            ThrowHttpException<TResponse>(response, payload);
         }
-
-        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(_options.RequestTimeout);
-
-        using var response = await httpClient.SendAsync(httpRequest, timeoutCts.Token);
-        var payload = await response.Content.ReadAsStringAsync(cancellationToken);
-        return responseParser.Parse<TResponse>(payload);
     }
 
     private static string? ConvertToQueryValue(object? value)
@@ -66,5 +85,43 @@ public sealed class TikTokPartnerClient(
             IFormattable formattable => formattable.ToString(null, System.Globalization.CultureInfo.InvariantCulture),
             _ => JsonSerializer.Serialize(value, BodySerializerOptions)
         };
+    }
+
+    private async Task DelayAsync(int attempt, CancellationToken cancellationToken)
+    {
+        var delay = TimeSpan.FromMilliseconds(_options.RetryBaseDelay.TotalMilliseconds * Math.Pow(2, attempt));
+        if (delay > TimeSpan.Zero)
+        {
+            await Task.Delay(delay, cancellationToken);
+        }
+    }
+
+    private static bool IsTransient(System.Net.HttpStatusCode statusCode)
+        => statusCode is System.Net.HttpStatusCode.RequestTimeout
+            or System.Net.HttpStatusCode.TooManyRequests
+            or >= System.Net.HttpStatusCode.InternalServerError;
+
+    private void ThrowHttpException<TResponse>(HttpResponseMessage response, string payload)
+    {
+        if (!string.IsNullOrWhiteSpace(payload))
+        {
+            try
+            {
+                responseParser.Parse<TResponse>(payload);
+            }
+            catch (TikTokApiException)
+            {
+                throw;
+            }
+            catch (JsonException)
+            {
+            }
+        }
+
+        throw new TikTokApiException(
+            (int)response.StatusCode,
+            response.ReasonPhrase ?? "HTTP request failed",
+            null,
+            TikTokErrorClassifier.Classify(response.StatusCode));
     }
 }

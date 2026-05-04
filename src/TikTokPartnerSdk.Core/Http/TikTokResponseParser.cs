@@ -19,6 +19,8 @@ public sealed class TikTokResponseParser
             throw new InvalidOperationException("TikTok API response could not be parsed.");
         }
 
+        envelope = NormalizeRequestId(json, envelope);
+
         if (envelope.Code != 0)
         {
             throw new TikTokApiException(
@@ -26,6 +28,25 @@ public sealed class TikTokResponseParser
                 envelope.Message,
                 envelope.RequestId,
                 TikTokErrorClassifier.Classify(envelope.Code, envelope.Message));
+        }
+
+        return envelope;
+    }
+
+    private static TikTokPartnerResponseEnvelope<TResponse> NormalizeRequestId<TResponse>(
+        string json,
+        TikTokPartnerResponseEnvelope<TResponse> envelope)
+    {
+        if (!string.IsNullOrWhiteSpace(envelope.RequestId))
+        {
+            return envelope;
+        }
+
+        using var document = JsonDocument.Parse(json);
+        if (document.RootElement.TryGetProperty("requestId", out var requestId)
+            && requestId.ValueKind == JsonValueKind.String)
+        {
+            return envelope with { RequestId = requestId.GetString() };
         }
 
         return envelope;
