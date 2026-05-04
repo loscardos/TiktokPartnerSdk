@@ -3,6 +3,7 @@ using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Event;
+using TikTokPartnerSdk.Generated.Finance;
 using TikTokPartnerSdk.Generated.Fulfillment;
 using TikTokPartnerSdk.Generated.Logistics;
 using TikTokPartnerSdk.Generated.Order;
@@ -469,6 +470,66 @@ public sealed class GeneratedManagerRuntimeTests
         eligibilityClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
         eligibilityClient.LastRequest.Query.Should().ContainKey("initiate_aftersale_user").WhoseValue.Should().Be("SELLER");
         eligibilityClient.LastRequest.Query.Should().ContainKey("request_types");
+    }
+
+    [Fact]
+    public async Task Finance_api_should_send_core_reconciliation_paths()
+    {
+        var paymentsClient = new RecordingClient();
+        var paymentsApi = new FinanceApi(paymentsClient);
+
+        await paymentsApi.GetPaymentsAsync(
+            "seller-token",
+            new FinanceGetPaymentsRequest(
+                "app-key",
+                1,
+                "sign",
+                1710000000,
+                1710003600,
+                20,
+                string.Empty,
+                "shop-cipher",
+                "create_time",
+                "DESC"),
+            CancellationToken.None);
+
+        paymentsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        paymentsClient.LastRequest.Path.Should().Be("/finance/202309/payments");
+        paymentsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        paymentsClient.LastRequest.Query.Should().ContainKey("create_time_ge").WhoseValue.Should().Be(1710000000);
+
+        var orderTransactionsClient = new RecordingClient();
+        var orderTransactionsApi = new FinanceApi(orderTransactionsClient);
+
+        await orderTransactionsApi.GetTransactionsByOrderAsync(
+            "seller-token",
+            new FinanceGetTransactionsByOrderRequest("order-1", "app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        orderTransactionsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        orderTransactionsClient.LastRequest.Path.Should().Be("/finance/202501/orders/order-1/statement_transactions");
+        orderTransactionsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var statementTransactionsClient = new RecordingClient();
+        var statementTransactionsApi = new FinanceApi(statementTransactionsClient);
+
+        await statementTransactionsApi.GetTransactionsByStatementAsync(
+            "seller-token",
+            new FinanceGetTransactionsByStatementRequest(
+                "statement-1",
+                "app-key",
+                1,
+                "sign",
+                20,
+                string.Empty,
+                "shop-cipher",
+                "transaction_time",
+                "DESC"),
+            CancellationToken.None);
+
+        statementTransactionsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        statementTransactionsClient.LastRequest.Path.Should().Be("/finance/202501/statements/statement-1/statement_transactions");
+        statementTransactionsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
