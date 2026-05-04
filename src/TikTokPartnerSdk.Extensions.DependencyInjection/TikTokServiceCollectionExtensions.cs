@@ -51,6 +51,13 @@ public static class TikTokServiceCollectionExtensions
         services.AddScoped<IFulfilledByTiktokFbtApi, FulfilledByTiktokFbtApi>();
         services.AddScoped<ISupplyChainApi, SupplyChainApi>();
         services.AddScoped<IPromotionApi, PromotionApi>();
+        services.AddScoped<IAnalyticsApi, AnalyticsApi>();
+        services.AddScoped<ICustomerServiceApi, CustomerServiceApi>();
+        services.AddScoped<ICustomerEngagementApi, CustomerEngagementApi>();
+        services.AddScoped<IAffiliateCreatorApi, AffiliateCreatorApi>();
+        services.AddScoped<IAffiliatePartnerApi, AffiliatePartnerApi>();
+        services.AddScoped<IAffiliateSellerApi, AffiliateSellerApi>();
+        services.AddScoped<IToolsApi, ToolsApi>();
         return services;
     }
 

@@ -49,5 +49,12 @@ public sealed class TikTokServiceCollectionExtensionsTests
         provider.GetService<IFulfilledByTiktokFbtApi>().Should().NotBeNull();
         provider.GetService<ISupplyChainApi>().Should().NotBeNull();
         provider.GetService<IPromotionApi>().Should().NotBeNull();
+        provider.GetService<IAnalyticsApi>().Should().NotBeNull();
+        provider.GetService<ICustomerServiceApi>().Should().NotBeNull();
+        provider.GetService<ICustomerEngagementApi>().Should().NotBeNull();
+        provider.GetService<IAffiliateCreatorApi>().Should().NotBeNull();
+        provider.GetService<IAffiliatePartnerApi>().Should().NotBeNull();
+        provider.GetService<IAffiliateSellerApi>().Should().NotBeNull();
+        provider.GetService<IToolsApi>().Should().NotBeNull();
     }
 }
