@@ -23,8 +23,8 @@ public sealed class OrderManager(
             cancellationToken).ConfigureAwait(false);
 
         return new TikTokPage<OrderGetOrderListResponseDataOrders>(
-            response.Data.Orders,
-            response.Data.NextPageToken,
+            response.Data.Orders ?? Array.Empty<OrderGetOrderListResponseDataOrders>(),
+            response.Data.NextPageToken ?? string.Empty,
             response.Data.TotalCount);
     }
 
@@ -73,13 +73,16 @@ public sealed class OrderManager(
             TikTokManagerContext.RequireShopCipher(context),
             request.SortField,
             request.SortOrder,
-            request.OrderStatus,
+            Optional(request.OrderStatus)!,
             request.CreateTimeGe,
             request.CreateTimeLt,
             request.UpdateTimeGe,
             request.UpdateTimeLt,
-            request.ShippingType,
-            request.BuyerUserId,
+            Optional(request.ShippingType)!,
+            Optional(request.BuyerUserId)!,
             request.IsBuyerRequestCancel,
             request.WarehouseIds ?? Array.Empty<string>());
+
+    private static string? Optional(string value)
+        => string.IsNullOrWhiteSpace(value) ? null : value;
 }

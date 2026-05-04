@@ -96,8 +96,8 @@ public sealed class ProductManager(
             cancellationToken).ConfigureAwait(false);
 
         return new TikTokPage<ProductSearchProductsResponseDataProducts>(
-            response.Data.Products,
-            response.Data.NextPageToken,
+            response.Data.Products ?? Array.Empty<ProductSearchProductsResponseDataProducts>(),
+            response.Data.NextPageToken ?? string.Empty,
             response.Data.TotalCount);
     }
 
@@ -123,17 +123,20 @@ public sealed class ProductManager(
             request.PageSize,
             request.PageToken,
             TikTokManagerContext.RequireShopCipher(context),
-            request.Status,
+            Optional(request.Status)!,
             request.SellerSkus ?? Array.Empty<string>(),
             request.CreateTimeGe,
             request.CreateTimeLe,
             request.UpdateTimeGe,
             request.UpdateTimeLe,
-            request.CategoryVersion,
+            Optional(request.CategoryVersion)!,
             request.ListingQualityTiers ?? Array.Empty<string>(),
             request.ListingPlatforms ?? Array.Empty<string>(),
             request.AuditStatus ?? Array.Empty<string>(),
             request.SkuIds ?? Array.Empty<string>(),
-            request.SnsFilter,
+            Optional(request.SnsFilter)!,
             request.ReturnDraftVersion);
+
+    private static string? Optional(string value)
+        => string.IsNullOrWhiteSpace(value) ? null : value;
 }

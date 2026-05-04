@@ -34,6 +34,48 @@ public sealed class ProductManagerTests
     }
 
     [Fact]
+    public async Task SearchProductsAsync_should_map_empty_optional_filters_to_null()
+    {
+        var client = new RecordingClient(
+            new TikTokPartnerResponseEnvelope<ProductSearchProductsResponseData>(
+                0,
+                "success",
+                "req-1",
+                new ProductSearchProductsResponseData(0, [], string.Empty)));
+        var manager = CreateManager(client);
+
+        await manager.SearchProductsAsync(
+            CreateContext(),
+            new TikTokProductSearchRequest(PageSize: 10),
+            CancellationToken.None);
+
+        var body = client.LastRequest!.Body.Should().BeAssignableTo<IReadOnlyDictionary<string, object?>>().Subject;
+        body["status"].Should().BeNull();
+        body["category_version"].Should().BeNull();
+        body["sns_filter"].Should().BeNull();
+    }
+
+    [Fact]
+    public async Task SearchProductsAsync_should_treat_missing_items_as_empty_page()
+    {
+        var client = new RecordingClient(
+            new TikTokPartnerResponseEnvelope<ProductSearchProductsResponseData>(
+                0,
+                "success",
+                "req-1",
+                new ProductSearchProductsResponseData(0, null!, null!)));
+        var manager = CreateManager(client);
+
+        var page = await manager.SearchProductsAsync(
+            CreateContext(),
+            new TikTokProductSearchRequest(PageSize: 10),
+            CancellationToken.None);
+
+        page.Items.Should().BeEmpty();
+        page.NextPageToken.Should().BeEmpty();
+    }
+
+    [Fact]
     public async Task SearchProductsAsync_should_return_page_from_generated_response()
     {
         var client = new RecordingClient(
@@ -64,12 +106,12 @@ public sealed class ProductManagerTests
             ["create_time_le"] = 0,
             ["update_time_ge"] = 0,
             ["update_time_le"] = 0,
-            ["category_version"] = string.Empty,
+            ["category_version"] = null,
             ["listing_quality_tiers"] = Array.Empty<string>(),
             ["listing_platforms"] = Array.Empty<string>(),
             ["audit_status"] = Array.Empty<string>(),
             ["sku_ids"] = Array.Empty<string>(),
-            ["sns_filter"] = string.Empty,
+            ["sns_filter"] = null,
             ["return_draft_version"] = false
         });
     }

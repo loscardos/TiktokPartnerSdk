@@ -17,7 +17,6 @@ public sealed class TikTokPartnerClient(
     ITikTokRateLimiter rateLimiter,
     TikTokResponseParser responseParser) : ITikTokPartnerClient
 {
-    private static readonly JsonSerializerOptions BodySerializerOptions = new(JsonSerializerDefaults.Web);
     private readonly TikTokPartnerOptions _options = options.Value;
 
     public async Task<TikTokPartnerResponseEnvelope<TResponse>> SendAsync<TResponse>(
@@ -34,7 +33,7 @@ public sealed class TikTokPartnerClient(
         query["app_key"] = _options.AppKey;
         query["timestamp"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(System.Globalization.CultureInfo.InvariantCulture);
 
-        var bodyText = request.Body is null ? null : JsonSerializer.Serialize(request.Body, BodySerializerOptions);
+        var bodyText = request.Body is null ? null : TikTokRequestBodySerializer.Serialize(request.Body);
         query["sign"] = signer.Sign(
             _options.AppSecret,
             request.Path,
@@ -83,7 +82,7 @@ public sealed class TikTokPartnerClient(
             string text => text,
             bool boolean => boolean ? "true" : "false",
             IFormattable formattable => formattable.ToString(null, System.Globalization.CultureInfo.InvariantCulture),
-            _ => JsonSerializer.Serialize(value, BodySerializerOptions)
+            _ => JsonSerializer.Serialize(value, new JsonSerializerOptions(JsonSerializerDefaults.Web))
         };
     }
 

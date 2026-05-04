@@ -1,5 +1,4 @@
 using System.Text;
-using System.Text.Json;
 
 namespace TikTokPartnerSdk.Core.Http;
 
@@ -12,7 +11,7 @@ public sealed class TikTokRequestContentFactory
             return null;
         }
 
-        var json = JsonSerializer.Serialize(body);
+        var json = TikTokRequestBodySerializer.Serialize(body);
         return new StringContent(json, Encoding.UTF8, "application/json");
     }
 }

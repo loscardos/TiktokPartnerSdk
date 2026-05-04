@@ -40,6 +40,50 @@ public sealed class OrderManagerTests
     }
 
     [Fact]
+    public async Task SearchOrdersAsync_should_map_empty_optional_filters_to_null()
+    {
+        var token = CreateToken();
+        var orderApi = new RecordingOrderApi(
+            new OrderGetOrderListResponse(
+                0,
+                "success",
+                "req-1",
+                new OrderGetOrderListResponseData(string.Empty, 0, [])));
+        var manager = CreateManager(orderApi, token);
+
+        await manager.SearchOrdersAsync(
+            CreateContext(),
+            new TikTokOrderSearchRequest(PageSize: 10),
+            CancellationToken.None);
+
+        orderApi.ListRequest.Should().NotBeNull();
+        orderApi.ListRequest!.OrderStatus.Should().BeNull();
+        orderApi.ListRequest.ShippingType.Should().BeNull();
+        orderApi.ListRequest.BuyerUserId.Should().BeNull();
+    }
+
+    [Fact]
+    public async Task SearchOrdersAsync_should_treat_missing_items_as_empty_page()
+    {
+        var token = CreateToken();
+        var orderApi = new RecordingOrderApi(
+            new OrderGetOrderListResponse(
+                0,
+                "success",
+                "req-1",
+                new OrderGetOrderListResponseData(null!, 0, null!)));
+        var manager = CreateManager(orderApi, token);
+
+        var page = await manager.SearchOrdersAsync(
+            CreateContext(),
+            new TikTokOrderSearchRequest(PageSize: 10),
+            CancellationToken.None);
+
+        page.Items.Should().BeEmpty();
+        page.NextPageToken.Should().BeEmpty();
+    }
+
+    [Fact]
     public async Task GetOrderDetailAsync_should_use_context_shop_cipher()
     {
         var token = CreateToken();
