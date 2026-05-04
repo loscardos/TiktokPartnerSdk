@@ -48,5 +48,6 @@ public sealed class TikTokServiceCollectionExtensionsTests
         provider.GetService<IFinanceApi>().Should().NotBeNull();
         provider.GetService<IFulfilledByTiktokFbtApi>().Should().NotBeNull();
         provider.GetService<ISupplyChainApi>().Should().NotBeNull();
+        provider.GetService<IPromotionApi>().Should().NotBeNull();
     }
 }
