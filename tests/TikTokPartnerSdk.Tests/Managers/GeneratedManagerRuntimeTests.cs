@@ -3,6 +3,7 @@ using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Event;
+using TikTokPartnerSdk.Generated.Order;
 using TikTokPartnerSdk.Generated.Seller;
 
 namespace TikTokPartnerSdk.Tests.Managers;
@@ -183,8 +184,72 @@ public sealed class GeneratedManagerRuntimeTests
         });
     }
 
+    [Fact]
+    public async Task Order_api_should_send_core_order_paths()
+    {
+        var detailClient = new RecordingClient();
+        var detailApi = new OrderApi(detailClient);
+
+        await detailApi.GetOrderDetailAsync(
+            "seller-token",
+            new OrderGetOrderDetailRequest("app-key", 1, "sign", ["order-1"], "shop-cipher"),
+            CancellationToken.None);
+
+        detailClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        detailClient.LastRequest.Path.Should().Be("/order/202507/orders");
+        detailClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        detailClient.LastRequest.Query.Should().ContainKey("ids");
+
+        var listClient = new RecordingClient();
+        var listApi = new OrderApi(listClient);
+
+        await listApi.GetOrderListAsync(
+            "seller-token",
+            new OrderGetOrderListRequest(
+                "app-key",
+                1,
+                "sign",
+                20,
+                string.Empty,
+                "shop-cipher",
+                "update_time",
+                "DESC",
+                "UNPAID",
+                1710000000,
+                1710003600,
+                1710000000,
+                1710003600,
+                "TIKTOK",
+                "buyer-1",
+                false,
+                []),
+            CancellationToken.None);
+
+        listClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        listClient.LastRequest.Path.Should().Be("/order/202309/orders/search");
+        listClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        listClient.LastRequest.Body.Should().NotBeNull();
+
+        var priceClient = new RecordingClient();
+        var priceApi = new OrderApi(priceClient);
+
+        await priceApi.GetPriceDetailAsync(
+            "seller-token",
+            new OrderGetPriceDetailRequest("order-1", "app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        priceClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        priceClient.LastRequest.Path.Should().Be("/order/202407/orders/order-1/price_detail");
+        priceClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+    }
+
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
     {
+        public RecordingClient()
+            : this(new object())
+        {
+        }
+
         public TikTokPartnerRequest? LastRequest { get; private set; }
 
         public Task<TikTokPartnerResponseEnvelope<TResponse>> SendAsync<TResponse>(
@@ -192,7 +257,26 @@ public sealed class GeneratedManagerRuntimeTests
             CancellationToken cancellationToken)
         {
             LastRequest = request;
-            return Task.FromResult((TikTokPartnerResponseEnvelope<TResponse>)response);
+            if (response is TikTokPartnerResponseEnvelope<TResponse> envelope)
+            {
+                return Task.FromResult(envelope);
+            }
+
+            return Task.FromResult(new TikTokPartnerResponseEnvelope<TResponse>(
+                0,
+                "success",
+                "req-generated",
+                CreatePayload<TResponse>()));
+        }
+
+        private static TResponse CreatePayload<TResponse>()
+        {
+            if (typeof(TResponse) == typeof(object))
+            {
+                return (TResponse)new object();
+            }
+
+            return (TResponse)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(TResponse));
         }
     }
 }
