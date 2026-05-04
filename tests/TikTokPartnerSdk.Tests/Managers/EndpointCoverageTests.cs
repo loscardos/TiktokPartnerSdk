@@ -40,6 +40,12 @@ public sealed class EndpointCoverageTests
     }
 
     [Fact]
+    public void Generated_interfaces_should_include_fbt()
+    {
+        typeof(IFulfilledByTiktokFbtApi).Should().NotBeNull();
+    }
+
+    [Fact]
     public void Generated_endpoint_count_should_match_committed_schema_snapshots()
     {
         var schemaCount = Directory
@@ -53,6 +59,6 @@ public sealed class EndpointCoverageTests
             .Count(static method => method.Name.EndsWith("Async", StringComparison.Ordinal));
 
         generatedMethods.Should().Be(schemaCount);
-        generatedMethods.Should().BeGreaterThanOrEqualTo(123);
+        generatedMethods.Should().BeGreaterThanOrEqualTo(145);
     }
 }
