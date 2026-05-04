@@ -21,7 +21,9 @@ public sealed class TikTokRequestUriBuilder
 
         var queryString = string.Join(
             "&",
-            query.Select(static x =>
+            query
+                .Where(static x => x.Value is not null)
+                .Select(static x =>
                 $"{Uri.EscapeDataString(x.Key)}={Uri.EscapeDataString(x.Value ?? string.Empty)}"));
 
         return new Uri(

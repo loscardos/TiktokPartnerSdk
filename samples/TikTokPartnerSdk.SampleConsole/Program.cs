@@ -4,6 +4,11 @@ using TikTokPartnerSdk.Abstractions.Managers;
 using TikTokPartnerSdk.Abstractions.Managers.Generated;
 using TikTokPartnerSdk.Extensions.DependencyInjection;
 using TikTokPartnerSdk.Generated.Authorization;
+using TikTokPartnerSdk.Generated.Event;
+using TikTokPartnerSdk.Generated.Finance;
+using TikTokPartnerSdk.Generated.Fulfillment;
+using TikTokPartnerSdk.Generated.Logistics;
+using TikTokPartnerSdk.Generated.ReturnAndRefund;
 using TikTokPartnerSdk.Generated.Seller;
 using TikTokPartnerSdk.SampleConsole;
 
@@ -77,6 +82,13 @@ try
             var smokeContext = CreateSellerContext(env);
             var smokeToken = await SeedTokenStoreAsync(provider, env, smokeContext, CancellationToken.None);
             await RunSmokeAsync(provider, smokeContext, smokeToken, env, CancellationToken.None);
+            break;
+
+        case "smoke-readonly":
+        case "readonly-smoke":
+            var readonlyContext = CreateSellerContext(env);
+            var readonlyToken = await SeedTokenStoreAsync(provider, env, readonlyContext, CancellationToken.None);
+            await RunReadonlySmokeAsync(provider, readonlyContext, readonlyToken, env, CancellationToken.None);
             break;
 
         default:
@@ -276,6 +288,181 @@ static async Task RunSmokeAsync(
     }
 }
 
+static async Task RunReadonlySmokeAsync(
+    IServiceProvider provider,
+    TikTokAuthorizationContext context,
+    TikTokTokenRecord token,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    await RunSmokeAsync(provider, context, token, env, cancellationToken);
+
+    var appKey = context.AppKey;
+    var shopCipher = RequireShopCipher(context);
+    var pageSize = ParseInt64(env, "TIKTOK_SANDBOX_PAGE_SIZE", 10);
+    var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+    var from = now - (long)TimeSpan.FromDays(ParseInt64(env, "TIKTOK_SANDBOX_LOOKBACK_DAYS", 30)).TotalSeconds;
+
+    var results = new List<bool>
+    {
+        await RunSmokeStepAsync("seller-permissions", async () =>
+        {
+            var api = provider.GetRequiredService<ISellerApi>();
+            var response = await api.GetSellerPermissionsAsync(
+                token.AccessToken,
+                new SellerGetSellerPermissionsRequest(appKey, 0, string.Empty),
+                cancellationToken);
+            Console.WriteLine($"permissions={response.Data.Permissions?.Count ?? 0}");
+        }),
+        await RunSmokeStepAsync("event-webhooks", async () =>
+        {
+            var api = provider.GetRequiredService<IEventApi>();
+            var response = await api.GetShopWebhooksAsync(
+                token.AccessToken,
+                new EventGetShopWebhooksRequest(appKey, 0, string.Empty, shopCipher),
+                cancellationToken);
+            Console.WriteLine($"webhooks={response.Data.Webhooks?.Count ?? 0} total={response.Data.TotalCount}");
+        }),
+        await RunSmokeStepAsync("logistics-warehouses", async () =>
+        {
+            var api = provider.GetRequiredService<ILogisticsApi>();
+            var response = await api.GetWarehouseListAsync(
+                token.AccessToken,
+                new LogisticsGetWarehouseListRequest(appKey, 0, string.Empty, shopCipher),
+                cancellationToken);
+            Console.WriteLine($"warehouses={response.Data.Warehouses?.Count ?? 0}");
+        }),
+        await RunSmokeStepAsync("logistics-global-warehouses", async () =>
+        {
+            var api = provider.GetRequiredService<ILogisticsApi>();
+            var response = await api.GetGlobalSellerWarehouseAsync(
+                token.AccessToken,
+                new LogisticsGetGlobalSellerWarehouseRequest(appKey, 0, string.Empty),
+                cancellationToken);
+            Console.WriteLine($"global_warehouses={response.Data.GlobalWarehouses?.Count ?? 0}");
+        }),
+        await RunSmokeStepAsync("fulfillment-packages-search", async () =>
+        {
+            var api = provider.GetRequiredService<IFulfillmentApi>();
+            var response = await api.SearchPackageAsync(
+                token.AccessToken,
+                new FulfillmentSearchPackageRequest(
+                    appKey,
+                    0,
+                    string.Empty,
+                    pageSize,
+                    string.Empty,
+                    shopCipher,
+                    "update_time",
+                    "DESC",
+                    from,
+                    now,
+                    from,
+                    now,
+                    null!),
+                cancellationToken);
+            Console.WriteLine($"packages={response.Data.Packages?.Count ?? 0} total={response.Data.TotalCount} next_page_token={response.Data.NextPageToken}");
+        }),
+        await RunSmokeStepAsync("returns-search-cancellations", async () =>
+        {
+            var api = provider.GetRequiredService<IReturnAndRefundApi>();
+            var response = await api.SearchCancellationsAsync(
+                token.AccessToken,
+                new ReturnAndRefundSearchCancellationsRequest(
+                    appKey,
+                    0,
+                    string.Empty,
+                    pageSize.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                    string.Empty,
+                    shopCipher,
+                    "update_time",
+                    "DESC",
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    from,
+                    now,
+                    from,
+                    now,
+                    Get(env, "TIKTOK_SANDBOX_LOCALE", "en-US")),
+                cancellationToken);
+            Console.WriteLine($"cancellations={response.Data.Cancellations?.Count ?? 0} total={response.Data.TotalCount} next_page_token={response.Data.NextPageToken}");
+        }),
+        await RunSmokeStepAsync("returns-search-returns", async () =>
+        {
+            var api = provider.GetRequiredService<IReturnAndRefundApi>();
+            var response = await api.SearchReturnsAsync(
+                token.AccessToken,
+                new ReturnAndRefundSearchReturnsRequest(
+                    appKey,
+                    0,
+                    string.Empty,
+                    pageSize.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                    string.Empty,
+                    shopCipher,
+                    "update_time",
+                    "DESC",
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    Array.Empty<string>(),
+                    from,
+                    Array.Empty<string>(),
+                    from,
+                    now,
+                    Get(env, "TIKTOK_SANDBOX_LOCALE", "en-US"),
+                    now),
+                cancellationToken);
+            Console.WriteLine($"returns={response.Data.ReturnOrders?.Count ?? 0} total={response.Data.TotalCount} next_page_token={response.Data.NextPageToken}");
+        }),
+        await RunSmokeStepAsync("finance-payments", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetPaymentsAsync(
+                token.AccessToken,
+                new FinanceGetPaymentsRequest(appKey, 0, string.Empty, from, now, pageSize, string.Empty, shopCipher, "create_time", "DESC"),
+                cancellationToken);
+            Console.WriteLine($"payments={response.Data.Payments?.Count ?? 0} next_page_token={response.Data.NextPageToken}");
+        }),
+        await RunSmokeStepAsync("finance-statements", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetStatementsAsync(
+                token.AccessToken,
+                new FinanceGetStatementsRequest(appKey, 0, string.Empty, pageSize, string.Empty, null!, shopCipher, "statement_time", "DESC", from, now),
+                cancellationToken);
+            Console.WriteLine($"statements={response.Data.Statements?.Count ?? 0} next_page_token={response.Data.NextPageToken}");
+        }),
+        await RunSmokeStepAsync("finance-withdrawals", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetWithdrawalsAsync(
+                token.AccessToken,
+                new FinanceGetWithdrawalsRequest(appKey, 0, string.Empty, from, now, pageSize, string.Empty, shopCipher, ["WITHDRAW", "SETTLE"]),
+                cancellationToken);
+            Console.WriteLine($"withdrawals={response.Data.Withdrawals?.Count ?? 0} total={response.Data.TotalCount} next_page_token={response.Data.NextPageToken}");
+        }),
+        await RunSmokeStepAsync("finance-unsettled-transactions", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetUnsettledTransactionsAsync(
+                token.AccessToken,
+                new FinanceGetUnsettledTransactionsRequest(appKey, 0, string.Empty, pageSize, string.Empty, from, now, shopCipher, "order_create_time", "DESC"),
+                cancellationToken);
+            Console.WriteLine($"unsettled_transactions={response.Data.Transactions?.Count ?? 0} total={response.Data.TotalCount} next_page_token={response.Data.NextPageToken}");
+        })
+    };
+
+    if (results.Any(static passed => !passed))
+    {
+        Environment.ExitCode = 1;
+    }
+}
+
 static async Task<bool> RunSmokeStepAsync(string name, Func<Task> action)
 {
     Console.WriteLine($"== {name} ==");
@@ -353,6 +540,7 @@ static void PrintHelp()
     Console.WriteLine("  orders-search       Search orders through token-aware IOrderManager");
     Console.WriteLine("  products-search     Search products through token-aware IProductManager");
     Console.WriteLine("  smoke               Run direct read-only validation: shops, orders, products");
+    Console.WriteLine("  smoke-readonly      Run broader read-only validation across seller, event, logistics, fulfillment, returns, finance");
 }
 
 static string Require(IReadOnlyDictionary<string, string> values, string key)
@@ -362,6 +550,11 @@ static string Require(IReadOnlyDictionary<string, string> values, string key)
         ? value
         : throw new InvalidOperationException($"Missing required environment value '{key}'.");
 }
+
+static string RequireShopCipher(TikTokAuthorizationContext context)
+    => !string.IsNullOrWhiteSpace(context.ShopCipher)
+        ? context.ShopCipher
+        : throw new InvalidOperationException("Shop cipher is required for seller shop APIs.");
 
 static string Get(IReadOnlyDictionary<string, string> values, string key, string fallback = "")
     => values.TryGetValue(key, out var value) ? value : fallback;

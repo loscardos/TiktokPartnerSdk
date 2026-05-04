@@ -29,6 +29,10 @@ public sealed class TikTokPartnerClient(
             static x => x.Key,
             static x => ConvertToQueryValue(x.Value),
             StringComparer.Ordinal);
+        foreach (var key in query.Where(static x => x.Value is null).Select(static x => x.Key).ToArray())
+        {
+            query.Remove(key);
+        }
 
         query["app_key"] = _options.AppKey;
         query["timestamp"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -81,6 +85,7 @@ public sealed class TikTokPartnerClient(
             null => null,
             string text => text,
             bool boolean => boolean ? "true" : "false",
+            IEnumerable<string> strings => string.Join(",", strings),
             IFormattable formattable => formattable.ToString(null, System.Globalization.CultureInfo.InvariantCulture),
             _ => JsonSerializer.Serialize(value, new JsonSerializerOptions(JsonSerializerDefaults.Web))
         };

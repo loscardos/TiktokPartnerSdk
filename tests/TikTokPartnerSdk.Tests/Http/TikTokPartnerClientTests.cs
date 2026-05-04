@@ -50,6 +50,30 @@ public sealed class TikTokPartnerClientTests
     }
 
     [Fact]
+    public async Task SendAsync_should_serialize_query_lists_as_comma_separated_values()
+    {
+        var handler = new RecordingHandler("""{"code":0,"message":"success","request_id":"req-1","data":{"ok":true}}""");
+        var client = CreatePartnerClient(handler);
+
+        await client.SendAsync<Dictionary<string, bool>>(
+            new TikTokPartnerRequest(
+                HttpMethod.Get,
+                "/finance/202309/withdrawals",
+                new Dictionary<string, object?>
+                {
+                    ["types"] = new[] { "WITHDRAW", "SETTLE" }
+                },
+                null,
+                null,
+                "token-1"),
+            CancellationToken.None);
+
+        handler.LastRequest!.RequestUri!.Query.Should().Contain("types=WITHDRAW%2CSETTLE");
+        handler.LastRequest.RequestUri.Query.Should().NotContain("%5B");
+    }
+
+
+    [Fact]
     public async Task SendAsync_should_retry_transient_http_status()
     {
         var handler = new SequenceHandler(
