@@ -1,7 +1,13 @@
 using FluentAssertions;
 using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Core.Managers.Generated;
+using TikTokPartnerSdk.Generated.AffiliateCreator;
+using TikTokPartnerSdk.Generated.AffiliatePartner;
+using TikTokPartnerSdk.Generated.AffiliateSeller;
+using TikTokPartnerSdk.Generated.Analytics;
 using TikTokPartnerSdk.Generated.Authorization;
+using TikTokPartnerSdk.Generated.CustomerEngagement;
+using TikTokPartnerSdk.Generated.CustomerService;
 using TikTokPartnerSdk.Generated.Event;
 using TikTokPartnerSdk.Generated.Finance;
 using TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
@@ -13,6 +19,7 @@ using TikTokPartnerSdk.Generated.Promotion;
 using TikTokPartnerSdk.Generated.ReturnAndRefund;
 using TikTokPartnerSdk.Generated.Seller;
 using TikTokPartnerSdk.Generated.SupplyChain;
+using TikTokPartnerSdk.Generated.Tools;
 
 namespace TikTokPartnerSdk.Tests.Managers;
 
@@ -694,6 +701,169 @@ public sealed class GeneratedManagerRuntimeTests
         couponClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
         couponClient.LastRequest.Path.Should().Be("/promotion/202406/coupons/coupon-1");
         couponClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+    }
+
+    [Fact]
+    public async Task Analytics_customer_service_and_engagement_apis_should_send_core_paths()
+    {
+        var analyticsClient = new RecordingClient();
+        var analyticsApi = new AnalyticsApi(analyticsClient);
+
+        await analyticsApi.GetShopPerformanceAsync(
+            "seller-token",
+            new AnalyticsGetShopPerformanceRequest(
+                "app-key",
+                1,
+                "sign",
+                "IDR",
+                "2026-01-31",
+                "DAY",
+                "shop-cipher",
+                "2026-01-01"),
+            CancellationToken.None);
+
+        analyticsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        analyticsClient.LastRequest.Path.Should().Be("/analytics/202509/shop/performance");
+        analyticsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        analyticsClient.LastRequest.Query.Should().ContainKey("currency").WhoseValue.Should().Be("IDR");
+
+        var customerServiceClient = new RecordingClient();
+        var customerServiceApi = new CustomerServiceApi(customerServiceClient);
+
+        await customerServiceApi.SendMessageAsync(
+            "seller-token",
+            new CustomerServiceSendMessageRequest(
+                "conversation-1",
+                "app-key",
+                1,
+                "sign",
+                "shop-cipher",
+                "TEXT",
+                "hello"),
+            CancellationToken.None);
+
+        customerServiceClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        customerServiceClient.LastRequest.Path.Should().Be("/customer_service/202309/conversations/conversation-1/messages");
+        customerServiceClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        customerServiceClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["type"] = "TEXT",
+            ["content"] = "hello"
+        });
+
+        var engagementClient = new RecordingClient();
+        var engagementApi = new CustomerEngagementApi(engagementClient);
+
+        await engagementApi.CreateEngagementTaskAsync(
+            "seller-token",
+            new CustomerEngagementCreateEngagementTaskRequest(
+                "app-key",
+                1,
+                "sign",
+                "idempotency-1",
+                "shop-cipher",
+                "template-1",
+                "Task",
+                1710003600,
+                "IM",
+                ["product-1"],
+                ["coupon-1"]),
+            CancellationToken.None);
+
+        engagementClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        engagementClient.LastRequest.Path.Should().Be("/customer_engagement/202412/engagement_tasks");
+        engagementClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        engagementClient.LastRequest.Query.Should().ContainKey("idempotency_key").WhoseValue.Should().Be("idempotency-1");
+        engagementClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["template_id"] = "template-1",
+            ["task_name"] = "Task",
+            ["end_time"] = 1710003600,
+            ["channel"] = "IM",
+            ["product_ids"] = new[] { "product-1" },
+            ["coupon_ids"] = new[] { "coupon-1" }
+        });
+    }
+
+    [Fact]
+    public async Task Affiliate_and_tools_apis_should_send_core_paths()
+    {
+        var creatorClient = new RecordingClient();
+        var creatorApi = new AffiliateCreatorApi(creatorClient);
+
+        await creatorApi.GetCreatorProfileAsync(
+            "seller-token",
+            new AffiliateCreatorGetCreatorProfileRequest("app-key", 1, "sign"),
+            CancellationToken.None);
+
+        creatorClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        creatorClient.LastRequest.Path.Should().Be("/affiliate_creator/202508/profiles");
+        creatorClient.LastRequest.Query.Should().BeEmpty();
+
+        var partnerClient = new RecordingClient();
+        var partnerApi = new AffiliatePartnerApi(partnerClient);
+
+        await partnerApi.GetAffiliatePartnerCampaignListAsync(
+            "seller-token",
+            new AffiliatePartnerGetAffiliatePartnerCampaignListRequest(
+                "app-key",
+                1,
+                "sign",
+                "asset-cipher",
+                20,
+                string.Empty,
+                "ALL",
+                "ACTIVE",
+                "OPEN"),
+            CancellationToken.None);
+
+        partnerClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        partnerClient.LastRequest.Path.Should().Be("/affiliate_partner/202405/campaigns");
+        partnerClient.LastRequest.Query.Should().ContainKey("category_asset_cipher").WhoseValue.Should().Be("asset-cipher");
+        partnerClient.LastRequest.Query.Should().ContainKey("page_size").WhoseValue.Should().Be(20);
+
+        var sellerClient = new RecordingClient();
+        var sellerApi = new AffiliateSellerApi(sellerClient);
+
+        await sellerApi.GetOpenCollaborationSettingsAsync(
+            "seller-token",
+            new AffiliateSellerGetOpenCollaborationSettingsRequest("app-key", 1, "sign", "shop-cipher"),
+            CancellationToken.None);
+
+        sellerClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        sellerClient.LastRequest.Path.Should().Be("/affiliate_seller/202409/open_collaboration_settings");
+        sellerClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+
+        var toolsClient = new RecordingClient();
+        var toolsApi = new ToolsApi(toolsClient);
+
+        await toolsApi.UploadFileInitAsync(
+            "seller-token",
+            new ToolsUploadFileInitRequest(
+                "app-key",
+                1,
+                "sign",
+                "asset-cipher",
+                "shop-cipher",
+                "image.png",
+                "IMAGE",
+                1024,
+                1,
+                "messages"),
+            CancellationToken.None);
+
+        toolsClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        toolsClient.LastRequest.Path.Should().Be("/open/202512/file/init");
+        toolsClient.LastRequest.Query.Should().ContainKey("category_asset_cipher").WhoseValue.Should().Be("asset-cipher");
+        toolsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        toolsClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["file_name"] = "image.png",
+            ["file_type"] = "IMAGE",
+            ["file_size"] = 1024,
+            ["total_chunk_count"] = 1,
+            ["target_path"] = "messages"
+        });
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
