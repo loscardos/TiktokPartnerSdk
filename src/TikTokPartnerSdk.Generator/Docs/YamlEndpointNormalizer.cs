@@ -8,7 +8,7 @@ public sealed partial class YamlEndpointNormalizer
     {
         var requestParameters = endpoint.PathParameters.Select(static parameter => ToSchemaParameter(parameter, "path"))
             .Concat(OrderRequestParameters(endpoint.QueryParameters).Select(static parameter => ToSchemaParameter(parameter, "query")))
-            .Concat(OrderRequestParameters(endpoint.BodyParameters).Select(static parameter => ToSchemaParameter(parameter, "body")))
+            .Concat(BuildParameterTree(endpoint.BodyParameters, "body"))
             .ToArray();
 
         return new SchemaEndpoint(

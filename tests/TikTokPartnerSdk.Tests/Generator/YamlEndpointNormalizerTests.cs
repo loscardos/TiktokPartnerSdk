@@ -35,4 +35,25 @@ public sealed class YamlEndpointNormalizerTests
         endpoint.RequestParameters.Should().Contain(parameter => parameter.Name == "shop_cipher" && parameter.Location == "query");
         endpoint.RequestParameters.Should().Contain(parameter => parameter.Name == "event_type" && parameter.Location == "body");
     }
+
+    [Fact]
+    public void Normalizer_should_build_nested_body_tree_for_product_create()
+    {
+        var path = Path.Combine(TestPaths.RepositoryRoot, "docs", "api-reference-sdk", "products.yaml");
+        var docsEndpoint = new YamlApiReferenceReader().ReadFile(path)
+            .Single(static endpoint => endpoint.Slug == "create-product-202309");
+
+        var endpoint = new YamlEndpointNormalizer().Normalize(docsEndpoint);
+
+        endpoint.RequestContentKind.Should().Be("body");
+        endpoint.RequestParameters.Should().Contain(parameter => parameter.Name == "shop_cipher" && parameter.Location == "query");
+
+        var title = endpoint.RequestParameters.Single(parameter => parameter.Name == "title");
+        title.Location.Should().Be("body");
+
+        var packageWeight = endpoint.RequestParameters.Single(parameter => parameter.Name == "package_weight");
+        packageWeight.Location.Should().Be("body");
+        packageWeight.Children.Should().Contain(parameter => parameter.Name == "value");
+        packageWeight.Children.Should().Contain(parameter => parameter.Name == "unit");
+    }
 }
