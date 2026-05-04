@@ -14,8 +14,15 @@ public sealed class TikTokWebhookParser(
         string rawBody,
         string signature,
         DateTimeOffset receivedAt)
+        => TryReceive(string.Empty, rawBody, signature, receivedAt);
+
+    public TikTokWebhookReceiveResult TryReceive(
+        string path,
+        string rawBody,
+        string signature,
+        DateTimeOffset receivedAt)
     {
-        if (!signatureVerifier.Verify(rawBody, signature))
+        if (!signatureVerifier.Verify(path, rawBody, signature))
         {
             return TikTokWebhookReceiveResult.Reject("invalid_signature");
         }

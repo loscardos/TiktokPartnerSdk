@@ -22,6 +22,46 @@ public sealed class TikTokWebhookSignatureVerifierTests
     }
 
     [Fact]
+    public void Verify_ReturnsTrueForTikTokShopWebhookAuthorizationSignature()
+    {
+        const string rawBody = """{"type":15,"tts_notification_id":"n1","shop_id":"s1","timestamp":1700000000,"data":{"product_id":123}}""";
+        var signature = Convert.ToHexString(HMACSHA256.HashData(
+            Encoding.UTF8.GetBytes("app-secret"),
+            Encoding.UTF8.GetBytes($"app-key{rawBody}"))).ToLowerInvariant();
+        var verifier = CreateVerifier();
+
+        verifier.Verify("/webhooks/tiktok", rawBody, signature).Should().BeTrue();
+    }
+
+    [Fact]
+    public void Verify_UsesWebhookSecretWhenConfigured()
+    {
+        const string rawBody = """{"type":1,"tts_notification_id":"n1","shop_id":"s1","timestamp":1700000000,"data":{}}""";
+        var signature = Convert.ToHexString(HMACSHA256.HashData(
+            Encoding.UTF8.GetBytes("webhook-secret"),
+            Encoding.UTF8.GetBytes($"app-key{rawBody}"))).ToLowerInvariant();
+        var verifier = new TikTokWebhookSignatureVerifier(Options.Create(new TikTokPartnerOptions
+        {
+            AppKey = "app-key",
+            AppSecret = "app-secret",
+            WebhookSecret = "webhook-secret"
+        }));
+
+        verifier.Verify(rawBody, signature).Should().BeTrue();
+    }
+
+    [Fact]
+    public void Verify_ReturnsTrueForOfficialWebhookSignatureWithPath()
+    {
+        const string rawBody = """{"type":15,"tts_notification_id":"n1","shop_id":"s1","timestamp":1700000000,"data":{"product_id":123}}""";
+        const string path = "/webhooks/tiktok";
+        var signature = SignOfficialWebhook(path, rawBody, "app-secret");
+        var verifier = CreateVerifier();
+
+        verifier.Verify(path, rawBody, signature).Should().BeTrue();
+    }
+
+    [Fact]
     public void Verify_ReturnsFalseForMissingSignature()
     {
         var verifier = CreateVerifier();
@@ -85,5 +125,13 @@ public sealed class TikTokWebhookSignatureVerifierTests
             Encoding.UTF8.GetBytes("app-secret"),
             Encoding.UTF8.GetBytes(signedPayload))).ToLowerInvariant();
         return $"t={timestamp},s={signature}";
+    }
+
+    private static string SignOfficialWebhook(string path, string rawBody, string secret)
+    {
+        var input = $"{secret}{path}{rawBody}{secret}";
+        return Convert.ToHexString(HMACSHA256.HashData(
+            Encoding.UTF8.GetBytes(secret),
+            Encoding.UTF8.GetBytes(input))).ToLowerInvariant();
     }
 }

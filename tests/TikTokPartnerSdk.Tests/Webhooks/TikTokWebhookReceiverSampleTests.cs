@@ -17,6 +17,8 @@ public sealed class TikTokWebhookReceiverSampleTests
         var program = File.ReadAllText(programPath);
         program.Should().Contain("ITikTokWebhookParser");
         program.Should().Contain("TikTok-Signature");
+        program.Should().Contain("x-tt-signature");
+        program.Should().Contain("TIKTOK_SANDBOX_APP_KEY");
         program.Should().Contain("return Results.Ok");
         program.Should().Contain("InMemoryWebhookQueue");
     }

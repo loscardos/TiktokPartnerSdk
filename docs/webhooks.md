@@ -26,7 +26,7 @@ TikTok Shop
 
 The committed webhook specification snapshot is stored at `docs/webhooks/tiktok-webhooks.yaml`.
 
-The verifier accepts TikTok's `TikTok-Signature` header in `t=<unix-timestamp>,s=<signature>` format and verifies the signed payload as `<timestamp>.<raw-body>`. The parser validates the signed timestamp when it is present. Raw-body HMAC signatures are still accepted for local compatibility tests.
+The verifier accepts TikTok Shop's webhook signature from `x-tt-signature` or `Authorization`. The signed payload is `app_key + raw-body`, hashed with HMAC-SHA256 using the app secret. Timestamped `TikTok-Signature` and raw-body HMAC signatures are still accepted for local compatibility tests.
 
 ## ASP.NET Receiver Example
 
@@ -44,12 +44,16 @@ app.MapPost("/webhooks/tiktok", async (
 {
     using var reader = new StreamReader(request.Body);
     var rawBody = await reader.ReadToEndAsync(cancellationToken);
-    var signature = request.Headers["TikTok-Signature"].ToString();
+    var signature = request.Headers["x-tt-signature"].ToString();
+    if (string.IsNullOrWhiteSpace(signature))
+    {
+        signature = request.Headers["authorization"].ToString();
+    }
 
-    var result = parser.TryReceive(rawBody, signature, DateTimeOffset.UtcNow);
+    var result = parser.TryReceive(request.Path.Value ?? string.Empty, rawBody, signature, DateTimeOffset.UtcNow);
     if (!result.IsAccepted)
     {
-        return Results.BadRequest(new { error = result.RejectionReason });
+        return Results.Unauthorized();
     }
 
     await rawPayloadSink.SaveAsync(result.Envelope!, cancellationToken);
