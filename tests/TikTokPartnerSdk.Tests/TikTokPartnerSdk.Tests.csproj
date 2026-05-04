@@ -16,5 +16,6 @@
     <ProjectReference Include="..\..\src\TikTokPartnerSdk.Core\TikTokPartnerSdk.Core.csproj" />
     <ProjectReference Include="..\..\src\TikTokPartnerSdk.Extensions.DependencyInjection\TikTokPartnerSdk.Extensions.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\src\TikTokPartnerSdk.Generator\TikTokPartnerSdk.Generator.csproj" />
+    <ProjectReference Include="..\..\samples\TikTokPartnerSdk.SampleConsole\TikTokPartnerSdk.SampleConsole.csproj" />
   </ItemGroup>
 </Project>

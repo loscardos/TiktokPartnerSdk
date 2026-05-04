@@ -5,6 +5,7 @@ using TikTokPartnerSdk.Abstractions.Managers.Generated;
 using TikTokPartnerSdk.Extensions.DependencyInjection;
 using TikTokPartnerSdk.Generated.Authorization;
 using TikTokPartnerSdk.Generated.Seller;
+using TikTokPartnerSdk.SampleConsole;
 
 var command = args.FirstOrDefault() ?? "help";
 if (command is "help" or "--help" or "-h")
@@ -44,6 +45,7 @@ try
             await SeedTokenStoreAsync(provider, env, refreshContext, CancellationToken.None);
             var refreshed = await provider.GetRequiredService<IAuthApi>()
                 .RefreshTokenAsync(refreshContext, CancellationToken.None);
+            PersistToken(refreshed);
             PrintToken(refreshed);
             break;
 
@@ -159,10 +161,12 @@ static async Task<TikTokTokenRecord> ExchangeSellerTokenAsync(
     CancellationToken cancellationToken)
 {
     var authApi = provider.GetRequiredService<IAuthApi>();
-    return await authApi.ExchangeCodeAsync(
+    var token = await authApi.ExchangeCodeAsync(
         Require(env, "TIKTOK_SANDBOX_AUTH_CODE"),
         context,
         cancellationToken);
+    PersistToken(token);
+    return token;
 }
 
 static async Task RunAuthorizedShopsWithTokenAsync(
@@ -316,6 +320,25 @@ static void PrintToken(TikTokTokenRecord token)
     Console.WriteLine($"shop_cipher={token.ShopCipher}");
 }
 
+static void PersistToken(TikTokTokenRecord token)
+{
+    var values = new Dictionary<string, string>
+    {
+        ["TIKTOK_SANDBOX_ACCESS_TOKEN"] = token.AccessToken,
+        ["TIKTOK_SANDBOX_REFRESH_TOKEN"] = token.RefreshToken,
+        ["TIKTOK_SANDBOX_ACCESS_TOKEN_EXPIRES_AT"] = token.ExpiresAtUtc.ToString("O"),
+        ["TIKTOK_SANDBOX_REFRESH_TOKEN_EXPIRES_AT"] = token.RefreshTokenExpiresAtUtc.ToString("O"),
+        ["TIKTOK_SANDBOX_AUTH_CODE"] = string.Empty
+    };
+
+    if (!string.IsNullOrWhiteSpace(token.ShopCipher))
+    {
+        values["TIKTOK_SANDBOX_SHOP_CIPHER"] = token.ShopCipher;
+    }
+
+    SandboxEnvFile.UpsertValues(SandboxEnvFile.DefaultPath, values);
+}
+
 static void PrintHelp()
 {
     Console.WriteLine("TikTokPartnerSdk sample validation CLI");
@@ -367,15 +390,7 @@ static Dictionary<string, string> LoadEnv()
             static entry => (string)entry.Value!,
             StringComparer.Ordinal);
 
-    var path = Path.GetFullPath(Path.Combine(
-        AppContext.BaseDirectory,
-        "..",
-        "..",
-        "..",
-        "..",
-        "..",
-        ".token",
-        "tiktok-sandbox.env"));
+    var path = SandboxEnvFile.DefaultPath;
     if (!File.Exists(path))
     {
         return values;
