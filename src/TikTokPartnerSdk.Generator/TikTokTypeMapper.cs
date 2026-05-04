@@ -4,7 +4,7 @@ public static class TikTokTypeMapper
 {
     public static string MapScalar(string schemaType)
     {
-        return schemaType switch
+        return schemaType.TrimStart('[', ']') switch
         {
             "string" => "string",
             "int" => "long",
@@ -19,7 +19,9 @@ public static class TikTokTypeMapper
     {
         if (parameter.Children.Count == 0)
         {
-            return MapScalar(parameter.Type);
+            return parameter.Type.StartsWith("[]", StringComparison.Ordinal)
+                ? $"IReadOnlyList<{MapScalar(parameter.Type)}>"
+                : MapScalar(parameter.Type);
         }
 
         var childTypeName = TikTokName.ToChildTypeName(parentTypeName, parameter.Name);

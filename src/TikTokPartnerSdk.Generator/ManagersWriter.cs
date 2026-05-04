@@ -82,12 +82,24 @@ public sealed class ManagersWriter
                 builder.AppendLine($"        query[\"{parameter.Name}\"] = request.{TikTokName.ToPascalCase(parameter.Name)};");
             }
 
+            var bodyParameters = endpoint.RequestParameters
+                .Where(static parameter => parameter.Location == "body")
+                .ToArray();
+            if (bodyParameters.Length > 0)
+            {
+                builder.AppendLine("        var body = new Dictionary<string, object?>();");
+                foreach (var parameter in bodyParameters)
+                {
+                    builder.AppendLine($"        body[\"{parameter.Name}\"] = request.{TikTokName.ToPascalCase(parameter.Name)};");
+                }
+            }
+
             builder.AppendLine($"        var envelope = await client.SendAsync<{ToEnvelopePayloadType(endpoint)}>(");
             builder.AppendLine("            new TikTokPartnerRequest(");
             builder.AppendLine($"                HttpMethod.{ToHttpMethod(endpoint.HttpMethod)},");
             builder.AppendLine($"                \"{endpoint.Path}\",");
             builder.AppendLine("                query,");
-            builder.AppendLine($"                {ToBodyExpression(endpoint)},");
+            builder.AppendLine($"                {ToBodyExpression(endpoint, bodyParameters.Length > 0)},");
             builder.AppendLine("                null,");
             builder.AppendLine("                accessToken),");
             builder.AppendLine("            cancellationToken);");
@@ -114,9 +126,9 @@ public sealed class ManagersWriter
             _ => throw new InvalidOperationException($"Unsupported HTTP method '{httpMethod}'.")
         };
 
-    private static string ToBodyExpression(SchemaEndpoint endpoint)
-        => endpoint.RequestContentKind.Equals("body", StringComparison.OrdinalIgnoreCase)
-            ? "request"
+    private static string ToBodyExpression(SchemaEndpoint endpoint, bool hasBodyParameters)
+        => endpoint.RequestContentKind.Equals("body", StringComparison.OrdinalIgnoreCase) && hasBodyParameters
+            ? "body"
             : "null";
 
     private static string ToEnvelopePayloadType(SchemaEndpoint endpoint)

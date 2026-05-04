@@ -1,0 +1,110 @@
+using System.Text.RegularExpressions;
+
+namespace TikTokPartnerSdk.Generator;
+
+public sealed partial class YamlEndpointNormalizer
+{
+    public SchemaEndpoint Normalize(YamlDocsEndpoint endpoint)
+    {
+        var requestParameters = endpoint.PathParameters.Select(static parameter => ToSchemaParameter(parameter, "path"))
+            .Concat(endpoint.QueryParameters.Select(static parameter => ToSchemaParameter(parameter, "query")))
+            .Concat(endpoint.BodyParameters.Select(static parameter => ToSchemaParameter(parameter, "body")))
+            .ToArray();
+
+        return new SchemaEndpoint(
+            ToOperationId(endpoint),
+            endpoint.ModuleName,
+            endpoint.ModuleKey,
+            endpoint.Path,
+            endpoint.Method,
+            InferAccessTokenKind(endpoint),
+            InferAccessTokenKind(endpoint),
+            endpoint.BodyParameters.Count > 0 ? "body" : "query",
+            endpoint.Headers.Select(static header => header.Name).ToArray(),
+            requestParameters,
+            BuildParameterTree(endpoint.ResponseParameters, "body"));
+    }
+
+    private static SchemaParameter ToSchemaParameter(YamlDocsParameter parameter, string location)
+        => new(CleanName(parameter.Name), parameter.Type, parameter.Required, location, []);
+
+    private static IReadOnlyList<SchemaParameter> BuildParameterTree(
+        IReadOnlyList<YamlDocsParameter> parameters,
+        string location)
+    {
+        var roots = new List<MutableSchemaParameter>();
+        var stack = new List<MutableSchemaParameter>();
+
+        foreach (var parameter in parameters)
+        {
+            var level = parameter.Name.TakeWhile(static character => character == '^').Count();
+            var node = new MutableSchemaParameter(CleanName(parameter.Name), parameter.Type, parameter.Required, location);
+
+            if (level == 0 || stack.Count == 0)
+            {
+                roots.Add(node);
+            }
+            else
+            {
+                var parentIndex = Math.Min(level - 1, stack.Count - 1);
+                stack[parentIndex].Children.Add(node);
+            }
+
+            if (stack.Count <= level)
+            {
+                stack.Add(node);
+            }
+            else
+            {
+                stack[level] = node;
+                if (stack.Count > level + 1)
+                {
+                    stack.RemoveRange(level + 1, stack.Count - level - 1);
+                }
+            }
+        }
+
+        return roots.Select(static root => root.ToSchemaParameter()).ToArray();
+    }
+
+    private static string CleanName(string name) => name.TrimStart('^');
+
+    private static string InferAccessTokenKind(YamlDocsEndpoint endpoint)
+    {
+        if (endpoint.ModuleKey.Equals("authorization", StringComparison.Ordinal)
+            && endpoint.Path.Contains("category_assets", StringComparison.OrdinalIgnoreCase))
+        {
+            return "partner";
+        }
+
+        return "seller";
+    }
+
+    private static string ToOperationId(YamlDocsEndpoint endpoint)
+    {
+        var version = endpoint.Path.Split('/', StringSplitOptions.RemoveEmptyEntries).Skip(1).FirstOrDefault() ?? "unknown";
+        var operationName = endpoint.Slug;
+        if (operationName.EndsWith("-" + version, StringComparison.Ordinal))
+        {
+            operationName = operationName[..^(version.Length + 1)];
+        }
+
+        operationName = NonIdentifierCharacterRegex().Replace(operationName, "_").Trim('_');
+        return $"{endpoint.ModuleKey}.{version}.{operationName}";
+    }
+
+    [GeneratedRegex("[^a-zA-Z0-9]+")]
+    private static partial Regex NonIdentifierCharacterRegex();
+
+    private sealed class MutableSchemaParameter(
+        string name,
+        string type,
+        bool required,
+        string location)
+    {
+        public List<MutableSchemaParameter> Children { get; } = [];
+
+        public SchemaParameter ToSchemaParameter()
+            => new(name, type, required, location, Children.Select(static child => child.ToSchemaParameter()).ToArray());
+    }
+}
