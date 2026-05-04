@@ -13,82 +13,281 @@ if (command is "help" or "--help" or "-h")
     return;
 }
 
-var env = LoadEnv();
-var services = new ServiceCollection();
-services.AddTikTokPartnerSdk(options =>
+try
 {
-    options.AppKey = Require(env, "TIKTOK_SANDBOX_APP_KEY");
-    options.AppSecret = Require(env, "TIKTOK_SANDBOX_APP_SECRET");
-});
+    var env = LoadEnv();
+    if (command == "check-config")
+    {
+        PrintConfigStatus(env);
+        return;
+    }
 
-using var provider = services.BuildServiceProvider();
+    using var provider = CreateProvider(env);
 
-switch (command)
+    switch (command)
+    {
+        case "auth-url":
+            var authApi = provider.GetRequiredService<IAuthApi>();
+            Console.WriteLine(authApi.BuildAuthorizationUrl(
+                new Uri(Require(env, "TIKTOK_SANDBOX_REDIRECT_URL")),
+                Get(env, "TIKTOK_SANDBOX_STATE", "sample-state")));
+            break;
+
+        case "exchange-code":
+            var exchangeContext = CreateSellerContext(env);
+            var exchanged = await ExchangeSellerTokenAsync(provider, env, exchangeContext, CancellationToken.None);
+            PrintToken(exchanged);
+            break;
+
+        case "refresh-token":
+            var refreshContext = CreateSellerContext(env);
+            await SeedTokenStoreAsync(provider, env, refreshContext, CancellationToken.None);
+            var refreshed = await provider.GetRequiredService<IAuthApi>()
+                .RefreshTokenAsync(refreshContext, CancellationToken.None);
+            PrintToken(refreshed);
+            break;
+
+        case "seller-shops":
+        case "get-active-shops":
+            await RunSellerShopsAsync(provider, env, CancellationToken.None);
+            break;
+
+        case "authorized-shops":
+        case "get-authorized-shops":
+            await RunAuthorizedShopsAsync(provider, env, CancellationToken.None);
+            break;
+
+        case "orders-search":
+            var ordersContext = CreateSellerContext(env);
+            await SeedTokenStoreAsync(provider, env, ordersContext, CancellationToken.None);
+            await RunOrdersSearchAsync(provider, ordersContext, env, CancellationToken.None);
+            break;
+
+        case "products-search":
+            var productsContext = CreateSellerContext(env);
+            await SeedTokenStoreAsync(provider, env, productsContext, CancellationToken.None);
+            await RunProductsSearchAsync(provider, productsContext, env, CancellationToken.None);
+            break;
+
+        default:
+            Console.Error.WriteLine($"Unknown command '{command}'.");
+            PrintHelp();
+            Environment.ExitCode = 1;
+            break;
+    }
+}
+catch (Exception exception)
 {
-    case "auth-url":
-        var authApi = provider.GetRequiredService<IAuthApi>();
-        Console.WriteLine(authApi.BuildAuthorizationUrl(
-            new Uri(Require(env, "TIKTOK_SANDBOX_REDIRECT_URL")),
-            "sample-state"));
-        break;
+    Console.Error.WriteLine(exception.Message);
+    Environment.ExitCode = 1;
+}
 
-    case "exchange-code":
-        var exchangeApi = provider.GetRequiredService<IAuthApi>();
-        var token = await exchangeApi.ExchangeCodeAsync(
-            Require(env, "TIKTOK_SANDBOX_AUTH_CODE"),
-            new TikTokAuthorizationContext(
-                TikTokAccessTokenKind.Seller,
-                Require(env, "TIKTOK_SANDBOX_APP_KEY"),
-                Require(env, "TIKTOK_SANDBOX_SHOP_CIPHER")),
-            CancellationToken.None);
-        Console.WriteLine($"access_token_expires_at={token.ExpiresAtUtc:O}");
-        break;
+static ServiceProvider CreateProvider(IReadOnlyDictionary<string, string> env)
+{
+    var services = new ServiceCollection();
+    services.AddTikTokPartnerSdk(options =>
+    {
+        options.AppKey = Require(env, "TIKTOK_SANDBOX_APP_KEY");
+        options.AppSecret = Require(env, "TIKTOK_SANDBOX_APP_SECRET");
+        options.RetryBaseDelay = TimeSpan.FromMilliseconds(100);
+    });
 
-    case "get-authorized-shops":
-        var authorizationApi = provider.GetRequiredService<IAuthorizationApi>();
-        var shops = await authorizationApi.GetAuthorizedShopsAsync(
-            Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
-            new AuthorizationGetAuthorizedShopsRequest(
-                Require(env, "TIKTOK_SANDBOX_APP_KEY"),
-                0,
-                string.Empty),
-            CancellationToken.None);
-        Console.WriteLine($"code={shops.Code} request_id={shops.RequestId}");
-        break;
+    return services.BuildServiceProvider();
+}
 
-    case "get-active-shops":
-        var sellerApi = provider.GetRequiredService<ISellerApi>();
-        var activeShops = await sellerApi.GetActiveShopsAsync(
-            Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
-            new SellerGetActiveShopsRequest(
-                Require(env, "TIKTOK_SANDBOX_APP_KEY"),
-                0,
-                string.Empty),
-            CancellationToken.None);
-        Console.WriteLine($"code={activeShops.Code} request_id={activeShops.RequestId}");
-        break;
+static TikTokAuthorizationContext CreateSellerContext(IReadOnlyDictionary<string, string> env)
+    => new(
+        TikTokAccessTokenKind.Seller,
+        Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+        Require(env, "TIKTOK_SANDBOX_SHOP_CIPHER"));
 
-    default:
-        Console.Error.WriteLine($"Unknown command '{command}'.");
-        PrintHelp();
-        Environment.ExitCode = 1;
-        break;
+static async Task<TikTokTokenRecord> SeedTokenStoreAsync(
+    IServiceProvider provider,
+    IReadOnlyDictionary<string, string> env,
+    TikTokAuthorizationContext context,
+    CancellationToken cancellationToken)
+{
+    var store = provider.GetRequiredService<ITikTokTokenStore>();
+    var existing = await store.GetAsync(context, cancellationToken);
+    if (existing is not null)
+    {
+        return existing;
+    }
+
+    var accessToken = Get(env, "TIKTOK_SANDBOX_ACCESS_TOKEN");
+    if (!string.IsNullOrWhiteSpace(accessToken))
+    {
+        var token = new TikTokTokenRecord(
+            TikTokAccessTokenKind.Seller,
+            accessToken,
+            Get(env, "TIKTOK_SANDBOX_REFRESH_TOKEN"),
+            ParseDateTimeOffset(env, "TIKTOK_SANDBOX_ACCESS_TOKEN_EXPIRES_AT", DateTimeOffset.UtcNow.AddHours(1)),
+            ParseDateTimeOffset(env, "TIKTOK_SANDBOX_REFRESH_TOKEN_EXPIRES_AT", DateTimeOffset.UtcNow.AddDays(30)),
+            context.ShopCipher,
+            context.AppKey);
+        await store.StoreAsync(token, cancellationToken);
+        return token;
+    }
+
+    if (!string.IsNullOrWhiteSpace(Get(env, "TIKTOK_SANDBOX_AUTH_CODE")))
+    {
+        return await ExchangeSellerTokenAsync(provider, env, context, cancellationToken);
+    }
+
+    throw new InvalidOperationException(
+        "Token-aware commands require TIKTOK_SANDBOX_ACCESS_TOKEN or TIKTOK_SANDBOX_AUTH_CODE.");
+}
+
+static async Task<TikTokTokenRecord> ExchangeSellerTokenAsync(
+    IServiceProvider provider,
+    IReadOnlyDictionary<string, string> env,
+    TikTokAuthorizationContext context,
+    CancellationToken cancellationToken)
+{
+    var authApi = provider.GetRequiredService<IAuthApi>();
+    return await authApi.ExchangeCodeAsync(
+        Require(env, "TIKTOK_SANDBOX_AUTH_CODE"),
+        context,
+        cancellationToken);
+}
+
+static async Task RunAuthorizedShopsAsync(
+    IServiceProvider provider,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    var api = provider.GetRequiredService<IAuthorizationApi>();
+    var response = await api.GetAuthorizedShopsAsync(
+        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
+        new AuthorizationGetAuthorizedShopsRequest(
+            Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+            0,
+            string.Empty),
+        cancellationToken);
+
+    Console.WriteLine($"code={response.Code} request_id={response.RequestId} shops={response.Data.Shops.Count}");
+}
+
+static async Task RunSellerShopsAsync(
+    IServiceProvider provider,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    var api = provider.GetRequiredService<ISellerApi>();
+    var response = await api.GetActiveShopsAsync(
+        Require(env, "TIKTOK_SANDBOX_ACCESS_TOKEN"),
+        new SellerGetActiveShopsRequest(
+            Require(env, "TIKTOK_SANDBOX_APP_KEY"),
+            0,
+            string.Empty),
+        cancellationToken);
+
+    Console.WriteLine($"code={response.Code} request_id={response.RequestId} shops={response.Data.Shops.Count}");
+}
+
+static async Task RunOrdersSearchAsync(
+    IServiceProvider provider,
+    TikTokAuthorizationContext context,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    var manager = provider.GetRequiredService<IOrderManager>();
+    var page = await manager.SearchOrdersAsync(
+        context,
+        new TikTokOrderSearchRequest(
+            PageSize: ParseInt64(env, "TIKTOK_SANDBOX_PAGE_SIZE", 10),
+            OrderStatus: Get(env, "TIKTOK_SANDBOX_ORDER_STATUS"),
+            UpdateTimeGe: ParseInt64(env, "TIKTOK_SANDBOX_UPDATE_TIME_GE", 0),
+            UpdateTimeLt: ParseInt64(env, "TIKTOK_SANDBOX_UPDATE_TIME_LT", 0)),
+        cancellationToken);
+
+    Console.WriteLine($"orders={page.Items.Count} total={page.TotalCount} next_page_token={page.NextPageToken}");
+}
+
+static async Task RunProductsSearchAsync(
+    IServiceProvider provider,
+    TikTokAuthorizationContext context,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    var manager = provider.GetRequiredService<IProductManager>();
+    var page = await manager.SearchProductsAsync(
+        context,
+        new TikTokProductSearchRequest(
+            PageSize: ParseInt64(env, "TIKTOK_SANDBOX_PAGE_SIZE", 10),
+            Status: Get(env, "TIKTOK_SANDBOX_PRODUCT_STATUS")),
+        cancellationToken);
+
+    Console.WriteLine($"products={page.Items.Count} total={page.TotalCount} next_page_token={page.NextPageToken}");
+}
+
+static void PrintConfigStatus(IReadOnlyDictionary<string, string> env)
+{
+    var keys = new[]
+    {
+        "TIKTOK_SANDBOX_APP_KEY",
+        "TIKTOK_SANDBOX_APP_SECRET",
+        "TIKTOK_SANDBOX_REDIRECT_URL",
+        "TIKTOK_SANDBOX_SHOP_CIPHER",
+        "TIKTOK_SANDBOX_AUTH_CODE",
+        "TIKTOK_SANDBOX_ACCESS_TOKEN",
+        "TIKTOK_SANDBOX_REFRESH_TOKEN"
+    };
+
+    foreach (var key in keys)
+    {
+        Console.WriteLine($"{key}={(string.IsNullOrWhiteSpace(Get(env, key)) ? "missing" : "set")}");
+    }
+}
+
+static void PrintToken(TikTokTokenRecord token)
+{
+    Console.WriteLine($"access_token={Mask(token.AccessToken)}");
+    Console.WriteLine($"refresh_token={Mask(token.RefreshToken)}");
+    Console.WriteLine($"access_token_expires_at={token.ExpiresAtUtc:O}");
+    Console.WriteLine($"refresh_token_expires_at={token.RefreshTokenExpiresAtUtc:O}");
+    Console.WriteLine($"shop_cipher={token.ShopCipher}");
 }
 
 static void PrintHelp()
 {
-    Console.WriteLine("Commands: auth-url, exchange-code, get-authorized-shops, get-active-shops");
+    Console.WriteLine("TikTokPartnerSdk sample validation CLI");
+    Console.WriteLine();
+    Console.WriteLine("Commands:");
+    Console.WriteLine("  check-config        Show which sandbox variables are available");
+    Console.WriteLine("  auth-url            Build the Partner Center authorization URL");
+    Console.WriteLine("  exchange-code       Exchange TIKTOK_SANDBOX_AUTH_CODE for a seller token");
+    Console.WriteLine("  refresh-token       Refresh a seeded or exchanged seller token");
+    Console.WriteLine("  authorized-shops    Call Authorization get authorized shops with an access token");
+    Console.WriteLine("  seller-shops        Call Seller get active shops with an access token");
+    Console.WriteLine("  orders-search       Search orders through token-aware IOrderManager");
+    Console.WriteLine("  products-search     Search products through token-aware IProductManager");
 }
 
 static string Require(IReadOnlyDictionary<string, string> values, string key)
 {
-    if (values.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value))
-    {
-        return value;
-    }
-
-    throw new InvalidOperationException($"Missing required environment value '{key}'.");
+    var value = Get(values, key);
+    return !string.IsNullOrWhiteSpace(value)
+        ? value
+        : throw new InvalidOperationException($"Missing required environment value '{key}'.");
 }
+
+static string Get(IReadOnlyDictionary<string, string> values, string key, string fallback = "")
+    => values.TryGetValue(key, out var value) ? value : fallback;
+
+static long ParseInt64(IReadOnlyDictionary<string, string> values, string key, long fallback)
+    => long.TryParse(Get(values, key), out var value) ? value : fallback;
+
+static DateTimeOffset ParseDateTimeOffset(
+    IReadOnlyDictionary<string, string> values,
+    string key,
+    DateTimeOffset fallback)
+    => DateTimeOffset.TryParse(Get(values, key), out var value) ? value : fallback;
+
+static string Mask(string value)
+    => string.IsNullOrWhiteSpace(value)
+        ? string.Empty
+        : value.Length <= 8 ? "********" : $"{value[..4]}...{value[^4..]}";
 
 static Dictionary<string, string> LoadEnv()
 {

@@ -30,3 +30,12 @@ dotnet test TikTokPartnerSdk.sln
 bash scripts/verify-generated.sh
 bash scripts/verify-packages.sh /tmp/tiktok-packages
 ```
+
+## Sample Validation CLI
+
+```bash
+dotnet run --project samples/TikTokPartnerSdk.SampleConsole -- check-config
+dotnet run --project samples/TikTokPartnerSdk.SampleConsole -- auth-url
+dotnet run --project samples/TikTokPartnerSdk.SampleConsole -- orders-search
+dotnet run --project samples/TikTokPartnerSdk.SampleConsole -- products-search
+```
