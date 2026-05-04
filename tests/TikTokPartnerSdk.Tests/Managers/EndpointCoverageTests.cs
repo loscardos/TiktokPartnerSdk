@@ -21,6 +21,13 @@ public sealed class EndpointCoverageTests
     }
 
     [Fact]
+    public void Generated_interfaces_should_include_fulfillment_and_logistics()
+    {
+        typeof(IFulfillmentApi).Should().NotBeNull();
+        typeof(ILogisticsApi).Should().NotBeNull();
+    }
+
+    [Fact]
     public void Generated_endpoint_count_should_match_committed_schema_snapshots()
     {
         var schemaCount = Directory
@@ -34,6 +41,6 @@ public sealed class EndpointCoverageTests
             .Count(static method => method.Name.EndsWith("Async", StringComparison.Ordinal));
 
         generatedMethods.Should().Be(schemaCount);
-        generatedMethods.Should().BeGreaterThanOrEqualTo(74);
+        generatedMethods.Should().BeGreaterThanOrEqualTo(104);
     }
 }
