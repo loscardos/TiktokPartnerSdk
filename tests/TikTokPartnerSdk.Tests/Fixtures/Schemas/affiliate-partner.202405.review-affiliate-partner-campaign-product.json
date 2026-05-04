@@ -1,0 +1,102 @@
+{
+  "operation_id": "affiliate-partner.202405.review_affiliate_partner_campaign_product",
+  "module_name": "Affiliate partner",
+  "module_key": "affiliate-partner",
+  "path": "/affiliate_partner/202405/campaigns/{campaign_id}/products/{product_id}/review",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "campaign_id",
+      "type": "string",
+      "required": true,
+      "location": "path",
+      "children": []
+    },
+    {
+      "name": "product_id",
+      "type": "string",
+      "required": true,
+      "location": "path",
+      "children": []
+    },
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "category_asset_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "review_result",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "reject_reasons",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ]
+}

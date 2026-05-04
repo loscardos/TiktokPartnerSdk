@@ -1,0 +1,169 @@
+{
+  "operation_id": "affiliate-creator.202504.creator_generate_publisher_link",
+  "module_name": "Affiliate creator",
+  "module_key": "affiliate-creator",
+  "path": "/affiliate_creator/202504/affiliate_sharing_links/publisher/{publisher_id}/generate_batch",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "publisher_id",
+      "type": "string",
+      "required": true,
+      "location": "path",
+      "children": []
+    },
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "material",
+      "type": "object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "ids",
+          "type": "[]string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "campaign_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "link_type",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "sharing_links",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "material_id",
+              "type": "int",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "sharing_link",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "deep_link",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "one_link",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "failed_materials",
+          "type": "[]object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "material_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            },
+            {
+              "name": "fail_reason",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

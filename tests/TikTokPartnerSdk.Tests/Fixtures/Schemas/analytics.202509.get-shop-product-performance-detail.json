@@ -1,0 +1,498 @@
+{
+  "operation_id": "analytics.202509.get_shop_product_performance_detail",
+  "module_name": "Analytics",
+  "module_key": "analytics",
+  "path": "/analytics/202509/shop_products/{product_id}/performance",
+  "method": "GET",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "query",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "product_id",
+      "type": "string",
+      "required": true,
+      "location": "path",
+      "children": []
+    },
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "required": false,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "end_date_lt",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "granularity",
+      "type": "string",
+      "required": false,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "shop_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "start_date_ge",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "performance",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "intervals",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "start_date",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "end_date",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "sales",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "gmv",
+                      "type": "object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "amount",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "currency",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "orders",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "items_sold",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "breakdowns",
+                      "type": "[]object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "content_type",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "sales",
+                          "type": "object",
+                          "required": false,
+                          "location": "body",
+                          "children": [
+                            {
+                              "name": "gmv",
+                              "type": "object",
+                              "required": false,
+                              "location": "body",
+                              "children": [
+                                {
+                                  "name": "amount",
+                                  "type": "string",
+                                  "required": false,
+                                  "location": "body",
+                                  "children": []
+                                },
+                                {
+                                  "name": "currency",
+                                  "type": "string",
+                                  "required": false,
+                                  "location": "body",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "items_sold",
+                              "type": "int",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            },
+                            {
+                              "name": "avg_customers",
+                              "type": "int",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "traffic",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "breakdowns",
+                      "type": "[]object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "traffic",
+                          "type": "object",
+                          "required": false,
+                          "location": "body",
+                          "children": [
+                            {
+                              "name": "impressions",
+                              "type": "int",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            },
+                            {
+                              "name": "page_views",
+                              "type": "int",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            },
+                            {
+                              "name": "avg_unique_page_views",
+                              "type": "int",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            },
+                            {
+                              "name": "ctr",
+                              "type": "string",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            },
+                            {
+                              "name": "avg_conversion_rate",
+                              "type": "string",
+                              "required": false,
+                              "location": "body",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "content_type",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "cancel_and_refunds",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "returned",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "canceled",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "refunded",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "replacements",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "ratings",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "stars",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "count",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "percentage",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "top_contents",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "type",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "contents",
+                  "type": "[]object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "content_id",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "items_sold",
+                      "type": "int",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "gmv",
+                      "type": "object",
+                      "required": false,
+                      "location": "body",
+                      "children": [
+                        {
+                          "name": "amount",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        },
+                        {
+                          "name": "currency",
+                          "type": "string",
+                          "required": false,
+                          "location": "body",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "top_creators",
+              "type": "[]object",
+              "required": false,
+              "location": "body",
+              "children": [
+                {
+                  "name": "creator_open_id",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "creator_name",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "creator_profile",
+                  "type": "string",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                },
+                {
+                  "name": "gmv",
+                  "type": "object",
+                  "required": false,
+                  "location": "body",
+                  "children": [
+                    {
+                      "name": "amount",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    },
+                    {
+                      "name": "currency",
+                      "type": "string",
+                      "required": false,
+                      "location": "body",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "items_sold",
+                  "type": "int",
+                  "required": false,
+                  "location": "body",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "latest_available_date",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

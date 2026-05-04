@@ -1,0 +1,195 @@
+{
+  "operation_id": "affiliate-partner.202405.create_affiliate_partner_campaign",
+  "module_name": "Affiliate partner",
+  "module_key": "affiliate-partner",
+  "path": "/affiliate_partner/202405/campaigns",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "category_asset_cipher",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "campaign_start_time",
+      "type": "int",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "campaign_end_time",
+      "type": "int",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "registration_start_time",
+      "type": "int",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "registration_end_time",
+      "type": "int",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "commission_rate",
+      "type": "int",
+      "required": true,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "contact_info",
+      "type": "object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "whatsapp",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "zalo",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "viber",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "line",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "target_shop_codes",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "target_seller_types",
+      "type": "[]string",
+      "required": false,
+      "location": "body",
+      "children": []
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "campaign_id",
+          "type": "string",
+          "required": false,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

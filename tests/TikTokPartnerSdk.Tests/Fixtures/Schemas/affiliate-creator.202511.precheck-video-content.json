@@ -1,0 +1,120 @@
+{
+  "operation_id": "affiliate-creator.202511.precheck_video_content",
+  "module_name": "Affiliate creator",
+  "module_key": "affiliate-creator",
+  "path": "/affiliate_creator/202511/videos/precheck_task",
+  "method": "POST",
+  "auth_scope": "seller",
+  "access_token_kind": "seller",
+  "request_content_kind": "body",
+  "required_headers": [
+    "x-tts-access-token",
+    "content-type"
+  ],
+  "request_parameters": [
+    {
+      "name": "app_key",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "timestamp",
+      "type": "int",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "sign",
+      "type": "string",
+      "required": true,
+      "location": "query",
+      "children": []
+    },
+    {
+      "name": "video_info",
+      "type": "object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "file_id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "product_link_info",
+      "type": "object",
+      "required": true,
+      "location": "body",
+      "children": [
+        {
+          "name": "product_id",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "location": "body",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "response_parameters": [
+    {
+      "name": "code",
+      "type": "int",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false,
+      "location": "body",
+      "children": []
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "location": "body",
+      "children": [
+        {
+          "name": "precheck",
+          "type": "object",
+          "required": false,
+          "location": "body",
+          "children": [
+            {
+              "name": "task_id",
+              "type": "string",
+              "required": false,
+              "location": "body",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
