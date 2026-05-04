@@ -7,6 +7,7 @@ using TikTokPartnerSdk.Generated.Fulfillment;
 using TikTokPartnerSdk.Generated.Logistics;
 using TikTokPartnerSdk.Generated.Order;
 using TikTokPartnerSdk.Generated.Product;
+using TikTokPartnerSdk.Generated.ReturnAndRefund;
 using TikTokPartnerSdk.Generated.Seller;
 
 namespace TikTokPartnerSdk.Tests.Managers;
@@ -402,6 +403,72 @@ public sealed class GeneratedManagerRuntimeTests
         providersClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
         providersClient.LastRequest.Query.Should().ContainKey("buyer_region").WhoseValue.Should().Be("ID");
         providersClient.LastRequest.Query.Should().ContainKey("warehouse_region").WhoseValue.Should().Be("ID");
+    }
+
+    [Fact]
+    public async Task Return_refund_api_should_send_core_aftersale_paths()
+    {
+        var recordsClient = new RecordingClient();
+        var recordsApi = new ReturnAndRefundApi(recordsClient);
+
+        await recordsApi.GetReturnRecordsAsync(
+            "seller-token",
+            new ReturnAndRefundGetReturnRecordsRequest("return-1", "app-key", 1, "sign", "en", "shop-cipher"),
+            CancellationToken.None);
+
+        recordsClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        recordsClient.LastRequest.Path.Should().Be("/return_refund/202309/returns/return-1/records");
+        recordsClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        recordsClient.LastRequest.Query.Should().ContainKey("locale").WhoseValue.Should().Be("en");
+
+        var approveClient = new RecordingClient();
+        var approveApi = new ReturnAndRefundApi(approveClient);
+
+        await approveApi.ApproveReturnAsync(
+            "seller-token",
+            new ReturnAndRefundApproveReturnRequest(
+                "return-1",
+                "app-key",
+                1,
+                "sign",
+                "idempotency-1",
+                "shop-cipher",
+                "APPROVE",
+                false,
+                new ReturnAndRefundApproveReturnRequestPartialRefund("IDR", "1000")),
+            CancellationToken.None);
+
+        approveClient.LastRequest!.Method.Should().Be(HttpMethod.Post);
+        approveClient.LastRequest.Path.Should().Be("/return_refund/202309/returns/return-1/approve");
+        approveClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        approveClient.LastRequest.Query.Should().ContainKey("idempotency_key").WhoseValue.Should().Be("idempotency-1");
+        approveClient.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
+        {
+            ["decision"] = "APPROVE",
+            ["buyer_keep_item"] = false,
+            ["partial_refund"] = new ReturnAndRefundApproveReturnRequestPartialRefund("IDR", "1000")
+        });
+
+        var eligibilityClient = new RecordingClient();
+        var eligibilityApi = new ReturnAndRefundApi(eligibilityClient);
+
+        await eligibilityApi.GetAftersaleEligibilityAsync(
+            "seller-token",
+            new ReturnAndRefundGetAftersaleEligibilityRequest(
+                "order-1",
+                "app-key",
+                1,
+                "sign",
+                "SELLER",
+                ["REFUND", "RETURN_AND_REFUND"],
+                "shop-cipher"),
+            CancellationToken.None);
+
+        eligibilityClient.LastRequest!.Method.Should().Be(HttpMethod.Get);
+        eligibilityClient.LastRequest.Path.Should().Be("/return_refund/202602/orders/order-1/aftersale_eligibility");
+        eligibilityClient.LastRequest.Query.Should().ContainKey("shop_cipher").WhoseValue.Should().Be("shop-cipher");
+        eligibilityClient.LastRequest.Query.Should().ContainKey("initiate_aftersale_user").WhoseValue.Should().Be("SELLER");
+        eligibilityClient.LastRequest.Query.Should().ContainKey("request_types");
     }
 
     private sealed class RecordingClient(object response) : ITikTokPartnerClient
