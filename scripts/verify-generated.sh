@@ -11,6 +11,7 @@ dotnet run --project "$root/src/TikTokPartnerSdk.Generator" -- generate \
 
 diff -ru \
   --exclude 'Common' \
+  --exclude 'Webhooks' \
   --exclude '*.csproj' \
   --exclude 'bin' \
   --exclude 'obj' \
