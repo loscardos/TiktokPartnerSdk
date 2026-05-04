@@ -6,12 +6,14 @@ using TikTokPartnerSdk.Abstractions.Http;
 using TikTokPartnerSdk.Abstractions.Managers;
 using TikTokPartnerSdk.Abstractions.Managers.Generated;
 using TikTokPartnerSdk.Abstractions.RateLimiting;
+using TikTokPartnerSdk.Abstractions.Webhooks;
 using TikTokPartnerSdk.Core.Auth;
 using TikTokPartnerSdk.Core.Crypto;
 using TikTokPartnerSdk.Core.Http;
 using TikTokPartnerSdk.Core.Managers;
 using TikTokPartnerSdk.Core.Managers.Generated;
 using TikTokPartnerSdk.Core.RateLimiting;
+using TikTokPartnerSdk.Core.Webhooks;
 
 namespace TikTokPartnerSdk.Extensions.DependencyInjection;
 
@@ -22,10 +24,15 @@ public static class TikTokServiceCollectionExtensions
         Action<TikTokPartnerOptions> configure)
     {
         services.Configure(configure);
+        services.Configure<TikTokWebhookOptions>(_ => { });
         services.AddSingleton<TikTokRequestSigner>();
         services.AddSingleton<TikTokRequestUriBuilder>();
         services.AddSingleton<TikTokRequestContentFactory>();
         services.AddSingleton<TikTokResponseParser>();
+        services.AddSingleton<ITikTokWebhookSignatureVerifier, TikTokWebhookSignatureVerifier>();
+        services.AddSingleton<TikTokWebhookTimestampValidator>();
+        services.AddSingleton<ITikTokWebhookIdempotencyKeyFactory, TikTokWebhookIdempotencyKeyFactory>();
+        services.AddSingleton<ITikTokWebhookParser, TikTokWebhookParser>();
         services.AddSingleton<NoopTikTokRateLimiter>();
         services.AddSingleton<FixedWindowTikTokRateLimiter>();
         services.AddSingleton<ITikTokRateLimiter>(provider =>
