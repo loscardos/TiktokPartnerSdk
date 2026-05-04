@@ -91,6 +91,12 @@ try
             await RunReadonlySmokeAsync(provider, readonlyContext, readonlyToken, env, CancellationToken.None);
             break;
 
+        case "certify-readonly":
+            var certificationContext = CreateSellerContext(env);
+            var certificationToken = await SeedTokenStoreAsync(provider, env, certificationContext, CancellationToken.None);
+            await RunReadonlyCertificationAsync(provider, certificationContext, certificationToken, env, CancellationToken.None);
+            break;
+
         default:
             Console.Error.WriteLine($"Unknown command '{command}'.");
             PrintHelp();
@@ -463,6 +469,160 @@ static async Task RunReadonlySmokeAsync(
     }
 }
 
+static async Task RunReadonlyCertificationAsync(
+    IServiceProvider provider,
+    TikTokAuthorizationContext context,
+    TikTokTokenRecord token,
+    IReadOnlyDictionary<string, string> env,
+    CancellationToken cancellationToken)
+{
+    var appKey = context.AppKey;
+    var shopCipher = RequireShopCipher(context);
+    var pageSize = ParseInt64(env, "TIKTOK_SANDBOX_PAGE_SIZE", 10);
+    var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+    var from = now - (long)TimeSpan.FromDays(ParseInt64(env, "TIKTOK_SANDBOX_LOOKBACK_DAYS", 30)).TotalSeconds;
+    var locale = Get(env, "TIKTOK_SANDBOX_LOCALE", "en-US");
+
+    var results = new List<CertificationResult>
+    {
+        await RunCertificationStepAsync("Authorization", "GET /authorization/202309/shops", async () =>
+        {
+            var api = provider.GetRequiredService<IAuthorizationApi>();
+            var response = await api.GetAuthorizedShopsAsync(token.AccessToken, new AuthorizationGetAuthorizedShopsRequest(appKey, 0, string.Empty), cancellationToken);
+            return $"shops={response.Data.Shops?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Seller", "GET /seller/202309/shops", async () =>
+        {
+            var api = provider.GetRequiredService<ISellerApi>();
+            var response = await api.GetActiveShopsAsync(token.AccessToken, new SellerGetActiveShopsRequest(appKey, 0, string.Empty), cancellationToken);
+            return $"shops={response.Data.Shops?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Seller", "GET /seller/202309/permissions", async () =>
+        {
+            var api = provider.GetRequiredService<ISellerApi>();
+            var response = await api.GetSellerPermissionsAsync(token.AccessToken, new SellerGetSellerPermissionsRequest(appKey, 0, string.Empty), cancellationToken);
+            return $"permissions={response.Data.Permissions?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Event", "GET /event/202309/webhooks", async () =>
+        {
+            var api = provider.GetRequiredService<IEventApi>();
+            var response = await api.GetShopWebhooksAsync(token.AccessToken, new EventGetShopWebhooksRequest(appKey, 0, string.Empty, shopCipher), cancellationToken);
+            return $"webhooks={response.Data.Webhooks?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Order", "POST /order/202309/orders/search", async () =>
+        {
+            var manager = provider.GetRequiredService<IOrderManager>();
+            var page = await manager.SearchOrdersAsync(context, new TikTokOrderSearchRequest(PageSize: pageSize, UpdateTimeGe: from, UpdateTimeLt: now), cancellationToken);
+            return $"orders={page.Items.Count}; total={page.TotalCount}; next_page_token={page.NextPageToken}";
+        }),
+        await RunCertificationStepAsync("Product", "POST /product/202502/products/search", async () =>
+        {
+            var manager = provider.GetRequiredService<IProductManager>();
+            var page = await manager.SearchProductsAsync(context, new TikTokProductSearchRequest(PageSize: pageSize, UpdateTimeGe: from, UpdateTimeLe: now), cancellationToken);
+            return $"products={page.Items.Count}; total={page.TotalCount}; next_page_token={page.NextPageToken}";
+        }),
+        await RunCertificationStepAsync("Logistics", "GET /logistics/202309/warehouses", async () =>
+        {
+            var api = provider.GetRequiredService<ILogisticsApi>();
+            var response = await api.GetWarehouseListAsync(token.AccessToken, new LogisticsGetWarehouseListRequest(appKey, 0, string.Empty, shopCipher), cancellationToken);
+            return $"warehouses={response.Data.Warehouses?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Logistics", "GET /logistics/202309/global_warehouses", async () =>
+        {
+            var api = provider.GetRequiredService<ILogisticsApi>();
+            var response = await api.GetGlobalSellerWarehouseAsync(token.AccessToken, new LogisticsGetGlobalSellerWarehouseRequest(appKey, 0, string.Empty), cancellationToken);
+            return $"global_warehouses={response.Data.GlobalWarehouses?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Fulfillment", "POST /fulfillment/202309/packages/search", async () =>
+        {
+            var api = provider.GetRequiredService<IFulfillmentApi>();
+            var response = await api.SearchPackageAsync(token.AccessToken, new FulfillmentSearchPackageRequest(appKey, 0, string.Empty, pageSize, string.Empty, shopCipher, "update_time", "DESC", from, now, from, now, null!), cancellationToken);
+            return $"packages={response.Data.Packages?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("ReturnAndRefund", "POST /return_refund/202602/cancellations/search", async () =>
+        {
+            var api = provider.GetRequiredService<IReturnAndRefundApi>();
+            var response = await api.SearchCancellationsAsync(token.AccessToken, new ReturnAndRefundSearchCancellationsRequest(appKey, 0, string.Empty, pageSize.ToString(System.Globalization.CultureInfo.InvariantCulture), string.Empty, shopCipher, "update_time", "DESC", Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), from, now, from, now, locale), cancellationToken);
+            return $"cancellations={response.Data.Cancellations?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("ReturnAndRefund", "POST /return_refund/202602/returns/search", async () =>
+        {
+            var api = provider.GetRequiredService<IReturnAndRefundApi>();
+            var response = await api.SearchReturnsAsync(token.AccessToken, new ReturnAndRefundSearchReturnsRequest(appKey, 0, string.Empty, pageSize.ToString(System.Globalization.CultureInfo.InvariantCulture), string.Empty, shopCipher, "update_time", "DESC", Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), from, Array.Empty<string>(), from, now, locale, now), cancellationToken);
+            return $"returns={response.Data.ReturnOrders?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Finance", "GET /finance/202309/payments", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetPaymentsAsync(token.AccessToken, new FinanceGetPaymentsRequest(appKey, 0, string.Empty, from, now, pageSize, string.Empty, shopCipher, "create_time", "DESC"), cancellationToken);
+            return $"payments={response.Data.Payments?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Finance", "GET /finance/202309/statements", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetStatementsAsync(token.AccessToken, new FinanceGetStatementsRequest(appKey, 0, string.Empty, pageSize, string.Empty, null!, shopCipher, "statement_time", "DESC", from, now), cancellationToken);
+            return $"statements={response.Data.Statements?.Count ?? 0}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Finance", "GET /finance/202309/withdrawals", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetWithdrawalsAsync(token.AccessToken, new FinanceGetWithdrawalsRequest(appKey, 0, string.Empty, from, now, pageSize, string.Empty, shopCipher, ["WITHDRAW", "SETTLE"]), cancellationToken);
+            return $"withdrawals={response.Data.Withdrawals?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
+        }),
+        await RunCertificationStepAsync("Finance", "GET /finance/202507/transactions/unsettled", async () =>
+        {
+            var api = provider.GetRequiredService<IFinanceApi>();
+            var response = await api.GetUnsettledTransactionsAsync(token.AccessToken, new FinanceGetUnsettledTransactionsRequest(appKey, 0, string.Empty, pageSize, string.Empty, from, now, shopCipher, "order_create_time", "DESC"), cancellationToken);
+            return $"transactions={response.Data.Transactions?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
+        })
+    };
+
+    results.AddRange([
+        new("Order", "GET /order/202507/orders/{order_id}", CertificationStatus.SkipNoData, "Needs order_id from a non-empty order search result."),
+        new("Product", "GET /product/202309/products/{product_id}", CertificationStatus.SkipNoData, "Needs product_id from a non-empty product search result."),
+        new("Fulfillment", "GET /fulfillment/202309/packages/{package_id}", CertificationStatus.SkipNoData, "Needs package_id from a non-empty package search result."),
+        new("ReturnAndRefund", "GET /return_refund/202309/returns/{return_id}/records", CertificationStatus.SkipNoData, "Needs return_id from a non-empty return search result."),
+        new("Tools", "POST /file/202512/upload/init", CertificationStatus.SkipMutationNeedsFixture, "Upload flow needs a controlled file fixture."),
+        new("Mutation", "create/update/delete/approve/reject/ship/cancel endpoints", CertificationStatus.SkipMutationNeedsFixture, "Write certification needs dedicated sandbox fixtures and explicit opt-in.")
+    ]);
+
+    CertificationReport.WriteMarkdown(CertificationReport.DefaultPath, results);
+    Console.WriteLine($"certification_report={CertificationReport.DefaultPath}");
+    PrintCertificationSummary(results);
+
+    if (results.Any(static result => result.Status == CertificationStatus.Fail))
+    {
+        Environment.ExitCode = 1;
+    }
+}
+
+static async Task<CertificationResult> RunCertificationStepAsync(
+    string area,
+    string endpoint,
+    Func<Task<string>> action)
+{
+    Console.WriteLine($"== {area}: {endpoint} ==");
+    try
+    {
+        var detail = await action();
+        Console.WriteLine($"PASS {endpoint}: {detail}");
+        return new CertificationResult(area, endpoint, CertificationStatus.Pass, detail);
+    }
+    catch (Exception exception)
+    {
+        Console.WriteLine($"FAIL {endpoint}: {exception.Message}");
+        return new CertificationResult(area, endpoint, CertificationStatus.Fail, exception.Message);
+    }
+}
+
+static void PrintCertificationSummary(IReadOnlyList<CertificationResult> results)
+{
+    foreach (var group in results.GroupBy(static result => result.Status).OrderBy(static group => group.Key.ToString()))
+    {
+        Console.WriteLine($"{group.Key}={group.Count()}");
+    }
+}
+
 static async Task<bool> RunSmokeStepAsync(string name, Func<Task> action)
 {
     Console.WriteLine($"== {name} ==");
@@ -541,6 +701,7 @@ static void PrintHelp()
     Console.WriteLine("  products-search     Search products through token-aware IProductManager");
     Console.WriteLine("  smoke               Run direct read-only validation: shops, orders, products");
     Console.WriteLine("  smoke-readonly      Run broader read-only validation across seller, event, logistics, fulfillment, returns, finance");
+    Console.WriteLine("  certify-readonly    Run readonly certification and write .tmp/tiktok-readonly-certification.md");
 }
 
 static string Require(IReadOnlyDictionary<string, string> values, string key)
