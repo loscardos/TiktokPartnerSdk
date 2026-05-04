@@ -7,28 +7,44 @@ public static class TikTokSandboxEnvironment
     public static TikTokSandboxConfiguration? TryLoad()
     {
         var values = LoadValues();
+        var runSandbox = values.TryGetValue("TIKTOK_RUN_SANDBOX", out var enabled)
+            && enabled.Equals("true", StringComparison.OrdinalIgnoreCase);
 
-        if (!values.TryGetValue("TIKTOK_SANDBOX_APP_KEY", out var appKey)
-            || string.IsNullOrWhiteSpace(appKey)
-            || !values.TryGetValue("TIKTOK_SANDBOX_APP_SECRET", out var appSecret)
-            || string.IsNullOrWhiteSpace(appSecret)
-            || !values.TryGetValue("TIKTOK_SANDBOX_REDIRECT_URL", out var redirectUrl)
-            || string.IsNullOrWhiteSpace(redirectUrl))
+        string Get(string key) => values.TryGetValue(key, out var value) ? value : string.Empty;
+
+        var configuration = new TikTokSandboxConfiguration
         {
-            return null;
+            RunSandbox = runSandbox,
+            AppKey = Get("TIKTOK_SANDBOX_APP_KEY"),
+            AppSecret = Get("TIKTOK_SANDBOX_APP_SECRET"),
+            RedirectUrl = Get("TIKTOK_SANDBOX_REDIRECT_URL"),
+            AuthCode = Get("TIKTOK_SANDBOX_AUTH_CODE"),
+            ShopCipher = Get("TIKTOK_SANDBOX_SHOP_CIPHER"),
+            PartnerAccessToken = Get("TIKTOK_SANDBOX_PARTNER_ACCESS_TOKEN")
+        };
+
+        if (!runSandbox)
+        {
+            return configuration;
         }
 
-        values.TryGetValue("TIKTOK_SANDBOX_AUTH_CODE", out var authCode);
-        values.TryGetValue("TIKTOK_SANDBOX_SHOP_CIPHER", out var shopCipher);
-
-        return new TikTokSandboxConfiguration
+        var missing = new[]
         {
-            AppKey = appKey,
-            AppSecret = appSecret,
-            RedirectUrl = redirectUrl,
-            AuthCode = authCode ?? string.Empty,
-            ShopCipher = shopCipher ?? string.Empty
-        };
+            ("TIKTOK_SANDBOX_APP_KEY", configuration.AppKey),
+            ("TIKTOK_SANDBOX_APP_SECRET", configuration.AppSecret),
+            ("TIKTOK_SANDBOX_REDIRECT_URL", configuration.RedirectUrl)
+        }
+            .Where(static item => string.IsNullOrWhiteSpace(item.Item2))
+            .Select(static item => item.Item1)
+            .ToArray();
+
+        if (missing.Length > 0)
+        {
+            throw new InvalidOperationException(
+                "Missing required TikTok sandbox variables: " + string.Join(", ", missing));
+        }
+
+        return configuration;
     }
 
     private static Dictionary<string, string> LoadValues()

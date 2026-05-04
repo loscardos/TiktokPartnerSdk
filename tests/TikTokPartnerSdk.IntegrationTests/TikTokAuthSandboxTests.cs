@@ -6,22 +6,11 @@ namespace TikTokPartnerSdk.IntegrationTests;
 
 public sealed class TikTokAuthSandboxTests
 {
-    [Fact]
-    public void Sandbox_environment_loader_should_require_app_key_secret_and_redirect()
-    {
-        var configuration = TikTokSandboxEnvironment.TryLoad();
-
-        Assert.NotNull(configuration);
-    }
-
-    [Fact]
+    [TikTokSandboxFact]
     public void BuildAuthorizationUrl_should_use_sandbox_credentials()
     {
-        var configuration = TikTokSandboxEnvironment.TryLoad();
-        if (configuration is null)
-        {
-            return;
-        }
+        var configuration = TikTokSandboxEnvironment.TryLoad()
+            ?? throw new InvalidOperationException("TikTok sandbox configuration could not be loaded.");
 
         var services = new ServiceCollection();
         services.AddTikTokPartnerSdk(options =>
