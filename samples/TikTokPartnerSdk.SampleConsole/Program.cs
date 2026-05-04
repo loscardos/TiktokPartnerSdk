@@ -28,6 +28,18 @@ try
         return;
     }
 
+    if (command == "certify-matrix")
+    {
+        RunEndpointCertificationMatrix();
+        return;
+    }
+
+    if (command == "certify-write")
+    {
+        RunWriteCertification(args);
+        return;
+    }
+
     using var provider = CreateProvider(env);
 
     switch (command)
@@ -569,7 +581,7 @@ static async Task RunReadonlyCertificationAsync(
             var response = await api.GetWithdrawalsAsync(token.AccessToken, new FinanceGetWithdrawalsRequest(appKey, 0, string.Empty, from, now, pageSize, string.Empty, shopCipher, ["WITHDRAW", "SETTLE"]), cancellationToken);
             return $"withdrawals={response.Data.Withdrawals?.Count ?? 0}; total={response.Data.TotalCount}; request_id={response.RequestId}";
         }),
-        await RunCertificationStepAsync("Finance", "GET /finance/202507/transactions/unsettled", async () =>
+        await RunCertificationStepAsync("Finance", "GET /finance/202507/orders/unsettled", async () =>
         {
             var api = provider.GetRequiredService<IFinanceApi>();
             var response = await api.GetUnsettledTransactionsAsync(token.AccessToken, new FinanceGetUnsettledTransactionsRequest(appKey, 0, string.Empty, pageSize, string.Empty, from, now, shopCipher, "order_create_time", "DESC"), cancellationToken);
@@ -596,6 +608,50 @@ static async Task RunReadonlyCertificationAsync(
     }
 }
 
+static void RunEndpointCertificationMatrix()
+{
+    var endpoints = GeneratedEndpointInventory.ReadFromDirectory(GeneratedEndpointInventory.DefaultGeneratedManagersDirectory);
+    var rows = EndpointCertificationMatrix.Create(endpoints, ReadonlyCertificationCatalog.CertifiedEndpoints);
+    EndpointCertificationMatrix.WriteMarkdown(EndpointCertificationMatrix.DefaultPath, rows);
+    Console.WriteLine($"endpoint_matrix={EndpointCertificationMatrix.DefaultPath}");
+    PrintEndpointMatrixSummary(rows);
+}
+
+static void RunWriteCertification(string[] args)
+{
+    if (!args.Contains("--i-understand-this-mutates-state", StringComparer.Ordinal))
+    {
+        Console.Error.WriteLine("certify-write requires --i-understand-this-mutates-state.");
+        Console.Error.WriteLine("The command will not run write/mutation certification without explicit opt-in.");
+        Environment.ExitCode = 1;
+        return;
+    }
+
+    var endpoints = GeneratedEndpointInventory.ReadFromDirectory(GeneratedEndpointInventory.DefaultGeneratedManagersDirectory);
+    var rows = EndpointCertificationMatrix.Create(endpoints, ReadonlyCertificationCatalog.CertifiedEndpoints)
+        .Where(static row => row.Classification == EndpointClassification.Mutation)
+        .Select(static row => row with
+        {
+            Status = EndpointCertificationStatus.MutationNeedsFixture,
+            RequiresFixture = true,
+            Detail = "write endpoint skipped until a domain-specific sandbox fixture is configured"
+        })
+        .ToArray();
+
+    var path = Path.GetFullPath(Path.Combine(
+        AppContext.BaseDirectory,
+        "..",
+        "..",
+        "..",
+        "..",
+        "..",
+        ".tmp",
+        "tiktok-write-certification.md"));
+    EndpointCertificationMatrix.WriteMarkdown(path, rows);
+    Console.WriteLine($"write_certification_report={path}");
+    PrintEndpointMatrixSummary(rows);
+}
+
 static async Task<CertificationResult> RunCertificationStepAsync(
     string area,
     string endpoint,
@@ -618,6 +674,14 @@ static async Task<CertificationResult> RunCertificationStepAsync(
 static void PrintCertificationSummary(IReadOnlyList<CertificationResult> results)
 {
     foreach (var group in results.GroupBy(static result => result.Status).OrderBy(static group => group.Key.ToString()))
+    {
+        Console.WriteLine($"{group.Key}={group.Count()}");
+    }
+}
+
+static void PrintEndpointMatrixSummary(IReadOnlyList<EndpointCertificationRow> rows)
+{
+    foreach (var group in rows.GroupBy(static row => row.Status).OrderBy(static group => group.Key.ToString()))
     {
         Console.WriteLine($"{group.Key}={group.Count()}");
     }
@@ -702,6 +766,8 @@ static void PrintHelp()
     Console.WriteLine("  smoke               Run direct read-only validation: shops, orders, products");
     Console.WriteLine("  smoke-readonly      Run broader read-only validation across seller, event, logistics, fulfillment, returns, finance");
     Console.WriteLine("  certify-readonly    Run readonly certification and write .tmp/tiktok-readonly-certification.md");
+    Console.WriteLine("  certify-matrix      Write .tmp/tiktok-endpoint-certification-matrix.md for all generated endpoints");
+    Console.WriteLine("  certify-write       Write mutation certification report; requires --i-understand-this-mutates-state");
 }
 
 static string Require(IReadOnlyDictionary<string, string> values, string key)

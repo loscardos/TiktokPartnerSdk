@@ -18,3 +18,5 @@ jobs:
       - run: dotnet build TikTokPartnerSdk.sln --no-restore -c Release
       - run: dotnet test TikTokPartnerSdk.sln --no-build -c Release
       - run: bash scripts/verify-generated.sh
+      - run: dotnet run --project samples/TikTokPartnerSdk.SampleConsole -- certify-matrix
+      - run: bash scripts/verify-packages.sh

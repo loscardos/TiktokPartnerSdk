@@ -13,6 +13,10 @@ jobs:
       TIKTOK_SANDBOX_REDIRECT_URL: ${{ secrets.TIKTOK_SANDBOX_REDIRECT_URL }}
       TIKTOK_SANDBOX_AUTH_CODE: ${{ secrets.TIKTOK_SANDBOX_AUTH_CODE }}
       TIKTOK_SANDBOX_SHOP_CIPHER: ${{ secrets.TIKTOK_SANDBOX_SHOP_CIPHER }}
+      TIKTOK_SANDBOX_ACCESS_TOKEN: ${{ secrets.TIKTOK_SANDBOX_ACCESS_TOKEN }}
+      TIKTOK_SANDBOX_REFRESH_TOKEN: ${{ secrets.TIKTOK_SANDBOX_REFRESH_TOKEN }}
+      TIKTOK_SANDBOX_ACCESS_TOKEN_EXPIRES_AT: ${{ secrets.TIKTOK_SANDBOX_ACCESS_TOKEN_EXPIRES_AT }}
+      TIKTOK_SANDBOX_REFRESH_TOKEN_EXPIRES_AT: ${{ secrets.TIKTOK_SANDBOX_REFRESH_TOKEN_EXPIRES_AT }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -20,3 +24,9 @@ jobs:
           dotnet-version: '8.0.x'
       - run: dotnet restore TikTokPartnerSdk.sln
       - run: dotnet test tests/TikTokPartnerSdk.IntegrationTests/TikTokPartnerSdk.IntegrationTests.csproj -c Release
+      - run: dotnet run --project samples/TikTokPartnerSdk.SampleConsole -- certify-readonly
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tiktok-readonly-certification
+          path: .tmp/tiktok-readonly-certification.md
