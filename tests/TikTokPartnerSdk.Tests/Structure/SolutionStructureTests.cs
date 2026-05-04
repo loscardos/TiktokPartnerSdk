@@ -36,6 +36,8 @@ public sealed class SolutionStructureTests
         workflow.Should().Contain("workflow_dispatch");
         workflow.Should().Contain("TIKTOK_RUN_SANDBOX: true");
         workflow.Should().Contain("TIKTOK_SANDBOX_APP_KEY");
+        workflow.Should().Contain("TIKTOK_SANDBOX_REDIRECT_URL");
+        workflow.Should().NotContain("TIKTOK_SANDBOX_REDIRECT_URI");
         workflow.Should().Contain("tests/TikTokPartnerSdk.IntegrationTests");
     }
 

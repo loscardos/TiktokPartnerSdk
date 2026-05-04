@@ -6,7 +6,7 @@
     <Description>ASP.NET-friendly TikTok Shop Partner SDK for .NET.</Description>
     <PackageTags>tiktok;tiktok-shop;partner-sdk;ecommerce</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://example.invalid/internal/tiktokpartnersdk</RepositoryUrl>
+    <RepositoryUrl>https://github.com/loscardos/tiktokpartnersdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

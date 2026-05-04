@@ -14,6 +14,7 @@ public sealed class PackageMetadataTests
         xml.Should().Contain("<Authors>");
         xml.Should().Contain("<PackageLicenseExpression>");
         xml.Should().Contain("<RepositoryUrl>");
+        xml.Should().NotContain("example.invalid");
         xml.Should().Contain("<PackageReadmeFile>");
         xml.Should().Contain("<GenerateDocumentationFile>true</GenerateDocumentationFile>");
     }
