@@ -12,11 +12,14 @@ public sealed class PackageMetadataTests
         var xml = props.ToString();
 
         xml.Should().Contain("<Authors>");
+        xml.Should().Contain("<Company>Loscardos</Company>");
+        xml.Should().Contain("<PackageId>Loscardos.$(MSBuildProjectName)</PackageId>");
         xml.Should().Contain("<PackageLicenseExpression>");
         xml.Should().Contain("<RepositoryUrl>");
         xml.Should().NotContain("example.invalid");
         xml.Should().Contain("<PackageReadmeFile>");
         xml.Should().Contain("<GenerateDocumentationFile>true</GenerateDocumentationFile>");
+        xml.Should().Contain("<Version>0.1.0-preview</Version>");
     }
 
     [Fact]

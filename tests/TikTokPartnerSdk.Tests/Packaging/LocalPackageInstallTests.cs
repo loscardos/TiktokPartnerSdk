@@ -11,6 +11,7 @@ public sealed class LocalPackageInstallTests
         var verifyScript = File.ReadAllText(Path.Combine(TestPaths.RepositoryRoot, "scripts", "verify-packages.sh"));
 
         packScript.Should().Contain("dotnet pack");
+        verifyScript.Should().Contain("Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection");
         verifyScript.Should().Contain("dotnet add");
         verifyScript.Should().Contain("dotnet build");
         verifyScript.Should().Contain("pack-local.sh");

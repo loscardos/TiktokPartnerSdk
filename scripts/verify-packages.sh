@@ -4,7 +4,7 @@ set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 output_dir="${1:-$root/artifacts/packages}"
 consumer_dir="${2:-$root/.tmp/package-consumer}"
-version="${3:-$(sed -n 's:.*<VersionPrefix>\(.*\)</VersionPrefix>.*:\1:p' "$root/Directory.Build.props" | head -n 1)}"
+version="${3:-$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' "$root/Directory.Build.props" | head -n 1)}"
 
 if [[ -z "$version" ]]; then
   echo "Unable to determine package version from Directory.Build.props" >&2
@@ -30,7 +30,7 @@ cat > "$consumer_dir/NuGet.config" <<EOF
 </configuration>
 EOF
 
-dotnet add "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" package TikTokPartnerSdk.Extensions.DependencyInjection --version "$version" --no-restore
+dotnet add "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" package Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection --version "$version" --no-restore
 dotnet restore "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" --configfile "$consumer_dir/NuGet.config"
 dotnet build "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" --no-restore
 
