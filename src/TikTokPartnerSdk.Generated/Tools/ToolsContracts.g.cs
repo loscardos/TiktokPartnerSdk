@@ -7,7 +7,9 @@ public sealed record ToolsUploadFileInitRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_asset_cipher")] string CategoryAssetCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("file_name")] string FileName,
     [property: JsonPropertyName("file_type")] string FileType,

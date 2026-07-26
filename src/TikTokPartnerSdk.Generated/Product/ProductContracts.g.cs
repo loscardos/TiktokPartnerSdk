@@ -9,6 +9,7 @@ public sealed record ProductActivateProductRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms);
 
 
@@ -39,61 +40,102 @@ public sealed record ProductCheckProductListingRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_diagnosis_required")] bool IsDiagnosisRequired,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("description")] string Description,
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductCheckProductListingRequestMainImages> MainImages,
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductCheckProductListingRequestSkus> Skus,
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductCheckProductListingRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_weight")] ProductCheckProductListingRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductCheckProductListingRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductCheckProductListingRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductCheckProductListingRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_product_id")] string ExternalProductId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("delivery_option_ids")] IReadOnlyList<string> DeliveryOptionIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductCheckProductListingRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("primary_combined_product_id")] string PrimaryCombinedProductId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_insurance_requirement")] string ShippingInsuranceRequirement,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_pre_owned")] bool IsPreOwned,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("minimum_order_quantity")] long MinimumOrderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_template_id")] string ShippingTemplateId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("option")] ProductCheckProductListingRequestOption Option,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("scheduled_sale")] ProductCheckProductListingRequestScheduledSale ScheduledSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("key_product_features")] IReadOnlyList<string> KeyProductFeatures);
 
 public sealed record ProductCheckProductListingRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductCheckProductListingRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductCheckProductListingRequestSkusSalesAttributes> SalesAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductCheckProductListingRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_sku_id")] string ExternalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductCheckProductListingRequestSkusIdentifierCode IdentifierCode,
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductCheckProductListingRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("combined_skus")] IReadOnlyList<ProductCheckProductListingRequestSkusCombinedSkus> CombinedSkus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_urls")] IReadOnlyList<string> ExternalUrls,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("pre_sale")] ProductCheckProductListingRequestSkusPreSale PreSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("list_price")] ProductCheckProductListingRequestSkusListPrice ListPrice,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_list_prices")] IReadOnlyList<ProductCheckProductListingRequestSkusExternalListPrices> ExternalListPrices,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fees")] IReadOnlyList<ProductCheckProductListingRequestSkusFees> Fees);
 
 public sealed record ProductCheckProductListingRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductCheckProductListingRequestSkusSalesAttributesSkuImg SkuImg,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("supplementary_sku_images")] IReadOnlyList<ProductCheckProductListingRequestSkusSalesAttributesSupplementarySkuImages> SupplementarySkuImages);
 
 public sealed record ProductCheckProductListingRequestSkusSalesAttributesSkuImg(
@@ -103,18 +145,25 @@ public sealed record ProductCheckProductListingRequestSkusSalesAttributesSupplem
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductCheckProductListingRequestSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductCheckProductListingRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductCheckProductListingRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_time")] long HandlingTime);
 
 public sealed record ProductCheckProductListingRequestSkusCombinedSkus(
@@ -123,11 +172,15 @@ public sealed record ProductCheckProductListingRequestSkusCombinedSkus(
     [property: JsonPropertyName("sku_count")] long SkuCount);
 
 public sealed record ProductCheckProductListingRequestSkusPreSale(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fulfillment_type")] ProductCheckProductListingRequestSkusPreSaleFulfillmentType FulfillmentType);
 
 public sealed record ProductCheckProductListingRequestSkusPreSaleFulfillmentType(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("release_date")] long ReleaseDate);
 
 public sealed record ProductCheckProductListingRequestSkusListPrice(
@@ -140,14 +193,20 @@ public sealed record ProductCheckProductListingRequestSkusExternalListPrices(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductCheckProductListingRequestSkusFees(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("additional_attribute")] string AdditionalAttribute);
 
 public sealed record ProductCheckProductListingRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductCheckProductListingRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductCheckProductListingRequestCertificationsFiles> Files,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("expiration_date")] long ExpirationDate);
 
 public sealed record ProductCheckProductListingRequestCertificationsImages(
@@ -167,11 +226,15 @@ public sealed record ProductCheckProductListingRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductCheckProductListingRequestProductAttributesValues> Values);
 
 public sealed record ProductCheckProductListingRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductCheckProductListingRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductCheckProductListingRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductCheckProductListingRequestSizeChartTemplate Template);
 
 public sealed record ProductCheckProductListingRequestSizeChartImage(
@@ -190,7 +253,9 @@ public sealed record ProductCheckProductListingRequestVideo(
     [property: JsonPropertyName("id")] string Id);
 
 public sealed record ProductCheckProductListingRequestOption(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("need_trigger_gne_async_check")] bool NeedTriggerGneAsyncCheck,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("gne_async_check_session_id")] string GneAsyncCheckSessionId);
 
 public sealed record ProductCheckProductListingRequestScheduledSale(
@@ -286,41 +351,66 @@ public sealed record ProductCreateGlobalProductRequest(
     [property: JsonPropertyName("title")] string Title,
     [property: JsonPropertyName("description")] string Description,
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductCreateGlobalProductRequestMainImages> MainImages,
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductCreateGlobalProductRequestSkus> Skus,
     [property: JsonPropertyName("package_weight")] ProductCreateGlobalProductRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductCreateGlobalProductRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductCreateGlobalProductRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductCreateGlobalProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductCreateGlobalProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductCreateGlobalProductRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer")] ProductCreateGlobalProductRequestManufacturer Manufacturer,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("source_locale")] string SourceLocale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_global_product_id")] string ExternalGlobalProductId);
 
 public sealed record ProductCreateGlobalProductRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductCreateGlobalProductRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("global_quantity")] long GlobalQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductCreateGlobalProductRequestSkusSalesAttributes> SalesAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductCreateGlobalProductRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductCreateGlobalProductRequestSkusIdentifierCode IdentifierCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductCreateGlobalProductRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_global_sku_id")] string ExternalGlobalSkuId);
 
 public sealed record ProductCreateGlobalProductRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductCreateGlobalProductRequestSkusSalesAttributesSkuImg SkuImg);
 
 public sealed record ProductCreateGlobalProductRequestSkusSalesAttributesSkuImg(
@@ -331,7 +421,9 @@ public sealed record ProductCreateGlobalProductRequestSkusPrice(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductCreateGlobalProductRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductCreateGlobalProductRequestSkusInventory(
@@ -344,7 +436,9 @@ public sealed record ProductCreateGlobalProductRequestPackageWeight(
 
 public sealed record ProductCreateGlobalProductRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductCreateGlobalProductRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductCreateGlobalProductRequestCertificationsFiles> Files);
 
 public sealed record ProductCreateGlobalProductRequestCertificationsImages(
@@ -366,11 +460,15 @@ public sealed record ProductCreateGlobalProductRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductCreateGlobalProductRequestProductAttributesValues> Values);
 
 public sealed record ProductCreateGlobalProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductCreateGlobalProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductCreateGlobalProductRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductCreateGlobalProductRequestSizeChartTemplate Template);
 
 public sealed record ProductCreateGlobalProductRequestSizeChartImage(
@@ -383,9 +481,13 @@ public sealed record ProductCreateGlobalProductRequestVideo(
     [property: JsonPropertyName("id")] string Id);
 
 public sealed record ProductCreateGlobalProductRequestManufacturer(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address")] string Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_number")] string PhoneNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("email")] string Email);
 
 
@@ -415,64 +517,109 @@ public sealed record ProductCreateProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("save_mode")] string SaveMode,
     [property: JsonPropertyName("description")] string Description,
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductCreateProductRequestMainImages> MainImages,
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductCreateProductRequestSkus> Skus,
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductCreateProductRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductCreateProductRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductCreateProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_weight")] ProductCreateProductRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductCreateProductRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_product_id")] string ExternalProductId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("delivery_option_ids")] IReadOnlyList<string> DeliveryOptionIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductCreateProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("primary_combined_product_id")] string PrimaryCombinedProductId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_not_for_sale")] bool IsNotForSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_insurance_requirement")] string ShippingInsuranceRequirement,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("minimum_order_quantity")] long MinimumOrderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_pre_owned")] bool IsPreOwned,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_template_id")] string ShippingTemplateId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("scheduled_sale")] ProductCreateProductRequestScheduledSale ScheduledSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("auto_translate_enabled")] bool AutoTranslateEnabled,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("key_product_features")] IReadOnlyList<string> KeyProductFeatures);
 
 public sealed record ProductCreateProductRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductCreateProductRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductCreateProductRequestSkusSalesAttributes> SalesAttributes,
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductCreateProductRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductCreateProductRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_sku_id")] string ExternalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductCreateProductRequestSkusIdentifierCode IdentifierCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("combined_skus")] IReadOnlyList<ProductCreateProductRequestSkusCombinedSkus> CombinedSkus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_urls")] IReadOnlyList<string> ExternalUrls,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("pre_sale")] ProductCreateProductRequestSkusPreSale PreSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("list_price")] ProductCreateProductRequestSkusListPrice ListPrice,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_list_prices")] IReadOnlyList<ProductCreateProductRequestSkusExternalListPrices> ExternalListPrices,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fees")] IReadOnlyList<ProductCreateProductRequestSkusFees> Fees);
 
 public sealed record ProductCreateProductRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductCreateProductRequestSkusSalesAttributesSkuImg SkuImg,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("supplementary_sku_images")] IReadOnlyList<ProductCreateProductRequestSkusSalesAttributesSupplementarySkuImages> SupplementarySkuImages);
 
 public sealed record ProductCreateProductRequestSkusSalesAttributesSkuImg(
@@ -483,17 +630,24 @@ public sealed record ProductCreateProductRequestSkusSalesAttributesSupplementary
 
 public sealed record ProductCreateProductRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_time")] long HandlingTime);
 
 public sealed record ProductCreateProductRequestSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductCreateProductRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductCreateProductRequestSkusCombinedSkus(
@@ -502,11 +656,15 @@ public sealed record ProductCreateProductRequestSkusCombinedSkus(
     [property: JsonPropertyName("sku_count")] long SkuCount);
 
 public sealed record ProductCreateProductRequestSkusPreSale(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fulfillment_type")] ProductCreateProductRequestSkusPreSaleFulfillmentType FulfillmentType);
 
 public sealed record ProductCreateProductRequestSkusPreSaleFulfillmentType(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("release_date")] long ReleaseDate);
 
 public sealed record ProductCreateProductRequestSkusListPrice(
@@ -519,14 +677,20 @@ public sealed record ProductCreateProductRequestSkusExternalListPrices(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductCreateProductRequestSkusFees(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("additional_attribute")] string AdditionalAttribute);
 
 public sealed record ProductCreateProductRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductCreateProductRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductCreateProductRequestCertificationsFiles> Files,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("expiration_date")] long ExpirationDate);
 
 public sealed record ProductCreateProductRequestCertificationsImages(
@@ -548,7 +712,9 @@ public sealed record ProductCreateProductRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductCreateProductRequestProductAttributesValues> Values);
 
 public sealed record ProductCreateProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductCreateProductRequestPackageWeight(
@@ -559,7 +725,9 @@ public sealed record ProductCreateProductRequestVideo(
     [property: JsonPropertyName("id")] string Id);
 
 public sealed record ProductCreateProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductCreateProductRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductCreateProductRequestSizeChartTemplate Template);
 
 public sealed record ProductCreateProductRequestSizeChartImage(
@@ -610,6 +778,7 @@ public sealed record ProductDeactivateProductsRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms);
 
 
@@ -690,35 +859,56 @@ public sealed record ProductEditGlobalProductRequest(
     [property: JsonPropertyName("title")] string Title,
     [property: JsonPropertyName("description")] string Description,
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductEditGlobalProductRequestMainImages> MainImages,
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductEditGlobalProductRequestSkus> Skus,
     [property: JsonPropertyName("package_weight")] ProductEditGlobalProductRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductEditGlobalProductRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductEditGlobalProductRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductEditGlobalProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductEditGlobalProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductEditGlobalProductRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer")] ProductEditGlobalProductRequestManufacturer Manufacturer,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_global_product_id")] string ExternalGlobalProductId);
 
 public sealed record ProductEditGlobalProductRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductEditGlobalProductRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("global_quantity")] long GlobalQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductEditGlobalProductRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductEditGlobalProductRequestSkusSalesAttributes> SalesAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductEditGlobalProductRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductEditGlobalProductRequestSkusIdentifierCode IdentifierCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_global_sku_id")] string ExternalGlobalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_prices")] IReadOnlyList<ProductEditGlobalProductRequestSkusSalePrices> SalePrices);
 
 public sealed record ProductEditGlobalProductRequestSkusPrice(
@@ -726,10 +916,15 @@ public sealed record ProductEditGlobalProductRequestSkusPrice(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductEditGlobalProductRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductEditGlobalProductRequestSkusSalesAttributesSkuImg SkuImg);
 
 public sealed record ProductEditGlobalProductRequestSkusSalesAttributesSkuImg(
@@ -740,7 +935,9 @@ public sealed record ProductEditGlobalProductRequestSkusInventory(
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ProductEditGlobalProductRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductEditGlobalProductRequestSkusSalePrices(
@@ -753,7 +950,9 @@ public sealed record ProductEditGlobalProductRequestPackageWeight(
 
 public sealed record ProductEditGlobalProductRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductEditGlobalProductRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductEditGlobalProductRequestCertificationsFiles> Files);
 
 public sealed record ProductEditGlobalProductRequestCertificationsImages(
@@ -775,11 +974,15 @@ public sealed record ProductEditGlobalProductRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductEditGlobalProductRequestProductAttributesValues> Values);
 
 public sealed record ProductEditGlobalProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductEditGlobalProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductEditGlobalProductRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductEditGlobalProductRequestSizeChartTemplate Template);
 
 public sealed record ProductEditGlobalProductRequestSizeChartImage(
@@ -792,9 +995,13 @@ public sealed record ProductEditGlobalProductRequestVideo(
     [property: JsonPropertyName("id")] string Id);
 
 public sealed record ProductEditGlobalProductRequestManufacturer(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address")] string Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_number")] string PhoneNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("email")] string Email);
 
 
@@ -832,7 +1039,9 @@ public sealed record ProductGetAttributesRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -872,11 +1081,16 @@ public sealed record ProductGetBrandsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_name")] string BrandName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_authorized")] bool IsAuthorized,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -904,10 +1118,15 @@ public sealed record ProductGetCategoriesRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("include_prohibited_categories")] bool IncludeProhibitedCategories,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("keyword")] string Keyword,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platform")] string ListingPlatform,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -934,7 +1153,9 @@ public sealed record ProductGetCategoryRulesRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -1002,7 +1223,9 @@ public sealed record ProductGetGlobalAttributesRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 
@@ -1042,8 +1265,11 @@ public sealed record ProductGetGlobalCategoriesRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("keyword")] string Keyword,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 
@@ -1069,7 +1295,9 @@ public sealed record ProductGetGlobalCategoryRulesRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 
@@ -1281,8 +1509,11 @@ public sealed record ProductGetProductRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_draft_version")] bool ReturnDraftVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_under_review_version")] bool ReturnUnderReviewVersion,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -1646,7 +1877,9 @@ public sealed record ProductInventorySearchRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_ids")] IReadOnlyList<string> SkuIds);
 
 
@@ -1702,28 +1935,40 @@ public sealed record ProductPublishGlobalProductRequest(
 
 public sealed record ProductPublishGlobalProductRequestPublishTarget(
     [property: JsonPropertyName("region")] string Region,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductPublishGlobalProductRequestPublishTargetSkus> Skus);
 
 public sealed record ProductPublishGlobalProductRequestPublishTargetSkus(
     [property: JsonPropertyName("related_global_sku_id")] string RelatedGlobalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("price")] ProductPublishGlobalProductRequestPublishTargetSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] ProductPublishGlobalProductRequestPublishTargetSkusInventory Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fees")] IReadOnlyList<ProductPublishGlobalProductRequestPublishTargetSkusFees> Fees);
 
 public sealed record ProductPublishGlobalProductRequestPublishTargetSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductPublishGlobalProductRequestPublishTargetSkusInventory(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ProductPublishGlobalProductRequestPublishTargetSkusFees(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("additional_attribute")] string AdditionalAttribute);
 
 
@@ -1768,13 +2013,19 @@ public sealed record ProductRecommendCategoryRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("product_title")] string ProductTitle,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("description")] string Description,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductRecommendCategoryRequestImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platform")] string ListingPlatform,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("include_prohibited_categories")] bool IncludeProhibitedCategories);
 
 public sealed record ProductRecommendCategoryRequestImages(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("uri")] string Uri);
 
 
@@ -1801,11 +2052,15 @@ public sealed record ProductRecommendGlobalCategoriesRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("product_title")] string ProductTitle,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("description")] string Description,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductRecommendGlobalCategoriesRequestImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion);
 
 public sealed record ProductRecommendGlobalCategoriesRequestImages(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("uri")] string Uri);
 
 
@@ -1888,9 +2143,12 @@ public sealed record ProductUpdateInventoryRequestSkus(
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductUpdateInventoryRequestSkusInventory> Inventory);
 
 public sealed record ProductUpdateInventoryRequestSkusInventory(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_time")] long HandlingTime);
 
 
@@ -1929,12 +2187,16 @@ public sealed record ProductUpdatePriceRequest(
 public sealed record ProductUpdatePriceRequestSkus(
     [property: JsonPropertyName("id")] string Id,
     [property: JsonPropertyName("price")] ProductUpdatePriceRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("list_price")] ProductUpdatePriceRequestSkusListPrice ListPrice,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_list_prices")] IReadOnlyList<ProductUpdatePriceRequestSkusExternalListPrices> ExternalListPrices);
 
 public sealed record ProductUpdatePriceRequestSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductUpdatePriceRequestSkusListPrice(
@@ -1980,6 +2242,7 @@ public sealed record ProductUploadProductImageRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("data")] string Data,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("use_case")] string UseCase);
 
 
@@ -2024,12 +2287,19 @@ public sealed record ProductSearchGlobalProductsRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("status")] string Status,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_skus")] IReadOnlyList<string> SellerSkus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_le")] long CreateTimeLe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_le")] long UpdateTimeLe);
 
 
@@ -2062,10 +2332,13 @@ public sealed record ProductOptimizedImagesRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductOptimizedImagesRequestImages> Images);
 
 public sealed record ProductOptimizedImagesRequestImages(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("uri")] string Uri,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("optimization_mode")] IReadOnlyList<string> OptimizationMode);
 
 
@@ -2216,10 +2489,14 @@ public sealed record ProductSearchSizeChartsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locales")] IReadOnlyList<string> Locales,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("ids")] IReadOnlyList<string> Ids,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("keyword")] string Keyword);
 
 
@@ -2250,15 +2527,20 @@ public sealed record ProductCreateManufacturerRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("registered_trade_name")] string RegisteredTradeName,
     [property: JsonPropertyName("email")] string Email,
     [property: JsonPropertyName("phone_number")] ProductCreateManufacturerRequestPhoneNumber PhoneNumber,
     [property: JsonPropertyName("address")] string Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 public sealed record ProductCreateManufacturerRequestPhoneNumber(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("availability")] string Availability,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("country_code")] string CountryCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("local_number")] string LocalNumber);
 
 
@@ -2280,6 +2562,7 @@ public sealed record ProductCreateResponsiblePersonRequest(
     [property: JsonPropertyName("email")] string Email,
     [property: JsonPropertyName("phone_number")] ProductCreateResponsiblePersonRequestPhoneNumber PhoneNumber,
     [property: JsonPropertyName("address")] ProductCreateResponsiblePersonRequestAddress Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 public sealed record ProductCreateResponsiblePersonRequestPhoneNumber(
@@ -2288,10 +2571,14 @@ public sealed record ProductCreateResponsiblePersonRequestPhoneNumber(
 
 public sealed record ProductCreateResponsiblePersonRequestAddress(
     [property: JsonPropertyName("street_address_line1")] string StreetAddressLine1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("street_address_line2")] string StreetAddressLine2,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("district")] string District,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("city")] string City,
     [property: JsonPropertyName("postal_code")] string PostalCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("province")] string Province,
     [property: JsonPropertyName("country")] string Country);
 
@@ -2311,16 +2598,25 @@ public sealed record ProductPartialEditManufacturerRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("registered_trade_name")] string RegisteredTradeName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("email")] string Email,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_number")] ProductPartialEditManufacturerRequestPhoneNumber PhoneNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address")] string Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 public sealed record ProductPartialEditManufacturerRequestPhoneNumber(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("availability")] string Availability,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("country_code")] string CountryCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("local_number")] string LocalNumber);
 
 
@@ -2336,10 +2632,15 @@ public sealed record ProductPartialEditResponsiblePersonRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("email")] string Email,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_number")] ProductPartialEditResponsiblePersonRequestPhoneNumber PhoneNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address")] ProductPartialEditResponsiblePersonRequestAddress Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 public sealed record ProductPartialEditResponsiblePersonRequestPhoneNumber(
@@ -2348,10 +2649,14 @@ public sealed record ProductPartialEditResponsiblePersonRequestPhoneNumber(
 
 public sealed record ProductPartialEditResponsiblePersonRequestAddress(
     [property: JsonPropertyName("street_address_line1")] string StreetAddressLine1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("street_address_line2")] string StreetAddressLine2,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("district")] string District,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("city")] string City,
     [property: JsonPropertyName("postal_code")] string PostalCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("province")] string Province,
     [property: JsonPropertyName("country")] string Country);
 
@@ -2368,35 +2673,52 @@ public sealed record ProductDiagnoseAndOptimizeProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_id")] string ProductId,
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("description")] string Description,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductDiagnoseAndOptimizeProductRequestMainImages> MainImages,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductDiagnoseAndOptimizeProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductDiagnoseAndOptimizeProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("optimization_fields")] IReadOnlyList<string> OptimizationFields);
 
 public sealed record ProductDiagnoseAndOptimizeProductRequestMainImages(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductDiagnoseAndOptimizeProductRequestProductAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("values")] IReadOnlyList<ProductDiagnoseAndOptimizeProductRequestProductAttributesValues> Values);
 
 public sealed record ProductDiagnoseAndOptimizeProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductDiagnoseAndOptimizeProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductDiagnoseAndOptimizeProductRequestSizeChartTemplate Template,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductDiagnoseAndOptimizeProductRequestSizeChartImage Image);
 
 public sealed record ProductDiagnoseAndOptimizeProductRequestSizeChartTemplate(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id);
 
 public sealed record ProductDiagnoseAndOptimizeProductRequestSizeChartImage(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("uri")] string Uri);
 
 
@@ -2449,9 +2771,13 @@ public sealed record ProductSearchManufacturersRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("keyword")] string Keyword,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locales")] IReadOnlyList<string> Locales);
 
 
@@ -2489,9 +2815,13 @@ public sealed record ProductSearchResponsiblePersonsRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("keyword")] string Keyword,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locales")] IReadOnlyList<string> Locales);
 
 
@@ -2536,20 +2866,34 @@ public sealed record ProductSearchProductsRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("status")] string Status,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_skus")] IReadOnlyList<string> SellerSkus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_le")] long CreateTimeLe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_le")] long UpdateTimeLe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_quality_tiers")] IReadOnlyList<string> ListingQualityTiers,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("audit_status")] IReadOnlyList<string> AuditStatus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_ids")] IReadOnlyList<string> SkuIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sns_filter")] string SnsFilter,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_draft_version")] bool ReturnDraftVersion);
 
 
@@ -2658,6 +3002,7 @@ public sealed record ProductCreateImageTranslationTasksRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_asset_cipher")] string CategoryAssetCipher,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("images")] IReadOnlyList<ProductCreateImageTranslationTasksRequestImages> Images);
@@ -2686,8 +3031,10 @@ public sealed record ProductGetImageTranslationTasksRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_asset_cipher")] string CategoryAssetCipher,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("translation_task_ids")] IReadOnlyList<string> TranslationTaskIds);
 
 
@@ -2774,25 +3121,36 @@ public sealed record ProductReplicateProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("replicate_target")] IReadOnlyList<ProductReplicateProductRequestReplicateTarget> ReplicateTarget,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_mode")] string InventoryMode);
 
 public sealed record ProductReplicateProductRequestReplicateTarget(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("region")] string Region,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductReplicateProductRequestReplicateTargetSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_mode")] string InventoryMode);
 
 public sealed record ProductReplicateProductRequestReplicateTargetSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("source_sku_id")] string SourceSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("price")] ProductReplicateProductRequestReplicateTargetSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductReplicateProductRequestReplicateTargetSkusInventory> Inventory);
 
 public sealed record ProductReplicateProductRequestReplicateTargetSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("currency")] string Currency,
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductReplicateProductRequestReplicateTargetSkusInventory(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity);
 
 
@@ -2820,65 +3178,113 @@ public sealed record ProductEditProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("save_mode")] string SaveMode,
     [property: JsonPropertyName("description")] string Description,
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductEditProductRequestMainImages> MainImages,
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductEditProductRequestSkus> Skus,
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductEditProductRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_weight")] ProductEditProductRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductEditProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductEditProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductEditProductRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_product_id")] string ExternalProductId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("delivery_option_ids")] IReadOnlyList<string> DeliveryOptionIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductEditProductRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_insurance_requirement")] string ShippingInsuranceRequirement,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_pre_owned")] bool IsPreOwned,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("minimum_order_quantity")] long MinimumOrderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("replicated_products")] IReadOnlyList<ProductEditProductRequestReplicatedProducts> ReplicatedProducts,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("subscribe_info_edit")] ProductEditProductRequestSubscribeInfoEdit SubscribeInfoEdit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_template_id")] string ShippingTemplateId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("scheduled_sale")] ProductEditProductRequestScheduledSale ScheduledSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("auto_translate_enabled")] bool AutoTranslateEnabled,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("key_product_features")] IReadOnlyList<string> KeyProductFeatures,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_mode")] string InventoryMode);
 
 public sealed record ProductEditProductRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductEditProductRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductEditProductRequestSkusSalesAttributes> SalesAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("price")] ProductEditProductRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_sku_id")] string ExternalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductEditProductRequestSkusIdentifierCode IdentifierCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductEditProductRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("combined_skus")] IReadOnlyList<ProductEditProductRequestSkusCombinedSkus> CombinedSkus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_urls")] IReadOnlyList<string> ExternalUrls,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("pre_sale")] ProductEditProductRequestSkusPreSale PreSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("list_price")] ProductEditProductRequestSkusListPrice ListPrice,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_list_prices")] IReadOnlyList<ProductEditProductRequestSkusExternalListPrices> ExternalListPrices,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fees")] IReadOnlyList<ProductEditProductRequestSkusFees> Fees);
 
 public sealed record ProductEditProductRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductEditProductRequestSkusSalesAttributesSkuImg SkuImg,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("supplementary_sku_images")] IReadOnlyList<ProductEditProductRequestSkusSalesAttributesSupplementarySkuImages> SupplementarySkuImages);
 
 public sealed record ProductEditProductRequestSkusSalesAttributesSkuImg(
@@ -2888,18 +3294,25 @@ public sealed record ProductEditProductRequestSkusSalesAttributesSupplementarySk
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductEditProductRequestSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductEditProductRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductEditProductRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_time")] long HandlingTime);
 
 public sealed record ProductEditProductRequestSkusCombinedSkus(
@@ -2908,11 +3321,15 @@ public sealed record ProductEditProductRequestSkusCombinedSkus(
     [property: JsonPropertyName("sku_count")] long SkuCount);
 
 public sealed record ProductEditProductRequestSkusPreSale(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fulfillment_type")] ProductEditProductRequestSkusPreSaleFulfillmentType FulfillmentType);
 
 public sealed record ProductEditProductRequestSkusPreSaleFulfillmentType(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("release_date")] long ReleaseDate);
 
 public sealed record ProductEditProductRequestSkusListPrice(
@@ -2925,14 +3342,20 @@ public sealed record ProductEditProductRequestSkusExternalListPrices(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductEditProductRequestSkusFees(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("additional_attribute")] string AdditionalAttribute);
 
 public sealed record ProductEditProductRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductEditProductRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductEditProductRequestCertificationsFiles> Files,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("expiration_date")] long ExpirationDate);
 
 public sealed record ProductEditProductRequestCertificationsImages(
@@ -2952,11 +3375,15 @@ public sealed record ProductEditProductRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductEditProductRequestProductAttributesValues> Values);
 
 public sealed record ProductEditProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductEditProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductEditProductRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductEditProductRequestSizeChartTemplate Template);
 
 public sealed record ProductEditProductRequestSizeChartImage(
@@ -2976,13 +3403,18 @@ public sealed record ProductEditProductRequestVideo(
 
 public sealed record ProductEditProductRequestReplicatedProducts(
     [property: JsonPropertyName("region")] string Region,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductEditProductRequestReplicatedProductsSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_mode")] string InventoryMode);
 
 public sealed record ProductEditProductRequestReplicatedProductsSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductEditProductRequestReplicatedProductsSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductEditProductRequestReplicatedProductsSkusInventory> Inventory);
 
 public sealed record ProductEditProductRequestReplicatedProductsSkusPrice(
@@ -2990,15 +3422,21 @@ public sealed record ProductEditProductRequestReplicatedProductsSkusPrice(
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductEditProductRequestReplicatedProductsSkusInventory(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ProductEditProductRequestSubscribeInfoEdit(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("subscribe_status")] string SubscribeStatus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_details")] IReadOnlyList<ProductEditProductRequestSubscribeInfoEditDiscountDetails> DiscountDetails);
 
 public sealed record ProductEditProductRequestSubscribeInfoEditDiscountDetails(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_level")] string DiscountLevel,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_value")] long DiscountValue);
 
 public sealed record ProductEditProductRequestScheduledSale(
@@ -3046,38 +3484,66 @@ public sealed record ProductPartialEditGlobalProductRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("description")] string Description,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_id")] string CategoryId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductPartialEditGlobalProductRequestMainImages> MainImages,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductPartialEditGlobalProductRequestSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_weight")] ProductPartialEditGlobalProductRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductPartialEditGlobalProductRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductPartialEditGlobalProductRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductPartialEditGlobalProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductPartialEditGlobalProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductPartialEditGlobalProductRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer")] ProductPartialEditGlobalProductRequestManufacturer Manufacturer,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_global_product_id")] string ExternalGlobalProductId);
 
 public sealed record ProductPartialEditGlobalProductRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductPartialEditGlobalProductRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("global_quantity")] long GlobalQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("price")] ProductPartialEditGlobalProductRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductPartialEditGlobalProductRequestSkusSalesAttributes> SalesAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductPartialEditGlobalProductRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductPartialEditGlobalProductRequestSkusIdentifierCode IdentifierCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_global_sku_id")] string ExternalGlobalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_prices")] IReadOnlyList<ProductPartialEditGlobalProductRequestSkusSalePrices> SalePrices);
 
 public sealed record ProductPartialEditGlobalProductRequestSkusPrice(
@@ -3085,10 +3551,15 @@ public sealed record ProductPartialEditGlobalProductRequestSkusPrice(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductPartialEditGlobalProductRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductPartialEditGlobalProductRequestSkusSalesAttributesSkuImg SkuImg);
 
 public sealed record ProductPartialEditGlobalProductRequestSkusSalesAttributesSkuImg(
@@ -3099,7 +3570,9 @@ public sealed record ProductPartialEditGlobalProductRequestSkusInventory(
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ProductPartialEditGlobalProductRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductPartialEditGlobalProductRequestSkusSalePrices(
@@ -3112,7 +3585,9 @@ public sealed record ProductPartialEditGlobalProductRequestPackageWeight(
 
 public sealed record ProductPartialEditGlobalProductRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductPartialEditGlobalProductRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductPartialEditGlobalProductRequestCertificationsFiles> Files);
 
 public sealed record ProductPartialEditGlobalProductRequestCertificationsImages(
@@ -3134,11 +3609,15 @@ public sealed record ProductPartialEditGlobalProductRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductPartialEditGlobalProductRequestProductAttributesValues> Values);
 
 public sealed record ProductPartialEditGlobalProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductPartialEditGlobalProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductPartialEditGlobalProductRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductPartialEditGlobalProductRequestSizeChartTemplate Template);
 
 public sealed record ProductPartialEditGlobalProductRequestSizeChartImage(
@@ -3151,9 +3630,13 @@ public sealed record ProductPartialEditGlobalProductRequestVideo(
     [property: JsonPropertyName("id")] string Id);
 
 public sealed record ProductPartialEditGlobalProductRequestManufacturer(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address")] string Address,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_number")] string PhoneNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("email")] string Email);
 
 
@@ -3192,57 +3675,102 @@ public sealed record ProductPartialEditProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("save_mode")] string SaveMode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("description")] string Description,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("brand_id")] string BrandId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("main_images")] IReadOnlyList<ProductPartialEditProductRequestMainImages> MainImages,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductPartialEditProductRequestSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductPartialEditProductRequestCertifications> Certifications,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_weight")] ProductPartialEditProductRequestPackageWeight PackageWeight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attributes")] IReadOnlyList<ProductPartialEditProductRequestProductAttributes> ProductAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("size_chart")] ProductPartialEditProductRequestSizeChart SizeChart,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_dimensions")] ProductPartialEditProductRequestPackageDimensions PackageDimensions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("video")] ProductPartialEditProductRequestVideo Video,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_product_id")] string ExternalProductId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("manufacturer_ids")] IReadOnlyList<string> ManufacturerIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("responsible_person_ids")] IReadOnlyList<string> ResponsiblePersonIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platforms")] IReadOnlyList<string> ListingPlatforms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("replicated_products")] IReadOnlyList<ProductPartialEditProductRequestReplicatedProducts> ReplicatedProducts,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("subscribe_info_edit")] ProductPartialEditProductRequestSubscribeInfoEdit SubscribeInfoEdit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("scheduled_sale")] ProductPartialEditProductRequestScheduledSale ScheduledSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("auto_translate_enabled")] bool AutoTranslateEnabled,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("key_product_features")] IReadOnlyList<string> KeyProductFeatures,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_mode")] string InventoryMode);
 
 public sealed record ProductPartialEditProductRequestMainImages(
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductPartialEditProductRequestSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductPartialEditProductRequestSkusSalesAttributes> SalesAttributes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("price")] ProductPartialEditProductRequestSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("identifier_code")] ProductPartialEditProductRequestSkusIdentifierCode IdentifierCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductPartialEditProductRequestSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_sku_id")] string ExternalSkuId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_unit_count")] string SkuUnitCount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("extra_identifier_codes")] IReadOnlyList<string> ExtraIdentifierCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("list_price")] ProductPartialEditProductRequestSkusListPrice ListPrice,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_list_prices")] IReadOnlyList<ProductPartialEditProductRequestSkusExternalListPrices> ExternalListPrices,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("pre_sale")] ProductPartialEditProductRequestSkusPreSale PreSale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_urls")] IReadOnlyList<string> ExternalUrls,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fees")] IReadOnlyList<ProductPartialEditProductRequestSkusFees> Fees);
 
 public sealed record ProductPartialEditProductRequestSkusSalesAttributes(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_id")] string ValueId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value_name")] string ValueName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_img")] ProductPartialEditProductRequestSkusSalesAttributesSkuImg SkuImg,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("supplementary_sku_images")] IReadOnlyList<ProductPartialEditProductRequestSkusSalesAttributesSupplementarySkuImages> SupplementarySkuImages);
 
 public sealed record ProductPartialEditProductRequestSkusSalesAttributesSkuImg(
@@ -3252,18 +3780,24 @@ public sealed record ProductPartialEditProductRequestSkusSalesAttributesSuppleme
     [property: JsonPropertyName("uri")] string Uri);
 
 public sealed record ProductPartialEditProductRequestSkusPrice(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductPartialEditProductRequestSkusIdentifierCode(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record ProductPartialEditProductRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_time")] long HandlingTime);
 
 public sealed record ProductPartialEditProductRequestSkusListPrice(
@@ -3276,22 +3810,32 @@ public sealed record ProductPartialEditProductRequestSkusExternalListPrices(
     [property: JsonPropertyName("currency")] string Currency);
 
 public sealed record ProductPartialEditProductRequestSkusPreSale(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fulfillment_type")] ProductPartialEditProductRequestSkusPreSaleFulfillmentType FulfillmentType);
 
 public sealed record ProductPartialEditProductRequestSkusPreSaleFulfillmentType(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("release_date")] long ReleaseDate);
 
 public sealed record ProductPartialEditProductRequestSkusFees(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("additional_attribute")] string AdditionalAttribute);
 
 public sealed record ProductPartialEditProductRequestCertifications(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ProductPartialEditProductRequestCertificationsImages> Images,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductPartialEditProductRequestCertificationsFiles> Files,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("expiration_date")] long ExpirationDate);
 
 public sealed record ProductPartialEditProductRequestCertificationsImages(
@@ -3311,11 +3855,15 @@ public sealed record ProductPartialEditProductRequestProductAttributes(
     [property: JsonPropertyName("values")] IReadOnlyList<ProductPartialEditProductRequestProductAttributesValues> Values);
 
 public sealed record ProductPartialEditProductRequestProductAttributesValues(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("name")] string Name);
 
 public sealed record ProductPartialEditProductRequestSizeChart(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("image")] ProductPartialEditProductRequestSizeChartImage Image,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("template")] ProductPartialEditProductRequestSizeChartTemplate Template);
 
 public sealed record ProductPartialEditProductRequestSizeChartImage(
@@ -3335,14 +3883,20 @@ public sealed record ProductPartialEditProductRequestVideo(
 
 public sealed record ProductPartialEditProductRequestReplicatedProducts(
     [property: JsonPropertyName("region")] string Region,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductPartialEditProductRequestReplicatedProductsSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_mode")] string InventoryMode);
 
 public sealed record ProductPartialEditProductRequestReplicatedProductsSkus(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductPartialEditProductRequestReplicatedProductsSkusPrice Price,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory")] IReadOnlyList<ProductPartialEditProductRequestReplicatedProductsSkusInventory> Inventory,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("external_sku_id")] string ExternalSkuId);
 
 public sealed record ProductPartialEditProductRequestReplicatedProductsSkusPrice(
@@ -3350,15 +3904,21 @@ public sealed record ProductPartialEditProductRequestReplicatedProductsSkusPrice
     [property: JsonPropertyName("sale_price")] string SalePrice);
 
 public sealed record ProductPartialEditProductRequestReplicatedProductsSkusInventory(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ProductPartialEditProductRequestSubscribeInfoEdit(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("subscribe_status")] string SubscribeStatus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_details")] IReadOnlyList<ProductPartialEditProductRequestSubscribeInfoEditDiscountDetails> DiscountDetails);
 
 public sealed record ProductPartialEditProductRequestSubscribeInfoEditDiscountDetails(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_level")] string DiscountLevel,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_value")] long DiscountValue);
 
 public sealed record ProductPartialEditProductRequestScheduledSale(
@@ -3402,8 +3962,10 @@ public sealed record ProductGetRecommendedProductPackageRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds);
 
 
@@ -3469,6 +4031,7 @@ public sealed record ProductGetOpportunityDetailRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -3534,13 +4097,19 @@ public sealed record ProductGetSubmissionRecordsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("opportunity_id")] string OpportunityId,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_id")] string ProductId,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("status")] string Status,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("submit_time_ge")] long SubmitTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("submit_time_lt")] long SubmitTimeLt);
 
 
@@ -3576,13 +4145,18 @@ public sealed record ProductListOpportunityRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("opportunity_type")] string OpportunityType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_ids")] IReadOnlyList<string> CategoryIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_lt")] long CreateTimeLt);
 
 
@@ -3657,10 +4231,13 @@ public sealed record ProductUpdateStockOperationSettingsRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("seller_id")] string SellerId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_ids")] IReadOnlyList<string> SkuIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("stock_operation_setting")] ProductUpdateStockOperationSettingsRequestStockOperationSetting StockOperationSetting);
 
 public sealed record ProductUpdateStockOperationSettingsRequestStockOperationSetting(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("enable_auto_restock")] bool EnableAutoRestock);
 
 

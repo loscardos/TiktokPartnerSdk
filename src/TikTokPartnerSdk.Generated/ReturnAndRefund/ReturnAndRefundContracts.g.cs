@@ -8,6 +8,7 @@ public sealed record ReturnAndRefundApproveCancellationRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -24,14 +25,19 @@ public sealed record ReturnAndRefundApproveReturnRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("decision")] string Decision,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("buyer_keep_item")] bool BuyerKeepItem,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("partial_refund")] ReturnAndRefundApproveReturnRequestPartialRefund PartialRefund);
 
 public sealed record ReturnAndRefundApproveReturnRequestPartialRefund(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("amount")] string Amount);
 
 
@@ -46,6 +52,7 @@ public sealed record ReturnAndRefundGetRejectReasonsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("return_or_cancel_id")] string ReturnOrCancelId,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
@@ -70,6 +77,7 @@ public sealed record ReturnAndRefundGetReturnRecordsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -111,16 +119,22 @@ public sealed record ReturnAndRefundRejectCancellationRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("reject_reason")] string RejectReason,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("comment")] string Comment,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ReturnAndRefundRejectCancellationRequestImages> Images);
 
 public sealed record ReturnAndRefundRejectCancellationRequestImages(
     [property: JsonPropertyName("image_id")] string ImageId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("mime_type")] string MimeType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("height")] long Height,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("width")] long Width);
 
 
@@ -136,17 +150,23 @@ public sealed record ReturnAndRefundRejectReturnRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("decision")] string Decision,
     [property: JsonPropertyName("reject_reason")] string RejectReason,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("comment")] string Comment,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("images")] IReadOnlyList<ReturnAndRefundRejectReturnRequestImages> Images);
 
 public sealed record ReturnAndRefundRejectReturnRequestImages(
     [property: JsonPropertyName("image_id")] string ImageId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("mime_type")] string MimeType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("height")] long Height,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("width")] long Width);
 
 
@@ -161,7 +181,9 @@ public sealed record ReturnAndRefundGetDecisionEligibilityRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("check_decisions")] IReadOnlyList<string> CheckDecisions,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonPropertyName("return_or_cancel_id")] string ReturnOrCancelId,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
@@ -195,11 +217,16 @@ public sealed record ReturnAndRefundCalculateRefundRequest(
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("order_id")] string OrderId,
     [property: JsonPropertyName("request_type")] string RequestType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipment_type")] string ShipmentType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handover_method")] string HandoverMethod,
     [property: JsonPropertyName("reason_name")] string ReasonName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_ids")] IReadOnlyList<string> OrderLineItemIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ReturnAndRefundCalculateRefundRequestSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_list")] IReadOnlyList<ReturnAndRefundCalculateRefundRequestOrderLineList> OrderLineList);
 
 public sealed record ReturnAndRefundCalculateRefundRequestSkus(
@@ -207,7 +234,9 @@ public sealed record ReturnAndRefundCalculateRefundRequestSkus(
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ReturnAndRefundCalculateRefundRequestOrderLineList(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_id")] string OrderLineItemId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_order_line_item_id")] string SubOrderLineItemId);
 
 
@@ -230,14 +259,20 @@ public sealed record ReturnAndRefundCalculateRefundResponseDataOrderRefundAmount
 
 
 public sealed record ReturnAndRefundCancelOrderRequest(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("app_key")] string AppKey,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("timestamp")] long Timestamp,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("order_id")] string OrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ReturnAndRefundCancelOrderRequestSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_ids")] IReadOnlyList<string> OrderLineItemIds,
     [property: JsonPropertyName("cancel_reason")] string CancelReason,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_list")] IReadOnlyList<ReturnAndRefundCancelOrderRequestOrderLineList> OrderLineList);
 
 public sealed record ReturnAndRefundCancelOrderRequestSkus(
@@ -245,7 +280,9 @@ public sealed record ReturnAndRefundCancelOrderRequestSkus(
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ReturnAndRefundCancelOrderRequestOrderLineList(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_id")] string OrderLineItemId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_order_line_item_id")] string SubOrderLineItemId);
 
 
@@ -261,20 +298,31 @@ public sealed record ReturnAndRefundCancelOrderResponseData(
 
 
 public sealed record ReturnAndRefundCreateReturnRequest(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("app_key")] string AppKey,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("timestamp")] long Timestamp,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("order_id")] string OrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<ReturnAndRefundCreateReturnRequestSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_ids")] IReadOnlyList<string> OrderLineItemIds,
     [property: JsonPropertyName("return_reason")] string ReturnReason,
     [property: JsonPropertyName("return_type")] string ReturnType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("refund_total")] string RefundTotal,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("currency")] string Currency,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipment_type")] string ShipmentType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handover_method")] string HandoverMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_list")] IReadOnlyList<ReturnAndRefundCreateReturnRequestOrderLineList> OrderLineList);
 
 public sealed record ReturnAndRefundCreateReturnRequestSkus(
@@ -282,7 +330,9 @@ public sealed record ReturnAndRefundCreateReturnRequestSkus(
     [property: JsonPropertyName("quantity")] long Quantity);
 
 public sealed record ReturnAndRefundCreateReturnRequestOrderLineList(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_id")] string OrderLineItemId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_order_line_item_id")] string SubOrderLineItemId);
 
 
@@ -302,7 +352,9 @@ public sealed record ReturnAndRefundGetAftersaleEligibilityRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("initiate_aftersale_user")] string InitiateAftersaleUser,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("request_types")] IReadOnlyList<string> RequestTypes,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -338,20 +390,34 @@ public sealed record ReturnAndRefundSearchCancellationsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_size")] string PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_field")] string SortField,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_order")] string SortOrder,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("cancel_ids")] IReadOnlyList<string> CancelIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("buyer_user_ids")] IReadOnlyList<string> BuyerUserIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("cancel_types")] IReadOnlyList<string> CancelTypes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("cancel_status")] IReadOnlyList<string> CancelStatus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_lt")] long CreateTimeLt,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_lt")] long UpdateTimeLt,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale);
 
 
@@ -450,22 +516,38 @@ public sealed record ReturnAndRefundSearchReturnsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_size")] string PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_field")] string SortField,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_order")] string SortOrder,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_ids")] IReadOnlyList<string> ReturnIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("buyer_user_ids")] IReadOnlyList<string> BuyerUserIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_types")] IReadOnlyList<string> ReturnTypes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_status")] IReadOnlyList<string> ReturnStatus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_proposed_return_type")] IReadOnlyList<string> SellerProposedReturnType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("arbitration_status")] IReadOnlyList<string> ArbitrationStatus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_lt")] long UpdateTimeLt,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_lt")] long CreateTimeLt);
 
 

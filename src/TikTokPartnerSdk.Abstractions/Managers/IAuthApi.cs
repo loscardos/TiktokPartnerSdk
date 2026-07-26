@@ -14,4 +14,11 @@ public interface IAuthApi
     Task<TikTokTokenRecord> RefreshTokenAsync(
         TikTokAuthorizationContext context,
         CancellationToken cancellationToken);
+
+    Task<TikTokTokenRecord> RefreshTokenAsync(
+        TikTokAuthorizationContext context,
+        TikTokTokenRecord existingToken,
+        CancellationToken cancellationToken) =>
+        throw new NotSupportedException(
+            "Explicit caller-owned token refresh is not implemented.");
 }

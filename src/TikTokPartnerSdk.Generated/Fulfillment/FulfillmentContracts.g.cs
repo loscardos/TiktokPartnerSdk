@@ -12,12 +12,17 @@ public sealed record FulfillmentBatchShipPackagesRequest(
 
 public sealed record FulfillmentBatchShipPackagesRequestPackages(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handover_method")] string HandoverMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("pickup_slot")] FulfillmentBatchShipPackagesRequestPackagesPickupSlot PickupSlot,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("self_shipment")] FulfillmentBatchShipPackagesRequestPackagesSelfShipment SelfShipment);
 
 public sealed record FulfillmentBatchShipPackagesRequestPackagesPickupSlot(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("start_time")] long StartTime,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("end_time")] long EndTime);
 
 public sealed record FulfillmentBatchShipPackagesRequestPackagesSelfShipment(
@@ -52,6 +57,7 @@ public sealed record FulfillmentCombinePackageRequest(
 
 public sealed record FulfillmentCombinePackageRequestCombinablePackages(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds);
 
 
@@ -82,6 +88,7 @@ public sealed record FulfillmentFulfillmentUploadDeliveryFileRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_asset_cipher")] string CategoryAssetCipher,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("data")] string Data,
@@ -103,6 +110,7 @@ public sealed record FulfillmentFulfillmentUploadDeliveryImageRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_asset_cipher")] string CategoryAssetCipher,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("data")] string Data);
@@ -126,9 +134,13 @@ public sealed record FulfillmentGetEligibleShippingServiceRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_ids")] IReadOnlyList<string> OrderLineItemIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("weight")] FulfillmentGetEligibleShippingServiceRequestWeight Weight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("dimension")] FulfillmentGetEligibleShippingServiceRequestDimension Dimension,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_list")] IReadOnlyList<FulfillmentGetEligibleShippingServiceRequestOrderLineList> OrderLineList);
 
 public sealed record FulfillmentGetEligibleShippingServiceRequestWeight(
@@ -142,7 +154,9 @@ public sealed record FulfillmentGetEligibleShippingServiceRequestDimension(
     [property: JsonPropertyName("unit")] string Unit);
 
 public sealed record FulfillmentGetEligibleShippingServiceRequestOrderLineList(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_id")] string OrderLineId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_item_id")] string SubItemId);
 
 
@@ -343,9 +357,12 @@ public sealed record FulfillmentGetPackageShippingDocumentRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("document_format")] string DocumentFormat,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("document_size")] string DocumentSize,
     [property: JsonPropertyName("document_type")] string DocumentType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_period")] string ShippingPeriod,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -390,13 +407,17 @@ public sealed record FulfillmentMarkPackageAsShippedRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item_ids")] IReadOnlyList<string> OrderLineItemIds,
     [property: JsonPropertyName("tracking_number")] string TrackingNumber,
     [property: JsonPropertyName("shipping_provider_id")] string ShippingProviderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_list")] IReadOnlyList<FulfillmentMarkPackageAsShippedRequestOrderLineList> OrderLineList);
 
 public sealed record FulfillmentMarkPackageAsShippedRequestOrderLineList(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_id")] string OrderLineId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_item_id")] string SubItemId);
 
 
@@ -421,6 +442,7 @@ public sealed record FulfillmentSearchCombinablePackagesRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -446,14 +468,23 @@ public sealed record FulfillmentSearchPackageRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_field")] string SortField,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_order")] string SortOrder,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_lt")] long CreateTimeLt,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_time_lt")] long UpdateTimeLt,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_status")] string PackageStatus);
 
 
@@ -496,12 +527,17 @@ public sealed record FulfillmentShipPackageRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handover_method")] string HandoverMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("pickup_slot")] FulfillmentShipPackageRequestPickupSlot PickupSlot,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("self_shipment")] FulfillmentShipPackageRequestSelfShipment SelfShipment);
 
 public sealed record FulfillmentShipPackageRequestPickupSlot(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("start_time")] long StartTime,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("end_time")] long EndTime);
 
 public sealed record FulfillmentShipPackageRequestSelfShipment(
@@ -523,6 +559,7 @@ public sealed record FulfillmentSplitOrdersRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("splittable_groups")] IReadOnlyList<FulfillmentSplitOrdersRequestSplittableGroups> SplittableGroups,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("splittable_groups_v2")] IReadOnlyList<FulfillmentSplitOrdersRequestSplittableGroupsV2> SplittableGroupsV2);
 
 public sealed record FulfillmentSplitOrdersRequestSplittableGroups(
@@ -530,11 +567,15 @@ public sealed record FulfillmentSplitOrdersRequestSplittableGroups(
     [property: JsonPropertyName("order_line_item_ids")] IReadOnlyList<string> OrderLineItemIds);
 
 public sealed record FulfillmentSplitOrdersRequestSplittableGroupsV2(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_list")] IReadOnlyList<FulfillmentSplitOrdersRequestSplittableGroupsV2OrderLineList> OrderLineList);
 
 public sealed record FulfillmentSplitOrdersRequestSplittableGroupsV2OrderLineList(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_id")] string OrderLineId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_item_id")] string SubItemId);
 
 
@@ -558,6 +599,7 @@ public sealed record FulfillmentUncombinePackagesRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds);
 
 
@@ -585,8 +627,11 @@ public sealed record FulfillmentUpdatePackageDeliveryStatusRequest(
 public sealed record FulfillmentUpdatePackageDeliveryStatusRequestPackages(
     [property: JsonPropertyName("id")] string Id,
     [property: JsonPropertyName("delivery_type")] string DeliveryType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fail_delivery_reason")] string FailDeliveryReason,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("file_type")] string FileType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("file_url")] string FileUrl);
 
 
@@ -648,8 +693,11 @@ public sealed record FulfillmentCreateFirstMileBundleRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds,
     [property: JsonPropertyName("handover_method")] string HandoverMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_provider_id")] string ShippingProviderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("tracking_number")] string TrackingNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_tail_number")] string PhoneTailNumber);
 
 
@@ -678,6 +726,7 @@ public sealed record FulfillmentUploadInvoiceRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("invoices")] IReadOnlyList<FulfillmentUploadInvoiceRequestInvoices> Invoices);
 
 public sealed record FulfillmentUploadInvoiceRequestInvoices(
@@ -732,8 +781,11 @@ public sealed record FulfillmentCreateFirstMileBundleV2Request(
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds,
     [property: JsonPropertyName("handover_method")] string HandoverMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_provider_id")] string ShippingProviderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("tracking_number")] string TrackingNumber,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("phone_tail_number")] string PhoneTailNumber);
 
 
@@ -763,15 +815,23 @@ public sealed record FulfillmentCreatePackagesRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("ship_type")] string ShipType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_id")] string OrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_item")] IReadOnlyList<FulfillmentCreatePackagesRequestOrderLineItem> OrderLineItem,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_list_ids")] IReadOnlyList<string> OrderListIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("dimension")] FulfillmentCreatePackagesRequestDimension Dimension,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_service_id")] string ShippingServiceId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("weight")] FulfillmentCreatePackagesRequestWeight Weight);
 
 public sealed record FulfillmentCreatePackagesRequestOrderLineItem(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_line_id")] string OrderLineId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sub_item_id")] string SubItemId);
 
 public sealed record FulfillmentCreatePackagesRequestDimension(
@@ -830,10 +890,12 @@ public sealed record FulfillmentRedeemInfoCallbackRequest(
 public sealed record FulfillmentRedeemInfoCallbackRequestOrderInfoList(
     [property: JsonPropertyName("order_line_id")] string OrderLineId,
     [property: JsonPropertyName("redeem_info")] FulfillmentRedeemInfoCallbackRequestOrderInfoListRedeemInfo RedeemInfo,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("source_unique_id")] string SourceUniqueId);
 
 public sealed record FulfillmentRedeemInfoCallbackRequestOrderInfoListRedeemInfo(
     [property: JsonPropertyName("redeem_type")] string RedeemType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("redeem_data")] string RedeemData);
 
 

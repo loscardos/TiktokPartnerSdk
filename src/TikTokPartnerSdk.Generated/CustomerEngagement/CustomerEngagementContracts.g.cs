@@ -13,7 +13,9 @@ public sealed record CustomerEngagementCreateEngagementTaskRequest(
     [property: JsonPropertyName("task_name")] string TaskName,
     [property: JsonPropertyName("end_time")] long EndTime,
     [property: JsonPropertyName("channel")] string Channel,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("coupon_ids")] IReadOnlyList<string> CouponIds);
 
 
@@ -94,6 +96,7 @@ public sealed record CustomerEngagementSendEngagementMessageRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("buyer_emails")] IReadOnlyList<string> BuyerEmails,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("task_id")] string TaskId);
 
 
@@ -124,12 +127,17 @@ public sealed record CustomerEngagementCreateCustomEngagementTaskRequest(
     [property: JsonPropertyName("task_name")] string TaskName,
     [property: JsonPropertyName("end_time")] long EndTime,
     [property: JsonPropertyName("channel")] string Channel,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("coupon_ids")] IReadOnlyList<string> CouponIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("custom_message")] CustomerEngagementCreateCustomEngagementTaskRequestCustomMessage CustomMessage);
 
 public sealed record CustomerEngagementCreateCustomEngagementTaskRequestCustomMessage(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("body")] string Body);
 
 

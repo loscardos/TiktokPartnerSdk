@@ -29,8 +29,10 @@ public sealed record LogisticsGetShippingProvidersRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("buyer_region")] string BuyerRegion,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_region")] string WarehouseRegion);
 
 
@@ -53,6 +55,7 @@ public sealed record LogisticsGetWarehouseDeliveryOptionsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("scope")] string Scope,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -144,20 +147,29 @@ public sealed record LogisticsGetAvailableShippingTemplateRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_attribute")] LogisticsGetAvailableShippingTemplateRequestProductAttribute ProductAttribute);
 
 public sealed record LogisticsGetAvailableShippingTemplateRequestProductAttribute(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("weight")] LogisticsGetAvailableShippingTemplateRequestProductAttributeWeight Weight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("dimension")] LogisticsGetAvailableShippingTemplateRequestProductAttributeDimension Dimension);
 
 public sealed record LogisticsGetAvailableShippingTemplateRequestProductAttributeWeight(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("weight")] string Weight,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("unit")] long Unit);
 
 public sealed record LogisticsGetAvailableShippingTemplateRequestProductAttributeDimension(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("length")] string Length,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("width")] string Width,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("height")] string Height,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("unit")] long Unit);
 
 

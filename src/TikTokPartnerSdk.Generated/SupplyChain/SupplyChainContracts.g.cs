@@ -13,7 +13,9 @@ public sealed record SupplyChainConfirmPackageShipmentRequest(
 public sealed record SupplyChainConfirmPackageShipmentRequestPackages(
     [property: JsonPropertyName("id")] string Id,
     [property: JsonPropertyName("wms_order_id")] string WmsOrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("provider_warehouse_code")] string ProviderWarehouseCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_origin_city")] string ShippingOriginCity,
     [property: JsonPropertyName("time_zone")] string TimeZone,
     [property: JsonPropertyName("ship_time_millis")] long ShipTimeMillis,
@@ -23,19 +25,28 @@ public sealed record SupplyChainConfirmPackageShipmentRequestPackages(
     [property: JsonPropertyName("shipping_provider_name")] string ShippingProviderName,
     [property: JsonPropertyName("tracking_number")] string TrackingNumber,
     [property: JsonPropertyName("dimension")] SupplyChainConfirmPackageShipmentRequestPackagesDimension Dimension,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("weight")] SupplyChainConfirmPackageShipmentRequestPackagesWeight Weight,
     [property: JsonPropertyName("skus")] IReadOnlyList<SupplyChainConfirmPackageShipmentRequestPackagesSkus> Skus,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("provider_warehouse_name")] string ProviderWarehouseName,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("tcw_warehouse_type")] string TcwWarehouseType);
 
 public sealed record SupplyChainConfirmPackageShipmentRequestPackagesDimension(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("length")] long Length,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("width")] long Width,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("height")] long Height,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("unit")] string Unit);
 
 public sealed record SupplyChainConfirmPackageShipmentRequestPackagesWeight(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value")] long Value,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("unit")] string Unit);
 
 public sealed record SupplyChainConfirmPackageShipmentRequestPackagesSkus(

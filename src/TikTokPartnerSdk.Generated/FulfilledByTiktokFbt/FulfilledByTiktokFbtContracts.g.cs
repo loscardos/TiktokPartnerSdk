@@ -49,10 +49,14 @@ public sealed record FulfilledByTiktokFbtSearchFbtInventoryRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("goods_ids")] IReadOnlyList<string> GoodsIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fbt_warehouse_ids")] IReadOnlyList<string> FbtWarehouseIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_ids")] IReadOnlyList<string> SkuIds);
 
 
@@ -120,11 +124,16 @@ public sealed record FulfilledByTiktokFbtSearchGoodsInfoRequest(
     [property: JsonPropertyName("timestamp")] string Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("goods_ids")] IReadOnlyList<string> GoodsIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("reference_codes")] IReadOnlyList<string> ReferenceCodes,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_ids")] IReadOnlyList<string> SkuIds);
 
 
@@ -224,11 +233,16 @@ public sealed record FulfilledByTiktokFbtSearchFbtInventoryRecordRequest(
     [property: JsonPropertyName("timestamp")] string Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("goods_ids")] IReadOnlyList<string> GoodsIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fbt_warehouse_ids")] IReadOnlyList<string> FbtWarehouseIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("create_time_le")] long CreateTimeLe);
 
 
@@ -269,9 +283,11 @@ public sealed record FulfilledByTiktokFbtCancelFbtMcfOrderRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("mcf_order_id")] string McfOrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("consign_orders")] IReadOnlyList<FulfilledByTiktokFbtCancelFbtMcfOrderRequestConsignOrders> ConsignOrders);
 
 public sealed record FulfilledByTiktokFbtCancelFbtMcfOrderRequestConsignOrders(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id);
 
 
@@ -319,7 +335,9 @@ public sealed record FulfilledByTiktokFbtCreateFbtMcfOrderRequestConsigneeAddres
     [property: JsonPropertyName("district_or_county")] string DistrictOrCounty,
     [property: JsonPropertyName("city")] string City,
     [property: JsonPropertyName("address_line_1")] string AddressLine1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address_line_2")] string AddressLine2,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("postal_code")] string PostalCode);
 
 
@@ -421,9 +439,13 @@ public sealed record FulfilledByTiktokFbtCreateUpdateInboundPlanRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("plan_id")] string PlanId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotent_key")] string IdempotentKey,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("goods_items")] IReadOnlyList<FulfilledByTiktokFbtCreateUpdateInboundPlanRequestGoodsItems> GoodsItems,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("cartons")] IReadOnlyList<FulfilledByTiktokFbtCreateUpdateInboundPlanRequestCartons> Cartons);
 
 public sealed record FulfilledByTiktokFbtCreateUpdateInboundPlanRequestGoodsItems(
@@ -434,13 +456,16 @@ public sealed record FulfilledByTiktokFbtCreateUpdateInboundPlanRequestCartons(
     [property: JsonPropertyName("carton_type")] string CartonType,
     [property: JsonPropertyName("items")] IReadOnlyList<FulfilledByTiktokFbtCreateUpdateInboundPlanRequestCartonsItems> Items,
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("carton_nums")] IReadOnlyList<string> CartonNums,
     [property: JsonPropertyName("box_measurements")] FulfilledByTiktokFbtCreateUpdateInboundPlanRequestCartonsBoxMeasurements BoxMeasurements);
 
 public sealed record FulfilledByTiktokFbtCreateUpdateInboundPlanRequestCartonsItems(
     [property: JsonPropertyName("goods_id")] string GoodsId,
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("lot_code")] string LotCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("expiration_timestamp")] string ExpirationTimestamp);
 
 public sealed record FulfilledByTiktokFbtCreateUpdateInboundPlanRequestCartonsBoxMeasurements(
@@ -538,6 +563,7 @@ public sealed record FulfilledByTiktokFbtGetInboundOrderRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("include_carton_details")] bool IncludeCartonDetails,
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
@@ -658,8 +684,11 @@ public sealed record FulfilledByTiktokFbtPrintLabelRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("order_id")] string OrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("print_items")] IReadOnlyList<string> PrintItems,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("carton_label_format")] string CartonLabelFormat,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_format")] string BarcodeFormat);
 
 
@@ -680,6 +709,7 @@ public sealed record FulfilledByTiktokFbtUpdateTrackingRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("order_id")] string OrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("parcel_tracking_info")] IReadOnlyList<FulfilledByTiktokFbtUpdateTrackingRequestParcelTrackingInfo> ParcelTrackingInfo);
 
 public sealed record FulfilledByTiktokFbtUpdateTrackingRequestParcelTrackingInfo(
@@ -732,18 +762,24 @@ public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoList(
     [property: JsonPropertyName("create_goods_type")] string CreateGoodsType,
     [property: JsonPropertyName("goods_name")] string GoodsName,
     [property: JsonPropertyName("goods_image_url")] string GoodsImageUrl,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("reference_code")] string ReferenceCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_infos")] IReadOnlyList<FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListBarcodeInfos> BarcodeInfos,
     [property: JsonPropertyName("return_handling_method")] string ReturnHandlingMethod,
     [property: JsonPropertyName("dimension_and_weight_base_info")] FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListDimensionAndWeightBaseInfo DimensionAndWeightBaseInfo,
     [property: JsonPropertyName("is_hazmat")] bool IsHazmat,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("hazmat_info")] FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHazmatInfo HazmatInfo,
     [property: JsonPropertyName("is_lot_code")] bool IsLotCode,
     [property: JsonPropertyName("is_expiration_management")] bool IsExpirationManagement,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shelf_life_attribute_info")] FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListShelfLifeAttributeInfo ShelfLifeAttributeInfo);
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListBarcodeInfos(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_type")] string BarcodeType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_value")] string BarcodeValue);
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListDimensionAndWeightBaseInfo(
@@ -756,7 +792,9 @@ public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListDim
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHazmatInfo(
     [property: JsonPropertyName("hazmat_type")] string HazmatType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("battery_extra_info")] FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHazmatInfoBatteryExtraInfo BatteryExtraInfo,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("flammable_liquids_extra_info")] FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHazmatInfoFlammableLiquidsExtraInfo FlammableLiquidsExtraInfo,
     [property: JsonPropertyName("dg_class")] string DgClass,
     [property: JsonPropertyName("dg_uncode")] string DgUncode,
@@ -770,21 +808,28 @@ public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHaz
     [property: JsonPropertyName("total_battery_capacity")] string TotalBatteryCapacity,
     [property: JsonPropertyName("total_battery_capacity_unit")] string TotalBatteryCapacityUnit,
     [property: JsonPropertyName("is_need_un_38_3_test")] bool IsNeedUn383Test,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("un_38_3_test_file_url")] string Un383TestFileUrl,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("battery_count_per_package")] string BatteryCountPerPackage);
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHazmatInfoFlammableLiquidsExtraInfo(
     [property: JsonPropertyName("flammable_liquids_type")] string FlammableLiquidsType,
     [property: JsonPropertyName("flammable_liquids_volume")] string FlammableLiquidsVolume,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("volume_unit")] string VolumeUnit);
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListShelfLifeAttributeInfo(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shelf_life")] long ShelfLife,
     [property: JsonPropertyName("inbound_cutoff_days")] long InboundCutoffDays,
     [property: JsonPropertyName("expiration_alert_days")] long ExpirationAlertDays,
     [property: JsonPropertyName("sales_cutoff_days")] long SalesCutoffDays,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_method_expired_goods")] string HandlingMethodExpiredGoods,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_cycle")] string ReturnCycle,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_address_info")] FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListShelfLifeAttributeInfoReturnAddressInfo ReturnAddressInfo);
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListShelfLifeAttributeInfoReturnAddressInfo(
@@ -796,6 +841,7 @@ public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListShe
     [property: JsonPropertyName("district")] string District,
     [property: JsonPropertyName("city")] string City,
     [property: JsonPropertyName("address_line1")] string AddressLine1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address_line2")] string AddressLine2);
 
 
@@ -857,6 +903,7 @@ public sealed record FulfilledByTiktokFbtShipInboundOrderRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("inbound_order_id")] string InboundOrderId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("cartons")] IReadOnlyList<FulfilledByTiktokFbtShipInboundOrderRequestCartons> Cartons,
     [property: JsonPropertyName("shipment_option")] FulfilledByTiktokFbtShipInboundOrderRequestShipmentOption ShipmentOption);
 
@@ -864,13 +911,16 @@ public sealed record FulfilledByTiktokFbtShipInboundOrderRequestCartons(
     [property: JsonPropertyName("carton_type")] string CartonType,
     [property: JsonPropertyName("items")] IReadOnlyList<FulfilledByTiktokFbtShipInboundOrderRequestCartonsItems> Items,
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("carton_nums")] IReadOnlyList<string> CartonNums,
     [property: JsonPropertyName("box_measurements")] FulfilledByTiktokFbtShipInboundOrderRequestCartonsBoxMeasurements BoxMeasurements);
 
 public sealed record FulfilledByTiktokFbtShipInboundOrderRequestCartonsItems(
     [property: JsonPropertyName("goods_id")] string GoodsId,
     [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("lot_code")] string LotCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("expiration_timestamp")] string ExpirationTimestamp);
 
 public sealed record FulfilledByTiktokFbtShipInboundOrderRequestCartonsBoxMeasurements(
@@ -883,6 +933,7 @@ public sealed record FulfilledByTiktokFbtShipInboundOrderRequestCartonsBoxMeasur
 
 public sealed record FulfilledByTiktokFbtShipInboundOrderRequestShipmentOption(
     [property: JsonPropertyName("shipping_method")] string ShippingMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("freight_type")] string FreightType);
 
 
@@ -933,24 +984,31 @@ public sealed record FulfilledByTiktokFbtUpdateGoodsRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("update_goods_dto")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDto UpdateGoodsDto);
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDto(
     [property: JsonPropertyName("tts_goods_id")] string TtsGoodsId,
     [property: JsonPropertyName("goods_name")] string GoodsName,
     [property: JsonPropertyName("goods_image_url")] string GoodsImageUrl,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("reference_code")] string ReferenceCode,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_infos")] IReadOnlyList<FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoBarcodeInfos> BarcodeInfos,
     [property: JsonPropertyName("return_handling_method")] string ReturnHandlingMethod,
     [property: JsonPropertyName("dimension_and_weight_base_info")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoDimensionAndWeightBaseInfo DimensionAndWeightBaseInfo,
     [property: JsonPropertyName("is_hazmat")] bool IsHazmat,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("hazmat_info")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatInfo HazmatInfo,
     [property: JsonPropertyName("is_lot_code")] bool IsLotCode,
     [property: JsonPropertyName("is_expiration_management")] bool IsExpirationManagement,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shelf_life_attribute_info")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoShelfLifeAttributeInfo ShelfLifeAttributeInfo);
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoBarcodeInfos(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_type")] string BarcodeType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("barcode_value")] string BarcodeValue);
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoDimensionAndWeightBaseInfo(
@@ -963,7 +1021,9 @@ public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoDimensi
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatInfo(
     [property: JsonPropertyName("hazmat_type")] string HazmatType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("battery_extra_info")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatInfoBatteryExtraInfo BatteryExtraInfo,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("flammable_liquids_extra_info")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatInfoFlammableLiquidsExtraInfo FlammableLiquidsExtraInfo,
     [property: JsonPropertyName("dg_class")] string DgClass,
     [property: JsonPropertyName("dg_uncode")] string DgUncode,
@@ -977,21 +1037,28 @@ public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatI
     [property: JsonPropertyName("total_battery_capacity")] string TotalBatteryCapacity,
     [property: JsonPropertyName("total_battery_capacity_unit")] string TotalBatteryCapacityUnit,
     [property: JsonPropertyName("is_need_un_38_3_test")] bool IsNeedUn383Test,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("un_38_3_test_file_url")] string Un383TestFileUrl,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("battery_count_per_package")] string BatteryCountPerPackage);
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatInfoFlammableLiquidsExtraInfo(
     [property: JsonPropertyName("flammable_liquids_type")] string FlammableLiquidsType,
     [property: JsonPropertyName("flammable_liquids_volume")] string FlammableLiquidsVolume,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("volume_unit")] string VolumeUnit);
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoShelfLifeAttributeInfo(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shelf_life")] long ShelfLife,
     [property: JsonPropertyName("inbound_cutoff_days")] long InboundCutoffDays,
     [property: JsonPropertyName("expiration_alert_days")] long ExpirationAlertDays,
     [property: JsonPropertyName("sales_cutoff_days")] long SalesCutoffDays,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("handling_method_expired_goods")] string HandlingMethodExpiredGoods,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_cycle")] string ReturnCycle,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("return_address_info")] FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoShelfLifeAttributeInfoReturnAddressInfo ReturnAddressInfo);
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoShelfLifeAttributeInfoReturnAddressInfo(
@@ -1003,6 +1070,7 @@ public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoShelfLi
     [property: JsonPropertyName("district")] string District,
     [property: JsonPropertyName("city")] string City,
     [property: JsonPropertyName("address_line1")] string AddressLine1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("address_line2")] string AddressLine2);
 
 

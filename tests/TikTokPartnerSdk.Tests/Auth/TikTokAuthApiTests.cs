@@ -94,6 +94,51 @@ public sealed class TikTokAuthApiTests
         authClient.LastQueryJson.Should().Contain("refresh_token");
     }
 
+    [Fact]
+    public async Task RefreshTokenAsync_with_explicit_token_should_leave_persistence_to_the_caller()
+    {
+        var context = new TikTokAuthorizationContext(
+            TikTokAccessTokenKind.Seller,
+            "app-key",
+            "cipher-1");
+        var existing = new TikTokTokenRecord(
+            TikTokAccessTokenKind.Seller,
+            "old-access",
+            "old-refresh",
+            DateTimeOffset.UtcNow.AddMinutes(-1),
+            DateTimeOffset.UtcNow.AddDays(10),
+            "cipher-1",
+            "app-key");
+        var store = new InMemoryTikTokTokenStore();
+        var authClient = new RecordingAuthClient(
+            new TikTokPartnerResponseEnvelope<AuthTokenResponse>(
+                0,
+                "success",
+                "req-3",
+                new AuthTokenResponse(
+                    "new-access",
+                    "new-refresh",
+                    7200,
+                    2592000)));
+        var api = new TikTokAuthApi(
+            Options.Create(new TikTokPartnerOptions
+            {
+                AppKey = "app-key",
+                AppSecret = "app-secret"
+            }),
+            authClient,
+            store);
+
+        var refreshed = await api.RefreshTokenAsync(
+            context,
+            existing,
+            CancellationToken.None);
+
+        refreshed.AccessToken.Should().Be("new-access");
+        authClient.LastQueryJson.Should().Contain("old-refresh");
+        (await store.GetAsync(context, CancellationToken.None)).Should().BeNull();
+    }
+
     private sealed class RecordingAuthClient : ITikTokAuthClient
     {
         private readonly object? _response;

@@ -53,21 +53,47 @@ public sealed class TikTokAuthApi(
         var existing = await tokenStore.GetAsync(context, cancellationToken)
             ?? throw new InvalidOperationException("TikTok token is missing for the requested authorization context.");
 
+        var token = await RefreshTokenAsync(
+            context,
+            existing,
+            cancellationToken);
+        await tokenStore.StoreAsync(token, cancellationToken);
+        return token;
+    }
+
+    public async Task<TikTokTokenRecord> RefreshTokenAsync(
+        TikTokAuthorizationContext context,
+        TikTokTokenRecord existingToken,
+        CancellationToken cancellationToken)
+    {
+        if (existingToken.AccessTokenKind != context.AccessTokenKind
+            || !string.Equals(
+                existingToken.AppKey,
+                context.AppKey,
+                StringComparison.Ordinal)
+            || !string.Equals(
+                existingToken.ShopCipher,
+                context.ShopCipher,
+                StringComparison.Ordinal))
+        {
+            throw new ArgumentException(
+                "The explicit TikTok token does not match the authorization context.",
+                nameof(existingToken));
+        }
+
         var envelope = await authClient.GetAsync<AuthTokenPayload>(
             "/token/refresh",
             new Dictionary<string, object?>
             {
                 ["app_key"] = _options.AppKey,
                 ["app_secret"] = _options.AppSecret,
-                ["refresh_token"] = existing.RefreshToken,
+                ["refresh_token"] = existingToken.RefreshToken,
                 ["grant_type"] = "refresh_token"
             },
             cancellationToken);
 
         var payload = envelope.Data ?? throw new InvalidOperationException("TikTok auth refresh returned no data.");
-        var token = ToTokenRecord(context, payload);
-        await tokenStore.StoreAsync(token, cancellationToken);
-        return token;
+        return ToTokenRecord(context, payload);
     }
 
     private static TikTokTokenRecord ToTokenRecord(

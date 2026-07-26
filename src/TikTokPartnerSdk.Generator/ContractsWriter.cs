@@ -20,20 +20,40 @@ public sealed class ContractsWriter
             var requestTypeName = TikTokName.ToRequestTypeName(endpoint);
             var responseTypeName = TikTokName.ToResponseTypeName(endpoint);
 
-            WriteRecord(builder, requestTypeName, endpoint.RequestParameters);
+            WriteRecord(
+                builder,
+                requestTypeName,
+                endpoint.RequestParameters,
+                omitOptionalDefaults: true);
             builder.AppendLine();
-            WriteNestedTypes(builder, requestTypeName, endpoint.RequestParameters);
+            WriteNestedTypes(
+                builder,
+                requestTypeName,
+                endpoint.RequestParameters,
+                omitOptionalDefaults: true);
             builder.AppendLine();
-            WriteRecord(builder, responseTypeName, endpoint.ResponseParameters);
+            WriteRecord(
+                builder,
+                responseTypeName,
+                endpoint.ResponseParameters,
+                omitOptionalDefaults: false);
             builder.AppendLine();
-            WriteNestedTypes(builder, responseTypeName, endpoint.ResponseParameters);
+            WriteNestedTypes(
+                builder,
+                responseTypeName,
+                endpoint.ResponseParameters,
+                omitOptionalDefaults: false);
             builder.AppendLine();
         }
 
         return builder.ToString().TrimEnd() + Environment.NewLine;
     }
 
-    private static void WriteRecord(StringBuilder builder, string typeName, IReadOnlyList<SchemaParameter> parameters)
+    private static void WriteRecord(
+        StringBuilder builder,
+        string typeName,
+        IReadOnlyList<SchemaParameter> parameters,
+        bool omitOptionalDefaults)
     {
         if (parameters.Count == 0)
         {
@@ -47,6 +67,11 @@ public sealed class ContractsWriter
         {
             var parameter = parameters[index];
             var suffix = index == parameters.Count - 1 ? ");" : ",";
+            if (omitOptionalDefaults && !parameter.Required)
+            {
+                builder.AppendLine(
+                    "    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]");
+            }
             builder.AppendLine(
                 $"    [property: JsonPropertyName(\"{parameter.Name}\")] {TikTokTypeMapper.MapType(parameter, typeName)} {TikTokName.ToPropertyName(parameter, parameters)}{suffix}");
         }
@@ -55,14 +80,23 @@ public sealed class ContractsWriter
     private static void WriteNestedTypes(
         StringBuilder builder,
         string parentTypeName,
-        IReadOnlyList<SchemaParameter> parameters)
+        IReadOnlyList<SchemaParameter> parameters,
+        bool omitOptionalDefaults)
     {
         foreach (var parameter in parameters.Where(static x => x.Children.Count > 0))
         {
             var childTypeName = TikTokName.ToChildTypeName(parentTypeName, parameter.Name);
-            WriteRecord(builder, childTypeName, parameter.Children);
+            WriteRecord(
+                builder,
+                childTypeName,
+                parameter.Children,
+                omitOptionalDefaults);
             builder.AppendLine();
-            WriteNestedTypes(builder, childTypeName, parameter.Children);
+            WriteNestedTypes(
+                builder,
+                childTypeName,
+                parameter.Children,
+                omitOptionalDefaults);
         }
     }
 }

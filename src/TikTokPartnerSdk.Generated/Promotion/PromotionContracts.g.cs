@@ -11,36 +11,50 @@ public sealed record PromotionCreateActivityRequest(
     [property: JsonPropertyName("title")] string Title,
     [property: JsonPropertyName("activity_type")] string ActivityType,
     [property: JsonPropertyName("product_level")] string ProductLevel,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("duration_type")] string DurationType,
     [property: JsonPropertyName("begin_time")] long BeginTime,
     [property: JsonPropertyName("end_time")] long EndTime,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("participation_limit")] IReadOnlyList<PromotionCreateActivityRequestParticipationLimit> ParticipationLimit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount")] PromotionCreateActivityRequestDiscount Discount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("target_user_info")] PromotionCreateActivityRequestTargetUserInfo TargetUserInfo);
 
 public sealed record PromotionCreateActivityRequestParticipationLimit(
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record PromotionCreateActivityRequestDiscount(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_discount")] PromotionCreateActivityRequestDiscountShippingDiscount ShippingDiscount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("bmsm_discount")] PromotionCreateActivityRequestDiscountBmsmDiscount BmsmDiscount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("gift_discount")] PromotionCreateActivityRequestDiscountGiftDiscount GiftDiscount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("bxgy_discount")] PromotionCreateActivityRequestDiscountBxgyDiscount BxgyDiscount);
 
 public sealed record PromotionCreateActivityRequestDiscountShippingDiscount(
     [property: JsonPropertyName("threshold_type")] string ThresholdType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("threshold_value")] string ThresholdValue,
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value")] string Value,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_method")] string ShippingMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_type")] string InventoryType,
     [property: JsonPropertyName("area_scope")] PromotionCreateActivityRequestDiscountShippingDiscountAreaScope AreaScope);
 
 public sealed record PromotionCreateActivityRequestDiscountShippingDiscountAreaScope(
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("specific_areas")] IReadOnlyList<string> SpecificAreas);
 
 public sealed record PromotionCreateActivityRequestDiscountBmsmDiscount(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("details")] IReadOnlyList<PromotionCreateActivityRequestDiscountBmsmDiscountDetails> Details);
 
 public sealed record PromotionCreateActivityRequestDiscountBmsmDiscountDetails(
@@ -71,9 +85,11 @@ public sealed record PromotionCreateActivityRequestDiscountBxgyDiscount(
     [property: JsonPropertyName("discount_type")] string DiscountType,
     [property: JsonPropertyName("discount_value")] string DiscountValue,
     [property: JsonPropertyName("benefit_max_applicable_quantity")] string BenefitMaxApplicableQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("benefit_max_applicable_times")] string BenefitMaxApplicableTimes);
 
 public sealed record PromotionCreateActivityRequestTargetUserInfo(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("user_type")] string UserType);
 
 
@@ -234,9 +250,13 @@ public sealed record PromotionRemoveActivityProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_ids")] IReadOnlyList<string> ProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sku_ids")] IReadOnlyList<string> SkuIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("benefit_product_ids")] IReadOnlyList<string> BenefitProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("exclude_product_ids")] IReadOnlyList<string> ExcludeProductIds);
 
 
@@ -257,10 +277,15 @@ public sealed record PromotionSearchActivitiesRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("status")] string Status,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("activity_title")] string ActivityTitle,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("activity_type")] string ActivityType);
 
 
@@ -352,22 +377,30 @@ public sealed record PromotionUpdateActivityProductRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("products")] IReadOnlyList<PromotionUpdateActivityProductRequestProducts> Products,
     [property: JsonPropertyName("activity_id")] string BodyActivityId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("benefit_product_ids")] IReadOnlyList<string> BenefitProductIds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("exclude_product_ids")] IReadOnlyList<string> ExcludeProductIds);
 
 public sealed record PromotionUpdateActivityProductRequestProducts(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("activity_price_amount")] string ActivityPriceAmount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount")] string Discount,
     [property: JsonPropertyName("quantity_limit")] long QuantityLimit,
     [property: JsonPropertyName("quantity_per_user")] long QuantityPerUser,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("skus")] IReadOnlyList<PromotionUpdateActivityProductRequestProductsSkus> Skus);
 
 public sealed record PromotionUpdateActivityProductRequestProductsSkus(
     [property: JsonPropertyName("id")] string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("activity_price_amount")] string ActivityPriceAmount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount")] string Discount,
     [property: JsonPropertyName("quantity_limit")] long QuantityLimit,
     [property: JsonPropertyName("quantity_per_user")] long QuantityPerUser);
@@ -394,37 +427,52 @@ public sealed record PromotionUpdateActivityRequest(
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("title")] string Title,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("duration_type")] string DurationType,
     [property: JsonPropertyName("begin_time")] long BeginTime,
     [property: JsonPropertyName("end_time")] long EndTime,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_level")] string ProductLevel,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("participation_limit")] IReadOnlyList<PromotionUpdateActivityRequestParticipationLimit> ParticipationLimit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount")] PromotionUpdateActivityRequestDiscount Discount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("target_user_info")] PromotionUpdateActivityRequestTargetUserInfo TargetUserInfo);
 
 public sealed record PromotionUpdateActivityRequestParticipationLimit(
     [property: JsonPropertyName("type")] string Type);
 
 public sealed record PromotionUpdateActivityRequestDiscount(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_discount")] PromotionUpdateActivityRequestDiscountShippingDiscount ShippingDiscount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("bmsm_discount")] PromotionUpdateActivityRequestDiscountBmsmDiscount BmsmDiscount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("gift_discount")] PromotionUpdateActivityRequestDiscountGiftDiscount GiftDiscount,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("bxgy_discount")] PromotionUpdateActivityRequestDiscountBxgyDiscount BxgyDiscount);
 
 public sealed record PromotionUpdateActivityRequestDiscountShippingDiscount(
     [property: JsonPropertyName("threshold_type")] string ThresholdType,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("threshold_value")] string ThresholdValue,
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("value")] string Value,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_method")] string ShippingMethod,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("inventory_type")] string InventoryType,
     [property: JsonPropertyName("area_scope")] PromotionUpdateActivityRequestDiscountShippingDiscountAreaScope AreaScope);
 
 public sealed record PromotionUpdateActivityRequestDiscountShippingDiscountAreaScope(
     [property: JsonPropertyName("type")] string Type,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("specific_areas")] IReadOnlyList<string> SpecificAreas);
 
 public sealed record PromotionUpdateActivityRequestDiscountBmsmDiscount(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("details")] IReadOnlyList<PromotionUpdateActivityRequestDiscountBmsmDiscountDetails> Details);
 
 public sealed record PromotionUpdateActivityRequestDiscountBmsmDiscountDetails(
@@ -455,9 +503,11 @@ public sealed record PromotionUpdateActivityRequestDiscountBxgyDiscount(
     [property: JsonPropertyName("discount_type")] string DiscountType,
     [property: JsonPropertyName("discount_value")] string DiscountValue,
     [property: JsonPropertyName("benefit_max_applicable_quantity")] string BenefitMaxApplicableQuantity,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("benefit_max_applicable_times")] string BenefitMaxApplicableTimes);
 
 public sealed record PromotionUpdateActivityRequestTargetUserInfo(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("user_type")] string UserType);
 
 
@@ -562,11 +612,16 @@ public sealed record PromotionSearchCouponsRequest(
     [property: JsonPropertyName("app_key")] string AppKey,
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("status")] IReadOnlyList<string> Status,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("title_keyword")] string TitleKeyword,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("display_type")] IReadOnlyList<string> DisplayType);
 
 

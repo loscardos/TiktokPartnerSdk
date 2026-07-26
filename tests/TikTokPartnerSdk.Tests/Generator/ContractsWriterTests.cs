@@ -88,4 +88,36 @@ public sealed class ContractsWriterTests
         output.Should().Contain("[property: JsonPropertyName(\"24h_live_gmv\")] AnalyticsGetShopLivePerformanceListResponseDataValue24hLiveGmv Value24hLiveGmv");
         output.Should().NotContain(" 24hLiveGmv");
     }
+
+    [Fact]
+    public void Optional_contract_members_should_omit_default_values()
+    {
+        var endpoint = new SchemaEndpoint(
+            "product.202309.update_inventory",
+            "Product",
+            "product",
+            "/product/202309/products/{product_id}/inventory/update",
+            "POST",
+            "seller",
+            "seller",
+            "body",
+            ["x-tts-access-token", "content-type"],
+            [
+                new SchemaParameter("quantity", "int", true, "body", []),
+                new SchemaParameter("backorder_quantity", "int", false, "body", [])
+            ],
+            []);
+
+        var output = new ContractsWriter().WriteModule(
+            "Product",
+            "product",
+            [endpoint]);
+
+        output.Should().Contain(
+            "[property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]");
+        output.Should().Contain(
+            "[property: JsonPropertyName(\"backorder_quantity\")] long BackorderQuantity");
+        output.Should().NotContain(
+            "JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]\n    [property: JsonPropertyName(\"quantity\")]");
+    }
 }
