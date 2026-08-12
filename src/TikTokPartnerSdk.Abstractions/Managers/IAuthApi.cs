@@ -1,6 +1,6 @@
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
-namespace TikTokPartnerSdk.Abstractions.Managers;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 
 public interface IAuthApi
 {

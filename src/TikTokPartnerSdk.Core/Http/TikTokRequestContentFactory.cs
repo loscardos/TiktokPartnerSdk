@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace TikTokPartnerSdk.Core.Http;
+namespace Loscardos.TikTokPartnerSdk.Core.Http;
 
 public sealed class TikTokRequestContentFactory
 {

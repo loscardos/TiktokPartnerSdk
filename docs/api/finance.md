@@ -3,20 +3,20 @@
 Use `IFinanceApi` for payments, statements, withdrawals, and transaction lookup.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Finance;
-using FinanceApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IFinanceApi;
+using Loscardos.TikTokPartnerSdk.Generated.Finance;
+using FinanceApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IFinanceApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IFinanceApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IFinanceApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Finance
+Loscardos.TikTokPartnerSdk.Generated.Finance
 ```
 
 ## Common Operations

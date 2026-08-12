@@ -3,20 +3,20 @@
 Use `ICustomerEngagementApi` for customer engagement tasks, templates, and performance reporting.
 
 ```csharp
-using TikTokPartnerSdk.Generated.CustomerEngagement;
-using CustomerEngagementApi = TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerEngagementApi;
+using Loscardos.TikTokPartnerSdk.Generated.CustomerEngagement;
+using CustomerEngagementApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerEngagementApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerEngagementApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerEngagementApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.CustomerEngagement
+Loscardos.TikTokPartnerSdk.Generated.CustomerEngagement
 ```
 
 ## Common Operations

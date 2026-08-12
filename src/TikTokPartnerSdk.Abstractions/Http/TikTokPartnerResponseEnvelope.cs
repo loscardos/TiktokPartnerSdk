@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace TikTokPartnerSdk.Abstractions.Http;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Http;
 
 public sealed record TikTokPartnerResponseEnvelope<TData>(
     [property: JsonPropertyName("code")]

@@ -1,8 +1,8 @@
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Pagination;
-using TikTokPartnerSdk.Generated.Order;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Pagination;
+using Loscardos.TikTokPartnerSdk.Generated.Order;
 
-namespace TikTokPartnerSdk.Abstractions.Managers;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 
 public interface IOrderManager
 {

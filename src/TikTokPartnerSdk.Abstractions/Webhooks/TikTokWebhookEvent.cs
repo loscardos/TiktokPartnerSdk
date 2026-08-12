@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace TikTokPartnerSdk.Abstractions.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
 public sealed record TikTokWebhookEvent(
     [property: JsonPropertyName("type")] long Type,

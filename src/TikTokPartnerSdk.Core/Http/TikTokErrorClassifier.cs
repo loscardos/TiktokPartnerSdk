@@ -1,7 +1,7 @@
 using System.Net;
-using TikTokPartnerSdk.Abstractions.Errors;
+using Loscardos.TikTokPartnerSdk.Abstractions.Errors;
 
-namespace TikTokPartnerSdk.Core.Http;
+namespace Loscardos.TikTokPartnerSdk.Core.Http;
 
 public static class TikTokErrorClassifier
 {

@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Core.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Core.Webhooks;
 
 public sealed class TikTokWebhookOptions
 {

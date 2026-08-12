@@ -3,20 +3,20 @@
 Use `IToolsApi` for file upload initialization.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Tools;
-using ToolsApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IToolsApi;
+using Loscardos.TikTokPartnerSdk.Generated.Tools;
+using ToolsApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IToolsApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IToolsApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IToolsApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Tools
+Loscardos.TikTokPartnerSdk.Generated.Tools
 ```
 
 ## Common Operations

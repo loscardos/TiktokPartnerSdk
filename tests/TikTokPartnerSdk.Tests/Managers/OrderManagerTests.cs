@@ -1,14 +1,14 @@
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
-using TikTokPartnerSdk.Core.Auth;
-using TikTokPartnerSdk.Core.Managers;
-using TikTokPartnerSdk.Generated.Order;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Auth;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
+using Loscardos.TikTokPartnerSdk.Generated.Order;
 
-namespace TikTokPartnerSdk.Tests.Managers;
+namespace Loscardos.TikTokPartnerSdk.Tests.Managers;
 
 public sealed class OrderManagerTests
 {

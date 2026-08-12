@@ -3,20 +3,20 @@
 Use `ISellerApi` for seller shop metadata and permissions.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Seller;
-using SellerApi = TikTokPartnerSdk.Abstractions.Managers.Generated.ISellerApi;
+using Loscardos.TikTokPartnerSdk.Generated.Seller;
+using SellerApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ISellerApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.ISellerApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ISellerApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Seller
+Loscardos.TikTokPartnerSdk.Generated.Seller
 ```
 
 ## Common Operations

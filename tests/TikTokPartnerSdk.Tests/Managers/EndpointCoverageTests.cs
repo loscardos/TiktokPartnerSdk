@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
 
-namespace TikTokPartnerSdk.Tests.Managers;
+namespace Loscardos.TikTokPartnerSdk.Tests.Managers;
 
 public sealed class EndpointCoverageTests
 {
@@ -78,7 +78,7 @@ public sealed class EndpointCoverageTests
 
         var generatedMethods = typeof(ISellerApi).Assembly
             .GetTypes()
-            .Where(static type => type.Namespace == "TikTokPartnerSdk.Abstractions.Managers.Generated")
+            .Where(static type => type.Namespace == "Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated")
             .SelectMany(static type => type.GetMethods())
             .Count(static method => method.Name.EndsWith("Async", StringComparison.Ordinal));
 

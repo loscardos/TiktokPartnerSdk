@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Generated.Webhooks;
+using Loscardos.TikTokPartnerSdk.Generated.Webhooks;
 
-namespace TikTokPartnerSdk.Tests.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Tests.Webhooks;
 
 public sealed class TikTokWebhookTypedContractsTests
 {
@@ -10,7 +10,7 @@ public sealed class TikTokWebhookTypedContractsTests
     {
         var dataTypes = typeof(TikTokOrderStatusChangeWebhookData).Assembly
             .GetTypes()
-            .Where(type => type.Namespace == "TikTokPartnerSdk.Generated.Webhooks")
+            .Where(type => type.Namespace == "Loscardos.TikTokPartnerSdk.Generated.Webhooks")
             .Where(type => type.IsClass && type.Name.EndsWith("WebhookData", StringComparison.Ordinal))
             .Select(type => type.Name)
             .ToArray();

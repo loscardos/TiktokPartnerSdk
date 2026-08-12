@@ -1,11 +1,11 @@
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
-using TikTokPartnerSdk.Abstractions.Pagination;
-using TikTokPartnerSdk.Core.Auth;
-using TikTokPartnerSdk.Generated.Product;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Abstractions.Pagination;
+using Loscardos.TikTokPartnerSdk.Core.Auth;
+using Loscardos.TikTokPartnerSdk.Generated.Product;
 
-namespace TikTokPartnerSdk.Core.Managers;
+namespace Loscardos.TikTokPartnerSdk.Core.Managers;
 
 public sealed class ProductManager(
     IProductApi productApi,

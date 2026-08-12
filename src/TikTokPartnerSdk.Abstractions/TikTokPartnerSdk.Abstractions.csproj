@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TikTokPartnerSdk.Abstractions</RootNamespace>
+    <RootNamespace>Loscardos.TikTokPartnerSdk.Abstractions</RootNamespace>
     <Description>Core abstractions for the TikTok Partner SDK runtime, auth, and generated APIs.</Description>
   </PropertyGroup>
   <ItemGroup>

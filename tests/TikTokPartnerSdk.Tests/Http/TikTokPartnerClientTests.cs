@@ -2,14 +2,14 @@ using FluentAssertions;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Text;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Core.RateLimiting;
-using TikTokPartnerSdk.Core.Crypto;
-using TikTokPartnerSdk.Core.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Core.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Core.Crypto;
+using Loscardos.TikTokPartnerSdk.Core.Http;
 
-namespace TikTokPartnerSdk.Tests.Http;
+namespace Loscardos.TikTokPartnerSdk.Tests.Http;
 
 public sealed class TikTokPartnerClientTests
 {

@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
-namespace TikTokPartnerSdk.Storage.EntityFramework.Tests;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework.Tests;
 
 public sealed class TikTokEntityFrameworkStorageServiceCollectionExtensionsTests
 {

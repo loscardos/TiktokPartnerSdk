@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.Errors;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Errors;
 
 public sealed class TikTokApiException : Exception
 {

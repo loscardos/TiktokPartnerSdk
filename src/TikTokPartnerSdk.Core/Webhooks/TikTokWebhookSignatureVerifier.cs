@@ -1,10 +1,10 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
-namespace TikTokPartnerSdk.Core.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Core.Webhooks;
 
 public sealed class TikTokWebhookSignatureVerifier(IOptions<TikTokPartnerOptions> options)
     : ITikTokWebhookSignatureVerifier
