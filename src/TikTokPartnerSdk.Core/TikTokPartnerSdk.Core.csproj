@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TikTokPartnerSdk.Core</RootNamespace>
+    <RootNamespace>Loscardos.TikTokPartnerSdk.Core</RootNamespace>
     <Description>Runtime HTTP, auth, token, and generated manager implementations for TikTok Partner SDK.</Description>
   </PropertyGroup>
   <ItemGroup>

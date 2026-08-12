@@ -1,9 +1,9 @@
 using FluentAssertions;
 using System.Net;
-using TikTokPartnerSdk.Abstractions.Errors;
-using TikTokPartnerSdk.Core.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Errors;
+using Loscardos.TikTokPartnerSdk.Core.Http;
 
-namespace TikTokPartnerSdk.Tests.Http;
+namespace Loscardos.TikTokPartnerSdk.Tests.Http;
 
 public sealed class TikTokErrorClassifierTests
 {

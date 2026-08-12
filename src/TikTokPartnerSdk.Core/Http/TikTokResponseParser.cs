@@ -1,8 +1,8 @@
 using System.Text.Json;
-using TikTokPartnerSdk.Abstractions.Errors;
-using TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Errors;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 
-namespace TikTokPartnerSdk.Core.Http;
+namespace Loscardos.TikTokPartnerSdk.Core.Http;
 
 public sealed class TikTokResponseParser
 {

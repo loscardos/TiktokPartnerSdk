@@ -3,14 +3,14 @@
 Use `IProductManager` for token-aware product search and detail workflows. Use generated `IProductApi` for full product endpoint coverage.
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 ```
 
 ## Polished Manager
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.IProductManager
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.IProductManager
 ```
 
 `IProductManager` supports:
@@ -22,13 +22,13 @@ TikTokPartnerSdk.Abstractions.Managers.IProductManager
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IProductApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IProductApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Product
+Loscardos.TikTokPartnerSdk.Generated.Product
 ```
 
 ## Common Operations

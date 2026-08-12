@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.RateLimiting;
 
-namespace TikTokPartnerSdk.Core.RateLimiting;
+namespace Loscardos.TikTokPartnerSdk.Core.RateLimiting;
 
 public sealed class FixedWindowTikTokRateLimiter(IOptions<TikTokPartnerOptions> options) : ITikTokRateLimiter
 {

@@ -1,7 +1,7 @@
 using System.Globalization;
-using TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
 
-namespace TikTokPartnerSdk.Core.Http;
+namespace Loscardos.TikTokPartnerSdk.Core.Http;
 
 public sealed class TikTokRequestUriBuilder
 {

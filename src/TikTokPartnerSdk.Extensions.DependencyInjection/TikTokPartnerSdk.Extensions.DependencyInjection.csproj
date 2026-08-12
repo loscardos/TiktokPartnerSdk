@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TikTokPartnerSdk.Extensions.DependencyInjection</RootNamespace>
+    <RootNamespace>Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection</RootNamespace>
     <Description>ASP.NET Core dependency injection helpers for TikTok Partner SDK.</Description>
   </PropertyGroup>
   <ItemGroup>

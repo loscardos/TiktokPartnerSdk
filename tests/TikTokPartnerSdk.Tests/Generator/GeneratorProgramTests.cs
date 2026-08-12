@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Generator;
+namespace Loscardos.TikTokPartnerSdk.Tests.Generator;
 
 public sealed class GeneratorProgramTests
 {
@@ -20,7 +20,7 @@ public sealed class GeneratorProgramTests
 
         Directory.CreateDirectory(outputDirectory);
 
-        var exitCode = TikTokPartnerSdk.Generator.Program.Main(
+        var exitCode = Loscardos.TikTokPartnerSdk.Generator.Program.Main(
         [
             "coverage",
             schemaDirectory,
@@ -47,7 +47,7 @@ public sealed class GeneratorProgramTests
 
         Directory.CreateDirectory(outputDirectory);
 
-        var exitCode = TikTokPartnerSdk.Generator.Program.Main(
+        var exitCode = Loscardos.TikTokPartnerSdk.Generator.Program.Main(
         [
             "coverage",
             schemaDirectory,

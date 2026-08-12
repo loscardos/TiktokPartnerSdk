@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Generator;
+namespace Loscardos.TikTokPartnerSdk.Tests.Generator;
 
 public sealed class NestedContractsWriterTests
 {

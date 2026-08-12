@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using Microsoft.AspNetCore.Mvc;
-using TikTokPartnerSdk.Abstractions.Webhooks;
-using TikTokPartnerSdk.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

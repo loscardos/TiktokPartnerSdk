@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TikTokPartnerSdk.Generator</RootNamespace>
+    <RootNamespace>Loscardos.TikTokPartnerSdk.Generator</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 </Project>

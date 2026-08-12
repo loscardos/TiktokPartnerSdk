@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace TikTokPartnerSdk.Core.Crypto;
+namespace Loscardos.TikTokPartnerSdk.Core.Crypto;
 
 public sealed class TikTokRequestSigner
 {

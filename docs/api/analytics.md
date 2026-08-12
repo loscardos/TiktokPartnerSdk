@@ -3,20 +3,20 @@
 Use `IAnalyticsApi` for shop, product, live, video, and traffic analytics.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Analytics;
-using AnalyticsApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IAnalyticsApi;
+using Loscardos.TikTokPartnerSdk.Generated.Analytics;
+using AnalyticsApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IAnalyticsApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IAnalyticsApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IAnalyticsApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Analytics
+Loscardos.TikTokPartnerSdk.Generated.Analytics
 ```
 
 ## Common Operations

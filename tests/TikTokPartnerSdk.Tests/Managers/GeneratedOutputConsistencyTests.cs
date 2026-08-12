@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Managers;
+namespace Loscardos.TikTokPartnerSdk.Tests.Managers;
 
 public sealed class GeneratedOutputConsistencyTests
 {

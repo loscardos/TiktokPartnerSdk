@@ -1,16 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
-using TikTokPartnerSdk.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Generated.Authorization;
-using TikTokPartnerSdk.Generated.Event;
-using TikTokPartnerSdk.Generated.Finance;
-using TikTokPartnerSdk.Generated.Fulfillment;
-using TikTokPartnerSdk.Generated.Logistics;
-using TikTokPartnerSdk.Generated.ReturnAndRefund;
-using TikTokPartnerSdk.Generated.Seller;
-using TikTokPartnerSdk.SampleConsole;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Generated.Authorization;
+using Loscardos.TikTokPartnerSdk.Generated.Event;
+using Loscardos.TikTokPartnerSdk.Generated.Finance;
+using Loscardos.TikTokPartnerSdk.Generated.Fulfillment;
+using Loscardos.TikTokPartnerSdk.Generated.Logistics;
+using Loscardos.TikTokPartnerSdk.Generated.ReturnAndRefund;
+using Loscardos.TikTokPartnerSdk.Generated.Seller;
+using Loscardos.TikTokPartnerSdk.SampleConsole;
 
 var command = args.FirstOrDefault() ?? "help";
 if (command is "help" or "--help" or "-h")

@@ -5,7 +5,7 @@ TikTok Shop Partner API uses an authorization code flow. The SDK provides `IAuth
 ## Build the Authorization URL
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 
 var redirectUri = new Uri("https://example.com/tiktok/callback");
 var url = authApi.BuildAuthorizationUrl(redirectUri, state: "csrf-state");
@@ -18,7 +18,7 @@ Send the seller to `url`. After authorization, TikTok redirects back with `code`
 TikTok access tokens are stored against a `TikTokAuthorizationContext`. For seller APIs, include the authorized shop cipher.
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
 var context = new TikTokAuthorizationContext(
     TikTokAccessTokenKind.Seller,

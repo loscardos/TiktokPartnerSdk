@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Generated.Webhooks;
+using Loscardos.TikTokPartnerSdk.Generated.Webhooks;
 
-namespace TikTokPartnerSdk.Tests.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Tests.Webhooks;
 
 public sealed class TikTokWebhookCatalogTests
 {

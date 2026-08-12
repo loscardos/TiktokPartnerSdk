@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.IntegrationTests;
+namespace Loscardos.TikTokPartnerSdk.IntegrationTests;
 
 public sealed class TikTokSandboxFactAttribute : FactAttribute
 {

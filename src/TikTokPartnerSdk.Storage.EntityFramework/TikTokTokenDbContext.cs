@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace TikTokPartnerSdk.Storage.EntityFramework;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 public sealed class TikTokTokenDbContext(DbContextOptions<TikTokTokenDbContext> options) : DbContext(options)
 {

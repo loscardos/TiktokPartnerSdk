@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace TikTokPartnerSdk.Abstractions.Pagination;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Pagination;
 
 public static class TikTokPagedEnumerable
 {

@@ -31,6 +31,22 @@ cat > "$consumer_dir/NuGet.config" <<EOF
 EOF
 
 dotnet add "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" package Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection --version "$version" --no-restore
+
+cat > "$consumer_dir/TikTokPartnerSdk.PackageSmoke/Program.cs" <<'CS'
+using Microsoft.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
+
+var services = new ServiceCollection();
+services.AddTikTokPartnerSdk(options =>
+{
+    options.AppKey = "package-smoke";
+    options.AppSecret = "package-smoke";
+});
+
+Console.WriteLine(typeof(TikTokPartnerOptions).FullName);
+CS
+
 dotnet restore "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" --configfile "$consumer_dir/NuGet.config"
 dotnet build "$consumer_dir/TikTokPartnerSdk.PackageSmoke/TikTokPartnerSdk.PackageSmoke.csproj" --no-restore
 

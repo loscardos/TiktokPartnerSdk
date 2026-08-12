@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.SampleConsole;
+namespace Loscardos.TikTokPartnerSdk.SampleConsole;
 
 public enum CertificationStatus
 {

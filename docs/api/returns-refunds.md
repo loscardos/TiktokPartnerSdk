@@ -3,20 +3,20 @@
 Use `IReturnAndRefundApi` for cancellation, return, refund, and eligibility workflows.
 
 ```csharp
-using TikTokPartnerSdk.Generated.ReturnAndRefund;
-using ReturnAndRefundApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IReturnAndRefundApi;
+using Loscardos.TikTokPartnerSdk.Generated.ReturnAndRefund;
+using ReturnAndRefundApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IReturnAndRefundApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IReturnAndRefundApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IReturnAndRefundApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.ReturnAndRefund
+Loscardos.TikTokPartnerSdk.Generated.ReturnAndRefund
 ```
 
 ## Common Operations

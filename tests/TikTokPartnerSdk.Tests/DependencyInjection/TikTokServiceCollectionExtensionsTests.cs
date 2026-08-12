@@ -1,11 +1,11 @@
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
-using TikTokPartnerSdk.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
 
-namespace TikTokPartnerSdk.Tests.DependencyInjection;
+namespace Loscardos.TikTokPartnerSdk.Tests.DependencyInjection;
 
 public sealed class TikTokServiceCollectionExtensionsTests
 {

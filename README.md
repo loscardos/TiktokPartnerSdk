@@ -35,8 +35,8 @@ dotnet add package Loscardos.TikTokPartnerSdk.Generated --prerelease
 ## Quick Start
 
 ```csharp
-using TikTokPartnerSdk.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Storage.EntityFramework;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 builder.Services.AddTikTokPartnerSdk(options =>
 {
@@ -53,7 +53,7 @@ Applications must register an `ITikTokTokenStore`. The EF storage package is pro
 ## Auth Flow
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 
 var authorizeUrl = authApi.BuildAuthorizationUrl(
     new Uri("https://example.com/tiktok/callback"),
@@ -63,7 +63,7 @@ var authorizeUrl = authApi.BuildAuthorizationUrl(
 After TikTok redirects back with `code` and `shop_region`, exchange the code and associate the token with the authorized shop cipher:
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
 var context = new TikTokAuthorizationContext(
     TikTokAccessTokenKind.Seller,
@@ -83,14 +83,14 @@ Persisted tokens are used by token-aware managers and refreshed through `TikTokT
 The SDK exposes two API surfaces:
 
 - Polished managers for common seller workflows: orders and products.
-- Generated managers for full SDK endpoint coverage. Generated managers live under `TikTokPartnerSdk.Abstractions.Managers.Generated` and use DTOs from `TikTokPartnerSdk.Generated.<Module>`.
+- Generated managers for full SDK endpoint coverage. Generated managers live under `Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated` and use DTOs from `Loscardos.TikTokPartnerSdk.Generated.<Module>`.
 - Webhooks primitives for raw payload verification, timestamp validation, idempotency keys, and typed event parsing.
 
 Example using the token-aware order manager:
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 
 public sealed class OrderSync(IOrderManager orders)
 {
@@ -112,8 +112,8 @@ public sealed class OrderSync(IOrderManager orders)
 Example using a generated seller manager:
 
 ```csharp
-using TikTokPartnerSdk.Generated.Seller;
-using GeneratedSellerApi = TikTokPartnerSdk.Abstractions.Managers.Generated.ISellerApi;
+using Loscardos.TikTokPartnerSdk.Generated.Seller;
+using GeneratedSellerApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ISellerApi;
 
 public sealed class ShopSync(GeneratedSellerApi sellerApi)
 {

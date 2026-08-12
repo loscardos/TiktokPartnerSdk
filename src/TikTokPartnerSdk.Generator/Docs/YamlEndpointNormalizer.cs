@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace TikTokPartnerSdk.Generator;
+namespace Loscardos.TikTokPartnerSdk.Generator;
 
 public sealed partial class YamlEndpointNormalizer
 {

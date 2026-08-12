@@ -1,23 +1,32 @@
-name: package
+name: private-package
 
 on:
-  workflow_dispatch:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - production
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: tiktok-partner-sdk-package-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  pack:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - run: dotnet restore TikTokPartnerSdk.sln
-      - run: bash scripts/verify-packages.sh
-      - run: dotnet pack TikTokPartnerSdk.sln --no-restore -c Release -o artifacts/packages
-      - uses: actions/upload-artifact@v4
-        with:
-          name: tiktokpackages
-          path: artifacts/packages
+      - name: Restore package projects
+        run: dotnet restore TikTokPartnerSdk.sln
+      - name: Pack immutable Loscardos packages
+        run: bash scripts/pack-local.sh
+      - name: Publish to private GitHub Packages feed
+        run: >-
+          dotnet nuget push "artifacts/packages/*.nupkg"
+          --source https://nuget.pkg.github.com/loscardos/index.json
+          --api-key "${{ secrets.GITHUB_TOKEN }}"

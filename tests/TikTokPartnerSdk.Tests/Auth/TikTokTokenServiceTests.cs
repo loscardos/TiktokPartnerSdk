@@ -1,11 +1,11 @@
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Core.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Core.Auth;
 
-namespace TikTokPartnerSdk.Tests.Auth;
+namespace Loscardos.TikTokPartnerSdk.Tests.Auth;
 
 public sealed class TikTokTokenServiceTests
 {

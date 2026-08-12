@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Core.Http;
+using Loscardos.TikTokPartnerSdk.Core.Http;
 
-namespace TikTokPartnerSdk.Tests.Http;
+namespace Loscardos.TikTokPartnerSdk.Tests.Http;
 
 public sealed class TikTokRequestContentFactoryTests
 {

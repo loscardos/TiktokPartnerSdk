@@ -4,11 +4,17 @@
     <Company>Loscardos</Company>
     <Product>TikTok Partner SDK for .NET</Product>
     <PackageId>Loscardos.$(MSBuildProjectName)</PackageId>
+    <AssemblyName>Loscardos.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Loscardos.$(MSBuildProjectName)</RootNamespace>
     <Description>ASP.NET-friendly TikTok Shop Partner SDK for .NET.</Description>
     <PackageTags>tiktok;tiktok-shop;partner-sdk;ecommerce</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/loscardos/tiktokpartnersdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>

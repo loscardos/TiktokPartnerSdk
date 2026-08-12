@@ -3,14 +3,14 @@
 Use `IOrderManager` for token-aware order search and detail workflows. Use generated `IOrderApi` when you need direct endpoint coverage.
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 ```
 
 ## Polished Manager
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.IOrderManager
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.IOrderManager
 ```
 
 `IOrderManager` supports:
@@ -22,13 +22,13 @@ TikTokPartnerSdk.Abstractions.Managers.IOrderManager
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IOrderApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IOrderApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Order
+Loscardos.TikTokPartnerSdk.Generated.Order
 ```
 
 ## Example
