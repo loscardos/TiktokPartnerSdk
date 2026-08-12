@@ -15,6 +15,6 @@ This documentation follows the same structure as `ShopeeSdk`: short task-focused
 
 ## API Categories
 
-Generated managers live in `TikTokPartnerSdk.Abstractions.Managers.Generated`. Request and response contracts live in `TikTokPartnerSdk.Generated.<Category>`.
+Generated managers live in `Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated`. Request and response contracts live in `Loscardos.TikTokPartnerSdk.Generated.<Category>`.
 
 - [API Category Index](api/README.md)

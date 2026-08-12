@@ -2,11 +2,11 @@ using System.Net;
 using System.Text;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Core.Http;
-using TikTokPartnerSdk.Core.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Core.Http;
+using Loscardos.TikTokPartnerSdk.Core.RateLimiting;
 
-namespace TikTokPartnerSdk.Tests.Http;
+namespace Loscardos.TikTokPartnerSdk.Tests.Http;
 
 public sealed class TikTokAuthClientTests
 {

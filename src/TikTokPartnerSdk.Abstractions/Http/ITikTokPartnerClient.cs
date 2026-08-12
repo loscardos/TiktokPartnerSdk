@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.Http;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Http;
 
 public interface ITikTokPartnerClient
 {

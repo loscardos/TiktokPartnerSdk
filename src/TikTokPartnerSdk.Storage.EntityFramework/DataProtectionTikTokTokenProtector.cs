@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.DataProtection;
 
-namespace TikTokPartnerSdk.Storage.EntityFramework;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 public sealed class DataProtectionTikTokTokenProtector : ITikTokTokenProtector
 {
@@ -8,7 +8,7 @@ public sealed class DataProtectionTikTokTokenProtector : ITikTokTokenProtector
 
     public DataProtectionTikTokTokenProtector(IDataProtectionProvider provider)
     {
-        _protector = provider.CreateProtector("TikTokPartnerSdk.Storage.EntityFramework.Tokens.v1");
+        _protector = provider.CreateProtector("Loscardos.TikTokPartnerSdk.Storage.EntityFramework.Tokens.v1");
     }
 
     public string Protect(string value) => _protector.Protect(value);

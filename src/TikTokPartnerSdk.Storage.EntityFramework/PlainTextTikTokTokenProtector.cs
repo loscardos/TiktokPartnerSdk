@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Storage.EntityFramework;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 public sealed class PlainTextTikTokTokenProtector : ITikTokTokenProtector
 {

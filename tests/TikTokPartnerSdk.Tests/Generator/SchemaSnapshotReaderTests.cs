@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Generator;
+using Loscardos.TikTokPartnerSdk.Generator;
 
-namespace TikTokPartnerSdk.Tests.Generator;
+namespace Loscardos.TikTokPartnerSdk.Tests.Generator;
 
 public sealed class SchemaSnapshotReaderTests
 {

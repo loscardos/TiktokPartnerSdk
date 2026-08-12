@@ -1,15 +1,15 @@
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Core.Auth;
-using TikTokPartnerSdk.Core.Managers;
-using TikTokPartnerSdk.Core.Managers.Generated;
-using TikTokPartnerSdk.Generated.Product;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Core.Auth;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
+using Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Generated.Product;
 
-namespace TikTokPartnerSdk.Tests.Managers;
+namespace Loscardos.TikTokPartnerSdk.Tests.Managers;
 
 public sealed class ProductManagerTests
 {

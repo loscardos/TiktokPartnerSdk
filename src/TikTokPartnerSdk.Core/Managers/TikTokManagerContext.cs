@@ -1,6 +1,6 @@
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
-namespace TikTokPartnerSdk.Core.Managers;
+namespace Loscardos.TikTokPartnerSdk.Core.Managers;
 
 internal static class TikTokManagerContext
 {

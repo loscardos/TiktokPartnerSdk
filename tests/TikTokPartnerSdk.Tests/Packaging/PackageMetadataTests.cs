@@ -1,7 +1,7 @@
 using System.Xml.Linq;
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Packaging;
+namespace Loscardos.TikTokPartnerSdk.Tests.Packaging;
 
 public sealed class PackageMetadataTests
 {
@@ -14,12 +14,42 @@ public sealed class PackageMetadataTests
         xml.Should().Contain("<Authors>");
         xml.Should().Contain("<Company>Loscardos</Company>");
         xml.Should().Contain("<PackageId>Loscardos.$(MSBuildProjectName)</PackageId>");
+        xml.Should().Contain("<AssemblyName>Loscardos.$(MSBuildProjectName)</AssemblyName>");
+        xml.Should().Contain("<RootNamespace>Loscardos.$(MSBuildProjectName)</RootNamespace>");
         xml.Should().Contain("<PackageLicenseExpression>");
         xml.Should().Contain("<RepositoryUrl>");
         xml.Should().NotContain("example.invalid");
         xml.Should().Contain("<PackageReadmeFile>");
         xml.Should().Contain("<GenerateDocumentationFile>true</GenerateDocumentationFile>");
         xml.Should().Contain("<Version>0.1.0-preview</Version>");
+    }
+
+    [Fact]
+    public void Shipping_source_and_publication_workflow_should_use_loscardos_identity()
+    {
+        var shippingSource = Directory
+            .EnumerateFiles(Path.Combine(TestPaths.RepositoryRoot, "src"), "*.cs", SearchOption.AllDirectories)
+            .Where(path => !path.Contains("TikTokPartnerSdk.Generator", StringComparison.Ordinal))
+            .Select(File.ReadAllText)
+            .ToArray();
+
+        shippingSource.Should().NotContain(source =>
+            source.Contains("namespace TikTokPartnerSdk.", StringComparison.Ordinal) ||
+            source.Contains("using TikTokPartnerSdk.", StringComparison.Ordinal));
+        shippingSource.Should().Contain(source =>
+            source.Contains("namespace Loscardos.TikTokPartnerSdk.", StringComparison.Ordinal));
+
+        var packageWorkflow = File.ReadAllText(Path.Combine(
+            TestPaths.RepositoryRoot,
+            ".github",
+            "workflows",
+            "package.yml"));
+        packageWorkflow.Should().Contain("branches:");
+        packageWorkflow.Should().Contain("- production");
+        packageWorkflow.Should().Contain("packages: write");
+        packageWorkflow.Should().Contain("nuget.pkg.github.com/loscardos/index.json");
+        packageWorkflow.Should().NotContain("dotnet test");
+        packageWorkflow.Should().NotContain("tags:");
     }
 
     [Fact]

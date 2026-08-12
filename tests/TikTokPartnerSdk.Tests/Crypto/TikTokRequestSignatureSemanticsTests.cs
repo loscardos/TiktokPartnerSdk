@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Core.Crypto;
+using Loscardos.TikTokPartnerSdk.Core.Crypto;
 
-namespace TikTokPartnerSdk.Tests.Crypto;
+namespace Loscardos.TikTokPartnerSdk.Tests.Crypto;
 
 public sealed class TikTokRequestSignatureSemanticsTests
 {

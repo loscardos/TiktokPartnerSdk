@@ -1,8 +1,8 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
 
-namespace TikTokPartnerSdk.Tests.Configuration;
+namespace Loscardos.TikTokPartnerSdk.Tests.Configuration;
 
 public sealed class TikTokPartnerOptionsTests
 {

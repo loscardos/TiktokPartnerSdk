@@ -1,6 +1,6 @@
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
-namespace TikTokPartnerSdk.Abstractions.Http;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Http;
 
 public sealed record TikTokPartnerRequest(
     HttpMethod Method,

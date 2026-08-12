@@ -1,9 +1,9 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Abstractions.Pagination;
-using TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Pagination;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
-namespace TikTokPartnerSdk.Tests.PublicApi;
+namespace Loscardos.TikTokPartnerSdk.Tests.PublicApi;
 
 public sealed class PublicApiSurfaceTests
 {

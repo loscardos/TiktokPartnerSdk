@@ -3,7 +3,7 @@
 The SDK stores tokens through `ITikTokTokenStore`.
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
 public interface ITikTokTokenStore
 {
@@ -28,7 +28,7 @@ dotnet add package Loscardos.TikTokPartnerSdk.Storage.EntityFramework --prerelea
 Then register:
 
 ```csharp
-using TikTokPartnerSdk.Storage.EntityFramework;
+using Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 builder.Services.AddTikTokEntityFrameworkTokenStorage();
 ```

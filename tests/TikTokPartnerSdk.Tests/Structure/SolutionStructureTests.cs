@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Structure;
+namespace Loscardos.TikTokPartnerSdk.Tests.Structure;
 
 public sealed class SolutionStructureTests
 {
@@ -42,12 +42,15 @@ public sealed class SolutionStructureTests
     }
 
     [Fact]
-    public void Package_workflow_should_pack_and_publish_artifacts()
+    public void Package_workflow_should_publish_preverified_packages_only_from_production()
     {
         var workflow = File.ReadAllText(Path.Combine(TestPaths.RepositoryRoot, ".github", "workflows", "package.yml"));
 
-        workflow.Should().Contain("dotnet pack");
-        workflow.Should().Contain("scripts/verify-packages.sh");
-        workflow.Should().Contain("upload-artifact");
+        workflow.Should().Contain("- production");
+        workflow.Should().Contain("scripts/pack-local.sh");
+        workflow.Should().Contain("nuget.pkg.github.com/loscardos/index.json");
+        workflow.Should().Contain("packages: write");
+        workflow.Should().NotContain("dotnet test");
+        workflow.Should().NotContain("upload-artifact");
     }
 }

@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Generator;
+namespace Loscardos.TikTokPartnerSdk.Generator;
 
 public sealed record YamlDocsEndpoint(
     string ModuleName,

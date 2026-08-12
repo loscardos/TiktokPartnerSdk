@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Storage.EntityFramework;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 public interface ITikTokTokenProtector
 {

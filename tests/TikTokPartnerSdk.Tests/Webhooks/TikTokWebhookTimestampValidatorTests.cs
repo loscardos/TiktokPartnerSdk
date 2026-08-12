@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Webhooks;
-using TikTokPartnerSdk.Core.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Core.Webhooks;
 
-namespace TikTokPartnerSdk.Tests.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Tests.Webhooks;
 
 public sealed class TikTokWebhookTimestampValidatorTests
 {

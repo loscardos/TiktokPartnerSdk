@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TikTokPartnerSdk.SampleConsole;
+namespace Loscardos.TikTokPartnerSdk.SampleConsole;
 
 public enum EndpointClassification
 {

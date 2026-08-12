@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TikTokPartnerSdk.Generated</RootNamespace>
+    <RootNamespace>Loscardos.TikTokPartnerSdk.Generated</RootNamespace>
     <Description>Committed generated DTO contracts for the TikTok Partner SDK.</Description>
   </PropertyGroup>
 </Project>

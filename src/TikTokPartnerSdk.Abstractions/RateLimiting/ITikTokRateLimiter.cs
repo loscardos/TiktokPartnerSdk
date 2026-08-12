@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.RateLimiting;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.RateLimiting;
 
 public interface ITikTokRateLimiter
 {

@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.Pagination;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Pagination;
 
 public sealed record TikTokPage<TItem>(
     IReadOnlyList<TItem> Items,

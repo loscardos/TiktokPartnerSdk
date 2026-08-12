@@ -4,7 +4,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace TikTokPartnerSdk.Generated.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Generated.Webhooks;
 
 public sealed record TikTokOrderStatusChangeWebhookData(
     [property: JsonPropertyName(@"order_id")] string? OrderId,

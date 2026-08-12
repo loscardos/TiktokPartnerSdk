@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.SampleConsole;
+using Loscardos.TikTokPartnerSdk.SampleConsole;
 
-namespace TikTokPartnerSdk.Tests.SampleConsole;
+namespace Loscardos.TikTokPartnerSdk.Tests.SampleConsole;
 
 public sealed class SandboxEnvFileTests
 {

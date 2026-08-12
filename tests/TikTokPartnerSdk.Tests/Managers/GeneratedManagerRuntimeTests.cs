@@ -1,27 +1,27 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Core.Managers.Generated;
-using TikTokPartnerSdk.Generated.AffiliateCreator;
-using TikTokPartnerSdk.Generated.AffiliatePartner;
-using TikTokPartnerSdk.Generated.AffiliateSeller;
-using TikTokPartnerSdk.Generated.Analytics;
-using TikTokPartnerSdk.Generated.Authorization;
-using TikTokPartnerSdk.Generated.CustomerEngagement;
-using TikTokPartnerSdk.Generated.CustomerService;
-using TikTokPartnerSdk.Generated.Event;
-using TikTokPartnerSdk.Generated.Finance;
-using TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
-using TikTokPartnerSdk.Generated.Fulfillment;
-using TikTokPartnerSdk.Generated.Logistics;
-using TikTokPartnerSdk.Generated.Order;
-using TikTokPartnerSdk.Generated.Product;
-using TikTokPartnerSdk.Generated.Promotion;
-using TikTokPartnerSdk.Generated.ReturnAndRefund;
-using TikTokPartnerSdk.Generated.Seller;
-using TikTokPartnerSdk.Generated.SupplyChain;
-using TikTokPartnerSdk.Generated.Tools;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Generated.AffiliateCreator;
+using Loscardos.TikTokPartnerSdk.Generated.AffiliatePartner;
+using Loscardos.TikTokPartnerSdk.Generated.AffiliateSeller;
+using Loscardos.TikTokPartnerSdk.Generated.Analytics;
+using Loscardos.TikTokPartnerSdk.Generated.Authorization;
+using Loscardos.TikTokPartnerSdk.Generated.CustomerEngagement;
+using Loscardos.TikTokPartnerSdk.Generated.CustomerService;
+using Loscardos.TikTokPartnerSdk.Generated.Event;
+using Loscardos.TikTokPartnerSdk.Generated.Finance;
+using Loscardos.TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
+using Loscardos.TikTokPartnerSdk.Generated.Fulfillment;
+using Loscardos.TikTokPartnerSdk.Generated.Logistics;
+using Loscardos.TikTokPartnerSdk.Generated.Order;
+using Loscardos.TikTokPartnerSdk.Generated.Product;
+using Loscardos.TikTokPartnerSdk.Generated.Promotion;
+using Loscardos.TikTokPartnerSdk.Generated.ReturnAndRefund;
+using Loscardos.TikTokPartnerSdk.Generated.Seller;
+using Loscardos.TikTokPartnerSdk.Generated.SupplyChain;
+using Loscardos.TikTokPartnerSdk.Generated.Tools;
 
-namespace TikTokPartnerSdk.Tests.Managers;
+namespace Loscardos.TikTokPartnerSdk.Tests.Managers;
 
 public sealed class GeneratedManagerRuntimeTests
 {

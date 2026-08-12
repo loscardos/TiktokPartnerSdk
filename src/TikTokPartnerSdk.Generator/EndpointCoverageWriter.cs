@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace TikTokPartnerSdk.Generator;
+namespace Loscardos.TikTokPartnerSdk.Generator;
 
 public sealed class EndpointCoverageWriter
 {

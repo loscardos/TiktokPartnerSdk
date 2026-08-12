@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Abstractions.Webhooks;
-using TikTokPartnerSdk.Core.Webhooks;
-using TikTokPartnerSdk.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Core.Webhooks;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
 
-namespace TikTokPartnerSdk.Tests.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Tests.Webhooks;
 
 public sealed class TikTokWebhookDependencyInjectionTests
 {

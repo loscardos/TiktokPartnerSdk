@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Tests;
+namespace Loscardos.TikTokPartnerSdk.Tests;
 
 internal static class TestPaths
 {

@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.SampleConsole;
+namespace Loscardos.TikTokPartnerSdk.Tests.SampleConsole;
 
 public sealed class DocumentationPresenceTests
 {

@@ -1,6 +1,6 @@
-using TikTokPartnerSdk.Abstractions.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Abstractions.RateLimiting;
 
-namespace TikTokPartnerSdk.Core.RateLimiting;
+namespace Loscardos.TikTokPartnerSdk.Core.RateLimiting;
 
 public sealed class NoopTikTokRateLimiter : ITikTokRateLimiter
 {

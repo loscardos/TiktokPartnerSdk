@@ -1,8 +1,8 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Core.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Core.Http;
 
-namespace TikTokPartnerSdk.Tests.Http;
+namespace Loscardos.TikTokPartnerSdk.Tests.Http;
 
 public sealed class TikTokRequestUriBuilderTests
 {
