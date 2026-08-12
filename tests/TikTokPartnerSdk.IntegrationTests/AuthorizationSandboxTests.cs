@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
-using TikTokPartnerSdk.Generated.Authorization;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Generated.Authorization;
 
-namespace TikTokPartnerSdk.IntegrationTests;
+namespace Loscardos.TikTokPartnerSdk.IntegrationTests;
 
 public sealed class AuthorizationSandboxTests
 {

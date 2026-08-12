@@ -26,8 +26,8 @@ dotnet add package Loscardos.TikTokPartnerSdk.Generated --prerelease
 ## Configure ASP.NET Core
 
 ```csharp
-using TikTokPartnerSdk.Extensions.DependencyInjection;
-using TikTokPartnerSdk.Storage.EntityFramework;
+using Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
+using Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 builder.Services.AddTikTokPartnerSdk(options =>
 {

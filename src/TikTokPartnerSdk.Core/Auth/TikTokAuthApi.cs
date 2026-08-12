@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
 
-namespace TikTokPartnerSdk.Core.Auth;
+namespace Loscardos.TikTokPartnerSdk.Core.Auth;
 
 public sealed class TikTokAuthApi(
     IOptions<TikTokPartnerOptions> options,

@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TikTokPartnerSdk.Abstractions.Pagination;
+using Loscardos.TikTokPartnerSdk.Abstractions.Pagination;
 
-namespace TikTokPartnerSdk.Tests.Pagination;
+namespace Loscardos.TikTokPartnerSdk.Tests.Pagination;
 
 public sealed class TikTokPaginationTests
 {

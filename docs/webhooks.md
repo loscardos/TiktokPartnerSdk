@@ -33,7 +33,7 @@ The verifier accepts TikTok Shop's webhook signature from `x-tt-signature` or `A
 The receiver should read the raw body before any JSON model binding changes it.
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
 app.MapPost("/webhooks/tiktok", async (
     HttpRequest request,
@@ -68,8 +68,8 @@ app.MapPost("/webhooks/tiktok", async (
 ## Worker Parsing Example
 
 ```csharp
-using TikTokPartnerSdk.Abstractions.Webhooks;
-using TikTokPartnerSdk.Generated.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Generated.Webhooks;
 
 public sealed class TikTokWebhookWorker(ITikTokWebhookParser parser)
 {

@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.Auth;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
 public sealed record TikTokAuthorizationContext(
     TikTokAccessTokenKind AccessTokenKind,

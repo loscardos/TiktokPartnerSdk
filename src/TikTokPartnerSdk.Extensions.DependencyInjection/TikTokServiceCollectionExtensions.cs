@@ -1,21 +1,21 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Abstractions.Managers;
-using TikTokPartnerSdk.Abstractions.Managers.Generated;
-using TikTokPartnerSdk.Abstractions.RateLimiting;
-using TikTokPartnerSdk.Abstractions.Webhooks;
-using TikTokPartnerSdk.Core.Auth;
-using TikTokPartnerSdk.Core.Crypto;
-using TikTokPartnerSdk.Core.Http;
-using TikTokPartnerSdk.Core.Managers;
-using TikTokPartnerSdk.Core.Managers.Generated;
-using TikTokPartnerSdk.Core.RateLimiting;
-using TikTokPartnerSdk.Core.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers;
+using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Abstractions.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Core.Auth;
+using Loscardos.TikTokPartnerSdk.Core.Crypto;
+using Loscardos.TikTokPartnerSdk.Core.Http;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
+using Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Core.Webhooks;
 
-namespace TikTokPartnerSdk.Extensions.DependencyInjection;
+namespace Loscardos.TikTokPartnerSdk.Extensions.DependencyInjection;
 
 public static class TikTokServiceCollectionExtensions
 {

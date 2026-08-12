@@ -2,7 +2,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace TikTokPartnerSdk.Storage.EntityFramework.Tests;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework.Tests;
 
 public sealed class DataProtectionTikTokTokenProtectorTests
 {

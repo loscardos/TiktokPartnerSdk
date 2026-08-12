@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace TikTokPartnerSdk.IntegrationTests;
+namespace Loscardos.TikTokPartnerSdk.IntegrationTests;
 
 public static class TikTokSandboxEnvironment
 {

@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Tests.Webhooks;
 
 public sealed class TikTokWebhookSpecSnapshotTests
 {

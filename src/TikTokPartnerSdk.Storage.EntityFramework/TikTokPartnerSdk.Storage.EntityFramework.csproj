@@ -3,13 +3,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TikTokPartnerSdk.Storage.EntityFramework</RootNamespace>
+    <RootNamespace>Loscardos.TikTokPartnerSdk.Storage.EntityFramework</RootNamespace>
     <Description>Entity Framework Core token storage and token protection for TikTok Partner SDK.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TikTokPartnerSdk.Abstractions\TikTokPartnerSdk.Abstractions.csproj" />

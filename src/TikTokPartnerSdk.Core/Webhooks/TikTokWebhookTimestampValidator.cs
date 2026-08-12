@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
-namespace TikTokPartnerSdk.Core.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Core.Webhooks;
 
 public sealed class TikTokWebhookTimestampValidator(IOptions<TikTokWebhookOptions> options)
 {

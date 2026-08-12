@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Text.Json;
 
-namespace TikTokPartnerSdk.Core.Http;
+namespace Loscardos.TikTokPartnerSdk.Core.Http;
 
 internal static class TikTokRequestBodySerializer
 {

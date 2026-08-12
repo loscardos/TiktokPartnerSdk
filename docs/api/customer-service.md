@@ -3,20 +3,20 @@
 Use `ICustomerServiceApi` for conversations, messages, sessions, and customer service settings.
 
 ```csharp
-using TikTokPartnerSdk.Generated.CustomerService;
-using CustomerServiceApi = TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerServiceApi;
+using Loscardos.TikTokPartnerSdk.Generated.CustomerService;
+using CustomerServiceApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerServiceApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerServiceApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.ICustomerServiceApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.CustomerService
+Loscardos.TikTokPartnerSdk.Generated.CustomerService
 ```
 
 ## Common Operations

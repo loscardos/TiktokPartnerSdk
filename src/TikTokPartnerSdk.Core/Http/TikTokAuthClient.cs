@@ -1,12 +1,12 @@
 using System.Globalization;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Errors;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Abstractions.RateLimiting;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Errors;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Abstractions.RateLimiting;
 
-namespace TikTokPartnerSdk.Core.Http;
+namespace Loscardos.TikTokPartnerSdk.Core.Http;
 
 public sealed class TikTokAuthClient(
     HttpClient httpClient,

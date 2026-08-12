@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.Configuration;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
 
 public sealed class TikTokPartnerOptions
 {

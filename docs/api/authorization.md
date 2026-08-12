@@ -3,20 +3,20 @@
 Use `IAuthorizationApi` for Partner authorization resources after you have an access token.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Authorization;
-using AuthorizationApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IAuthorizationApi;
+using Loscardos.TikTokPartnerSdk.Generated.Authorization;
+using AuthorizationApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IAuthorizationApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IAuthorizationApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IAuthorizationApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Authorization
+Loscardos.TikTokPartnerSdk.Generated.Authorization
 ```
 
 ## Common Operations

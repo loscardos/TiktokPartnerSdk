@@ -3,20 +3,20 @@
 Use `IFulfilledByTiktokFbtApi` for FBT merchant, goods, inventory, MCF, and inbound operations.
 
 ```csharp
-using TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
-using FbtApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfilledByTiktokFbtApi;
+using Loscardos.TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
+using FbtApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfilledByTiktokFbtApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfilledByTiktokFbtApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfilledByTiktokFbtApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.FulfilledByTiktokFbt
+Loscardos.TikTokPartnerSdk.Generated.FulfilledByTiktokFbt
 ```
 
 ## Common Operations

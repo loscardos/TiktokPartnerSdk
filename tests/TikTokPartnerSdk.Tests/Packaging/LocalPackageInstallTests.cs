@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TikTokPartnerSdk.Tests.Packaging;
+namespace Loscardos.TikTokPartnerSdk.Tests.Packaging;
 
 public sealed class LocalPackageInstallTests
 {

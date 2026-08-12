@@ -1,6 +1,6 @@
-using TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 
-namespace TikTokPartnerSdk.Storage.EntityFramework;
+namespace Loscardos.TikTokPartnerSdk.Storage.EntityFramework;
 
 public sealed class TikTokTokenEntity
 {

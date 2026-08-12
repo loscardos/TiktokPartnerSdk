@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace TikTokPartnerSdk.Generator;
+namespace Loscardos.TikTokPartnerSdk.Generator;
 
 public sealed class SchemaReader
 {

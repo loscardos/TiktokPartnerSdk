@@ -3,20 +3,20 @@
 Use `IPromotionApi` for activity and coupon operations.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Promotion;
-using PromotionApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IPromotionApi;
+using Loscardos.TikTokPartnerSdk.Generated.Promotion;
+using PromotionApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IPromotionApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IPromotionApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IPromotionApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Promotion
+Loscardos.TikTokPartnerSdk.Generated.Promotion
 ```
 
 ## Common Operations

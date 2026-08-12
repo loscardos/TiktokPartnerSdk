@@ -1,12 +1,12 @@
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
-using TikTokPartnerSdk.Abstractions.Auth;
-using TikTokPartnerSdk.Abstractions.Configuration;
-using TikTokPartnerSdk.Abstractions.Http;
-using TikTokPartnerSdk.Core.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
+using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Http;
+using Loscardos.TikTokPartnerSdk.Core.Auth;
 
-namespace TikTokPartnerSdk.Tests.Auth;
+namespace Loscardos.TikTokPartnerSdk.Tests.Auth;
 
 public sealed class TikTokAuthApiTests
 {

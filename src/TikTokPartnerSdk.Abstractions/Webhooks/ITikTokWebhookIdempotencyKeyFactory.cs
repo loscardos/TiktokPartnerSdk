@@ -1,4 +1,4 @@
-namespace TikTokPartnerSdk.Abstractions.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
 public interface ITikTokWebhookIdempotencyKeyFactory
 {

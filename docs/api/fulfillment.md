@@ -3,20 +3,20 @@
 Use `IFulfillmentApi` for package, shipping, tracking, document, and invoice operations.
 
 ```csharp
-using TikTokPartnerSdk.Generated.Fulfillment;
-using FulfillmentApi = TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfillmentApi;
+using Loscardos.TikTokPartnerSdk.Generated.Fulfillment;
+using FulfillmentApi = Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfillmentApi;
 ```
 
 ## Generated Interface
 
 ```text
-TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfillmentApi
+Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated.IFulfillmentApi
 ```
 
 ## DTO Namespace
 
 ```text
-TikTokPartnerSdk.Generated.Fulfillment
+Loscardos.TikTokPartnerSdk.Generated.Fulfillment
 ```
 
 ## Common Operations

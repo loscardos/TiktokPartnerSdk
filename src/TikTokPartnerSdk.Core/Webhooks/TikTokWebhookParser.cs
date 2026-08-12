@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TikTokPartnerSdk.Abstractions.Webhooks;
+using Loscardos.TikTokPartnerSdk.Abstractions.Webhooks;
 
-namespace TikTokPartnerSdk.Core.Webhooks;
+namespace Loscardos.TikTokPartnerSdk.Core.Webhooks;
 
 public sealed class TikTokWebhookParser(
     ITikTokWebhookSignatureVerifier signatureVerifier,
