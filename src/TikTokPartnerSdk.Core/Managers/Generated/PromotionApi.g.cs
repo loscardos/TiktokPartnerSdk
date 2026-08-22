@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Promotion;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -22,12 +23,12 @@ public sealed class PromotionApi(ITikTokPartnerClient client) : IPromotionApi
         body["title"] = request.Title;
         body["activity_type"] = request.ActivityType;
         body["product_level"] = request.ProductLevel;
-        body["duration_type"] = request.DurationType;
+        TikTokGeneratedRequestMap.AddOptional(body, "duration_type", request.DurationType);
         body["begin_time"] = request.BeginTime;
         body["end_time"] = request.EndTime;
-        body["participation_limit"] = request.ParticipationLimit;
-        body["discount"] = request.Discount;
-        body["target_user_info"] = request.TargetUserInfo;
+        TikTokGeneratedRequestMap.AddOptional(body, "participation_limit", request.ParticipationLimit);
+        TikTokGeneratedRequestMap.AddOptional(body, "discount", request.Discount);
+        TikTokGeneratedRequestMap.AddOptional(body, "target_user_info", request.TargetUserInfo);
         var path = "/promotion/202309/activities";
         var envelope = await client.SendAsync<PromotionCreateActivityResponseData>(
             new TikTokPartnerRequest(
@@ -112,10 +113,10 @@ public sealed class PromotionApi(ITikTokPartnerClient client) : IPromotionApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["product_ids"] = request.ProductIds;
-        body["sku_ids"] = request.SkuIds;
-        body["benefit_product_ids"] = request.BenefitProductIds;
-        body["exclude_product_ids"] = request.ExcludeProductIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_ids", request.ProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "sku_ids", request.SkuIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "benefit_product_ids", request.BenefitProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "exclude_product_ids", request.ExcludeProductIds);
         var path = "/promotion/202309/activities/{activity_id}/products";
         path = path.Replace("{activity_id}", Uri.EscapeDataString(Convert.ToString(request.ActivityId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<PromotionRemoveActivityProductResponseData>(
@@ -145,11 +146,11 @@ public sealed class PromotionApi(ITikTokPartnerClient client) : IPromotionApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["status"] = request.Status;
-        body["activity_title"] = request.ActivityTitle;
-        body["page_size"] = request.PageSize;
-        body["page_token"] = request.PageToken;
-        body["activity_type"] = request.ActivityType;
+        TikTokGeneratedRequestMap.AddOptional(body, "status", request.Status);
+        TikTokGeneratedRequestMap.AddOptional(body, "activity_title", request.ActivityTitle);
+        TikTokGeneratedRequestMap.AddOptional(body, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(body, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(body, "activity_type", request.ActivityType);
         var path = "/promotion/202309/activities/search";
         var envelope = await client.SendAsync<PromotionSearchActivitiesResponseData>(
             new TikTokPartnerRequest(
@@ -178,10 +179,10 @@ public sealed class PromotionApi(ITikTokPartnerClient client) : IPromotionApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["products"] = request.Products;
+        TikTokGeneratedRequestMap.AddOptional(body, "products", request.Products);
         body["activity_id"] = request.BodyActivityId;
-        body["benefit_product_ids"] = request.BenefitProductIds;
-        body["exclude_product_ids"] = request.ExcludeProductIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "benefit_product_ids", request.BenefitProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "exclude_product_ids", request.ExcludeProductIds);
         var path = "/promotion/202309/activities/{activity_id}/products";
         path = path.Replace("{activity_id}", Uri.EscapeDataString(Convert.ToString(request.PathActivityId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<PromotionUpdateActivityProductResponseData>(
@@ -212,13 +213,13 @@ public sealed class PromotionApi(ITikTokPartnerClient client) : IPromotionApi
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["title"] = request.Title;
-        body["duration_type"] = request.DurationType;
+        TikTokGeneratedRequestMap.AddOptional(body, "duration_type", request.DurationType);
         body["begin_time"] = request.BeginTime;
         body["end_time"] = request.EndTime;
-        body["product_level"] = request.ProductLevel;
-        body["participation_limit"] = request.ParticipationLimit;
-        body["discount"] = request.Discount;
-        body["target_user_info"] = request.TargetUserInfo;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_level", request.ProductLevel);
+        TikTokGeneratedRequestMap.AddOptional(body, "participation_limit", request.ParticipationLimit);
+        TikTokGeneratedRequestMap.AddOptional(body, "discount", request.Discount);
+        TikTokGeneratedRequestMap.AddOptional(body, "target_user_info", request.TargetUserInfo);
         var path = "/promotion/202309/activities/{activity_id}";
         path = path.Replace("{activity_id}", Uri.EscapeDataString(Convert.ToString(request.ActivityId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<PromotionUpdateActivityResponseData>(
@@ -274,13 +275,13 @@ public sealed class PromotionApi(ITikTokPartnerClient client) : IPromotionApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["status"] = request.Status;
-        body["title_keyword"] = request.TitleKeyword;
-        body["display_type"] = request.DisplayType;
+        TikTokGeneratedRequestMap.AddOptional(body, "status", request.Status);
+        TikTokGeneratedRequestMap.AddOptional(body, "title_keyword", request.TitleKeyword);
+        TikTokGeneratedRequestMap.AddOptional(body, "display_type", request.DisplayType);
         var path = "/promotion/202406/coupons/search";
         var envelope = await client.SendAsync<PromotionSearchCouponsResponseData>(
             new TikTokPartnerRequest(

@@ -116,7 +116,7 @@ public sealed class ContractsWriterTests
         output.Should().Contain(
             "[property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]");
         output.Should().Contain(
-            "[property: JsonPropertyName(\"backorder_quantity\")] long BackorderQuantity");
+            "[property: JsonPropertyName(\"backorder_quantity\")] long? BackorderQuantity");
         output.Should().NotContain(
             "JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]\n    [property: JsonPropertyName(\"quantity\")]");
     }

@@ -56,15 +56,15 @@ public sealed record AffiliatePartnerEditAffiliatePartnerCampaignRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("description")] string Description,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("campaign_start_time")] long CampaignStartTime,
+    [property: JsonPropertyName("campaign_start_time")] long? CampaignStartTime,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("campaign_end_time")] long CampaignEndTime,
+    [property: JsonPropertyName("campaign_end_time")] long? CampaignEndTime,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("registration_start_time")] long RegistrationStartTime,
+    [property: JsonPropertyName("registration_start_time")] long? RegistrationStartTime,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("registration_end_time")] long RegistrationEndTime,
+    [property: JsonPropertyName("registration_end_time")] long? RegistrationEndTime,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("commission_rate")] long CommissionRate,
+    [property: JsonPropertyName("commission_rate")] long? CommissionRate,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("contact_info")] AffiliatePartnerEditAffiliatePartnerCampaignRequestContactInfo ContactInfo,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -327,7 +327,7 @@ public sealed record AffiliatePartnerGetAffiliateCampaignCreatorFulfillmentStatu
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken);
 
@@ -418,7 +418,7 @@ public sealed record AffiliatePartnerGetAffiliateCampaignCreatorFulfillmentStatu
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonPropertyName("category_asset_cipher")] string CategoryAssetCipher,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken);
 
@@ -539,11 +539,11 @@ public sealed record AffiliatePartnerSearchCapAffiliateOrdersRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("product_id")] string ProductId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("settle_status")] long SettleStatus,
+    [property: JsonPropertyName("settle_status")] long? SettleStatus,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_lt")] long CreateTimeLt);
+    [property: JsonPropertyName("create_time_lt")] long? CreateTimeLt);
 
 
 public sealed record AffiliatePartnerSearchCapAffiliateOrdersResponse(
@@ -720,9 +720,9 @@ public sealed record AffiliatePartnerSearchTapAffiliateOrdersRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_lt")] long CreateTimeLt,
+    [property: JsonPropertyName("create_time_lt")] long? CreateTimeLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("campaign_id")] string CampaignId);
 

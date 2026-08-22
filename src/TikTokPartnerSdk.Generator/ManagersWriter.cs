@@ -53,6 +53,7 @@ public sealed class ManagersWriter
         builder.AppendLine("#nullable enable");
         builder.AppendLine("using Loscardos.TikTokPartnerSdk.Abstractions.Http;");
         builder.AppendLine("using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;");
+        builder.AppendLine("using Loscardos.TikTokPartnerSdk.Core.Managers;");
         builder.AppendLine($"using Loscardos.TikTokPartnerSdk.Generated.{modulePascal};");
         builder.AppendLine();
         builder.AppendLine("namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;");
@@ -79,7 +80,7 @@ public sealed class ManagersWriter
                     continue;
                 }
 
-                builder.AppendLine($"        query[\"{parameter.Name}\"] = request.{TikTokName.ToPropertyName(parameter, endpoint.RequestParameters)};");
+                WriteParameterAssignment(builder, "query", parameter, endpoint.RequestParameters);
             }
 
             var bodyParameters = endpoint.RequestParameters
@@ -90,7 +91,7 @@ public sealed class ManagersWriter
                 builder.AppendLine("        var body = new Dictionary<string, object?>();");
                 foreach (var parameter in bodyParameters)
                 {
-                    builder.AppendLine($"        body[\"{parameter.Name}\"] = request.{TikTokName.ToPropertyName(parameter, endpoint.RequestParameters)};");
+                    WriteParameterAssignment(builder, "body", parameter, endpoint.RequestParameters);
                 }
             }
 
@@ -165,4 +166,20 @@ public sealed class ManagersWriter
 
     private static IEnumerable<SchemaParameter> PathParameters(SchemaEndpoint endpoint)
         => endpoint.RequestParameters.Where(static parameter => parameter.Location == "path");
+
+    private static void WriteParameterAssignment(
+        StringBuilder builder,
+        string target,
+        SchemaParameter parameter,
+        IReadOnlyList<SchemaParameter> requestParameters)
+    {
+        var propertyName = TikTokName.ToPropertyName(parameter, requestParameters);
+        if (parameter.Required)
+        {
+            builder.AppendLine($"        {target}[\"{parameter.Name}\"] = request.{propertyName};");
+            return;
+        }
+
+        builder.AppendLine($"        TikTokGeneratedRequestMap.AddOptional({target}, \"{parameter.Name}\", request.{propertyName});");
+    }
 }

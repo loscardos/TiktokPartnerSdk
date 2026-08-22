@@ -74,15 +74,18 @@ public sealed class OrderManager(
             request.SortField,
             request.SortOrder,
             Optional(request.OrderStatus)!,
-            request.CreateTimeGe,
-            request.CreateTimeLt,
-            request.UpdateTimeGe,
-            request.UpdateTimeLt,
+            Optional(request.CreateTimeGe),
+            Optional(request.CreateTimeLt),
+            Optional(request.UpdateTimeGe),
+            Optional(request.UpdateTimeLt),
             Optional(request.ShippingType)!,
             Optional(request.BuyerUserId)!,
-            request.IsBuyerRequestCancel,
-            request.WarehouseIds ?? Array.Empty<string>());
+            request.IsBuyerRequestCancel ? true : null,
+            request.WarehouseIds!);
 
     private static string? Optional(string value)
         => string.IsNullOrWhiteSpace(value) ? null : value;
+
+    private static long? Optional(long value)
+        => value == 0 ? null : value;
 }

@@ -104,4 +104,39 @@ public sealed class ManagersWriterTests
         output.Should().Contain("body[\"activity_id\"] = request.BodyActivityId;");
         output.Should().Contain("path = path.Replace(\"{activity_id}\", Uri.EscapeDataString(Convert.ToString(request.PathActivityId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));");
     }
+
+    [Fact]
+    public void Implementation_should_add_required_parameters_and_filter_optional_parameters_generically()
+    {
+        var endpoint = new SchemaEndpoint(
+            "order.202309.get_order_list",
+            "Order",
+            "order",
+            "/order/202309/orders/search",
+            "POST",
+            "seller",
+            "seller",
+            "body",
+            ["x-tts-access-token", "content-type"],
+            [
+                new SchemaParameter("page_size", "int", true, "query", []),
+                new SchemaParameter("page_token", "string", false, "query", []),
+                new SchemaParameter("update_time_ge", "int", false, "body", []),
+                new SchemaParameter("warehouse_ids", "[]string", false, "body", []),
+                new SchemaParameter("orders", "[]object", true, "body", [])
+            ],
+            [
+                new SchemaParameter("code", "int", false, "body", []),
+                new SchemaParameter("message", "string", false, "body", []),
+                new SchemaParameter("request_id", "string", false, "body", [])
+            ]);
+
+        var output = new ManagersWriter().WriteImplementation("Order", "order", [endpoint]);
+
+        output.Should().Contain("query[\"page_size\"] = request.PageSize;");
+        output.Should().Contain("TikTokGeneratedRequestMap.AddOptional(query, \"page_token\", request.PageToken);");
+        output.Should().Contain("TikTokGeneratedRequestMap.AddOptional(body, \"update_time_ge\", request.UpdateTimeGe);");
+        output.Should().Contain("TikTokGeneratedRequestMap.AddOptional(body, \"warehouse_ids\", request.WarehouseIds);");
+        output.Should().Contain("body[\"orders\"] = request.Orders;");
+    }
 }

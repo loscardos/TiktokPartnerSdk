@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Logistics;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -43,9 +44,9 @@ public sealed class LogisticsApi(ITikTokPartnerClient client) : ILogisticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["buyer_region"] = request.BuyerRegion;
+        TikTokGeneratedRequestMap.AddOptional(query, "buyer_region", request.BuyerRegion);
         query["shop_cipher"] = request.ShopCipher;
-        query["warehouse_region"] = request.WarehouseRegion;
+        TikTokGeneratedRequestMap.AddOptional(query, "warehouse_region", request.WarehouseRegion);
         var path = "/logistics/202309/delivery_options/{delivery_option_id}/shipping_providers";
         path = path.Replace("{delivery_option_id}", Uri.EscapeDataString(Convert.ToString(request.DeliveryOptionId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<LogisticsGetShippingProvidersResponseData>(
@@ -73,7 +74,7 @@ public sealed class LogisticsApi(ITikTokPartnerClient client) : ILogisticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["scope"] = request.Scope;
+        TikTokGeneratedRequestMap.AddOptional(query, "scope", request.Scope);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/logistics/202309/warehouses/{warehouse_id}/delivery_options";
         path = path.Replace("{warehouse_id}", Uri.EscapeDataString(Convert.ToString(request.WarehouseId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -131,7 +132,7 @@ public sealed class LogisticsApi(ITikTokPartnerClient client) : ILogisticsApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["product_attribute"] = request.ProductAttribute;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attribute", request.ProductAttribute);
         var path = "/logistics/202510/seller_templates";
         var envelope = await client.SendAsync<LogisticsGetAvailableShippingTemplateResponseData>(
             new TikTokPartnerRequest(

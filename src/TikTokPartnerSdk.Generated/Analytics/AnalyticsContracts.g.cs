@@ -303,7 +303,7 @@ public sealed record AnalyticsGetShopLivePerformanceListRequest(
     [property: JsonPropertyName("currency")] string Currency,
     [property: JsonPropertyName("end_date_lt")] string EndDateLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
@@ -388,7 +388,7 @@ public sealed record AnalyticsGetShopLivePerformanceOverviewRequest(
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("start_date_ge")] string StartDateGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("today")] bool Today);
+    [property: JsonPropertyName("today")] bool? Today);
 
 
 public sealed record AnalyticsGetShopLivePerformanceOverviewResponse(
@@ -618,7 +618,7 @@ public sealed record AnalyticsGetShopProductPerformanceListRequest(
     [property: JsonPropertyName("currency")] string Currency,
     [property: JsonPropertyName("end_date_lt")] string EndDateLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -667,7 +667,7 @@ public sealed record AnalyticsGetShopSkuPerformanceListRequest(
     [property: JsonPropertyName("currency")] string Currency,
     [property: JsonPropertyName("end_date_lt")] string EndDateLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -867,7 +867,7 @@ public sealed record AnalyticsGetShopVideoPerformanceListRequest(
     [property: JsonPropertyName("currency")] string Currency,
     [property: JsonPropertyName("end_date_lt")] string EndDateLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
@@ -933,7 +933,7 @@ public sealed record AnalyticsGetShopVideoPerformanceOverviewRequest(
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("start_date_ge")] string StartDateGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("today")] bool Today);
+    [property: JsonPropertyName("today")] bool? Today);
 
 
 public sealed record AnalyticsGetShopVideoPerformanceOverviewResponse(
@@ -973,7 +973,7 @@ public sealed record AnalyticsGetShopVideoProductPerformanceListRequest(
     [property: JsonPropertyName("currency")] string Currency,
     [property: JsonPropertyName("end_date_lt")] string EndDateLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,

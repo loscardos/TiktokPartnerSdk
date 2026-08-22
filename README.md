@@ -4,7 +4,7 @@ ASP.NET-friendly TikTok Shop Partner SDK for .NET 8.
 
 TikTokPartnerSdk provides signed TikTok Shop Open API requests, authorization helpers, token refresh support, ASP.NET Core dependency injection, Entity Framework token storage, token-aware seller managers, and generated endpoint clients for the TikTok Partner API surface.
 
-> Status: `0.1.0-preview`. The package is ready for sandbox validation and early integration work. Review behavior against your own TikTok app permissions before live rollout.
+> Status: `0.1.1-preview`. The package is ready for sandbox validation and early integration work. Review behavior against your own TikTok app permissions before live rollout.
 
 ## Packages
 

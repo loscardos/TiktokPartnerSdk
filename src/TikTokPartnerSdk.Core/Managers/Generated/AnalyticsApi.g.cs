@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Analytics;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -235,14 +236,14 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["account_type"] = request.AccountType;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "account_type", request.AccountType);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_lives/performance";
         var envelope = await client.SendAsync<AnalyticsGetShopLivePerformanceListResponseData>(
@@ -270,13 +271,13 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["account_type"] = request.AccountType;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "account_type", request.AccountType);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["granularity"] = request.Granularity;
+        TikTokGeneratedRequestMap.AddOptional(query, "granularity", request.Granularity);
         query["shop_cipher"] = request.ShopCipher;
         query["start_date_ge"] = request.StartDateGe;
-        query["today"] = request.Today;
+        TikTokGeneratedRequestMap.AddOptional(query, "today", request.Today);
         var path = "/analytics/202509/shop_lives/overview_performance";
         var envelope = await client.SendAsync<AnalyticsGetShopLivePerformanceOverviewResponseData>(
             new TikTokPartnerRequest(
@@ -303,9 +304,9 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["granularity"] = request.Granularity;
+        TikTokGeneratedRequestMap.AddOptional(query, "granularity", request.Granularity);
         query["shop_cipher"] = request.ShopCipher;
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop/performance";
@@ -334,9 +335,9 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["granularity"] = request.Granularity;
+        TikTokGeneratedRequestMap.AddOptional(query, "granularity", request.Granularity);
         query["shop_cipher"] = request.ShopCipher;
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_products/{product_id}/performance";
@@ -366,15 +367,15 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_filter"] = request.CategoryFilter;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_filter", request.CategoryFilter);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["product_status_filter"] = request.ProductStatusFilter;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "product_status_filter", request.ProductStatusFilter);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_products/performance";
         var envelope = await client.SendAsync<AnalyticsGetShopProductPerformanceListResponseData>(
@@ -402,16 +403,16 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_filter"] = request.CategoryFilter;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_filter", request.CategoryFilter);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["product_ids"] = request.ProductIds;
-        query["product_status_filter"] = request.ProductStatusFilter;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "product_ids", request.ProductIds);
+        TikTokGeneratedRequestMap.AddOptional(query, "product_status_filter", request.ProductStatusFilter);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_skus/performance";
         var envelope = await client.SendAsync<AnalyticsGetShopSkuPerformanceListResponseData>(
@@ -439,9 +440,9 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["granularity"] = request.Granularity;
+        TikTokGeneratedRequestMap.AddOptional(query, "granularity", request.Granularity);
         query["shop_cipher"] = request.ShopCipher;
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_skus/{sku_id}/performance";
@@ -471,9 +472,9 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["granularity"] = request.Granularity;
+        TikTokGeneratedRequestMap.AddOptional(query, "granularity", request.Granularity);
         query["shop_cipher"] = request.ShopCipher;
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_videos/{video_id}/performance";
@@ -503,14 +504,14 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["account_type"] = request.AccountType;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "account_type", request.AccountType);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_videos/performance";
         var envelope = await client.SendAsync<AnalyticsGetShopVideoPerformanceListResponseData>(
@@ -538,13 +539,13 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["account_type"] = request.AccountType;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "account_type", request.AccountType);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["granularity"] = request.Granularity;
+        TikTokGeneratedRequestMap.AddOptional(query, "granularity", request.Granularity);
         query["shop_cipher"] = request.ShopCipher;
         query["start_date_ge"] = request.StartDateGe;
-        query["today"] = request.Today;
+        TikTokGeneratedRequestMap.AddOptional(query, "today", request.Today);
         var path = "/analytics/202509/shop_videos/overview_performance";
         var envelope = await client.SendAsync<AnalyticsGetShopVideoPerformanceOverviewResponseData>(
             new TikTokPartnerRequest(
@@ -571,13 +572,13 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["end_date_lt"] = request.EndDateLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         query["start_date_ge"] = request.StartDateGe;
         var path = "/analytics/202509/shop_videos/{video_id}/products/performance";
         path = path.Replace("{video_id}", Uri.EscapeDataString(Convert.ToString(request.VideoId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -606,8 +607,8 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/analytics/202510/shop_lives/{live_id}/performance_per_minutes";
         path = path.Replace("{live_id}", Uri.EscapeDataString(Convert.ToString(request.LiveId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -636,7 +637,7 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/analytics/202510/shop/performance/{date}/performance_per_hour";
         path = path.Replace("{date}", Uri.EscapeDataString(Convert.ToString(request.Date, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -666,7 +667,7 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["author_type"] = request.AuthorType;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["date"] = request.Date;
         query["shop_cipher"] = request.ShopCipher;
         query["time_slot"] = request.TimeSlot;
@@ -696,10 +697,10 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
-        query["date"] = request.Date;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
+        TikTokGeneratedRequestMap.AddOptional(query, "date", request.Date);
         query["shop_cipher"] = request.ShopCipher;
-        query["time_slot"] = request.TimeSlot;
+        TikTokGeneratedRequestMap.AddOptional(query, "time_slot", request.TimeSlot);
         var path = "/analytics/202511/lives/bestselling";
         var envelope = await client.SendAsync<AnalyticsGetBestsellingLivesResponseData>(
             new TikTokPartnerRequest(
@@ -726,8 +727,8 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_id"] = request.CategoryId;
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_id", request.CategoryId);
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["date"] = request.Date;
         query["shop_cipher"] = request.ShopCipher;
         query["time_slot"] = request.TimeSlot;
@@ -757,7 +758,7 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["date"] = request.Date;
         query["shop_cipher"] = request.ShopCipher;
         query["time_slot"] = request.TimeSlot;
@@ -787,10 +788,10 @@ public sealed class AnalyticsApi(ITikTokPartnerClient client) : IAnalyticsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["currency"] = request.Currency;
+        TikTokGeneratedRequestMap.AddOptional(query, "currency", request.Currency);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var path = "/analytics/202512/shop/{live_id}/products_performance";
         path = path.Replace("{live_id}", Uri.EscapeDataString(Convert.ToString(request.LiveId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<AnalyticsGetShopLiveProductsPerformanceListResponseData>(

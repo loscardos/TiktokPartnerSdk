@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.ReturnAndRefund;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -17,7 +18,7 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["idempotency_key"] = request.IdempotencyKey;
+        TikTokGeneratedRequestMap.AddOptional(query, "idempotency_key", request.IdempotencyKey);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/return_refund/202309/cancellations/{cancel_id}/approve";
         path = path.Replace("{cancel_id}", Uri.EscapeDataString(Convert.ToString(request.CancelId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -46,12 +47,12 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["idempotency_key"] = request.IdempotencyKey;
+        TikTokGeneratedRequestMap.AddOptional(query, "idempotency_key", request.IdempotencyKey);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["decision"] = request.Decision;
-        body["buyer_keep_item"] = request.BuyerKeepItem;
-        body["partial_refund"] = request.PartialRefund;
+        TikTokGeneratedRequestMap.AddOptional(body, "buyer_keep_item", request.BuyerKeepItem);
+        TikTokGeneratedRequestMap.AddOptional(body, "partial_refund", request.PartialRefund);
         var path = "/return_refund/202309/returns/{return_id}/approve";
         path = path.Replace("{return_id}", Uri.EscapeDataString(Convert.ToString(request.ReturnId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -79,7 +80,7 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["return_or_cancel_id"] = request.ReturnOrCancelId;
         query["shop_cipher"] = request.ShopCipher;
         var path = "/return_refund/202309/reject_reasons";
@@ -108,7 +109,7 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/return_refund/202309/returns/{return_id}/records";
         path = path.Replace("{return_id}", Uri.EscapeDataString(Convert.ToString(request.ReturnId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -137,12 +138,12 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["idempotency_key"] = request.IdempotencyKey;
+        TikTokGeneratedRequestMap.AddOptional(query, "idempotency_key", request.IdempotencyKey);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["reject_reason"] = request.RejectReason;
-        body["comment"] = request.Comment;
-        body["images"] = request.Images;
+        TikTokGeneratedRequestMap.AddOptional(body, "comment", request.Comment);
+        TikTokGeneratedRequestMap.AddOptional(body, "images", request.Images);
         var path = "/return_refund/202309/cancellations/{cancel_id}/reject";
         path = path.Replace("{cancel_id}", Uri.EscapeDataString(Convert.ToString(request.CancelId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -170,13 +171,13 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["idempotency_key"] = request.IdempotencyKey;
+        TikTokGeneratedRequestMap.AddOptional(query, "idempotency_key", request.IdempotencyKey);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["decision"] = request.Decision;
         body["reject_reason"] = request.RejectReason;
-        body["comment"] = request.Comment;
-        body["images"] = request.Images;
+        TikTokGeneratedRequestMap.AddOptional(body, "comment", request.Comment);
+        TikTokGeneratedRequestMap.AddOptional(body, "images", request.Images);
         var path = "/return_refund/202309/returns/{return_id}/reject";
         path = path.Replace("{return_id}", Uri.EscapeDataString(Convert.ToString(request.ReturnId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -204,8 +205,8 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["check_decisions"] = request.CheckDecisions;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "check_decisions", request.CheckDecisions);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["return_or_cancel_id"] = request.ReturnOrCancelId;
         query["shop_cipher"] = request.ShopCipher;
         var path = "/return_refund/202601/decision_eligibility";
@@ -238,12 +239,12 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         var body = new Dictionary<string, object?>();
         body["order_id"] = request.OrderId;
         body["request_type"] = request.RequestType;
-        body["shipment_type"] = request.ShipmentType;
-        body["handover_method"] = request.HandoverMethod;
+        TikTokGeneratedRequestMap.AddOptional(body, "shipment_type", request.ShipmentType);
+        TikTokGeneratedRequestMap.AddOptional(body, "handover_method", request.HandoverMethod);
         body["reason_name"] = request.ReasonName;
-        body["order_line_item_ids"] = request.OrderLineItemIds;
-        body["skus"] = request.Skus;
-        body["order_line_list"] = request.OrderLineList;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_item_ids", request.OrderLineItemIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "skus", request.Skus);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_list", request.OrderLineList);
         var path = "/return_refund/202602/refunds/calculate";
         var envelope = await client.SendAsync<ReturnAndRefundCalculateRefundResponseData>(
             new TikTokPartnerRequest(
@@ -273,10 +274,10 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["order_id"] = request.OrderId;
-        body["skus"] = request.Skus;
-        body["order_line_item_ids"] = request.OrderLineItemIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "skus", request.Skus);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_item_ids", request.OrderLineItemIds);
         body["cancel_reason"] = request.CancelReason;
-        body["order_line_list"] = request.OrderLineList;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_list", request.OrderLineList);
         var path = "/return_refund/202602/cancellations";
         var envelope = await client.SendAsync<ReturnAndRefundCancelOrderResponseData>(
             new TikTokPartnerRequest(
@@ -303,19 +304,19 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["idempotency_key"] = request.IdempotencyKey;
+        TikTokGeneratedRequestMap.AddOptional(query, "idempotency_key", request.IdempotencyKey);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["order_id"] = request.OrderId;
-        body["skus"] = request.Skus;
-        body["order_line_item_ids"] = request.OrderLineItemIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "skus", request.Skus);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_item_ids", request.OrderLineItemIds);
         body["return_reason"] = request.ReturnReason;
         body["return_type"] = request.ReturnType;
-        body["refund_total"] = request.RefundTotal;
-        body["currency"] = request.Currency;
-        body["shipment_type"] = request.ShipmentType;
-        body["handover_method"] = request.HandoverMethod;
-        body["order_line_list"] = request.OrderLineList;
+        TikTokGeneratedRequestMap.AddOptional(body, "refund_total", request.RefundTotal);
+        TikTokGeneratedRequestMap.AddOptional(body, "currency", request.Currency);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipment_type", request.ShipmentType);
+        TikTokGeneratedRequestMap.AddOptional(body, "handover_method", request.HandoverMethod);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_list", request.OrderLineList);
         var path = "/return_refund/202602/returns";
         var envelope = await client.SendAsync<ReturnAndRefundCreateReturnResponseData>(
             new TikTokPartnerRequest(
@@ -342,8 +343,8 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["initiate_aftersale_user"] = request.InitiateAftersaleUser;
-        query["request_types"] = request.RequestTypes;
+        TikTokGeneratedRequestMap.AddOptional(query, "initiate_aftersale_user", request.InitiateAftersaleUser);
+        TikTokGeneratedRequestMap.AddOptional(query, "request_types", request.RequestTypes);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/return_refund/202602/orders/{order_id}/aftersale_eligibility";
         path = path.Replace("{order_id}", Uri.EscapeDataString(Convert.ToString(request.OrderId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -372,22 +373,22 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var body = new Dictionary<string, object?>();
-        body["cancel_ids"] = request.CancelIds;
-        body["order_ids"] = request.OrderIds;
-        body["buyer_user_ids"] = request.BuyerUserIds;
-        body["cancel_types"] = request.CancelTypes;
-        body["cancel_status"] = request.CancelStatus;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_lt"] = request.CreateTimeLt;
-        body["update_time_ge"] = request.UpdateTimeGe;
-        body["update_time_lt"] = request.UpdateTimeLt;
-        body["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(body, "cancel_ids", request.CancelIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_ids", request.OrderIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "buyer_user_ids", request.BuyerUserIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "cancel_types", request.CancelTypes);
+        TikTokGeneratedRequestMap.AddOptional(body, "cancel_status", request.CancelStatus);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_lt", request.CreateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_ge", request.UpdateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_lt", request.UpdateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
         var path = "/return_refund/202602/cancellations/search";
         var envelope = await client.SendAsync<ReturnAndRefundSearchCancellationsResponseData>(
             new TikTokPartnerRequest(
@@ -414,24 +415,24 @@ public sealed class ReturnAndRefundApi(ITikTokPartnerClient client) : IReturnAnd
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var body = new Dictionary<string, object?>();
-        body["return_ids"] = request.ReturnIds;
-        body["order_ids"] = request.OrderIds;
-        body["buyer_user_ids"] = request.BuyerUserIds;
-        body["return_types"] = request.ReturnTypes;
-        body["return_status"] = request.ReturnStatus;
-        body["seller_proposed_return_type"] = request.SellerProposedReturnType;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["arbitration_status"] = request.ArbitrationStatus;
-        body["update_time_ge"] = request.UpdateTimeGe;
-        body["update_time_lt"] = request.UpdateTimeLt;
-        body["locale"] = request.Locale;
-        body["create_time_lt"] = request.CreateTimeLt;
+        TikTokGeneratedRequestMap.AddOptional(body, "return_ids", request.ReturnIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_ids", request.OrderIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "buyer_user_ids", request.BuyerUserIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "return_types", request.ReturnTypes);
+        TikTokGeneratedRequestMap.AddOptional(body, "return_status", request.ReturnStatus);
+        TikTokGeneratedRequestMap.AddOptional(body, "seller_proposed_return_type", request.SellerProposedReturnType);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "arbitration_status", request.ArbitrationStatus);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_ge", request.UpdateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_lt", request.UpdateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_lt", request.CreateTimeLt);
         var path = "/return_refund/202602/returns/search";
         var envelope = await client.SendAsync<ReturnAndRefundSearchReturnsResponseData>(
             new TikTokPartnerRequest(

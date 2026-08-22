@@ -160,7 +160,7 @@ public sealed record LogisticsGetAvailableShippingTemplateRequestProductAttribut
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("weight")] string Weight,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("unit")] long Unit);
+    [property: JsonPropertyName("unit")] long? Unit);
 
 public sealed record LogisticsGetAvailableShippingTemplateRequestProductAttributeDimension(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -170,7 +170,7 @@ public sealed record LogisticsGetAvailableShippingTemplateRequestProductAttribut
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("height")] string Height,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("unit")] long Unit);
+    [property: JsonPropertyName("unit")] long? Unit);
 
 
 public sealed record LogisticsGetAvailableShippingTemplateResponse(

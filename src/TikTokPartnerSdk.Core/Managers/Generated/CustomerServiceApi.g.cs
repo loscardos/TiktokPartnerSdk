@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.CustomerService;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -73,15 +74,15 @@ public sealed class CustomerServiceApi(ITikTokPartnerClient client) : ICustomerS
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
-        query["need_data"] = request.NeedData;
-        query["need_plaintext"] = request.NeedPlaintext;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(query, "need_data", request.NeedData);
+        TikTokGeneratedRequestMap.AddOptional(query, "need_plaintext", request.NeedPlaintext);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
-        query["time_zone"] = request.TimeZone;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
+        TikTokGeneratedRequestMap.AddOptional(query, "time_zone", request.TimeZone);
         var path = "/customer_service/202309/conversations/{conversation_id}/messages";
         path = path.Replace("{conversation_id}", Uri.EscapeDataString(Convert.ToString(request.ConversationId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<CustomerServiceGetConversationMessagesResponseData>(
@@ -109,10 +110,10 @@ public sealed class CustomerServiceApi(ITikTokPartnerClient client) : ICustomerS
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
-        query["need_session_id"] = request.NeedSessionId;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(query, "need_session_id", request.NeedSessionId);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/customer_service/202309/conversations";
         var envelope = await client.SendAsync<CustomerServiceGetConversationsResponseData>(
@@ -286,7 +287,7 @@ public sealed class CustomerServiceApi(ITikTokPartnerClient client) : ICustomerS
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["need_session_id"] = request.NeedSessionId;
+        TikTokGeneratedRequestMap.AddOptional(query, "need_session_id", request.NeedSessionId);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/customer_service/202601/conversations/{conversation_id}";
         path = path.Replace("{conversation_id}", Uri.EscapeDataString(Convert.ToString(request.ConversationId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -315,14 +316,14 @@ public sealed class CustomerServiceApi(ITikTokPartnerClient client) : ICustomerS
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["begin_time_ge"] = request.BeginTimeGe;
         body["begin_time_lt"] = request.BeginTimeLt;
-        body["buyer_nickname"] = request.BuyerNickname;
+        TikTokGeneratedRequestMap.AddOptional(body, "buyer_nickname", request.BuyerNickname);
         var path = "/customer_service/202602/sessions/search";
         var envelope = await client.SendAsync<CustomerServiceSearchSessionsResponseData>(
             new TikTokPartnerRequest(

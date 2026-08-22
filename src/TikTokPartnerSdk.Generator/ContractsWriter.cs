@@ -73,7 +73,7 @@ public sealed class ContractsWriter
                     "    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]");
             }
             builder.AppendLine(
-                $"    [property: JsonPropertyName(\"{parameter.Name}\")] {TikTokTypeMapper.MapType(parameter, typeName)} {TikTokName.ToPropertyName(parameter, parameters)}{suffix}");
+                $"    [property: JsonPropertyName(\"{parameter.Name}\")] {MapContractType(parameter, typeName, omitOptionalDefaults)} {TikTokName.ToPropertyName(parameter, parameters)}{suffix}");
         }
     }
 
@@ -99,4 +99,18 @@ public sealed class ContractsWriter
                 omitOptionalDefaults);
         }
     }
+
+    private static string MapContractType(
+        SchemaParameter parameter,
+        string parentTypeName,
+        bool requestContract)
+    {
+        var type = TikTokTypeMapper.MapType(parameter, parentTypeName);
+        return requestContract && !parameter.Required && IsValueType(type)
+            ? type + "?"
+            : type;
+    }
+
+    private static bool IsValueType(string type)
+        => type is "long" or "bool" or "decimal";
 }

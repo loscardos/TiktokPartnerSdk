@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.AffiliateSeller;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -19,7 +20,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["auto_add_product"] = request.AutoAddProduct;
+        TikTokGeneratedRequestMap.AddOptional(body, "auto_add_product", request.AutoAddProduct);
         var path = "/affiliate_seller/202405/open_collaboration_settings";
         var envelope = await client.SendAsync<object>(
             new TikTokPartnerRequest(
@@ -75,15 +76,15 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var body = new Dictionary<string, object?>();
-        body["title_keywords"] = request.TitleKeywords;
-        body["sales_price_range"] = request.SalesPriceRange;
-        body["category"] = request.Category;
-        body["commission_rate_range"] = request.CommissionRateRange;
+        TikTokGeneratedRequestMap.AddOptional(body, "title_keywords", request.TitleKeywords);
+        TikTokGeneratedRequestMap.AddOptional(body, "sales_price_range", request.SalesPriceRange);
+        TikTokGeneratedRequestMap.AddOptional(body, "category", request.Category);
+        TikTokGeneratedRequestMap.AddOptional(body, "commission_rate_range", request.CommissionRateRange);
         var path = "/affiliate_seller/202405/open_collaborations/products/search";
         var envelope = await client.SendAsync<AffiliateSellerSellerSearchAffiliateOpenCollaborationProductResponseData>(
             new TikTokPartnerRequest(
@@ -195,7 +196,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["content_format"] = request.ContentFormat;
+        TikTokGeneratedRequestMap.AddOptional(body, "content_format", request.ContentFormat);
         var path = "/affiliate_seller/202409/sample_applications/{application_id}/fulfillments/search";
         path = path.Replace("{application_id}", Uri.EscapeDataString(Convert.ToString(request.ApplicationId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<AffiliateSellerSellerSearchSampleApplicationsFulfillmentsResponseData>(
@@ -226,7 +227,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["product_id"] = request.ProductId;
-        body["sample_rule"] = request.SampleRule;
+        TikTokGeneratedRequestMap.AddOptional(body, "sample_rule", request.SampleRule);
         var path = "/affiliate_seller/202410/open_collaborations/sample_rules";
         var envelope = await client.SendAsync<object>(
             new TikTokPartnerRequest(
@@ -282,12 +283,12 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["create_time_lt"] = request.CreateTimeLt;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["program_id"] = request.ProgramId;
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_lt", request.CreateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "program_id", request.ProgramId);
         var path = "/affiliate_seller/202410/orders/search";
         var envelope = await client.SendAsync<AffiliateSellerSearchSellerAffiliateOrdersResponseData>(
             new TikTokPartnerRequest(
@@ -344,13 +345,13 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["conversation_status"] = request.ConversationStatus;
-        query["only_need_conversation_id"] = request.QueryOnlyNeedConversationId;
+        TikTokGeneratedRequestMap.AddOptional(query, "conversation_status", request.ConversationStatus);
+        TikTokGeneratedRequestMap.AddOptional(query, "only_need_conversation_id", request.QueryOnlyNeedConversationId);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["shop_cipher"] = request.ShopCipher;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "shop_cipher", request.ShopCipher);
         var body = new Dictionary<string, object?>();
-        body["only_need_conversation_id"] = request.BodyOnlyNeedConversationId;
+        TikTokGeneratedRequestMap.AddOptional(body, "only_need_conversation_id", request.BodyOnlyNeedConversationId);
         var path = "/affiliate_seller/202412/conversations";
         var envelope = await client.SendAsync<AffiliateSellerGetConversationListResponseData>(
             new TikTokPartnerRequest(
@@ -405,7 +406,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/affiliate_seller/202412/conversation/{conversation_id}/messages";
         path = path.Replace("{conversation_id}", Uri.EscapeDataString(Convert.ToString(request.ConversationId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -464,14 +465,14 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var body = new Dictionary<string, object?>();
-        body["keyword_type"] = request.KeywordType;
-        body["keyword"] = request.Keyword;
-        body["top_level_category_id"] = request.TopLevelCategoryId;
+        TikTokGeneratedRequestMap.AddOptional(body, "keyword_type", request.KeywordType);
+        TikTokGeneratedRequestMap.AddOptional(body, "keyword", request.Keyword);
+        TikTokGeneratedRequestMap.AddOptional(body, "top_level_category_id", request.TopLevelCategoryId);
         var path = "/affiliate_seller/202412/open_collaborations/search";
         var envelope = await client.SendAsync<AffiliateSellerSearchOpenCollaborationResponseData>(
             new TikTokPartnerRequest(
@@ -532,7 +533,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["review_result"] = request.ReviewResult;
-        body["reject_reason"] = request.RejectReason;
+        TikTokGeneratedRequestMap.AddOptional(body, "reject_reason", request.RejectReason);
         var path = "/affiliate_seller/202507/sample_applications/{application_id}/review";
         path = path.Replace("{application_id}", Uri.EscapeDataString(Convert.ToString(request.ApplicationId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -563,7 +564,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["creator_open_id"] = request.CreatorOpenId;
-        body["only_need_conversation_id"] = request.OnlyNeedConversationId;
+        TikTokGeneratedRequestMap.AddOptional(body, "only_need_conversation_id", request.OnlyNeedConversationId);
         var path = "/affiliate_seller/202508/conversations";
         var envelope = await client.SendAsync<AffiliateSellerCreateConversationWithCreatorResponseData>(
             new TikTokPartnerRequest(
@@ -593,7 +594,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["name"] = request.Name;
-        body["message"] = request.Message;
+        TikTokGeneratedRequestMap.AddOptional(body, "message", request.Message);
         body["end_time"] = request.EndTime;
         body["products"] = request.Products;
         body["creator_user_open_ids"] = request.CreatorUserOpenIds;
@@ -654,7 +655,7 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["product_id"] = request.ProductId;
         query["shop_cipher"] = request.ShopCipher;
         var path = "/affiliate_seller/202508/open_collaborations/creator_content_details";
@@ -742,14 +743,14 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["creator_accept_status"] = request.CreatorAcceptStatus;
-        body["free_sample_setting"] = request.FreeSampleSetting;
-        body["search_param"] = request.SearchParam;
-        body["creator_user_open_id"] = request.CreatorUserOpenId;
+        TikTokGeneratedRequestMap.AddOptional(body, "creator_accept_status", request.CreatorAcceptStatus);
+        TikTokGeneratedRequestMap.AddOptional(body, "free_sample_setting", request.FreeSampleSetting);
+        TikTokGeneratedRequestMap.AddOptional(body, "search_param", request.SearchParam);
+        TikTokGeneratedRequestMap.AddOptional(body, "creator_user_open_id", request.CreatorUserOpenId);
         body["collaboration_status"] = request.CollaborationStatus;
         var path = "/affiliate_seller/202508/target_collaborations/search";
         var envelope = await client.SendAsync<AffiliateSellerSearchTargetCollaborationsResponseData>(
@@ -778,18 +779,18 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["search_key"] = request.SearchKey;
-        body["keyword"] = request.Keyword;
-        body["follower_demographics"] = request.FollowerDemographics;
-        body["gmv_ranges"] = request.GmvRanges;
-        body["units_sold_ranges"] = request.UnitsSoldRanges;
-        body["category"] = request.Category;
-        body["content_performance"] = request.ContentPerformance;
-        body["affiliate_data"] = request.AffiliateData;
-        body["advanced_filters"] = request.AdvancedFilters;
+        TikTokGeneratedRequestMap.AddOptional(body, "search_key", request.SearchKey);
+        TikTokGeneratedRequestMap.AddOptional(body, "keyword", request.Keyword);
+        TikTokGeneratedRequestMap.AddOptional(body, "follower_demographics", request.FollowerDemographics);
+        TikTokGeneratedRequestMap.AddOptional(body, "gmv_ranges", request.GmvRanges);
+        TikTokGeneratedRequestMap.AddOptional(body, "units_sold_ranges", request.UnitsSoldRanges);
+        TikTokGeneratedRequestMap.AddOptional(body, "category", request.Category);
+        TikTokGeneratedRequestMap.AddOptional(body, "content_performance", request.ContentPerformance);
+        TikTokGeneratedRequestMap.AddOptional(body, "affiliate_data", request.AffiliateData);
+        TikTokGeneratedRequestMap.AddOptional(body, "advanced_filters", request.AdvancedFilters);
         var path = "/affiliate_seller/202508/marketplace_creators/search";
         var envelope = await client.SendAsync<AffiliateSellerSellerSearchCreatorOnMarketplaceResponseData>(
             new TikTokPartnerRequest(
@@ -816,17 +817,17 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["product_id"] = request.ProductId;
-        body["title"] = request.Title;
-        body["creator_user_oepn_id"] = request.CreatorUserOepnId;
-        body["username"] = request.Username;
-        body["target_collabration_id"] = request.TargetCollabrationId;
-        body["order_id"] = request.OrderId;
-        body["status"] = request.Status;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_id", request.ProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "title", request.Title);
+        TikTokGeneratedRequestMap.AddOptional(body, "creator_user_oepn_id", request.CreatorUserOepnId);
+        TikTokGeneratedRequestMap.AddOptional(body, "username", request.Username);
+        TikTokGeneratedRequestMap.AddOptional(body, "target_collabration_id", request.TargetCollabrationId);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_id", request.OrderId);
+        TikTokGeneratedRequestMap.AddOptional(body, "status", request.Status);
         var path = "/affiliate_seller/202508/sample_applications/search";
         var envelope = await client.SendAsync<AffiliateSellerSellerSearchSampleApplicationsResponseData>(
             new TikTokPartnerRequest(
@@ -944,12 +945,12 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["campaign_id"] = request.CampaignId;
-        query["collaboration_id"] = request.CollaborationId;
+        TikTokGeneratedRequestMap.AddOptional(query, "campaign_id", request.CampaignId);
+        TikTokGeneratedRequestMap.AddOptional(query, "collaboration_id", request.CollaborationId);
         query["product_id"] = request.ProductId;
         query["shop_cipher"] = request.ShopCipher;
         query["sku_id"] = request.SkuId;
-        query["valid_days"] = request.ValidDays;
+        TikTokGeneratedRequestMap.AddOptional(query, "valid_days", request.ValidDays);
         var path = "/affiliate_seller/202512/sample_applications/deeplink";
         var envelope = await client.SendAsync<AffiliateSellerSellerGetSampleRequestDeeplinkResponseData>(
             new TikTokPartnerRequest(
@@ -1005,10 +1006,10 @@ public sealed class AffiliateSellerApi(ITikTokPartnerClient client) : IAffiliate
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["module_type"] = request.ModuleType;
-        body["window_type"] = request.WindowType;
-        body["end_day"] = request.EndDay;
-        body["plan_type"] = request.PlanType;
+        TikTokGeneratedRequestMap.AddOptional(body, "module_type", request.ModuleType);
+        TikTokGeneratedRequestMap.AddOptional(body, "window_type", request.WindowType);
+        TikTokGeneratedRequestMap.AddOptional(body, "end_day", request.EndDay);
+        TikTokGeneratedRequestMap.AddOptional(body, "plan_type", request.PlanType);
         var path = "/affiliate_seller/202603/compass/offline_task";
         var envelope = await client.SendAsync<AffiliateSellerCreateCompassOfflineExportTaskResponseData>(
             new TikTokPartnerRequest(

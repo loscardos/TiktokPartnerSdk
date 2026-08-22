@@ -50,9 +50,9 @@ public sealed class ProductManagerTests
             CancellationToken.None);
 
         var body = client.LastRequest!.Body.Should().BeAssignableTo<IReadOnlyDictionary<string, object?>>().Subject;
-        body["status"].Should().BeNull();
-        body["category_version"].Should().BeNull();
-        body["sns_filter"].Should().BeNull();
+        body.Should().NotContainKey("status");
+        body.Should().NotContainKey("category_version");
+        body.Should().NotContainKey("sns_filter");
     }
 
     [Fact]
@@ -100,19 +100,7 @@ public sealed class ProductManagerTests
         client.LastRequest.Query.Should().ContainKey("page_token").WhoseValue.Should().Be("start");
         client.LastRequest.Body.Should().BeEquivalentTo(new Dictionary<string, object?>
         {
-            ["status"] = "ACTIVATE",
-            ["seller_skus"] = Array.Empty<string>(),
-            ["create_time_ge"] = 0,
-            ["create_time_le"] = 0,
-            ["update_time_ge"] = 0,
-            ["update_time_le"] = 0,
-            ["category_version"] = null,
-            ["listing_quality_tiers"] = Array.Empty<string>(),
-            ["listing_platforms"] = Array.Empty<string>(),
-            ["audit_status"] = Array.Empty<string>(),
-            ["sku_ids"] = Array.Empty<string>(),
-            ["sns_filter"] = null,
-            ["return_draft_version"] = false
+            ["status"] = "ACTIVATE"
         });
     }
 

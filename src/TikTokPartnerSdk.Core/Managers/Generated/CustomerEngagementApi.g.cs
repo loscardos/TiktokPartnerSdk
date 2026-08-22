@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.CustomerEngagement;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -24,8 +25,8 @@ public sealed class CustomerEngagementApi(ITikTokPartnerClient client) : ICustom
         body["task_name"] = request.TaskName;
         body["end_time"] = request.EndTime;
         body["channel"] = request.Channel;
-        body["product_ids"] = request.ProductIds;
-        body["coupon_ids"] = request.CouponIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_ids", request.ProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "coupon_ids", request.CouponIds);
         var path = "/customer_engagement/202412/engagement_tasks";
         var envelope = await client.SendAsync<CustomerEngagementCreateEngagementTaskResponseData>(
             new TikTokPartnerRequest(
@@ -112,7 +113,7 @@ public sealed class CustomerEngagementApi(ITikTokPartnerClient client) : ICustom
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["buyer_emails"] = request.BuyerEmails;
-        body["task_id"] = request.TaskId;
+        TikTokGeneratedRequestMap.AddOptional(body, "task_id", request.TaskId);
         var path = "/customer_engagement/202412/messages";
         var envelope = await client.SendAsync<CustomerEngagementSendEngagementMessageResponseData>(
             new TikTokPartnerRequest(
@@ -145,9 +146,9 @@ public sealed class CustomerEngagementApi(ITikTokPartnerClient client) : ICustom
         body["task_name"] = request.TaskName;
         body["end_time"] = request.EndTime;
         body["channel"] = request.Channel;
-        body["product_ids"] = request.ProductIds;
-        body["coupon_ids"] = request.CouponIds;
-        body["custom_message"] = request.CustomMessage;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_ids", request.ProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "coupon_ids", request.CouponIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "custom_message", request.CustomMessage);
         var path = "/customer_engagement/202502/engagement_tasks/custom";
         var envelope = await client.SendAsync<CustomerEngagementCreateCustomEngagementTaskResponseData>(
             new TikTokPartnerRequest(
