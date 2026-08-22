@@ -21,9 +21,9 @@ public sealed record FulfillmentBatchShipPackagesRequestPackages(
 
 public sealed record FulfillmentBatchShipPackagesRequestPackagesPickupSlot(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("start_time")] long StartTime,
+    [property: JsonPropertyName("start_time")] long? StartTime,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("end_time")] long EndTime);
+    [property: JsonPropertyName("end_time")] long? EndTime);
 
 public sealed record FulfillmentBatchShipPackagesRequestPackagesSelfShipment(
     [property: JsonPropertyName("tracking_number")] string TrackingNumber,
@@ -477,13 +477,13 @@ public sealed record FulfillmentSearchPackageRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sort_order")] string SortOrder,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_lt")] long CreateTimeLt,
+    [property: JsonPropertyName("create_time_lt")] long? CreateTimeLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonPropertyName("update_time_ge")] long? UpdateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_lt")] long UpdateTimeLt,
+    [property: JsonPropertyName("update_time_lt")] long? UpdateTimeLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("package_status")] string PackageStatus);
 
@@ -536,9 +536,9 @@ public sealed record FulfillmentShipPackageRequest(
 
 public sealed record FulfillmentShipPackageRequestPickupSlot(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("start_time")] long StartTime,
+    [property: JsonPropertyName("start_time")] long? StartTime,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("end_time")] long EndTime);
+    [property: JsonPropertyName("end_time")] long? EndTime);
 
 public sealed record FulfillmentShipPackageRequestSelfShipment(
     [property: JsonPropertyName("tracking_number")] string TrackingNumber,

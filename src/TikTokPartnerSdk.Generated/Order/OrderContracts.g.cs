@@ -18,19 +18,19 @@ public sealed record OrderGetOrderListRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("order_status")] string OrderStatus,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_lt")] long CreateTimeLt,
+    [property: JsonPropertyName("create_time_lt")] long? CreateTimeLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonPropertyName("update_time_ge")] long? UpdateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_lt")] long UpdateTimeLt,
+    [property: JsonPropertyName("update_time_lt")] long? UpdateTimeLt,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_type")] string ShippingType,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("buyer_user_id")] string BuyerUserId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_buyer_request_cancel")] bool IsBuyerRequestCancel,
+    [property: JsonPropertyName("is_buyer_request_cancel")] bool? IsBuyerRequestCancel,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_ids")] IReadOnlyList<string> WarehouseIds);
 

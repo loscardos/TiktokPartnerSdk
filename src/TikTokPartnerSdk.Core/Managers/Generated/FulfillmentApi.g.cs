@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Fulfillment;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -75,7 +76,7 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_asset_cipher"] = request.CategoryAssetCipher;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_asset_cipher", request.CategoryAssetCipher);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["data"] = request.Data;
@@ -106,7 +107,7 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_asset_cipher"] = request.CategoryAssetCipher;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_asset_cipher", request.CategoryAssetCipher);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["data"] = request.Data;
@@ -138,10 +139,10 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["order_line_item_ids"] = request.OrderLineItemIds;
-        body["weight"] = request.Weight;
-        body["dimension"] = request.Dimension;
-        body["order_line_list"] = request.OrderLineList;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_item_ids", request.OrderLineItemIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "weight", request.Weight);
+        TikTokGeneratedRequestMap.AddOptional(body, "dimension", request.Dimension);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_list", request.OrderLineList);
         var path = "/fulfillment/202309/orders/{order_id}/shipping_services/query";
         path = path.Replace("{order_id}", Uri.EscapeDataString(Convert.ToString(request.OrderId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<FulfillmentGetEligibleShippingServiceResponseData>(
@@ -253,10 +254,10 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["document_format"] = request.DocumentFormat;
-        query["document_size"] = request.DocumentSize;
+        TikTokGeneratedRequestMap.AddOptional(query, "document_format", request.DocumentFormat);
+        TikTokGeneratedRequestMap.AddOptional(query, "document_size", request.DocumentSize);
         query["document_type"] = request.DocumentType;
-        query["shipping_period"] = request.ShippingPeriod;
+        TikTokGeneratedRequestMap.AddOptional(query, "shipping_period", request.ShippingPeriod);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/fulfillment/202309/packages/{package_id}/shipping_documents";
         path = path.Replace("{package_id}", Uri.EscapeDataString(Convert.ToString(request.PackageId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -315,10 +316,10 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["order_line_item_ids"] = request.OrderLineItemIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_item_ids", request.OrderLineItemIds);
         body["tracking_number"] = request.TrackingNumber;
         body["shipping_provider_id"] = request.ShippingProviderId;
-        body["order_line_list"] = request.OrderLineList;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_list", request.OrderLineList);
         var path = "/fulfillment/202309/orders/{order_id}/packages";
         path = path.Replace("{order_id}", Uri.EscapeDataString(Convert.ToString(request.OrderId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<FulfillmentMarkPackageAsShippedResponseData>(
@@ -347,7 +348,7 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/fulfillment/202309/combinable_packages/search";
         var envelope = await client.SendAsync<FulfillmentSearchCombinablePackagesResponseData>(
@@ -376,16 +377,16 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "shop_cipher", request.ShopCipher);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var body = new Dictionary<string, object?>();
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_lt"] = request.CreateTimeLt;
-        body["update_time_ge"] = request.UpdateTimeGe;
-        body["update_time_lt"] = request.UpdateTimeLt;
-        body["package_status"] = request.PackageStatus;
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_lt", request.CreateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_ge", request.UpdateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_lt", request.UpdateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_status", request.PackageStatus);
         var path = "/fulfillment/202309/packages/search";
         var envelope = await client.SendAsync<FulfillmentSearchPackageResponseData>(
             new TikTokPartnerRequest(
@@ -414,9 +415,9 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["handover_method"] = request.HandoverMethod;
-        body["pickup_slot"] = request.PickupSlot;
-        body["self_shipment"] = request.SelfShipment;
+        TikTokGeneratedRequestMap.AddOptional(body, "handover_method", request.HandoverMethod);
+        TikTokGeneratedRequestMap.AddOptional(body, "pickup_slot", request.PickupSlot);
+        TikTokGeneratedRequestMap.AddOptional(body, "self_shipment", request.SelfShipment);
         var path = "/fulfillment/202309/packages/{package_id}/ship";
         path = path.Replace("{package_id}", Uri.EscapeDataString(Convert.ToString(request.PackageId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -447,7 +448,7 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["splittable_groups"] = request.SplittableGroups;
-        body["splittable_groups_v2"] = request.SplittableGroupsV2;
+        TikTokGeneratedRequestMap.AddOptional(body, "splittable_groups_v2", request.SplittableGroupsV2);
         var path = "/fulfillment/202309/orders/{order_id}/split";
         path = path.Replace("{order_id}", Uri.EscapeDataString(Convert.ToString(request.OrderId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<FulfillmentSplitOrdersResponseData>(
@@ -477,7 +478,7 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["order_ids"] = request.OrderIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_ids", request.OrderIds);
         var path = "/fulfillment/202309/packages/{package_id}/uncombine";
         path = path.Replace("{package_id}", Uri.EscapeDataString(Convert.ToString(request.PackageId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<FulfillmentUncombinePackagesResponseData>(
@@ -599,9 +600,9 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var body = new Dictionary<string, object?>();
         body["order_ids"] = request.OrderIds;
         body["handover_method"] = request.HandoverMethod;
-        body["shipping_provider_id"] = request.ShippingProviderId;
-        body["tracking_number"] = request.TrackingNumber;
-        body["phone_tail_number"] = request.PhoneTailNumber;
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_provider_id", request.ShippingProviderId);
+        TikTokGeneratedRequestMap.AddOptional(body, "tracking_number", request.TrackingNumber);
+        TikTokGeneratedRequestMap.AddOptional(body, "phone_tail_number", request.PhoneTailNumber);
         var path = "/fulfillment/202407/bundles";
         var envelope = await client.SendAsync<FulfillmentCreateFirstMileBundleResponseData>(
             new TikTokPartnerRequest(
@@ -630,7 +631,7 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["invoices"] = request.Invoices;
+        TikTokGeneratedRequestMap.AddOptional(body, "invoices", request.Invoices);
         var path = "/fulfillment/202502/invoice/upload";
         var envelope = await client.SendAsync<FulfillmentUploadInvoiceResponseData>(
             new TikTokPartnerRequest(
@@ -689,9 +690,9 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         var body = new Dictionary<string, object?>();
         body["order_ids"] = request.OrderIds;
         body["handover_method"] = request.HandoverMethod;
-        body["shipping_provider_id"] = request.ShippingProviderId;
-        body["tracking_number"] = request.TrackingNumber;
-        body["phone_tail_number"] = request.PhoneTailNumber;
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_provider_id", request.ShippingProviderId);
+        TikTokGeneratedRequestMap.AddOptional(body, "tracking_number", request.TrackingNumber);
+        TikTokGeneratedRequestMap.AddOptional(body, "phone_tail_number", request.PhoneTailNumber);
         var path = "/fulfillment/202510/first_mile_bundle";
         var envelope = await client.SendAsync<FulfillmentCreateFirstMileBundleV2ResponseData>(
             new TikTokPartnerRequest(
@@ -721,12 +722,12 @@ public sealed class FulfillmentApi(ITikTokPartnerClient client) : IFulfillmentAp
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["ship_type"] = request.ShipType;
-        body["order_id"] = request.OrderId;
-        body["order_line_item"] = request.OrderLineItem;
-        body["order_list_ids"] = request.OrderListIds;
-        body["dimension"] = request.Dimension;
-        body["shipping_service_id"] = request.ShippingServiceId;
-        body["weight"] = request.Weight;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_id", request.OrderId);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_line_item", request.OrderLineItem);
+        TikTokGeneratedRequestMap.AddOptional(body, "order_list_ids", request.OrderListIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "dimension", request.Dimension);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_service_id", request.ShippingServiceId);
+        TikTokGeneratedRequestMap.AddOptional(body, "weight", request.Weight);
         var path = "/fulfillment/202512/packages";
         var envelope = await client.SendAsync<FulfillmentCreatePackagesResponseData>(
             new TikTokPartnerRequest(

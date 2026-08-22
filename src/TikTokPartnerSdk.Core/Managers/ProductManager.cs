@@ -124,19 +124,22 @@ public sealed class ProductManager(
             request.PageToken,
             TikTokManagerContext.RequireShopCipher(context),
             Optional(request.Status)!,
-            request.SellerSkus ?? Array.Empty<string>(),
-            request.CreateTimeGe,
-            request.CreateTimeLe,
-            request.UpdateTimeGe,
-            request.UpdateTimeLe,
+            request.SellerSkus!,
+            Optional(request.CreateTimeGe),
+            Optional(request.CreateTimeLe),
+            Optional(request.UpdateTimeGe),
+            Optional(request.UpdateTimeLe),
             Optional(request.CategoryVersion)!,
-            request.ListingQualityTiers ?? Array.Empty<string>(),
-            request.ListingPlatforms ?? Array.Empty<string>(),
-            request.AuditStatus ?? Array.Empty<string>(),
-            request.SkuIds ?? Array.Empty<string>(),
+            request.ListingQualityTiers!,
+            request.ListingPlatforms!,
+            request.AuditStatus!,
+            request.SkuIds!,
             Optional(request.SnsFilter)!,
-            request.ReturnDraftVersion);
+            request.ReturnDraftVersion ? true : null);
 
     private static string? Optional(string value)
         => string.IsNullOrWhiteSpace(value) ? null : value;
+
+    private static long? Optional(long value)
+        => value == 0 ? null : value;
 }

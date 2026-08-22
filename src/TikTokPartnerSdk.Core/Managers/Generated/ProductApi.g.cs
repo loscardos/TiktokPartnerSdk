@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Product;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -20,7 +21,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["product_ids"] = request.ProductIds;
-        body["listing_platforms"] = request.ListingPlatforms;
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
         var path = "/product/202309/products/activate";
         var envelope = await client.SendAsync<ProductActivateProductResponseData>(
             new TikTokPartnerRequest(
@@ -47,36 +48,36 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["is_diagnosis_required"] = request.IsDiagnosisRequired;
+        TikTokGeneratedRequestMap.AddOptional(query, "is_diagnosis_required", request.IsDiagnosisRequired);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["description"] = request.Description;
         body["category_id"] = request.CategoryId;
-        body["brand_id"] = request.BrandId;
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
         body["main_images"] = request.MainImages;
         body["skus"] = request.Skus;
         body["title"] = request.Title;
-        body["is_cod_allowed"] = request.IsCodAllowed;
-        body["certifications"] = request.Certifications;
-        body["package_weight"] = request.PackageWeight;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["external_product_id"] = request.ExternalProductId;
-        body["delivery_option_ids"] = request.DeliveryOptionIds;
-        body["video"] = request.Video;
-        body["primary_combined_product_id"] = request.PrimaryCombinedProductId;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["listing_platforms"] = request.ListingPlatforms;
-        body["shipping_insurance_requirement"] = request.ShippingInsuranceRequirement;
-        body["is_pre_owned"] = request.IsPreOwned;
-        body["minimum_order_quantity"] = request.MinimumOrderQuantity;
-        body["shipping_template_id"] = request.ShippingTemplateId;
-        body["option"] = request.Option;
-        body["scheduled_sale"] = request.ScheduledSale;
-        body["search_terms"] = request.SearchTerms;
-        body["key_product_features"] = request.KeyProductFeatures;
+        TikTokGeneratedRequestMap.AddOptional(body, "is_cod_allowed", request.IsCodAllowed);
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_weight", request.PackageWeight);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_product_id", request.ExternalProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "delivery_option_ids", request.DeliveryOptionIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "primary_combined_product_id", request.PrimaryCombinedProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_insurance_requirement", request.ShippingInsuranceRequirement);
+        TikTokGeneratedRequestMap.AddOptional(body, "is_pre_owned", request.IsPreOwned);
+        TikTokGeneratedRequestMap.AddOptional(body, "minimum_order_quantity", request.MinimumOrderQuantity);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_template_id", request.ShippingTemplateId);
+        TikTokGeneratedRequestMap.AddOptional(body, "option", request.Option);
+        TikTokGeneratedRequestMap.AddOptional(body, "scheduled_sale", request.ScheduledSale);
+        TikTokGeneratedRequestMap.AddOptional(body, "search_terms", request.SearchTerms);
+        TikTokGeneratedRequestMap.AddOptional(body, "key_product_features", request.KeyProductFeatures);
         var path = "/product/202309/products/listing_check";
         var envelope = await client.SendAsync<ProductCheckProductListingResponseData>(
             new TikTokPartnerRequest(
@@ -135,21 +136,21 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         body["title"] = request.Title;
         body["description"] = request.Description;
         body["category_id"] = request.CategoryId;
-        body["brand_id"] = request.BrandId;
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
         body["main_images"] = request.MainImages;
         body["skus"] = request.Skus;
         body["package_weight"] = request.PackageWeight;
-        body["certifications"] = request.Certifications;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["video"] = request.Video;
-        body["manufacturer"] = request.Manufacturer;
-        body["category_version"] = request.CategoryVersion;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["source_locale"] = request.SourceLocale;
-        body["external_global_product_id"] = request.ExternalGlobalProductId;
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer", request.Manufacturer);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "source_locale", request.SourceLocale);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_global_product_id", request.ExternalGlobalProductId);
         var path = "/product/202309/global_products";
         var envelope = await client.SendAsync<ProductCreateGlobalProductResponseData>(
             new TikTokPartnerRequest(
@@ -178,38 +179,38 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["save_mode"] = request.SaveMode;
+        TikTokGeneratedRequestMap.AddOptional(body, "save_mode", request.SaveMode);
         body["description"] = request.Description;
         body["category_id"] = request.CategoryId;
-        body["brand_id"] = request.BrandId;
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
         body["main_images"] = request.MainImages;
         body["skus"] = request.Skus;
         body["title"] = request.Title;
-        body["is_cod_allowed"] = request.IsCodAllowed;
-        body["certifications"] = request.Certifications;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["product_attributes"] = request.ProductAttributes;
-        body["package_weight"] = request.PackageWeight;
-        body["video"] = request.Video;
-        body["external_product_id"] = request.ExternalProductId;
-        body["delivery_option_ids"] = request.DeliveryOptionIds;
-        body["size_chart"] = request.SizeChart;
-        body["primary_combined_product_id"] = request.PrimaryCombinedProductId;
-        body["is_not_for_sale"] = request.IsNotForSale;
-        body["category_version"] = request.CategoryVersion;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["listing_platforms"] = request.ListingPlatforms;
-        body["shipping_insurance_requirement"] = request.ShippingInsuranceRequirement;
-        body["minimum_order_quantity"] = request.MinimumOrderQuantity;
-        body["is_pre_owned"] = request.IsPreOwned;
-        body["idempotency_key"] = request.IdempotencyKey;
-        body["shipping_template_id"] = request.ShippingTemplateId;
-        body["scheduled_sale"] = request.ScheduledSale;
-        body["locale"] = request.Locale;
-        body["auto_translate_enabled"] = request.AutoTranslateEnabled;
-        body["search_terms"] = request.SearchTerms;
-        body["key_product_features"] = request.KeyProductFeatures;
+        TikTokGeneratedRequestMap.AddOptional(body, "is_cod_allowed", request.IsCodAllowed);
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_weight", request.PackageWeight);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_product_id", request.ExternalProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "delivery_option_ids", request.DeliveryOptionIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "primary_combined_product_id", request.PrimaryCombinedProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "is_not_for_sale", request.IsNotForSale);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_insurance_requirement", request.ShippingInsuranceRequirement);
+        TikTokGeneratedRequestMap.AddOptional(body, "minimum_order_quantity", request.MinimumOrderQuantity);
+        TikTokGeneratedRequestMap.AddOptional(body, "is_pre_owned", request.IsPreOwned);
+        TikTokGeneratedRequestMap.AddOptional(body, "idempotency_key", request.IdempotencyKey);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_template_id", request.ShippingTemplateId);
+        TikTokGeneratedRequestMap.AddOptional(body, "scheduled_sale", request.ScheduledSale);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(body, "auto_translate_enabled", request.AutoTranslateEnabled);
+        TikTokGeneratedRequestMap.AddOptional(body, "search_terms", request.SearchTerms);
+        TikTokGeneratedRequestMap.AddOptional(body, "key_product_features", request.KeyProductFeatures);
         var path = "/product/202309/products";
         var envelope = await client.SendAsync<ProductCreateProductResponseData>(
             new TikTokPartnerRequest(
@@ -239,7 +240,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["product_ids"] = request.ProductIds;
-        body["listing_platforms"] = request.ListingPlatforms;
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
         var path = "/product/202309/products/deactivate";
         var envelope = await client.SendAsync<ProductDeactivateProductsResponseData>(
             new TikTokPartnerRequest(
@@ -327,20 +328,20 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         body["title"] = request.Title;
         body["description"] = request.Description;
         body["category_id"] = request.CategoryId;
-        body["brand_id"] = request.BrandId;
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
         body["main_images"] = request.MainImages;
         body["skus"] = request.Skus;
         body["package_weight"] = request.PackageWeight;
-        body["certifications"] = request.Certifications;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["video"] = request.Video;
-        body["manufacturer"] = request.Manufacturer;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["category_version"] = request.CategoryVersion;
-        body["external_global_product_id"] = request.ExternalGlobalProductId;
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer", request.Manufacturer);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_global_product_id", request.ExternalGlobalProductId);
         var path = "/product/202309/global_products/{global_product_id}";
         path = path.Replace("{global_product_id}", Uri.EscapeDataString(Convert.ToString(request.GlobalProductId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductEditGlobalProductResponseData>(
@@ -368,8 +369,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_version"] = request.CategoryVersion;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/product/202309/categories/{category_id}/attributes";
         path = path.Replace("{category_id}", Uri.EscapeDataString(Convert.ToString(request.CategoryId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -398,12 +399,12 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["brand_name"] = request.BrandName;
-        query["category_id"] = request.CategoryId;
-        query["category_version"] = request.CategoryVersion;
-        query["is_authorized"] = request.IsAuthorized;
+        TikTokGeneratedRequestMap.AddOptional(query, "brand_name", request.BrandName);
+        TikTokGeneratedRequestMap.AddOptional(query, "category_id", request.CategoryId);
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "is_authorized", request.IsAuthorized);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/product/202309/brands";
         var envelope = await client.SendAsync<ProductGetBrandsResponseData>(
@@ -431,11 +432,11 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_version"] = request.CategoryVersion;
-        query["include_prohibited_categories"] = request.IncludeProhibitedCategories;
-        query["keyword"] = request.Keyword;
-        query["listing_platform"] = request.ListingPlatform;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "include_prohibited_categories", request.IncludeProhibitedCategories);
+        TikTokGeneratedRequestMap.AddOptional(query, "keyword", request.Keyword);
+        TikTokGeneratedRequestMap.AddOptional(query, "listing_platform", request.ListingPlatform);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/product/202309/categories";
         var envelope = await client.SendAsync<ProductGetCategoriesResponseData>(
@@ -463,8 +464,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_version"] = request.CategoryVersion;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/product/202309/categories/{category_id}/rules";
         path = path.Replace("{category_id}", Uri.EscapeDataString(Convert.ToString(request.CategoryId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -493,8 +494,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_version"] = request.CategoryVersion;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         var path = "/product/202309/categories/{category_id}/global_attributes";
         path = path.Replace("{category_id}", Uri.EscapeDataString(Convert.ToString(request.CategoryId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductGetGlobalAttributesResponseData>(
@@ -522,9 +523,9 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_version"] = request.CategoryVersion;
-        query["keyword"] = request.Keyword;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "keyword", request.Keyword);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         var path = "/product/202309/global_categories";
         var envelope = await client.SendAsync<ProductGetGlobalCategoriesResponseData>(
             new TikTokPartnerRequest(
@@ -551,8 +552,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_version"] = request.CategoryVersion;
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         var path = "/product/202309/categories/{category_id}/global_rules";
         path = path.Replace("{category_id}", Uri.EscapeDataString(Convert.ToString(request.CategoryId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductGetGlobalCategoryRulesResponseData>(
@@ -607,9 +608,9 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
-        query["return_draft_version"] = request.ReturnDraftVersion;
-        query["return_under_review_version"] = request.ReturnUnderReviewVersion;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(query, "return_draft_version", request.ReturnDraftVersion);
+        TikTokGeneratedRequestMap.AddOptional(query, "return_under_review_version", request.ReturnUnderReviewVersion);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/product/202309/products/{product_id}";
         path = path.Replace("{product_id}", Uri.EscapeDataString(Convert.ToString(request.ProductId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -640,8 +641,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["product_ids"] = request.ProductIds;
-        body["sku_ids"] = request.SkuIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_ids", request.ProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "sku_ids", request.SkuIds);
         var path = "/product/202309/inventory/search";
         var envelope = await client.SendAsync<ProductInventorySearchResponseData>(
             new TikTokPartnerRequest(
@@ -700,11 +701,11 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["product_title"] = request.ProductTitle;
-        body["description"] = request.Description;
-        body["images"] = request.Images;
-        body["category_version"] = request.CategoryVersion;
-        body["listing_platform"] = request.ListingPlatform;
-        body["include_prohibited_categories"] = request.IncludeProhibitedCategories;
+        TikTokGeneratedRequestMap.AddOptional(body, "description", request.Description);
+        TikTokGeneratedRequestMap.AddOptional(body, "images", request.Images);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platform", request.ListingPlatform);
+        TikTokGeneratedRequestMap.AddOptional(body, "include_prohibited_categories", request.IncludeProhibitedCategories);
         var path = "/product/202309/categories/recommend";
         var envelope = await client.SendAsync<ProductRecommendCategoryResponseData>(
             new TikTokPartnerRequest(
@@ -733,9 +734,9 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         var body = new Dictionary<string, object?>();
         body["product_title"] = request.ProductTitle;
-        body["description"] = request.Description;
-        body["images"] = request.Images;
-        body["category_version"] = request.CategoryVersion;
+        TikTokGeneratedRequestMap.AddOptional(body, "description", request.Description);
+        TikTokGeneratedRequestMap.AddOptional(body, "images", request.Images);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
         var path = "/product/202309/global_categories/recommend";
         var envelope = await client.SendAsync<ProductRecommendGlobalCategoriesResponseData>(
             new TikTokPartnerRequest(
@@ -911,7 +912,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         var body = new Dictionary<string, object?>();
         body["data"] = request.Data;
-        body["use_case"] = request.UseCase;
+        TikTokGeneratedRequestMap.AddOptional(body, "use_case", request.UseCase);
         var path = "/product/202309/images/upload";
         var envelope = await client.SendAsync<ProductUploadProductImageResponseData>(
             new TikTokPartnerRequest(
@@ -966,14 +967,14 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         var body = new Dictionary<string, object?>();
-        body["status"] = request.Status;
-        body["seller_skus"] = request.SellerSkus;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_le"] = request.CreateTimeLe;
-        body["update_time_ge"] = request.UpdateTimeGe;
-        body["update_time_le"] = request.UpdateTimeLe;
+        TikTokGeneratedRequestMap.AddOptional(body, "status", request.Status);
+        TikTokGeneratedRequestMap.AddOptional(body, "seller_skus", request.SellerSkus);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_le", request.CreateTimeLe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_ge", request.UpdateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_le", request.UpdateTimeLe);
         var path = "/product/202312/global_products/search";
         var envelope = await client.SendAsync<ProductSearchGlobalProductsResponseData>(
             new TikTokPartnerRequest(
@@ -1002,7 +1003,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["images"] = request.Images;
+        TikTokGeneratedRequestMap.AddOptional(body, "images", request.Images);
         var path = "/product/202404/images/optimize";
         var envelope = await client.SendAsync<ProductOptimizedImagesResponseData>(
             new TikTokPartnerRequest(
@@ -1140,12 +1141,12 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locales"] = request.Locales;
+        TikTokGeneratedRequestMap.AddOptional(query, "locales", request.Locales);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         var body = new Dictionary<string, object?>();
-        body["ids"] = request.Ids;
-        body["keyword"] = request.Keyword;
+        TikTokGeneratedRequestMap.AddOptional(body, "ids", request.Ids);
+        TikTokGeneratedRequestMap.AddOptional(body, "keyword", request.Keyword);
         var path = "/product/202407/sizecharts/search";
         var envelope = await client.SendAsync<ProductSearchSizeChartsResponseData>(
             new TikTokPartnerRequest(
@@ -1174,11 +1175,11 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         var body = new Dictionary<string, object?>();
         body["name"] = request.Name;
-        body["registered_trade_name"] = request.RegisteredTradeName;
+        TikTokGeneratedRequestMap.AddOptional(body, "registered_trade_name", request.RegisteredTradeName);
         body["email"] = request.Email;
         body["phone_number"] = request.PhoneNumber;
         body["address"] = request.Address;
-        body["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
         var path = "/product/202409/compliance/manufacturers";
         var envelope = await client.SendAsync<ProductCreateManufacturerResponseData>(
             new TikTokPartnerRequest(
@@ -1210,7 +1211,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         body["email"] = request.Email;
         body["phone_number"] = request.PhoneNumber;
         body["address"] = request.Address;
-        body["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
         var path = "/product/202409/compliance/responsible_persons";
         var envelope = await client.SendAsync<ProductCreateResponsiblePersonResponseData>(
             new TikTokPartnerRequest(
@@ -1238,12 +1239,12 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         var body = new Dictionary<string, object?>();
-        body["name"] = request.Name;
-        body["registered_trade_name"] = request.RegisteredTradeName;
-        body["email"] = request.Email;
-        body["phone_number"] = request.PhoneNumber;
-        body["address"] = request.Address;
-        body["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(body, "name", request.Name);
+        TikTokGeneratedRequestMap.AddOptional(body, "registered_trade_name", request.RegisteredTradeName);
+        TikTokGeneratedRequestMap.AddOptional(body, "email", request.Email);
+        TikTokGeneratedRequestMap.AddOptional(body, "phone_number", request.PhoneNumber);
+        TikTokGeneratedRequestMap.AddOptional(body, "address", request.Address);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
         var path = "/product/202409/compliance/manufacturers/{manufacturer_id}/partial_edit";
         path = path.Replace("{manufacturer_id}", Uri.EscapeDataString(Convert.ToString(request.ManufacturerId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -1272,11 +1273,11 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         var body = new Dictionary<string, object?>();
-        body["name"] = request.Name;
-        body["email"] = request.Email;
-        body["phone_number"] = request.PhoneNumber;
-        body["address"] = request.Address;
-        body["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(body, "name", request.Name);
+        TikTokGeneratedRequestMap.AddOptional(body, "email", request.Email);
+        TikTokGeneratedRequestMap.AddOptional(body, "phone_number", request.PhoneNumber);
+        TikTokGeneratedRequestMap.AddOptional(body, "address", request.Address);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
         var path = "/product/202409/compliance/responsible_persons/{responsible_person_id}/partial_edit";
         path = path.Replace("{responsible_person_id}", Uri.EscapeDataString(Convert.ToString(request.ResponsiblePersonId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<object>(
@@ -1306,15 +1307,15 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["product_id"] = request.ProductId;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_id", request.ProductId);
         body["category_id"] = request.CategoryId;
-        body["description"] = request.Description;
-        body["brand_id"] = request.BrandId;
-        body["main_images"] = request.MainImages;
-        body["title"] = request.Title;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["optimization_fields"] = request.OptimizationFields;
+        TikTokGeneratedRequestMap.AddOptional(body, "description", request.Description);
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
+        TikTokGeneratedRequestMap.AddOptional(body, "main_images", request.MainImages);
+        TikTokGeneratedRequestMap.AddOptional(body, "title", request.Title);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "optimization_fields", request.OptimizationFields);
         var path = "/product/202411/products/diagnose_optimize";
         var envelope = await client.SendAsync<ProductDiagnoseAndOptimizeProductResponseData>(
             new TikTokPartnerRequest(
@@ -1342,11 +1343,11 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         var body = new Dictionary<string, object?>();
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["keyword"] = request.Keyword;
-        body["locales"] = request.Locales;
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "keyword", request.Keyword);
+        TikTokGeneratedRequestMap.AddOptional(body, "locales", request.Locales);
         var path = "/product/202501/compliance/manufacturers/search";
         var envelope = await client.SendAsync<ProductSearchManufacturersResponseData>(
             new TikTokPartnerRequest(
@@ -1374,11 +1375,11 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         var body = new Dictionary<string, object?>();
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["keyword"] = request.Keyword;
-        body["locales"] = request.Locales;
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "keyword", request.Keyword);
+        TikTokGeneratedRequestMap.AddOptional(body, "locales", request.Locales);
         var path = "/product/202501/compliance/responsible_persons/search";
         var envelope = await client.SendAsync<ProductSearchResponsiblePersonsResponseData>(
             new TikTokPartnerRequest(
@@ -1406,22 +1407,22 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["status"] = request.Status;
-        body["seller_skus"] = request.SellerSkus;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_le"] = request.CreateTimeLe;
-        body["update_time_ge"] = request.UpdateTimeGe;
-        body["update_time_le"] = request.UpdateTimeLe;
-        body["category_version"] = request.CategoryVersion;
-        body["listing_quality_tiers"] = request.ListingQualityTiers;
-        body["listing_platforms"] = request.ListingPlatforms;
-        body["audit_status"] = request.AuditStatus;
-        body["sku_ids"] = request.SkuIds;
-        body["sns_filter"] = request.SnsFilter;
-        body["return_draft_version"] = request.ReturnDraftVersion;
+        TikTokGeneratedRequestMap.AddOptional(body, "status", request.Status);
+        TikTokGeneratedRequestMap.AddOptional(body, "seller_skus", request.SellerSkus);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_le", request.CreateTimeLe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_ge", request.UpdateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_le", request.UpdateTimeLe);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_quality_tiers", request.ListingQualityTiers);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
+        TikTokGeneratedRequestMap.AddOptional(body, "audit_status", request.AuditStatus);
+        TikTokGeneratedRequestMap.AddOptional(body, "sku_ids", request.SkuIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "sns_filter", request.SnsFilter);
+        TikTokGeneratedRequestMap.AddOptional(body, "return_draft_version", request.ReturnDraftVersion);
         var path = "/product/202502/products/search";
         var envelope = await client.SendAsync<ProductSearchProductsResponseData>(
             new TikTokPartnerRequest(
@@ -1448,7 +1449,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_asset_cipher"] = request.CategoryAssetCipher;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_asset_cipher", request.CategoryAssetCipher);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["images"] = request.Images;
@@ -1478,9 +1479,9 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_asset_cipher"] = request.CategoryAssetCipher;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_asset_cipher", request.CategoryAssetCipher);
         query["shop_cipher"] = request.ShopCipher;
-        query["translation_task_ids"] = request.TranslationTaskIds;
+        TikTokGeneratedRequestMap.AddOptional(query, "translation_task_ids", request.TranslationTaskIds);
         var path = "/product/202506/images/translation_tasks";
         var envelope = await client.SendAsync<ProductGetImageTranslationTasksResponseData>(
             new TikTokPartnerRequest(
@@ -1564,8 +1565,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["replicate_target"] = request.ReplicateTarget;
-        body["inventory_mode"] = request.InventoryMode;
+        TikTokGeneratedRequestMap.AddOptional(body, "replicate_target", request.ReplicateTarget);
+        TikTokGeneratedRequestMap.AddOptional(body, "inventory_mode", request.InventoryMode);
         var path = "/product/202507/products/{product_id}/global_replicate";
         path = path.Replace("{product_id}", Uri.EscapeDataString(Convert.ToString(request.ProductId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductReplicateProductResponseData>(
@@ -1595,38 +1596,38 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["save_mode"] = request.SaveMode;
+        TikTokGeneratedRequestMap.AddOptional(body, "save_mode", request.SaveMode);
         body["description"] = request.Description;
         body["category_id"] = request.CategoryId;
-        body["brand_id"] = request.BrandId;
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
         body["main_images"] = request.MainImages;
         body["skus"] = request.Skus;
         body["title"] = request.Title;
-        body["is_cod_allowed"] = request.IsCodAllowed;
-        body["certifications"] = request.Certifications;
-        body["package_weight"] = request.PackageWeight;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["external_product_id"] = request.ExternalProductId;
-        body["delivery_option_ids"] = request.DeliveryOptionIds;
-        body["video"] = request.Video;
-        body["category_version"] = request.CategoryVersion;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["listing_platforms"] = request.ListingPlatforms;
-        body["shipping_insurance_requirement"] = request.ShippingInsuranceRequirement;
-        body["is_pre_owned"] = request.IsPreOwned;
-        body["minimum_order_quantity"] = request.MinimumOrderQuantity;
-        body["replicated_products"] = request.ReplicatedProducts;
-        body["subscribe_info_edit"] = request.SubscribeInfoEdit;
-        body["shipping_template_id"] = request.ShippingTemplateId;
-        body["scheduled_sale"] = request.ScheduledSale;
-        body["locale"] = request.Locale;
-        body["auto_translate_enabled"] = request.AutoTranslateEnabled;
-        body["search_terms"] = request.SearchTerms;
-        body["key_product_features"] = request.KeyProductFeatures;
-        body["inventory_mode"] = request.InventoryMode;
+        TikTokGeneratedRequestMap.AddOptional(body, "is_cod_allowed", request.IsCodAllowed);
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_weight", request.PackageWeight);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_product_id", request.ExternalProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "delivery_option_ids", request.DeliveryOptionIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_insurance_requirement", request.ShippingInsuranceRequirement);
+        TikTokGeneratedRequestMap.AddOptional(body, "is_pre_owned", request.IsPreOwned);
+        TikTokGeneratedRequestMap.AddOptional(body, "minimum_order_quantity", request.MinimumOrderQuantity);
+        TikTokGeneratedRequestMap.AddOptional(body, "replicated_products", request.ReplicatedProducts);
+        TikTokGeneratedRequestMap.AddOptional(body, "subscribe_info_edit", request.SubscribeInfoEdit);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_template_id", request.ShippingTemplateId);
+        TikTokGeneratedRequestMap.AddOptional(body, "scheduled_sale", request.ScheduledSale);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(body, "auto_translate_enabled", request.AutoTranslateEnabled);
+        TikTokGeneratedRequestMap.AddOptional(body, "search_terms", request.SearchTerms);
+        TikTokGeneratedRequestMap.AddOptional(body, "key_product_features", request.KeyProductFeatures);
+        TikTokGeneratedRequestMap.AddOptional(body, "inventory_mode", request.InventoryMode);
         var path = "/product/202509/products/{product_id}";
         path = path.Replace("{product_id}", Uri.EscapeDataString(Convert.ToString(request.ProductId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductEditProductResponseData>(
@@ -1655,23 +1656,23 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         var body = new Dictionary<string, object?>();
-        body["title"] = request.Title;
-        body["description"] = request.Description;
-        body["category_id"] = request.CategoryId;
-        body["brand_id"] = request.BrandId;
-        body["main_images"] = request.MainImages;
-        body["skus"] = request.Skus;
-        body["package_weight"] = request.PackageWeight;
-        body["certifications"] = request.Certifications;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["video"] = request.Video;
-        body["manufacturer"] = request.Manufacturer;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["category_version"] = request.CategoryVersion;
-        body["external_global_product_id"] = request.ExternalGlobalProductId;
+        TikTokGeneratedRequestMap.AddOptional(body, "title", request.Title);
+        TikTokGeneratedRequestMap.AddOptional(body, "description", request.Description);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_id", request.CategoryId);
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
+        TikTokGeneratedRequestMap.AddOptional(body, "main_images", request.MainImages);
+        TikTokGeneratedRequestMap.AddOptional(body, "skus", request.Skus);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_weight", request.PackageWeight);
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer", request.Manufacturer);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "category_version", request.CategoryVersion);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_global_product_id", request.ExternalGlobalProductId);
         var path = "/product/202509/global_products/{global_product_id}/partial_edit";
         path = path.Replace("{global_product_id}", Uri.EscapeDataString(Convert.ToString(request.GlobalProductId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductPartialEditGlobalProductResponseData>(
@@ -1701,31 +1702,31 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["save_mode"] = request.SaveMode;
-        body["description"] = request.Description;
-        body["brand_id"] = request.BrandId;
-        body["main_images"] = request.MainImages;
-        body["skus"] = request.Skus;
-        body["title"] = request.Title;
-        body["is_cod_allowed"] = request.IsCodAllowed;
-        body["certifications"] = request.Certifications;
-        body["package_weight"] = request.PackageWeight;
-        body["product_attributes"] = request.ProductAttributes;
-        body["size_chart"] = request.SizeChart;
-        body["package_dimensions"] = request.PackageDimensions;
-        body["video"] = request.Video;
-        body["external_product_id"] = request.ExternalProductId;
-        body["manufacturer_ids"] = request.ManufacturerIds;
-        body["responsible_person_ids"] = request.ResponsiblePersonIds;
-        body["listing_platforms"] = request.ListingPlatforms;
-        body["replicated_products"] = request.ReplicatedProducts;
-        body["subscribe_info_edit"] = request.SubscribeInfoEdit;
-        body["scheduled_sale"] = request.ScheduledSale;
-        body["locale"] = request.Locale;
-        body["auto_translate_enabled"] = request.AutoTranslateEnabled;
-        body["search_terms"] = request.SearchTerms;
-        body["key_product_features"] = request.KeyProductFeatures;
-        body["inventory_mode"] = request.InventoryMode;
+        TikTokGeneratedRequestMap.AddOptional(body, "save_mode", request.SaveMode);
+        TikTokGeneratedRequestMap.AddOptional(body, "description", request.Description);
+        TikTokGeneratedRequestMap.AddOptional(body, "brand_id", request.BrandId);
+        TikTokGeneratedRequestMap.AddOptional(body, "main_images", request.MainImages);
+        TikTokGeneratedRequestMap.AddOptional(body, "skus", request.Skus);
+        TikTokGeneratedRequestMap.AddOptional(body, "title", request.Title);
+        TikTokGeneratedRequestMap.AddOptional(body, "is_cod_allowed", request.IsCodAllowed);
+        TikTokGeneratedRequestMap.AddOptional(body, "certifications", request.Certifications);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_weight", request.PackageWeight);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_attributes", request.ProductAttributes);
+        TikTokGeneratedRequestMap.AddOptional(body, "size_chart", request.SizeChart);
+        TikTokGeneratedRequestMap.AddOptional(body, "package_dimensions", request.PackageDimensions);
+        TikTokGeneratedRequestMap.AddOptional(body, "video", request.Video);
+        TikTokGeneratedRequestMap.AddOptional(body, "external_product_id", request.ExternalProductId);
+        TikTokGeneratedRequestMap.AddOptional(body, "manufacturer_ids", request.ManufacturerIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "responsible_person_ids", request.ResponsiblePersonIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "listing_platforms", request.ListingPlatforms);
+        TikTokGeneratedRequestMap.AddOptional(body, "replicated_products", request.ReplicatedProducts);
+        TikTokGeneratedRequestMap.AddOptional(body, "subscribe_info_edit", request.SubscribeInfoEdit);
+        TikTokGeneratedRequestMap.AddOptional(body, "scheduled_sale", request.ScheduledSale);
+        TikTokGeneratedRequestMap.AddOptional(body, "locale", request.Locale);
+        TikTokGeneratedRequestMap.AddOptional(body, "auto_translate_enabled", request.AutoTranslateEnabled);
+        TikTokGeneratedRequestMap.AddOptional(body, "search_terms", request.SearchTerms);
+        TikTokGeneratedRequestMap.AddOptional(body, "key_product_features", request.KeyProductFeatures);
+        TikTokGeneratedRequestMap.AddOptional(body, "inventory_mode", request.InventoryMode);
         var path = "/product/202509/products/{product_id}/partial_edit";
         path = path.Replace("{product_id}", Uri.EscapeDataString(Convert.ToString(request.ProductId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<ProductPartialEditProductResponseData>(
@@ -1754,10 +1755,10 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["product_ids"] = request.ProductIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "product_ids", request.ProductIds);
         var path = "/product/202602/packages/recommend";
         var envelope = await client.SendAsync<ProductGetRecommendedProductPackageResponseData>(
             new TikTokPartnerRequest(
@@ -1810,7 +1811,7 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["shop_cipher"] = request.ShopCipher;
         var path = "/product/202604/opportunities/{opportunity_id}";
         path = path.Replace("{opportunity_id}", Uri.EscapeDataString(Convert.ToString(request.OpportunityId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
@@ -1839,14 +1840,14 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["opportunity_id"] = request.OpportunityId;
+        TikTokGeneratedRequestMap.AddOptional(query, "opportunity_id", request.OpportunityId);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["product_id"] = request.ProductId;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "product_id", request.ProductId);
         query["shop_cipher"] = request.ShopCipher;
-        query["status"] = request.Status;
-        query["submit_time_ge"] = request.SubmitTimeGe;
-        query["submit_time_lt"] = request.SubmitTimeLt;
+        TikTokGeneratedRequestMap.AddOptional(query, "status", request.Status);
+        TikTokGeneratedRequestMap.AddOptional(query, "submit_time_ge", request.SubmitTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(query, "submit_time_lt", request.SubmitTimeLt);
         var path = "/product/202604/opportunities/submissions";
         var envelope = await client.SendAsync<ProductGetSubmissionRecordsResponseData>(
             new TikTokPartnerRequest(
@@ -1873,15 +1874,15 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["locale"] = request.Locale;
+        TikTokGeneratedRequestMap.AddOptional(query, "locale", request.Locale);
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["opportunity_type"] = request.OpportunityType;
-        body["category_ids"] = request.CategoryIds;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_lt"] = request.CreateTimeLt;
+        TikTokGeneratedRequestMap.AddOptional(body, "category_ids", request.CategoryIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_lt", request.CreateTimeLt);
         var path = "/product/202604/opportunities/query";
         var envelope = await client.SendAsync<ProductListOpportunityResponseData>(
             new TikTokPartnerRequest(
@@ -1941,8 +1942,8 @@ public sealed class ProductApi(ITikTokPartnerClient client) : IProductApi
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["seller_id"] = request.SellerId;
-        body["sku_ids"] = request.SkuIds;
-        body["stock_operation_setting"] = request.StockOperationSetting;
+        TikTokGeneratedRequestMap.AddOptional(body, "sku_ids", request.SkuIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "stock_operation_setting", request.StockOperationSetting);
         var path = "/product/202604/inventory/operation/settings";
         var envelope = await client.SendAsync<ProductUpdateStockOperationSettingsResponseData>(
             new TikTokPartnerRequest(

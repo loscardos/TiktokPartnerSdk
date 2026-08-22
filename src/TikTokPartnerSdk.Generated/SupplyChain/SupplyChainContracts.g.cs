@@ -35,17 +35,17 @@ public sealed record SupplyChainConfirmPackageShipmentRequestPackages(
 
 public sealed record SupplyChainConfirmPackageShipmentRequestPackagesDimension(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("length")] long Length,
+    [property: JsonPropertyName("length")] long? Length,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("width")] long Width,
+    [property: JsonPropertyName("width")] long? Width,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("height")] long Height,
+    [property: JsonPropertyName("height")] long? Height,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("unit")] string Unit);
 
 public sealed record SupplyChainConfirmPackageShipmentRequestPackagesWeight(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("value")] long Value,
+    [property: JsonPropertyName("value")] long? Value,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("unit")] string Unit);
 

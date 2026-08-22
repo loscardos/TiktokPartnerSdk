@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Tools;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -17,8 +18,8 @@ public sealed class ToolsApi(ITikTokPartnerClient client) : IToolsApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["category_asset_cipher"] = request.CategoryAssetCipher;
-        query["shop_cipher"] = request.ShopCipher;
+        TikTokGeneratedRequestMap.AddOptional(query, "category_asset_cipher", request.CategoryAssetCipher);
+        TikTokGeneratedRequestMap.AddOptional(query, "shop_cipher", request.ShopCipher);
         var body = new Dictionary<string, object?>();
         body["file_name"] = request.FileName;
         body["file_type"] = request.FileType;

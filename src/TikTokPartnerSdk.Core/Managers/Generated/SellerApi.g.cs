@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Seller;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;

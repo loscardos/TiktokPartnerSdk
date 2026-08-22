@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Finance;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -17,13 +18,13 @@ public sealed class FinanceApi(ITikTokPartnerClient client) : IFinanceApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["create_time_ge"] = request.CreateTimeGe;
-        query["create_time_lt"] = request.CreateTimeLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(query, "create_time_lt", request.CreateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var path = "/finance/202309/payments";
         var envelope = await client.SendAsync<FinanceGetPaymentsResponseData>(
             new TikTokPartnerRequest(
@@ -50,14 +51,14 @@ public sealed class FinanceApi(ITikTokPartnerClient client) : IFinanceApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["payment_status"] = request.PaymentStatus;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "payment_status", request.PaymentStatus);
         query["shop_cipher"] = request.ShopCipher;
         query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
-        query["statement_time_ge"] = request.StatementTimeGe;
-        query["statement_time_lt"] = request.StatementTimeLt;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
+        TikTokGeneratedRequestMap.AddOptional(query, "statement_time_ge", request.StatementTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(query, "statement_time_lt", request.StatementTimeLt);
         var path = "/finance/202309/statements";
         var envelope = await client.SendAsync<FinanceGetStatementsResponseData>(
             new TikTokPartnerRequest(
@@ -84,10 +85,10 @@ public sealed class FinanceApi(ITikTokPartnerClient client) : IFinanceApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["create_time_ge"] = request.CreateTimeGe;
-        query["create_time_lt"] = request.CreateTimeLt;
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(query, "create_time_lt", request.CreateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         query["types"] = request.Types;
         var path = "/finance/202309/withdrawals";
@@ -144,11 +145,11 @@ public sealed class FinanceApi(ITikTokPartnerClient client) : IFinanceApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var path = "/finance/202501/statements/{statement_id}/statement_transactions";
         path = path.Replace("{statement_id}", Uri.EscapeDataString(Convert.ToString(request.StatementId, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty));
         var envelope = await client.SendAsync<FinanceGetTransactionsByStatementResponseData>(
@@ -176,13 +177,13 @@ public sealed class FinanceApi(ITikTokPartnerClient client) : IFinanceApi
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
-        query["search_time_ge"] = request.SearchTimeGe;
-        query["search_time_lt"] = request.SearchTimeLt;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_size", request.PageSize);
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
+        TikTokGeneratedRequestMap.AddOptional(query, "search_time_ge", request.SearchTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(query, "search_time_lt", request.SearchTimeLt);
         query["shop_cipher"] = request.ShopCipher;
         query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var path = "/finance/202507/orders/unsettled";
         var envelope = await client.SendAsync<FinanceGetUnsettledTransactionsResponseData>(
             new TikTokPartnerRequest(

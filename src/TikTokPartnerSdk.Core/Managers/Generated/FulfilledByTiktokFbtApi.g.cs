@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.FulfilledByTiktokFbt;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -45,12 +46,12 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["goods_ids"] = request.GoodsIds;
-        body["fbt_warehouse_ids"] = request.FbtWarehouseIds;
-        body["sku_ids"] = request.SkuIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "goods_ids", request.GoodsIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "fbt_warehouse_ids", request.FbtWarehouseIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "sku_ids", request.SkuIds);
         var path = "/fbt/202408/inventory/search";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtSearchFbtInventoryResponseData>(
             new TikTokPartnerRequest(
@@ -105,13 +106,13 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["goods_ids"] = request.GoodsIds;
-        body["product_ids"] = request.ProductIds;
-        body["reference_codes"] = request.ReferenceCodes;
-        body["sku_ids"] = request.SkuIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "goods_ids", request.GoodsIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "product_ids", request.ProductIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "reference_codes", request.ReferenceCodes);
+        TikTokGeneratedRequestMap.AddOptional(body, "sku_ids", request.SkuIds);
         var path = "/fbt/202409/goods/search";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtSearchGoodsInfoResponseData>(
             new TikTokPartnerRequest(
@@ -139,13 +140,13 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["goods_ids"] = request.GoodsIds;
-        body["fbt_warehouse_ids"] = request.FbtWarehouseIds;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_le"] = request.CreateTimeLe;
+        TikTokGeneratedRequestMap.AddOptional(body, "goods_ids", request.GoodsIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "fbt_warehouse_ids", request.FbtWarehouseIds);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_le", request.CreateTimeLe);
         var path = "/fbt/202410/inventory_records/search";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtSearchFbtInventoryRecordResponseData>(
             new TikTokPartnerRequest(
@@ -175,7 +176,7 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["mcf_order_id"] = request.McfOrderId;
-        body["consign_orders"] = request.ConsignOrders;
+        TikTokGeneratedRequestMap.AddOptional(body, "consign_orders", request.ConsignOrders);
         var path = "/fbt/202601/mcf_outbound_orders/cancel";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtCancelFbtMcfOrderResponseData>(
             new TikTokPartnerRequest(
@@ -320,10 +321,10 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["plan_id"] = request.PlanId;
-        body["idempotent_key"] = request.IdempotentKey;
-        body["goods_items"] = request.GoodsItems;
-        body["cartons"] = request.Cartons;
+        TikTokGeneratedRequestMap.AddOptional(body, "plan_id", request.PlanId);
+        TikTokGeneratedRequestMap.AddOptional(body, "idempotent_key", request.IdempotentKey);
+        TikTokGeneratedRequestMap.AddOptional(body, "goods_items", request.GoodsItems);
+        TikTokGeneratedRequestMap.AddOptional(body, "cartons", request.Cartons);
         var path = "/fbt/202602/create_update_inbound_plan";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtCreateUpdateInboundPlanResponseData>(
             new TikTokPartnerRequest(
@@ -381,7 +382,7 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         // access_token_kind=seller
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
-        query["include_carton_details"] = request.IncludeCartonDetails;
+        TikTokGeneratedRequestMap.AddOptional(query, "include_carton_details", request.IncludeCartonDetails);
         query["order_ids"] = request.OrderIds;
         query["shop_cipher"] = request.ShopCipher;
         var path = "/fbt/202602/inbound_orders";
@@ -442,9 +443,9 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["order_id"] = request.OrderId;
-        body["print_items"] = request.PrintItems;
-        body["carton_label_format"] = request.CartonLabelFormat;
-        body["barcode_format"] = request.BarcodeFormat;
+        TikTokGeneratedRequestMap.AddOptional(body, "print_items", request.PrintItems);
+        TikTokGeneratedRequestMap.AddOptional(body, "carton_label_format", request.CartonLabelFormat);
+        TikTokGeneratedRequestMap.AddOptional(body, "barcode_format", request.BarcodeFormat);
         var path = "/fbt/202602/inbound_orders/label_print";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtPrintLabelResponseData>(
             new TikTokPartnerRequest(
@@ -474,7 +475,7 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["order_id"] = request.OrderId;
-        body["parcel_tracking_info"] = request.ParcelTrackingInfo;
+        TikTokGeneratedRequestMap.AddOptional(body, "parcel_tracking_info", request.ParcelTrackingInfo);
         var path = "/fbt/202602/inbound_orders/tracking_update";
         var envelope = await client.SendAsync<object>(
             new TikTokPartnerRequest(
@@ -594,7 +595,7 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
         body["inbound_order_id"] = request.InboundOrderId;
-        body["cartons"] = request.Cartons;
+        TikTokGeneratedRequestMap.AddOptional(body, "cartons", request.Cartons);
         body["shipment_option"] = request.ShipmentOption;
         var path = "/fbt/202603/ship_inbound_order";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtShipInboundOrderResponseData>(
@@ -654,7 +655,7 @@ public sealed class FulfilledByTiktokFbtApi(ITikTokPartnerClient client) : IFulf
         var query = new Dictionary<string, object?>();
         query["shop_cipher"] = request.ShopCipher;
         var body = new Dictionary<string, object?>();
-        body["update_goods_dto"] = request.UpdateGoodsDto;
+        TikTokGeneratedRequestMap.AddOptional(body, "update_goods_dto", request.UpdateGoodsDto);
         var path = "/fbt/202603/goods/update_goods_info";
         var envelope = await client.SendAsync<FulfilledByTiktokFbtUpdateGoodsResponseData>(
             new TikTokPartnerRequest(

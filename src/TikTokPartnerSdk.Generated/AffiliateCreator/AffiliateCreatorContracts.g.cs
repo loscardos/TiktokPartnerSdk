@@ -64,9 +64,9 @@ public sealed record AffiliateCreatorCreatorSearchOpenCollaborationProductReques
 
 public sealed record AffiliateCreatorCreatorSearchOpenCollaborationProductRequestCommissionRateRange(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("rate_ge")] long RateGe,
+    [property: JsonPropertyName("rate_ge")] long? RateGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("rate_lt")] long RateLt);
+    [property: JsonPropertyName("rate_lt")] long? RateLt);
 
 
 public sealed record AffiliateCreatorCreatorSearchOpenCollaborationProductResponse(
@@ -332,9 +332,9 @@ public sealed record AffiliateCreatorSearchCreatorAffiliateOrdersRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_lt")] long CreateTimeLt);
+    [property: JsonPropertyName("create_time_lt")] long? CreateTimeLt);
 
 
 public sealed record AffiliateCreatorSearchCreatorAffiliateOrdersResponse(
@@ -562,7 +562,7 @@ public sealed record AffiliateCreatorSearchCreatorSampleApplicationsRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("page_size")] long PageSize,
+    [property: JsonPropertyName("page_size")] long? PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -1037,7 +1037,7 @@ public sealed record AffiliateCreatorPostShoppableVideoRequestVideoInfo(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("cover_uri")] string CoverUri,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("cover_timestamp_ms")] long CoverTimestampMs,
+    [property: JsonPropertyName("cover_timestamp_ms")] long? CoverTimestampMs,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("music_id")] string MusicId);
 

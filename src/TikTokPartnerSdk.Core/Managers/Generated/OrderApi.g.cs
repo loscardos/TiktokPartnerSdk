@@ -2,6 +2,7 @@
 #nullable enable
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Abstractions.Managers.Generated;
+using Loscardos.TikTokPartnerSdk.Core.Managers;
 using Loscardos.TikTokPartnerSdk.Generated.Order;
 
 namespace Loscardos.TikTokPartnerSdk.Core.Managers.Generated;
@@ -18,20 +19,20 @@ public sealed class OrderApi(ITikTokPartnerClient client) : IOrderApi
         // required_headers=x-tts-access-token,content-type
         var query = new Dictionary<string, object?>();
         query["page_size"] = request.PageSize;
-        query["page_token"] = request.PageToken;
+        TikTokGeneratedRequestMap.AddOptional(query, "page_token", request.PageToken);
         query["shop_cipher"] = request.ShopCipher;
-        query["sort_field"] = request.SortField;
-        query["sort_order"] = request.SortOrder;
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_field", request.SortField);
+        TikTokGeneratedRequestMap.AddOptional(query, "sort_order", request.SortOrder);
         var body = new Dictionary<string, object?>();
-        body["order_status"] = request.OrderStatus;
-        body["create_time_ge"] = request.CreateTimeGe;
-        body["create_time_lt"] = request.CreateTimeLt;
-        body["update_time_ge"] = request.UpdateTimeGe;
-        body["update_time_lt"] = request.UpdateTimeLt;
-        body["shipping_type"] = request.ShippingType;
-        body["buyer_user_id"] = request.BuyerUserId;
-        body["is_buyer_request_cancel"] = request.IsBuyerRequestCancel;
-        body["warehouse_ids"] = request.WarehouseIds;
+        TikTokGeneratedRequestMap.AddOptional(body, "order_status", request.OrderStatus);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_ge", request.CreateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "create_time_lt", request.CreateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_ge", request.UpdateTimeGe);
+        TikTokGeneratedRequestMap.AddOptional(body, "update_time_lt", request.UpdateTimeLt);
+        TikTokGeneratedRequestMap.AddOptional(body, "shipping_type", request.ShippingType);
+        TikTokGeneratedRequestMap.AddOptional(body, "buyer_user_id", request.BuyerUserId);
+        TikTokGeneratedRequestMap.AddOptional(body, "is_buyer_request_cancel", request.IsBuyerRequestCancel);
+        TikTokGeneratedRequestMap.AddOptional(body, "warehouse_ids", request.WarehouseIds);
         var path = "/order/202309/orders/search";
         var envelope = await client.SendAsync<OrderGetOrderListResponseData>(
             new TikTokPartnerRequest(

@@ -41,7 +41,7 @@ public sealed record ProductCheckProductListingRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_diagnosis_required")] bool IsDiagnosisRequired,
+    [property: JsonPropertyName("is_diagnosis_required")] bool? IsDiagnosisRequired,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher,
     [property: JsonPropertyName("description")] string Description,
     [property: JsonPropertyName("category_id")] string CategoryId,
@@ -51,7 +51,7 @@ public sealed record ProductCheckProductListingRequest(
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductCheckProductListingRequestSkus> Skus,
     [property: JsonPropertyName("title")] string Title,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonPropertyName("is_cod_allowed")] bool? IsCodAllowed,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductCheckProductListingRequestCertifications> Certifications,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -79,9 +79,9 @@ public sealed record ProductCheckProductListingRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_insurance_requirement")] string ShippingInsuranceRequirement,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_pre_owned")] bool IsPreOwned,
+    [property: JsonPropertyName("is_pre_owned")] bool? IsPreOwned,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("minimum_order_quantity")] long MinimumOrderQuantity,
+    [property: JsonPropertyName("minimum_order_quantity")] long? MinimumOrderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_template_id")] string ShippingTemplateId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -160,11 +160,11 @@ public sealed record ProductCheckProductListingRequestSkusIdentifierCode(
 public sealed record ProductCheckProductListingRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonPropertyName("quantity")] long? Quantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonPropertyName("backorder_quantity")] long? BackorderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_time")] long HandlingTime);
+    [property: JsonPropertyName("handling_time")] long? HandlingTime);
 
 public sealed record ProductCheckProductListingRequestSkusCombinedSkus(
     [property: JsonPropertyName("product_id")] string ProductId,
@@ -179,9 +179,9 @@ public sealed record ProductCheckProductListingRequestSkusPreSale(
 
 public sealed record ProductCheckProductListingRequestSkusPreSaleFulfillmentType(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonPropertyName("handling_duration_days")] long? HandlingDurationDays,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("release_date")] long ReleaseDate);
+    [property: JsonPropertyName("release_date")] long? ReleaseDate);
 
 public sealed record ProductCheckProductListingRequestSkusListPrice(
     [property: JsonPropertyName("amount")] string Amount,
@@ -207,7 +207,7 @@ public sealed record ProductCheckProductListingRequestCertifications(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductCheckProductListingRequestCertificationsFiles> Files,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("expiration_date")] long ExpirationDate);
+    [property: JsonPropertyName("expiration_date")] long? ExpirationDate);
 
 public sealed record ProductCheckProductListingRequestCertificationsImages(
     [property: JsonPropertyName("uri")] string Uri);
@@ -254,7 +254,7 @@ public sealed record ProductCheckProductListingRequestVideo(
 
 public sealed record ProductCheckProductListingRequestOption(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("need_trigger_gne_async_check")] bool NeedTriggerGneAsyncCheck,
+    [property: JsonPropertyName("need_trigger_gne_async_check")] bool? NeedTriggerGneAsyncCheck,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("gne_async_check_session_id")] string GneAsyncCheckSessionId);
 
@@ -384,7 +384,7 @@ public sealed record ProductCreateGlobalProductRequestMainImages(
 
 public sealed record ProductCreateGlobalProductRequestSkus(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("global_quantity")] long GlobalQuantity,
+    [property: JsonPropertyName("global_quantity")] long? GlobalQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sales_attributes")] IReadOnlyList<ProductCreateGlobalProductRequestSkusSalesAttributes> SalesAttributes,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -527,7 +527,7 @@ public sealed record ProductCreateProductRequest(
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductCreateProductRequestSkus> Skus,
     [property: JsonPropertyName("title")] string Title,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonPropertyName("is_cod_allowed")] bool? IsCodAllowed,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductCreateProductRequestCertifications> Certifications,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -547,7 +547,7 @@ public sealed record ProductCreateProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("primary_combined_product_id")] string PrimaryCombinedProductId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_not_for_sale")] bool IsNotForSale,
+    [property: JsonPropertyName("is_not_for_sale")] bool? IsNotForSale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -559,9 +559,9 @@ public sealed record ProductCreateProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_insurance_requirement")] string ShippingInsuranceRequirement,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("minimum_order_quantity")] long MinimumOrderQuantity,
+    [property: JsonPropertyName("minimum_order_quantity")] long? MinimumOrderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_pre_owned")] bool IsPreOwned,
+    [property: JsonPropertyName("is_pre_owned")] bool? IsPreOwned,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("idempotency_key")] string IdempotencyKey,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -571,7 +571,7 @@ public sealed record ProductCreateProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("auto_translate_enabled")] bool AutoTranslateEnabled,
+    [property: JsonPropertyName("auto_translate_enabled")] bool? AutoTranslateEnabled,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -631,11 +631,11 @@ public sealed record ProductCreateProductRequestSkusSalesAttributesSupplementary
 public sealed record ProductCreateProductRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonPropertyName("quantity")] long? Quantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonPropertyName("backorder_quantity")] long? BackorderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_time")] long HandlingTime);
+    [property: JsonPropertyName("handling_time")] long? HandlingTime);
 
 public sealed record ProductCreateProductRequestSkusPrice(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -663,9 +663,9 @@ public sealed record ProductCreateProductRequestSkusPreSale(
 
 public sealed record ProductCreateProductRequestSkusPreSaleFulfillmentType(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonPropertyName("handling_duration_days")] long? HandlingDurationDays,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("release_date")] long ReleaseDate);
+    [property: JsonPropertyName("release_date")] long? ReleaseDate);
 
 public sealed record ProductCreateProductRequestSkusListPrice(
     [property: JsonPropertyName("amount")] string Amount,
@@ -691,7 +691,7 @@ public sealed record ProductCreateProductRequestCertifications(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductCreateProductRequestCertificationsFiles> Files,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("expiration_date")] long ExpirationDate);
+    [property: JsonPropertyName("expiration_date")] long? ExpirationDate);
 
 public sealed record ProductCreateProductRequestCertificationsImages(
     [property: JsonPropertyName("uri")] string Uri);
@@ -892,7 +892,7 @@ public sealed record ProductEditGlobalProductRequestSkus(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("global_quantity")] long GlobalQuantity,
+    [property: JsonPropertyName("global_quantity")] long? GlobalQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonPropertyName("price")] ProductEditGlobalProductRequestSkusPrice Price,
@@ -1088,7 +1088,7 @@ public sealed record ProductGetBrandsRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_authorized")] bool IsAuthorized,
+    [property: JsonPropertyName("is_authorized")] bool? IsAuthorized,
     [property: JsonPropertyName("page_size")] long PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
@@ -1121,7 +1121,7 @@ public sealed record ProductGetCategoriesRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("include_prohibited_categories")] bool IncludeProhibitedCategories,
+    [property: JsonPropertyName("include_prohibited_categories")] bool? IncludeProhibitedCategories,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("keyword")] string Keyword,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -1512,9 +1512,9 @@ public sealed record ProductGetProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("return_draft_version")] bool ReturnDraftVersion,
+    [property: JsonPropertyName("return_draft_version")] bool? ReturnDraftVersion,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("return_under_review_version")] bool ReturnUnderReviewVersion,
+    [property: JsonPropertyName("return_under_review_version")] bool? ReturnUnderReviewVersion,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
 
@@ -1961,7 +1961,7 @@ public sealed record ProductPublishGlobalProductRequestPublishTargetSkusInventor
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity);
+    [property: JsonPropertyName("quantity")] long? Quantity);
 
 public sealed record ProductPublishGlobalProductRequestPublishTargetSkusFees(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -2022,7 +2022,7 @@ public sealed record ProductRecommendCategoryRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("listing_platform")] string ListingPlatform,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("include_prohibited_categories")] bool IncludeProhibitedCategories);
+    [property: JsonPropertyName("include_prohibited_categories")] bool? IncludeProhibitedCategories);
 
 public sealed record ProductRecommendCategoryRequestImages(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -2147,9 +2147,9 @@ public sealed record ProductUpdateInventoryRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonPropertyName("quantity")] long Quantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonPropertyName("backorder_quantity")] long? BackorderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_time")] long HandlingTime);
+    [property: JsonPropertyName("handling_time")] long? HandlingTime);
 
 
 public sealed record ProductUpdateInventoryResponse(
@@ -2294,13 +2294,13 @@ public sealed record ProductSearchGlobalProductsRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_skus")] IReadOnlyList<string> SellerSkus,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_le")] long CreateTimeLe,
+    [property: JsonPropertyName("create_time_le")] long? CreateTimeLe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonPropertyName("update_time_ge")] long? UpdateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_le")] long UpdateTimeLe);
+    [property: JsonPropertyName("update_time_le")] long? UpdateTimeLe);
 
 
 public sealed record ProductSearchGlobalProductsResponse(
@@ -2874,13 +2874,13 @@ public sealed record ProductSearchProductsRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_skus")] IReadOnlyList<string> SellerSkus,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_le")] long CreateTimeLe,
+    [property: JsonPropertyName("create_time_le")] long? CreateTimeLe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_ge")] long UpdateTimeGe,
+    [property: JsonPropertyName("update_time_ge")] long? UpdateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("update_time_le")] long UpdateTimeLe,
+    [property: JsonPropertyName("update_time_le")] long? UpdateTimeLe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_version")] string CategoryVersion,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -2894,7 +2894,7 @@ public sealed record ProductSearchProductsRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("sns_filter")] string SnsFilter,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("return_draft_version")] bool ReturnDraftVersion);
+    [property: JsonPropertyName("return_draft_version")] bool? ReturnDraftVersion);
 
 
 public sealed record ProductSearchProductsResponse(
@@ -3151,7 +3151,7 @@ public sealed record ProductReplicateProductRequestReplicateTargetSkusInventory(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity);
+    [property: JsonPropertyName("quantity")] long? Quantity);
 
 
 public sealed record ProductReplicateProductResponse(
@@ -3188,7 +3188,7 @@ public sealed record ProductEditProductRequest(
     [property: JsonPropertyName("skus")] IReadOnlyList<ProductEditProductRequestSkus> Skus,
     [property: JsonPropertyName("title")] string Title,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonPropertyName("is_cod_allowed")] bool? IsCodAllowed,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductEditProductRequestCertifications> Certifications,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3216,9 +3216,9 @@ public sealed record ProductEditProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("shipping_insurance_requirement")] string ShippingInsuranceRequirement,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_pre_owned")] bool IsPreOwned,
+    [property: JsonPropertyName("is_pre_owned")] bool? IsPreOwned,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("minimum_order_quantity")] long MinimumOrderQuantity,
+    [property: JsonPropertyName("minimum_order_quantity")] long? MinimumOrderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("replicated_products")] IReadOnlyList<ProductEditProductRequestReplicatedProducts> ReplicatedProducts,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3230,7 +3230,7 @@ public sealed record ProductEditProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("auto_translate_enabled")] bool AutoTranslateEnabled,
+    [property: JsonPropertyName("auto_translate_enabled")] bool? AutoTranslateEnabled,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3309,11 +3309,11 @@ public sealed record ProductEditProductRequestSkusIdentifierCode(
 public sealed record ProductEditProductRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity,
+    [property: JsonPropertyName("quantity")] long? Quantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonPropertyName("backorder_quantity")] long? BackorderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_time")] long HandlingTime);
+    [property: JsonPropertyName("handling_time")] long? HandlingTime);
 
 public sealed record ProductEditProductRequestSkusCombinedSkus(
     [property: JsonPropertyName("product_id")] string ProductId,
@@ -3328,9 +3328,9 @@ public sealed record ProductEditProductRequestSkusPreSale(
 
 public sealed record ProductEditProductRequestSkusPreSaleFulfillmentType(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonPropertyName("handling_duration_days")] long? HandlingDurationDays,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("release_date")] long ReleaseDate);
+    [property: JsonPropertyName("release_date")] long? ReleaseDate);
 
 public sealed record ProductEditProductRequestSkusListPrice(
     [property: JsonPropertyName("amount")] string Amount,
@@ -3356,7 +3356,7 @@ public sealed record ProductEditProductRequestCertifications(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductEditProductRequestCertificationsFiles> Files,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("expiration_date")] long ExpirationDate);
+    [property: JsonPropertyName("expiration_date")] long? ExpirationDate);
 
 public sealed record ProductEditProductRequestCertificationsImages(
     [property: JsonPropertyName("uri")] string Uri);
@@ -3425,7 +3425,7 @@ public sealed record ProductEditProductRequestReplicatedProductsSkusInventory(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity);
+    [property: JsonPropertyName("quantity")] long? Quantity);
 
 public sealed record ProductEditProductRequestSubscribeInfoEdit(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3437,7 +3437,7 @@ public sealed record ProductEditProductRequestSubscribeInfoEditDiscountDetails(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_level")] string DiscountLevel,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("discount_value")] long DiscountValue);
+    [property: JsonPropertyName("discount_value")] long? DiscountValue);
 
 public sealed record ProductEditProductRequestScheduledSale(
     [property: JsonPropertyName("is_enabled_scheduled_sale")] bool IsEnabledScheduledSale,
@@ -3526,7 +3526,7 @@ public sealed record ProductPartialEditGlobalProductRequestSkus(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("id")] string Id,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("global_quantity")] long GlobalQuantity,
+    [property: JsonPropertyName("global_quantity")] long? GlobalQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("seller_sku")] string SellerSku,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3688,7 +3688,7 @@ public sealed record ProductPartialEditProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("title")] string Title,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("is_cod_allowed")] bool IsCodAllowed,
+    [property: JsonPropertyName("is_cod_allowed")] bool? IsCodAllowed,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("certifications")] IReadOnlyList<ProductPartialEditProductRequestCertifications> Certifications,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3718,7 +3718,7 @@ public sealed record ProductPartialEditProductRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("auto_translate_enabled")] bool AutoTranslateEnabled,
+    [property: JsonPropertyName("auto_translate_enabled")] bool? AutoTranslateEnabled,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("search_terms")] IReadOnlyList<string> SearchTerms,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3796,9 +3796,9 @@ public sealed record ProductPartialEditProductRequestSkusInventory(
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonPropertyName("quantity")] long Quantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("backorder_quantity")] long BackorderQuantity,
+    [property: JsonPropertyName("backorder_quantity")] long? BackorderQuantity,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_time")] long HandlingTime);
+    [property: JsonPropertyName("handling_time")] long? HandlingTime);
 
 public sealed record ProductPartialEditProductRequestSkusListPrice(
     [property: JsonPropertyName("amount")] string Amount,
@@ -3817,9 +3817,9 @@ public sealed record ProductPartialEditProductRequestSkusPreSale(
 
 public sealed record ProductPartialEditProductRequestSkusPreSaleFulfillmentType(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("handling_duration_days")] long HandlingDurationDays,
+    [property: JsonPropertyName("handling_duration_days")] long? HandlingDurationDays,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("release_date")] long ReleaseDate);
+    [property: JsonPropertyName("release_date")] long? ReleaseDate);
 
 public sealed record ProductPartialEditProductRequestSkusFees(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3836,7 +3836,7 @@ public sealed record ProductPartialEditProductRequestCertifications(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("files")] IReadOnlyList<ProductPartialEditProductRequestCertificationsFiles> Files,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("expiration_date")] long ExpirationDate);
+    [property: JsonPropertyName("expiration_date")] long? ExpirationDate);
 
 public sealed record ProductPartialEditProductRequestCertificationsImages(
     [property: JsonPropertyName("uri")] string Uri);
@@ -3907,7 +3907,7 @@ public sealed record ProductPartialEditProductRequestReplicatedProductsSkusInven
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("warehouse_id")] string WarehouseId,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("quantity")] long Quantity);
+    [property: JsonPropertyName("quantity")] long? Quantity);
 
 public sealed record ProductPartialEditProductRequestSubscribeInfoEdit(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -3919,7 +3919,7 @@ public sealed record ProductPartialEditProductRequestSubscribeInfoEditDiscountDe
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("discount_level")] string DiscountLevel,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("discount_value")] long DiscountValue);
+    [property: JsonPropertyName("discount_value")] long? DiscountValue);
 
 public sealed record ProductPartialEditProductRequestScheduledSale(
     [property: JsonPropertyName("is_enabled_scheduled_sale")] bool IsEnabledScheduledSale,
@@ -4108,9 +4108,9 @@ public sealed record ProductGetSubmissionRecordsRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("status")] string Status,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("submit_time_ge")] long SubmitTimeGe,
+    [property: JsonPropertyName("submit_time_ge")] long? SubmitTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("submit_time_lt")] long SubmitTimeLt);
+    [property: JsonPropertyName("submit_time_lt")] long? SubmitTimeLt);
 
 
 public sealed record ProductGetSubmissionRecordsResponse(
@@ -4155,9 +4155,9 @@ public sealed record ProductListOpportunityRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("category_ids")] IReadOnlyList<string> CategoryIds,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_lt")] long CreateTimeLt);
+    [property: JsonPropertyName("create_time_lt")] long? CreateTimeLt);
 
 
 public sealed record ProductListOpportunityResponse(
@@ -4238,7 +4238,7 @@ public sealed record ProductUpdateStockOperationSettingsRequest(
 
 public sealed record ProductUpdateStockOperationSettingsRequestStockOperationSetting(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("enable_auto_restock")] bool EnableAutoRestock);
+    [property: JsonPropertyName("enable_auto_restock")] bool? EnableAutoRestock);
 
 
 public sealed record ProductUpdateStockOperationSettingsResponse(

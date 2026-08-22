@@ -241,9 +241,9 @@ public sealed record FulfilledByTiktokFbtSearchFbtInventoryRecordRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("fbt_warehouse_ids")] IReadOnlyList<string> FbtWarehouseIds,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_ge")] long CreateTimeGe,
+    [property: JsonPropertyName("create_time_ge")] long? CreateTimeGe,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("create_time_le")] long CreateTimeLe);
+    [property: JsonPropertyName("create_time_le")] long? CreateTimeLe);
 
 
 public sealed record FulfilledByTiktokFbtSearchFbtInventoryRecordResponse(
@@ -564,7 +564,7 @@ public sealed record FulfilledByTiktokFbtGetInboundOrderRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("include_carton_details")] bool IncludeCartonDetails,
+    [property: JsonPropertyName("include_carton_details")] bool? IncludeCartonDetails,
     [property: JsonPropertyName("order_ids")] IReadOnlyList<string> OrderIds,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
@@ -821,7 +821,7 @@ public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListHaz
 
 public sealed record FulfilledByTiktokFbtCreateGoodsRequestCreateGoodsDtoListShelfLifeAttributeInfo(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("shelf_life")] long ShelfLife,
+    [property: JsonPropertyName("shelf_life")] long? ShelfLife,
     [property: JsonPropertyName("inbound_cutoff_days")] long InboundCutoffDays,
     [property: JsonPropertyName("expiration_alert_days")] long ExpirationAlertDays,
     [property: JsonPropertyName("sales_cutoff_days")] long SalesCutoffDays,
@@ -1050,7 +1050,7 @@ public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoHazmatI
 
 public sealed record FulfilledByTiktokFbtUpdateGoodsRequestUpdateGoodsDtoShelfLifeAttributeInfo(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("shelf_life")] long ShelfLife,
+    [property: JsonPropertyName("shelf_life")] long? ShelfLife,
     [property: JsonPropertyName("inbound_cutoff_days")] long InboundCutoffDays,
     [property: JsonPropertyName("expiration_alert_days")] long ExpirationAlertDays,
     [property: JsonPropertyName("sales_cutoff_days")] long SalesCutoffDays,

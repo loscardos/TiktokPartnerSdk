@@ -46,9 +46,9 @@ public sealed record CustomerServiceGetConversationMessagesRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("need_data")] bool NeedData,
+    [property: JsonPropertyName("need_data")] bool? NeedData,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("need_plaintext")] bool NeedPlaintext,
+    [property: JsonPropertyName("need_plaintext")] bool? NeedPlaintext,
     [property: JsonPropertyName("page_size")] long PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
@@ -97,7 +97,7 @@ public sealed record CustomerServiceGetConversationsRequest(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("locale")] string Locale,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("need_session_id")] bool NeedSessionId,
+    [property: JsonPropertyName("need_session_id")] bool? NeedSessionId,
     [property: JsonPropertyName("page_size")] long PageSize,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [property: JsonPropertyName("page_token")] string PageToken,
@@ -252,7 +252,7 @@ public sealed record CustomerServiceGetConversationRequest(
     [property: JsonPropertyName("timestamp")] long Timestamp,
     [property: JsonPropertyName("sign")] string Sign,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    [property: JsonPropertyName("need_session_id")] bool NeedSessionId,
+    [property: JsonPropertyName("need_session_id")] bool? NeedSessionId,
     [property: JsonPropertyName("shop_cipher")] string ShopCipher);
 
 
