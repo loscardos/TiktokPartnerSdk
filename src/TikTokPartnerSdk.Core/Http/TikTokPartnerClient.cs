@@ -63,6 +63,7 @@ public sealed class TikTokPartnerClient(
 
             using var response = await httpClient.SendAsync(httpRequest, timeoutCts.Token);
             var payload = await response.Content.ReadAsStringAsync(cancellationToken);
+            var retryAfter = GetRetryAfter(response);
             if (response.IsSuccessStatusCode)
             {
                 return responseParser.Parse<TResponse>(payload);
@@ -70,11 +71,11 @@ public sealed class TikTokPartnerClient(
 
             if (IsTransient(response.StatusCode) && attempt < _options.MaxTransientRetries)
             {
-                await DelayAsync(attempt, cancellationToken);
+                await DelayAsync(attempt, retryAfter, cancellationToken);
                 continue;
             }
 
-            ThrowHttpException<TResponse>(response, payload);
+            ThrowHttpException<TResponse>(response, payload, retryAfter);
         }
     }
 
@@ -91,9 +92,13 @@ public sealed class TikTokPartnerClient(
         };
     }
 
-    private async Task DelayAsync(int attempt, CancellationToken cancellationToken)
+    private async Task DelayAsync(int attempt, TimeSpan? retryAfter, CancellationToken cancellationToken)
     {
         var delay = TimeSpan.FromMilliseconds(_options.RetryBaseDelay.TotalMilliseconds * Math.Pow(2, attempt));
+        if (retryAfter > delay)
+        {
+            delay = retryAfter.Value;
+        }
         if (delay > TimeSpan.Zero)
         {
             await Task.Delay(delay, cancellationToken);
@@ -105,13 +110,13 @@ public sealed class TikTokPartnerClient(
             or System.Net.HttpStatusCode.TooManyRequests
             or >= System.Net.HttpStatusCode.InternalServerError;
 
-    private void ThrowHttpException<TResponse>(HttpResponseMessage response, string payload)
+    private void ThrowHttpException<TResponse>(HttpResponseMessage response, string payload, TimeSpan? retryAfter)
     {
         if (!string.IsNullOrWhiteSpace(payload))
         {
             try
             {
-                responseParser.Parse<TResponse>(payload);
+                responseParser.Parse<TResponse>(payload, retryAfter);
             }
             catch (TikTokApiException)
             {
@@ -126,6 +131,15 @@ public sealed class TikTokPartnerClient(
             (int)response.StatusCode,
             response.ReasonPhrase ?? "HTTP request failed",
             null,
-            TikTokErrorClassifier.Classify(response.StatusCode));
+            TikTokErrorClassifier.Classify(response.StatusCode),
+            retryAfter);
+    }
+
+    private static TimeSpan? GetRetryAfter(HttpResponseMessage response)
+    {
+        var retryAfter = response.Headers.RetryAfter;
+        var delay = retryAfter?.Delta
+            ?? (retryAfter?.Date is { } date ? date - DateTimeOffset.UtcNow : null);
+        return delay > TimeSpan.Zero ? delay : null;
     }
 }
