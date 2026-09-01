@@ -21,7 +21,7 @@ public sealed class PackageMetadataTests
         xml.Should().NotContain("example.invalid");
         xml.Should().Contain("<PackageReadmeFile>");
         xml.Should().Contain("<GenerateDocumentationFile>true</GenerateDocumentationFile>");
-        xml.Should().Contain("<Version>0.1.1-preview</Version>");
+        xml.Should().Contain("<Version>0.1.2-preview</Version>");
     }
 
     [Fact]

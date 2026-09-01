@@ -11,7 +11,7 @@ public sealed class TikTokResponseParser
         PropertyNameCaseInsensitive = true
     };
 
-    public TikTokPartnerResponseEnvelope<TResponse> Parse<TResponse>(string json)
+    public TikTokPartnerResponseEnvelope<TResponse> Parse<TResponse>(string json, TimeSpan? retryAfter = null)
     {
         var envelope = JsonSerializer.Deserialize<TikTokPartnerResponseEnvelope<TResponse>>(json, SerializerOptions);
         if (envelope is null)
@@ -27,7 +27,8 @@ public sealed class TikTokResponseParser
                 envelope.Code,
                 envelope.Message,
                 envelope.RequestId,
-                TikTokErrorClassifier.Classify(envelope.Code, envelope.Message));
+                TikTokErrorClassifier.Classify(envelope.Code, envelope.Message),
+                retryAfter);
         }
 
         return envelope;

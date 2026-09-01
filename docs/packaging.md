@@ -25,5 +25,5 @@ dotnet test TikTokPartnerSdk.sln
 The current preview version is:
 
 ```text
-0.1.1-preview
+0.1.2-preview
 ```
