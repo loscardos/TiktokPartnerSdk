@@ -1,9 +1,11 @@
 using FluentAssertions;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using Loscardos.TikTokPartnerSdk.Abstractions.Auth;
 using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Errors;
 using Loscardos.TikTokPartnerSdk.Abstractions.Http;
 using Loscardos.TikTokPartnerSdk.Core.RateLimiting;
 using Loscardos.TikTokPartnerSdk.Core.Crypto;
@@ -95,6 +97,49 @@ public sealed class TikTokPartnerClientTests
         await client.SendAsync<Dictionary<string, bool>>(CreateRequest(), CancellationToken.None);
 
         handler.RequestCount.Should().Be(2);
+    }
+
+    [Fact]
+    public async Task SendAsync_should_honor_retry_after_before_retrying()
+    {
+        var throttled = new HttpResponseMessage(HttpStatusCode.TooManyRequests)
+        {
+            Content = new StringContent("""{"code":36009004,"message":"Too many requests","request_id":"req-rate"}""", Encoding.UTF8, "application/json")
+        };
+        throttled.Headers.RetryAfter = new System.Net.Http.Headers.RetryConditionHeaderValue(TimeSpan.FromSeconds(1));
+        var handler = new SequenceHandler(
+            throttled,
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"code":0,"message":"success","request_id":"req-ok","data":{"ok":true}}""", Encoding.UTF8, "application/json")
+            });
+        var client = CreatePartnerClient(handler, options =>
+        {
+            options.MaxTransientRetries = 1;
+            options.RetryBaseDelay = TimeSpan.Zero;
+        });
+
+        var stopwatch = Stopwatch.StartNew();
+        await client.SendAsync<Dictionary<string, bool>>(CreateRequest(), CancellationToken.None);
+
+        stopwatch.Elapsed.Should().BeGreaterThanOrEqualTo(TimeSpan.FromMilliseconds(900));
+        handler.RequestCount.Should().Be(2);
+    }
+
+    [Fact]
+    public async Task SendAsync_should_expose_retry_after_on_terminal_api_error()
+    {
+        var throttled = new HttpResponseMessage(HttpStatusCode.TooManyRequests)
+        {
+            Content = new StringContent("""{"code":36009004,"message":"Too many requests","request_id":"req-rate"}""", Encoding.UTF8, "application/json")
+        };
+        throttled.Headers.RetryAfter = new System.Net.Http.Headers.RetryConditionHeaderValue(TimeSpan.FromMinutes(3));
+        var client = CreatePartnerClient(new SequenceHandler(throttled), options => options.MaxTransientRetries = 0);
+
+        var exception = await Assert.ThrowsAsync<TikTokApiException>(() =>
+            client.SendAsync<Dictionary<string, bool>>(CreateRequest(), CancellationToken.None));
+
+        exception.RetryAfter.Should().Be(TimeSpan.FromMinutes(3));
     }
 
     private static TikTokPartnerClient CreatePartnerClient(

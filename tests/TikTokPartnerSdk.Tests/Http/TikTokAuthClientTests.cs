@@ -3,6 +3,7 @@ using System.Text;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Loscardos.TikTokPartnerSdk.Abstractions.Configuration;
+using Loscardos.TikTokPartnerSdk.Abstractions.Errors;
 using Loscardos.TikTokPartnerSdk.Core.Http;
 using Loscardos.TikTokPartnerSdk.Core.RateLimiting;
 
@@ -44,6 +45,26 @@ public sealed class TikTokAuthClientTests
         handler.LastRequestBody.Should().NotContain("sign");
     }
 
+    [Fact]
+    public async Task GetAsync_should_expose_retry_after_on_terminal_api_error()
+    {
+        var response = new HttpResponseMessage(HttpStatusCode.TooManyRequests)
+        {
+            Content = new StringContent("""{"code":36009004,"message":"Too many requests","requestId":"req-auth-rate"}""", Encoding.UTF8, "application/json")
+        };
+        response.Headers.RetryAfter = new System.Net.Http.Headers.RetryConditionHeaderValue(TimeSpan.FromMinutes(2));
+        var client = new TikTokAuthClient(
+            new HttpClient(new StaticResponseHandler(response)),
+            Options.Create(new TikTokPartnerOptions { MaxTransientRetries = 0 }),
+            new NoopTikTokRateLimiter(),
+            new TikTokResponseParser());
+
+        var exception = await Assert.ThrowsAsync<TikTokApiException>(() =>
+            client.GetAsync<AuthPayload>("/token/get", new Dictionary<string, object?>(), CancellationToken.None));
+
+        exception.RetryAfter.Should().Be(TimeSpan.FromMinutes(2));
+    }
+
     private sealed record AuthPayload(
         string AccessToken,
         string RefreshToken,
@@ -68,5 +89,13 @@ public sealed class TikTokAuthClientTests
                 Content = new StringContent(response, Encoding.UTF8, "application/json")
             };
         }
+    }
+
+    private sealed class StaticResponseHandler(HttpResponseMessage response) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken)
+            => Task.FromResult(response);
     }
 }
